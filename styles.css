@@ -221,19 +221,22 @@ p.lead {
   font-weight: 600;
   color: var(--c-text-mute);
   letter-spacing: 0.02em;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 .hero-tag .dot {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--c-primary);
 }
+/* EB Garamond's tall ascenders + line-height 1.1 swallow the visible
+   gap between the pill and the heading, so add explicit margin-top
+   on the heading itself. */
 .hero h1 {
   font-family: var(--ff-serif);
   font-size: var(--fs-display);
   line-height: var(--lh-display);
   font-weight: 500;
   letter-spacing: -0.01em;
-  margin: 0 0 16px;
+  margin: 24px 0 16px;
 }
 .hero h1 em {
   font-style: italic;
@@ -724,4 +727,78 @@ body[lang="ko"] [data-ko] { display: revert; }
 
 @media (max-width: 720px) {
   .bridge-cards { grid-template-columns: 1fr; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Palette toggle (nav button) — sun shown in dark mode, moon in light.
+   Same sun/moon SVG swap pattern as popup + floating panel.
+   ───────────────────────────────────────────────────────────── */
+.palette-toggle {
+  appearance: none;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--r-sm);
+  color: var(--c-text-mute);
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.12s ease, color 0.12s ease;
+}
+.palette-toggle:hover { color: var(--c-text); border-color: var(--c-text-mute); }
+.palette-toggle:focus-visible {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 2px;
+}
+.palette-toggle .palette-sun { display: none; }
+.palette-toggle .palette-moon { display: inline-block; }
+.palette-toggle[aria-pressed="true"] .palette-sun { display: inline-block; }
+.palette-toggle[aria-pressed="true"] .palette-moon { display: none; }
+
+/* ─────────────────────────────────────────────────────────────
+   Dark palette — mirrors src/styles/tokens.css [data-palette="studio-dark"].
+   Shadow opacity bumped ~4× because black-on-black shadow is weak.
+   Mirrors design/dark-mode-design.md §4.1 + §5.
+   ───────────────────────────────────────────────────────────── */
+body[data-palette="studio-dark"] {
+  --c-bg:        oklch(0.16  0.012 245);
+  --c-surface:   oklch(0.22  0.014 245);
+  --c-surface-2: oklch(0.19  0.012 245);
+  --c-text:      oklch(0.97  0.003 245);
+  --c-text-mute: oklch(0.78  0.006 245);
+  --c-text-soft: oklch(0.62  0.008 245);
+  --c-border:    oklch(0.32  0.012 245);
+  --c-border-strong: oklch(0.42 0.014 245);
+  --c-primary:   oklch(0.70  0.09  245);
+  --c-primary-h: oklch(0.78  0.09  245);
+  --c-primary-fg: oklch(0.14  0.020 245);
+  --c-tint:      oklch(0.32  0.045 245);
+  --c-focus:     oklch(0.74  0.13  245);
+
+  --shadow-sm:   0 1px 2px  rgb(0 0 0 / 0.40);
+  --shadow-md:   0 2px 6px  rgb(0 0 0 / 0.45), 0 1px 2px rgb(0 0 0 / 0.35);
+  --shadow-lg:   0 12px 28px rgb(0 0 0 / 0.55), 0 4px 8px rgb(0 0 0 / 0.40);
+  --shadow-card: 0 1px 2px  rgb(0 0 0 / 0.35),
+                 0 4px 10px rgb(0 0 0 / 0.40),
+                 0 12px 24px rgb(0 0 0 / 0.50);
+}
+
+/* The lang-select dropdown chevron is a data URI SVG with a fixed grey
+   stroke; replace it with a brighter chevron in dark mode so the arrow
+   stays visible on the dark surface. */
+body[data-palette="studio-dark"] .lang-select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23bdc7d6' stroke-width='1.4' fill='none' stroke-linecap='round'/></svg>");
+}
+
+/* Floating "Take the tour" pill — keep its brand dark colors in light
+   mode (already dark-on-light by design), but in dark mode flip to a
+   surface tone so it doesn't blend into the background. */
+body[data-palette="studio-dark"] #mn-tour {
+  background: var(--c-surface-2);
+  color: var(--c-text);
+  border: 1px solid var(--c-border-strong);
+  box-shadow: var(--shadow-md);
 }

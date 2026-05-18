@@ -6,6 +6,33 @@
 const STORAGE_KEY = 'manuscript-site-lang';
 const SUPPORTED = ['en', 'ko'];
 
+const PALETTE_KEY = 'manuscript-site-palette';
+const LIGHT_PALETTE = 'studio';
+const DARK_PALETTE = 'studio-dark';
+function isDarkPaletteId(id) { return typeof id === 'string' && id.endsWith('-dark'); }
+function prefersDark() {
+  try { return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; }
+  catch (_) { return false; }
+}
+function pickInitialPalette() {
+  try {
+    const stored = localStorage.getItem(PALETTE_KEY);
+    if (stored === LIGHT_PALETTE || stored === DARK_PALETTE) return stored;
+  } catch (_) {}
+  return prefersDark() ? DARK_PALETTE : LIGHT_PALETTE;
+}
+function applyPalette(id) {
+  document.body.setAttribute('data-palette', id);
+  const btn = document.getElementById('palette-toggle');
+  if (btn) btn.setAttribute('aria-pressed', isDarkPaletteId(id) ? 'true' : 'false');
+}
+function togglePalette() {
+  const current = document.body.getAttribute('data-palette') || LIGHT_PALETTE;
+  const next = isDarkPaletteId(current) ? LIGHT_PALETTE : DARK_PALETTE;
+  applyPalette(next);
+  try { localStorage.setItem(PALETTE_KEY, next); } catch (_) {}
+}
+
 function pickInitialLang() {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -27,10 +54,27 @@ function applyLang(lang) {
 
 function init() {
   applyLang(pickInitialLang());
+  applyPalette(pickInitialPalette());
   const select = document.getElementById('lang-select');
   if (select) {
     select.addEventListener('change', (e) => applyLang(e.target.value));
   }
+  const paletteBtn = document.getElementById('palette-toggle');
+  if (paletteBtn) {
+    paletteBtn.addEventListener('click', togglePalette);
+  }
+  // Follow OS preference changes only if the user hasn't picked manually.
+  try {
+    const mql = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+    if (mql && typeof mql.addEventListener === 'function') {
+      mql.addEventListener('change', (e) => {
+        let stored = null;
+        try { stored = localStorage.getItem(PALETTE_KEY); } catch (_) {}
+        if (stored === LIGHT_PALETTE || stored === DARK_PALETTE) return;
+        applyPalette(e.matches ? DARK_PALETTE : LIGHT_PALETTE);
+      });
+    }
+  } catch (_) {}
 
   // Mobile hamburger toggle for the primary nav. The nav is hidden by
   // default at narrow widths (see styles.css media query); the toggle

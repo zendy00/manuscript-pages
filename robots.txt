@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# AI / LLM training crawlers — let them index, the landing page is public docs.
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+Sitemap: https://zendy00.github.io/manuscript-pages/sitemap.xml

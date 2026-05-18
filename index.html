@@ -3,16 +3,53 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Manuscript — DOM-aware demos for the web</title>
+
+    <!-- ───── Primary SEO ───── -->
+    <title>Manuscript — DOM-aware product demos &amp; interactive walkthroughs for the web</title>
     <meta
       name="description"
-      content="A Chrome extension for authoring versioned web demos and manuals. DOM-aware selectors, 3-layer fallback, replay with narration."
+      content="Chrome extension to author multi-step product demos, walkthroughs, and user manuals. Pick page elements with a wand, layer spotlights, text, shapes, and freedraw arrows, then replay with narrated step-by-step playback. 3-layer DOM selector fallback so a single attribute or text change won't break your manual. Versioned JSON output, embed-anywhere runtime bridge, detached presenter window."
     />
-    <meta name="theme-color" content="#0a2a5c" />
+    <meta
+      name="keywords"
+      content="chrome extension, product tour, web demo, interactive walkthrough, user manual, software tutorial, onboarding, dom-aware selector, replay, narration, scribe alternative, tango alternative, manuscript, web presenter, step-by-step guide"
+    />
+    <meta name="author" content="Zendy Kim" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c1525" media="(prefers-color-scheme: dark)" />
+    <meta name="application-name" content="Manuscript" />
+    <meta name="apple-mobile-web-app-title" content="Manuscript" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- ───── Canonical + hreflang ───── -->
+    <link rel="canonical" href="https://zendy00.github.io/manuscript-pages/" />
+    <link rel="alternate" hreflang="en" href="https://zendy00.github.io/manuscript-pages/" />
+    <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/manuscript-pages/?lang=ko" />
+    <link rel="alternate" hreflang="x-default" href="https://zendy00.github.io/manuscript-pages/" />
+
+    <!-- ───── Icons ───── -->
     <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="./assets/icons/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="./assets/icons/favicon-16.png" sizes="16x16" type="image/png" />
-    <link rel="apple-touch-icon" href="./assets/icons/favicon-128.png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="./assets/icons/favicon-128.png" />
+    <link rel="mask-icon" href="./assets/icons/favicon.svg" color="#0a2a5c" />
+
+    <!-- ───── Performance hints ───── -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- ───── Stylesheets ───── -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
@@ -23,10 +60,145 @@
     />
     <link rel="stylesheet" href="./styles.css" />
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Manuscript — DOM-aware demos for the web" />
-    <meta property="og:description" content="Author versioned, page-resilient web demos right inside Chrome." />
+    <!-- ───── Open Graph ───── -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://zendy00.github.io/manuscript-pages/" />
+    <meta property="og:site_name" content="Manuscript" />
+    <meta property="og:title" content="Manuscript — DOM-aware product demos for the web" />
+    <meta property="og:description" content="Chrome extension to author multi-step product demos, walkthroughs, and user manuals. DOM-aware selectors with 3-layer fallback, narrated replay, embed-anywhere bridge." />
+    <meta property="og:image" content="https://zendy00.github.io/manuscript-pages/assets/icons/favicon-128.png" />
+    <meta property="og:image:alt" content="Manuscript pen-nib logo" />
+    <meta property="og:image:width" content="128" />
+    <meta property="og:image:height" content="128" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ko_KR" />
+
+    <!-- ───── Twitter Card ───── -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Manuscript — DOM-aware product demos for the web" />
+    <meta name="twitter:description" content="Chrome extension to author multi-step product demos with DOM-aware selectors, narrated replay, and an embed-anywhere bridge." />
+    <meta name="twitter:image" content="https://zendy00.github.io/manuscript-pages/assets/icons/favicon-128.png" />
+    <meta name="twitter:image:alt" content="Manuscript pen-nib logo" />
+
+    <!-- ───── JSON-LD / Schema.org ───── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://zendy00.github.io/manuscript-pages/#app",
+          "name": "Manuscript",
+          "alternateName": ["Manuscript Chrome Extension", "Web Presenter"],
+          "description": "Chrome extension for authoring multi-step product demos and user manuals with DOM-aware element selection, layered annotations, and narrated step-by-step replay.",
+          "applicationCategory": "BrowserApplication",
+          "applicationSubCategory": "DeveloperApplication",
+          "operatingSystem": "Windows, macOS, Linux, ChromeOS",
+          "browserRequirements": "Requires Google Chrome 88 or newer",
+          "softwareVersion": "0.1.5",
+          "releaseNotes": "Closed beta release with floating panel, spotlight, annotations, narrated replay, detached prompter, runtime bridge, dark mode.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          "downloadUrl": "https://zendy00.github.io/manuscript-pages/downloads/manuscript-latest.zip",
+          "installUrl": "https://zendy00.github.io/manuscript-pages/#install",
+          "screenshot": "https://zendy00.github.io/manuscript-pages/assets/screenshots/hero-panel.png",
+          "url": "https://zendy00.github.io/manuscript-pages/",
+          "image": "https://zendy00.github.io/manuscript-pages/assets/icons/favicon-128.png",
+          "author": {
+            "@type": "Person",
+            "name": "Zendy Kim",
+            "email": "zendy00@gmail.com"
+          },
+          "publisher": {
+            "@type": "Person",
+            "name": "Zendy Kim"
+          },
+          "inLanguage": ["en", "ko"],
+          "license": "https://github.com/zendy00/manuscript-pages",
+          "featureList": [
+            "3-layer DOM resolver with attribute, text, and viewport fallback",
+            "Same-origin iframe-aware element picking and replay",
+            "Cross-page replay with action steps",
+            "Text, shape, and freedraw annotations with entry animations",
+            "Narrated playback via Web Speech API",
+            "Detached presenter prompter window",
+            "Runtime bridge for embedded tours via postMessage",
+            "Dark mode and four color palettes",
+            "Versioned JSON export and import"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://zendy00.github.io/manuscript-pages/#website",
+          "url": "https://zendy00.github.io/manuscript-pages/",
+          "name": "Manuscript",
+          "description": "Landing page and documentation for the Manuscript Chrome extension.",
+          "publisher": { "@id": "https://zendy00.github.io/manuscript-pages/#person" },
+          "inLanguage": ["en", "ko"]
+        },
+        {
+          "@type": "Person",
+          "@id": "https://zendy00.github.io/manuscript-pages/#person",
+          "name": "Zendy Kim",
+          "email": "zendy00@gmail.com",
+          "url": "https://github.com/zendy00"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://zendy00.github.io/manuscript-pages/" },
+            { "@type": "ListItem", "position": 2, "name": "Features", "item": "https://zendy00.github.io/manuscript-pages/#features" },
+            { "@type": "ListItem", "position": 3, "name": "How it works", "item": "https://zendy00.github.io/manuscript-pages/#how" },
+            { "@type": "ListItem", "position": 4, "name": "Bridge", "item": "https://zendy00.github.io/manuscript-pages/#bridge" },
+            { "@type": "ListItem", "position": 5, "name": "Install", "item": "https://zendy00.github.io/manuscript-pages/#install" },
+            { "@type": "ListItem", "position": 6, "name": "Guide", "item": "https://zendy00.github.io/manuscript-pages/#guide" },
+            { "@type": "ListItem", "position": 7, "name": "FAQ", "item": "https://zendy00.github.io/manuscript-pages/#faq" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Manuscript?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Manuscript is a Chrome extension that lets you author multi-step product demos and user manuals by picking real DOM elements on any web page, layering spotlights and annotations, and replaying them step by step with narration."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is Manuscript different from Scribe or Tango?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Manuscript uses a 3-layer DOM selector (stable attribute, then text + parent path, then viewport coordinates) so a single attribute or text change does not break your manual. The output is a versioned JSON file you own and can commit to git."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does Manuscript support iframes?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, same-origin iframes are fully supported. Cross-origin and nested iframes are planned for v0.2."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Manuscript free?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Manuscript v0.1 is free during closed beta. Video recording and premium features are planned for v0.2."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body data-palette="studio" lang="en">
     <header class="site-header">
@@ -55,6 +227,22 @@
           <a href="#install" data-en>Install</a><a href="#install" data-ko>설치</a>
           <a href="#guide" data-en>Guide</a><a href="#guide" data-ko>사용설명서</a>
           <a href="#faq" data-en>FAQ</a><a href="#faq" data-ko>FAQ</a>
+          <button
+            id="palette-toggle"
+            class="palette-toggle"
+            type="button"
+            aria-label="Toggle dark mode"
+            aria-pressed="false"
+            title="Toggle dark mode"
+          >
+            <svg class="palette-sun" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="8" cy="8" r="3"></circle>
+              <path d="M8 1.2v1.6M8 13.2v1.6M14.8 8h-1.6M2.8 8H1.2M12.8 3.2l-1.13 1.13M4.33 11.67l-1.13 1.13M12.8 12.8l-1.13-1.13M4.33 4.33L3.2 3.2"></path>
+            </svg>
+            <svg class="palette-moon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M6.5 1.5a6.5 6.5 0 1 0 8 8 5.4 5.4 0 0 1-8-8z"></path>
+            </svg>
+          </button>
           <select id="lang-select" class="lang-select" aria-label="Language">
             <option value="en">English</option>
             <option value="ko">한국어</option>
@@ -69,10 +257,10 @@
         <div class="container">
           <div>
             <span class="hero-tag" data-en>
-              <span class="dot"></span> Closed beta · v0.1.4
+              <span class="dot"></span> Closed beta · v0.1.5
             </span>
             <span class="hero-tag" data-ko>
-              <span class="dot"></span> 클로즈드 베타 · v0.1.4
+              <span class="dot"></span> 클로즈드 베타 · v0.1.5
             </span>
 
             <h1 data-en>Write &amp; show.<br /><em>DOM-aware</em> demos for the web.</h1>
@@ -91,8 +279,8 @@
             </p>
 
             <div class="hero-ctas">
-              <a class="btn btn-primary" href="./downloads/manuscript-latest.zip" download data-en>↓ Download v0.1.4 (.zip)</a>
-              <a class="btn btn-primary" href="./downloads/manuscript-latest.zip" download data-ko>↓ v0.1.4 다운로드 (.zip)</a>
+              <a class="btn btn-primary" href="./downloads/manuscript-latest.zip" download data-en>↓ Download v0.1.5 (.zip)</a>
+              <a class="btn btn-primary" href="./downloads/manuscript-latest.zip" download data-ko>↓ v0.1.5 다운로드 (.zip)</a>
               <a class="btn btn-ghost" href="#install" data-en>How to install</a>
               <a class="btn btn-ghost" href="#install" data-ko>설치 방법</a>
             </div>
@@ -432,10 +620,10 @@ manuscript.exit()
           </p>
 
           <p class="install-cta" data-en>
-            <a class="btn btn-primary" href="./downloads/manuscript-latest.zip" download>↓ Download manuscript-0.1.4.zip</a>
+            <a class="btn btn-primary" href="./downloads/manuscript-latest.zip" download>↓ Download manuscript-0.1.5.zip</a>
           </p>
           <p class="install-cta" data-ko>
-            <a class="btn btn-primary" href="./downloads/manuscript-latest.zip" download>↓ manuscript-0.1.4.zip 다운로드</a>
+            <a class="btn btn-primary" href="./downloads/manuscript-latest.zip" download>↓ manuscript-0.1.5.zip 다운로드</a>
           </p>
 
           <ol class="install-list" data-en>
@@ -761,16 +949,6 @@ manuscript.exit()
                 <td data-en>Planned for v0.2 (paid feature)</td><td data-ko>v0.2 유료 기능 예정</td>
               </tr>
               <tr>
-                <td data-en>Cloud save &amp; share</td><td data-ko>클라우드 저장·공유</td>
-                <td data-en>Not yet</td><td data-ko>미지원</td>
-                <td data-en>v0.2</td><td data-ko>v0.2</td>
-              </tr>
-              <tr>
-                <td data-en>Self-hosted server</td><td data-ko>자체 서버 호스팅</td>
-                <td data-en>Not yet</td><td data-ko>미지원</td>
-                <td data-en>v0.3</td><td data-ko>v0.3</td>
-              </tr>
-              <tr>
                 <td data-en>Custom keyboard shortcuts</td><td data-ko>사용자 정의 단축키</td>
                 <td data-en>Not yet</td><td data-ko>미지원</td>
                 <td data-en>← → Space Esc fixed</td><td data-ko>← → Space Esc 고정</td>
@@ -779,11 +957,6 @@ manuscript.exit()
                 <td data-en>Multi-select picker</td><td data-ko>Multi-select picker</td>
                 <td data-en>Not yet</td><td data-ko>미지원</td>
                 <td data-en>One element at a time</td><td data-ko>한 번에 1개</td>
-              </tr>
-              <tr>
-                <td data-en>Dark mode</td><td data-ko>다크 모드</td>
-                <td data-en>Not yet</td><td data-ko>미지원</td>
-                <td data-en>v0.2</td><td data-ko>v0.2</td>
               </tr>
               <tr>
                 <td data-en><code>chrome://</code> pages</td><td data-ko><code>chrome://</code> 페이지</td>
@@ -822,8 +995,8 @@ manuscript.exit()
           <a href="./tours/SKILL.md" download>SKILL.md</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.1.4 · closed beta · © 2026</span>
-          <span data-ko>Manuscript v0.1.4 · 클로즈드 베타 · © 2026</span>
+          <span data-en>Manuscript v0.1.5 · closed beta · © 2026</span>
+          <span data-ko>Manuscript v0.1.5 · 클로즈드 베타 · © 2026</span>
         </div>
       </div>
     </footer>
