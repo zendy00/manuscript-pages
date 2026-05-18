@@ -20,6 +20,8 @@ function applyLang(lang) {
   document.documentElement.setAttribute('lang', lang);
   const select = document.getElementById('lang-select');
   if (select && select.value !== lang) select.value = lang;
+  const toggle = document.querySelector('.nav-toggle');
+  if (toggle) toggle.setAttribute('aria-label', lang === 'ko' ? '메뉴' : 'Menu');
   try { localStorage.setItem(STORAGE_KEY, lang); } catch (_) {}
 }
 
@@ -28,6 +30,37 @@ function init() {
   const select = document.getElementById('lang-select');
   if (select) {
     select.addEventListener('change', (e) => applyLang(e.target.value));
+  }
+
+  // Mobile hamburger toggle for the primary nav. The nav is hidden by
+  // default at narrow widths (see styles.css media query); the toggle
+  // adds .is-open to slide it down. Closes on link click, outside
+  // click, and Escape.
+  const nav = document.getElementById('primary-nav');
+  const toggles = document.querySelectorAll('.nav-toggle');
+  if (nav && toggles.length > 0) {
+    const setOpen = (open) => {
+      nav.classList.toggle('is-open', open);
+      toggles.forEach((t) => t.setAttribute('aria-expanded', String(open)));
+    };
+    toggles.forEach((t) =>
+      t.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setOpen(!nav.classList.contains('is-open'));
+      })
+    );
+    nav.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => setOpen(false))
+    );
+    document.addEventListener('click', (e) => {
+      if (!nav.classList.contains('is-open')) return;
+      if (nav.contains(e.target)) return;
+      if ([...toggles].some((t) => t.contains(e.target))) return;
+      setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
   }
 
   // Smooth-scroll for in-page nav links

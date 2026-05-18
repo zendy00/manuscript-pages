@@ -1,0 +1,261 @@
+{
+  "schemaVersion": "0.1.1",
+  "id": "tour-site-en",
+  "name": "Tour of the Manuscript landing page (EN)",
+  "url": "https://zendy00.github.io/manuscript-pages/",
+  "createdAt": "2026-05-18T15:00:00.000Z",
+  "updatedAt": "2026-05-18T15:00:00.000Z",
+  "siteFonts": [
+    "'Pretendard Variable', Pretendard, -apple-system, 'Asta Sans', sans-serif"
+  ],
+  "steps": [
+    {
+      "id": "step-1",
+      "name": "Welcome",
+      "description": "Welcome to Manuscript — a Chrome extension for authoring DOM-aware product tours and manuals. Let me show you around.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "section.hero" },
+        "layer2": { "kind": "text-parent", "text": "DOM-aware", "parentSelector": "main", "tagName": "SECTION" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 0, "width": 1200, "height": 480, "nearbyText": ["Manuscript", "Closed beta"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-1-text",
+          "text": "1. Welcome",
+          "position": { "x": 80, "y": 80 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2",
+      "name": "One-click download",
+      "description": "You can grab v0.1.3 in a single click. Manuscript ships as an unpacked Chrome extension, so the whole tool runs locally on your machine.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".hero-ctas" },
+        "layer2": { "kind": "text-parent", "text": "Download", "parentSelector": "section.hero", "tagName": "DIV" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 320, "width": 480, "height": 64, "nearbyText": ["Download", "How to install"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-2-text",
+          "text": "2. Download",
+          "position": { "x": 80, "y": 280 },
+          "anchorOffset": { "x": 0, "y": -44 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3",
+      "name": "Six features",
+      "description": "Six things set Manuscript apart: a three-layer DOM resolver, iframe support, cross-page replay, animated annotations, narrated playback, and a detached presenter view.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#features .section-title[data-en]" },
+        "layer2": { "kind": "text-parent", "text": "Six things that matter.", "parentSelector": "#features .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 760, "width": 720, "height": 56, "nearbyText": ["What's inside", "Six things that matter"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-3-text",
+          "text": "3. What's inside",
+          "position": { "x": 80, "y": 760 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4",
+      "name": "From picker to replay",
+      "description": "Authoring is five moves: start a manuscript, pick an element, layer text or shapes, add more steps, and replay. Each move is one click.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#how .section-title[data-en]" },
+        "layer2": { "kind": "text-parent", "text": "From picker to replay in five moves.", "parentSelector": "#how .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 1360, "width": 720, "height": 56, "nearbyText": ["How it works", "From picker to replay"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-4-text",
+          "text": "4. How it works",
+          "position": { "x": 80, "y": 1360 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-5",
+      "name": "Runtime bridge",
+      "description": "The runtime bridge lets you drop a Manuscript tour into any page you control — a small JavaScript library, the user's installed extension, and one JSON file. SKILL.md walks an AI agent through authoring that JSON.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#bridge .section-title[data-en]" },
+        "layer2": { "kind": "text-parent", "text": "Embed Manuscript on any page you control.", "parentSelector": "#bridge .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2160, "width": 720, "height": 56, "nearbyText": ["Runtime bridge", "Embed Manuscript", "SKILL.md"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-5-text",
+          "text": "5. Bridge",
+          "position": { "x": 80, "y": 2160 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-6",
+      "name": "Install in under 3 minutes",
+      "description": "Installation takes under three minutes. Download the zip, unzip it, load it as an unpacked extension, and pin the icon. You are done.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#install .section-title[data-en]" },
+        "layer2": { "kind": "text-parent", "text": "Manual install in under 3 minutes.", "parentSelector": "#install .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2880, "width": 720, "height": 56, "nearbyText": ["Install", "Manual install"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-6-text",
+          "text": "6. Install",
+          "position": { "x": 80, "y": 2880 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-7",
+      "name": "Full user guide",
+      "description": "The full user guide covers picking, annotating, action steps, replay, prompter, export and import — everything you need to ship a manual.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#guide .section-title[data-en]" },
+        "layer2": { "kind": "text-parent", "text": "Everything you need to ship a manual.", "parentSelector": "#guide .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 3760, "width": 720, "height": 56, "nearbyText": ["User guide", "Everything you need"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-7-text",
+          "text": "7. User guide",
+          "position": { "x": 80, "y": 3760 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-8",
+      "name": "Switch language any time",
+      "description": "You can switch between English and Korean at any time using this dropdown. Try it after the tour.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#lang-select" },
+        "layer2": { "kind": "text-parent", "text": "English", "parentSelector": ".site-header .nav", "tagName": "SELECT" },
+        "layer3": { "kind": "visual-heuristic", "x": 1080, "y": 16, "width": 92, "height": 32, "nearbyText": ["English", "한국어"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-8-text",
+          "text": "8. EN ↔ KO",
+          "position": { "x": 1000, "y": 80 },
+          "anchorOffset": { "x": -120, "y": 48 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 16,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 5000,
+      "waitForNavigation": false
+    }
+  ]
+}

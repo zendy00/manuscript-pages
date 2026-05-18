@@ -1,0 +1,261 @@
+{
+  "schemaVersion": "0.1.1",
+  "id": "tour-site-ko",
+  "name": "Manuscript 랜딩 페이지 투어 (KO)",
+  "url": "https://zendy00.github.io/manuscript-pages/",
+  "createdAt": "2026-05-18T15:00:00.000Z",
+  "updatedAt": "2026-05-18T15:00:00.000Z",
+  "siteFonts": [
+    "'Pretendard Variable', Pretendard, -apple-system, 'Asta Sans', sans-serif"
+  ],
+  "steps": [
+    {
+      "id": "step-1",
+      "name": "환영합니다",
+      "description": "Manuscript에 오신 것을 환영합니다. DOM 인식 기반의 제품 투어와 매뉴얼 저작 도구입니다. 차근차근 둘러보시죠.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "section.hero" },
+        "layer2": { "kind": "text-parent", "text": "DOM 인식", "parentSelector": "main", "tagName": "SECTION" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 0, "width": 1200, "height": 480, "nearbyText": ["Manuscript", "클로즈드 베타"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-1-text",
+          "text": "1. 환영",
+          "position": { "x": 80, "y": 80 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2",
+      "name": "한 번에 다운로드",
+      "description": "v0.1.3를 클릭 한 번에 받을 수 있습니다. Manuscript는 압축 해제된 Chrome 확장이라 모든 동작이 사용자 컴퓨터 안에서 일어납니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": ".hero-ctas" },
+        "layer2": { "kind": "text-parent", "text": "다운로드", "parentSelector": "section.hero", "tagName": "DIV" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 320, "width": 480, "height": 64, "nearbyText": ["다운로드", "설치 방법"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-2-text",
+          "text": "2. 다운로드",
+          "position": { "x": 80, "y": 280 },
+          "anchorOffset": { "x": 0, "y": -44 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3",
+      "name": "여섯 가지 차별점",
+      "description": "Manuscript의 여섯 가지 차별점입니다. 3-layer DOM 셀렉터, iframe 지원, 페이지 이동 후 이어재생, 움직이는 annotation, 음성 안내 재생, 그리고 분리된 프롬프터.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#features .section-title[data-ko]" },
+        "layer2": { "kind": "text-parent", "text": "차별점 6가지.", "parentSelector": "#features .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 760, "width": 720, "height": 56, "nearbyText": ["핵심 기능", "차별점 6가지"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-3-text",
+          "text": "3. 핵심 기능",
+          "position": { "x": 80, "y": 760 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4",
+      "name": "picker에서 재생까지",
+      "description": "저작은 다섯 단계입니다. 시연 시작, element 선택, 텍스트와 도형 추가, 스텝 더 만들기, 재생. 각 단계는 클릭 한 번입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#how .section-title[data-ko]" },
+        "layer2": { "kind": "text-parent", "text": "요소 선택부터 재생까지 5단계.", "parentSelector": "#how .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 1360, "width": 720, "height": 56, "nearbyText": ["동작 방식", "요소 선택부터 재생까지"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-4-text",
+          "text": "4. 동작 방식",
+          "position": { "x": 80, "y": 1360 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-5",
+      "name": "런타임 브리지",
+      "description": "런타임 브리지를 활용하면 본인이 운영하는 페이지에 Manuscript 투어를 임베드할 수 있습니다. 작은 JavaScript 라이브러리, 사용자 확장 설치, JSON 한 개면 됩니다. SKILL.md가 AI agent에게 JSON 저작을 지시합니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#bridge .section-title[data-ko]" },
+        "layer2": { "kind": "text-parent", "text": "본인이 운영하는 페이지에 Manuscript를 임베드.", "parentSelector": "#bridge .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2160, "width": 720, "height": 56, "nearbyText": ["런타임 브리지", "본인이 운영하는 페이지", "SKILL.md"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-5-text",
+          "text": "5. 브리지",
+          "position": { "x": 80, "y": 2160 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-6",
+      "name": "3분 안에 설치",
+      "description": "설치는 3분 안에 끝납니다. zip을 받아 압축을 풀고, Chrome에 압축 해제된 확장으로 로드한 뒤 아이콘을 고정. 끝입니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#install .section-title[data-ko]" },
+        "layer2": { "kind": "text-parent", "text": "3분 안에 수동 설치.", "parentSelector": "#install .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2880, "width": 720, "height": 56, "nearbyText": ["설치", "3분 안에 수동 설치"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-6-text",
+          "text": "6. 설치",
+          "position": { "x": 80, "y": 2880 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-7",
+      "name": "전체 사용설명서",
+      "description": "전체 사용설명서에서는 element 선택, annotation 편집, action 스텝, 재생, 프롬프터, 내보내기와 불러오기까지 시연을 완성하는 데 필요한 모든 것을 다룹니다.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#guide .section-title[data-ko]" },
+        "layer2": { "kind": "text-parent", "text": "매뉴얼 한 편을 완성하는 데 필요한 모든 것.", "parentSelector": "#guide .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 3760, "width": 720, "height": 56, "nearbyText": ["사용설명서", "매뉴얼 한 편을 완성"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-7-text",
+          "text": "7. 사용설명서",
+          "position": { "x": 80, "y": 3760 },
+          "anchorOffset": { "x": 24, "y": -52 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 18,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 6500,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-8",
+      "name": "언어 전환은 언제든",
+      "description": "이 드롭다운으로 영어와 한국어를 언제든 전환할 수 있습니다. 투어 종료 후 시도해보세요.",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#lang-select" },
+        "layer2": { "kind": "text-parent", "text": "한국어", "parentSelector": ".site-header .nav", "tagName": "SELECT" },
+        "layer3": { "kind": "visual-heuristic", "x": 1080, "y": 16, "width": 92, "height": 32, "nearbyText": ["English", "한국어"] }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "ann-8-text",
+          "text": "8. EN ↔ KO",
+          "position": { "x": 1000, "y": 80 },
+          "anchorOffset": { "x": -120, "y": 48 },
+          "style": {
+            "fontFamily": "'EB Garamond', Garamond, serif",
+            "fontSize": 16,
+            "color": "#ffffff",
+            "bold": true,
+            "backgroundColor": "#1a2438",
+            "backgroundOpacity": 1,
+            "borderColor": "transparent"
+          }
+        }
+      ],
+      "autoAdvanceMs": 5000,
+      "waitForNavigation": false
+    }
+  ]
+}
