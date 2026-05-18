@@ -16,7 +16,7 @@
 ├── manuscript-bridge.0.1.2.js  # 런타임 브리지 라이브러리 (/bridge에서 자동 동기화)
 ├── downloads/
 │   ├── manuscript-latest.zip    # 확장 빌드
-│   └── manuscript-0.1.3.zip
+│   └── manuscript-0.1.4.zip
 ├── tours/
 │   ├── tour-en.json        # 본 랜딩 페이지 8 스텝 투어 (영어)
 │   ├── tour-ko.json        # 같은 투어, 한국어 narration
@@ -37,7 +37,7 @@
 1. **Hero** — Manuscript 소개와 다운로드 CTA
 2. **Features** — 6가지 차별점
 3. **How it works** — 5단계 저작 흐름 (picker → annotate → replay)
-4. **런타임 브리지** *(v0.1.3 신규)* — 본인이 운영하는 임의의 페이지에
+4. **런타임 브리지** *(v0.1.4 신규)* — 본인이 운영하는 임의의 페이지에
    Manuscript 투어를 임베드하는 방법. `manuscript-bridge.0.1.2.js`,
    `SKILL.md`, 예제 `tour-en.json` / `tour-ko.json` 제공. 페이지 언어에
    맞춰 토글되는 사용 예제 코드와 다운로드 카드 포함.
@@ -93,4 +93,4 @@ HTML 변경과 함께 commit합니다.
 
 ## 라이선스 · 문의
 
-클로즈드 베타 · v0.1.3. 피드백은 <zendy00@gmail.com> 으로 보내주세요.
+클로즈드 베타 · v0.1.4. 피드백은 <zendy00@gmail.com> 으로 보내주세요.

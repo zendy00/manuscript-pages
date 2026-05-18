@@ -607,6 +607,22 @@ p.lead {
   .brand-word { font-size: 18px; }
 }
 
+/* Footer links collapse to a vertical list on mobile so long anchors
+   (mail address, SKILL.md, "사용설명서", …) don't wrap mid-link. */
+@media (max-width: 560px) {
+  .site-footer .links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .site-footer .links a {
+    padding: 4px 0;
+    font-size: 15px;
+  }
+}
+
 /* lang visibility — JS toggles [lang] on body */
 [data-en], [data-ko] { display: none; }
 body[lang="en"] [data-en] { display: revert; }

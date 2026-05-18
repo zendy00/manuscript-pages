@@ -16,7 +16,7 @@ The site itself is a single static HTML page — no build step, no bundler. It i
 ├── manuscript-bridge.0.1.2.js   # runtime bridge library (synced from /bridge)
 ├── downloads/
 │   ├── manuscript-latest.zip    # extension build
-│   └── manuscript-0.1.3.zip
+│   └── manuscript-0.1.4.zip
 ├── tours/
 │   ├── tour-en.json        # 8-step tour of this landing page (English)
 │   ├── tour-ko.json        # same tour, Korean narration
@@ -37,7 +37,7 @@ The landing page covers six surfaces:
 1. **Hero** — what Manuscript is, download CTA.
 2. **Features** — six things that set Manuscript apart.
 3. **How it works** — five-move authoring flow (picker → annotate → replay).
-4. **Runtime bridge** *(new in v0.1.3)* — how to embed a Manuscript tour
+4. **Runtime bridge** *(new in v0.1.4)* — how to embed a Manuscript tour
    on any page you control: `manuscript-bridge.0.1.2.js`, `SKILL.md`,
    example `tour-en.json` / `tour-ko.json`. Includes usage code (toggles
    to the page's current language) and downloads.
@@ -95,4 +95,4 @@ starts in `manuscript/site/`.
 
 ## License & contact
 
-Closed beta · v0.1.3. Email feedback to <zendy00@gmail.com>.
+Closed beta · v0.1.4. Email feedback to <zendy00@gmail.com>.
