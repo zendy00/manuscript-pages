@@ -382,6 +382,78 @@ p.lead {
   text-align: center;
 }
 
+/* ───── Hero video — lite YouTube embed ─────
+   Click target is the entire card; on activation the inline script swaps
+   the thumbnail+button DOM for a YouTube iframe pointed at the same id.
+   Pays zero YouTube JS until the viewer asks for the video. */
+.hero-video {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  background: #000;
+  cursor: pointer;
+  user-select: none;
+  outline-offset: 3px;
+  isolation: isolate;
+}
+.hero-video:focus-visible {
+  outline: 3px solid var(--c-primary);
+}
+.hero-video-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.3s ease;
+}
+.hero-video:hover .hero-video-thumb,
+.hero-video:focus-visible .hero-video-thumb {
+  transform: scale(1.02);
+  filter: brightness(0.88);
+}
+.hero-video-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 88px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgb(0 0 0 / 0.35));
+  transition: transform 0.18s ease;
+}
+.hero-video:hover .hero-video-play,
+.hero-video:focus-visible .hero-video-play {
+  transform: scale(1.08);
+}
+.hero-video-play svg {
+  width: 100%;
+  height: 100%;
+}
+.hero-video-caption {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 0.6);
+}
+.hero-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* ───── Record spotlight (headline feature) ───── */
 .record-spotlight {
   background:
