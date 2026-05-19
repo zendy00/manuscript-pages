@@ -95,4 +95,4 @@ starts in `manuscript/site/`.
 
 ## License & contact
 
-Closed beta · v0.2.3. Email feedback to <zendy00@gmail.com>.
+v0.2.3. Email feedback to <zendy00@gmail.com>.
