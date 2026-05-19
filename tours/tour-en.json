@@ -43,7 +43,7 @@
     {
       "id": "step-2",
       "name": "One-click download",
-      "description": "You can grab v0.2.2 in a single click. Manuscript ships as an unpacked Chrome extension, so the whole tool runs locally on your machine.",
+      "description": "You can grab v0.2.3 in a single click. Manuscript ships as an unpacked Chrome extension, so the whole tool runs locally on your machine.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": ".hero-ctas" },

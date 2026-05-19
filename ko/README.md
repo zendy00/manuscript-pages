@@ -16,7 +16,7 @@
 ├── manuscript-bridge.0.1.2.js  # 런타임 브리지 라이브러리 (/bridge에서 자동 동기화)
 ├── downloads/
 │   ├── manuscript-latest.zip    # 확장 빌드
-│   └── manuscript-0.2.2.zip
+│   └── manuscript-0.2.3.zip
 ├── tours/
 │   ├── tour-en.json        # 본 랜딩 페이지 8 스텝 투어 (영어)
 │   ├── tour-ko.json        # 같은 투어, 한국어 narration
@@ -93,4 +93,4 @@ HTML 변경과 함께 commit합니다.
 
 ## 라이선스 · 문의
 
-클로즈드 베타 · v0.2.2. 피드백은 <zendy00@gmail.com> 으로 보내주세요.
+클로즈드 베타 · v0.2.3. 피드백은 <zendy00@gmail.com> 으로 보내주세요.

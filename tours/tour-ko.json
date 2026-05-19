@@ -43,7 +43,7 @@
     {
       "id": "step-2",
       "name": "한 번에 다운로드",
-      "description": "v0.2.2을 클릭 한 번에 받을 수 있습니다. Manuscript는 압축 해제된 Chrome 확장이라 모든 동작이 사용자 컴퓨터 안에서 일어납니다.",
+      "description": "v0.2.3을 클릭 한 번에 받을 수 있습니다. Manuscript는 압축 해제된 Chrome 확장이라 모든 동작이 사용자 컴퓨터 안에서 일어납니다.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": ".hero-ctas" },
