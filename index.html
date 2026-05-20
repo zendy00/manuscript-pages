@@ -192,7 +192,7 @@
               "name": "Is Manuscript free?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Manuscript is currently free, including the headline video recording feature. Future premium features are planned."
+                "text": "Manuscript is currently free, including the screen recording feature. Future premium features are planned."
               }
             }
           ]
@@ -308,8 +308,8 @@
               <span class="dot"></span> v0.2.3
             </span>
 
-            <h1 data-en>Write it. Show it.<br />Friendly <em>web tours</em> for everyone.</h1>
-            <h1 data-ko>쓰고 보여주기.<br />누구나 만드는 <em>웹 시연</em>.</h1>
+            <h1 data-en>Tours that <em>don't break</em><br />when your page changes.</h1>
+            <h1 data-ko>페이지가 바뀌어도<br /><em>안 깨지는</em> 사용 설명.</h1>
 
             <ul class="hero-keywords" aria-label="Manuscript covers" data-en>
               <li><span class="dot"></span>Web tours</li>
@@ -334,15 +334,17 @@
             </p>
 
             <p class="lead" data-en>
-              A friendly Chrome extension for putting together step-by-step product
-              walkthroughs and how-tos. Click the parts of a page you want to highlight,
-              add a note or a hand-drawn arrow, then press play. Your tour keeps working
-              even when the page changes a little.
+              A Chrome extension that pins each step of your tour to the actual element
+              on the page with a 3-layer fallback — stable attribute first, then text
+              with parent path, then viewport position. A renamed class, an edited
+              button label, or a layout reflow won't stop your manual from playing.
+              Click to mark steps, add notes or a hand-drawn arrow, then press play.
             </p>
             <p class="lead" data-ko>
-              누구나 단계별 제품 안내와 사용 설명을 손쉽게 만들 수 있는 Chrome 확장입니다.
-              페이지에서 강조하고 싶은 부분을 클릭하고, 짧은 설명이나 손그림 화살표를 더한 뒤
-              재생만 누르면 됩니다. 페이지가 조금 바뀌어도 안내는 그대로 작동합니다.
+              각 단계를 페이지의 실제 요소에 3-layer fallback (안정 속성 → 텍스트+부모
+              경로 → 뷰포트 위치) 으로 고정시키는 Chrome 확장입니다. 클래스명이 바뀌거나
+              버튼 글자가 수정되거나 레이아웃이 변해도 안내는 멈추지 않습니다. 클릭으로
+              단계를 표시하고, 메모나 손그림 화살표를 더한 뒤, 재생만 누르세요.
             </p>
 
             <div class="hero-ctas">
@@ -385,12 +387,12 @@
         </div>
       </section>
 
-      <!-- ───── Record (headline feature) ───── -->
+      <!-- ───── Record (video output) ───── -->
       <section id="record" class="record-spotlight">
         <div class="container">
           <div class="record-copy">
-            <p class="eyebrow" data-en>★ Headline feature</p>
-            <p class="eyebrow" data-ko>★ 핵심 기능</p>
+            <p class="eyebrow" data-en>★ Output as video</p>
+            <p class="eyebrow" data-ko>★ 동영상 출력</p>
 
             <h2 class="section-title" data-en>
               Turn your tour into a <em>video</em>.
