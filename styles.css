@@ -465,10 +465,7 @@ p.lead {
   border-bottom: 1px solid var(--c-border);
 }
 .record-spotlight .container {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: 48px;
-  align-items: center;
+  max-width: 720px;
 }
 .record-spotlight .section-title {
   font-family: var(--ff-serif);
@@ -517,132 +514,6 @@ p.lead {
   color: var(--c-text);
   font-weight: 600;
 }
-.record-art {
-  position: relative;
-  border-radius: var(--r-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-  background: #000;
-  display: block;
-  margin: 0;
-}
-.record-art img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.record-art .placeholder {
-  font-family: var(--ff-mono);
-  font-size: 12px;
-  color: var(--c-text-soft);
-  padding: 40px;
-  text-align: center;
-}
-
-/* Decorative YouTube-like player chrome over the screenshot. */
-.record-player .player-chrome {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0 0 8px;
-  background: linear-gradient(to top, rgb(0 0 0 / 0.78) 0%, rgb(0 0 0 / 0.55) 60%, rgb(0 0 0 / 0) 100%);
-  color: #fff;
-  font-family: 'Roboto', 'Segoe UI', system-ui, sans-serif;
-  user-select: none;
-  pointer-events: none;
-}
-.record-player .player-progress {
-  position: relative;
-  height: 4px;
-  background: rgb(255 255 255 / 0.20);
-  margin: 0 12px;
-  border-radius: 2px;
-  overflow: hidden;
-  transition: height 0.15s ease;
-}
-.record-player:hover .player-progress { height: 6px; }
-.record-player .player-progress-buffer {
-  position: absolute;
-  inset: 0;
-  width: 38%;
-  background: rgb(255 255 255 / 0.35);
-}
-.record-player .player-progress-fill {
-  position: absolute;
-  inset: 0;
-  width: 22%;
-  background: #ff0033;
-  z-index: 1;
-}
-.record-player .player-progress-fill::after {
-  content: '';
-  position: absolute;
-  right: -7px;
-  top: 50%;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #ff0033;
-  transform: translateY(-50%);
-  box-shadow: 0 0 0 3px rgb(255 0 51 / 0.30);
-}
-.record-player .player-controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 8px 0;
-}
-.record-player .player-btn {
-  appearance: none;
-  background: transparent;
-  border: 0;
-  color: #fff;
-  width: 32px;
-  height: 32px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: default;
-  opacity: 0.92;
-  border-radius: 4px;
-}
-.record-player .player-btn svg { display: block; }
-.record-player .player-time {
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.02em;
-  color: #fff;
-  margin-left: 4px;
-  white-space: nowrap;
-}
-.record-player .player-spacer { flex: 1; }
-.record-player .player-rec {
-  width: auto;
-  padding: 0 10px;
-  gap: 6px;
-  border-radius: 999px;
-  background: rgb(0 0 0 / 0.40);
-  border: 1px solid rgb(255 255 255 / 0.20);
-  height: 26px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  align-self: center;
-}
-.record-player .player-rec-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: #ff0033;
-  box-shadow: 0 0 0 0 rgb(255 0 51 / 0.65);
-  animation: rec-pulse 1.6s ease-in-out infinite;
-}
-@keyframes rec-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgb(255 0 51 / 0.65); }
-  50%      { box-shadow: 0 0 0 6px rgb(255 0 51 / 0); }
-}
-
 /* ───── Feature grid ───── */
 .features {
   background: var(--c-surface-2);
@@ -904,7 +775,6 @@ p.lead {
   .hero { padding: 80px 0 64px; }
   .hero .container { grid-template-columns: 1fr; gap: 40px; }
   .hero h1 { font-size: 40px; }
-  .record-spotlight .container { grid-template-columns: 1fr; gap: 32px; }
   .record-spotlight .section-title { font-size: 32px; }
   .feature-grid { grid-template-columns: 1fr; }
   .guide-grid { grid-template-columns: 1fr; gap: 24px; }
