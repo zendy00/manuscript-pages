@@ -16,7 +16,7 @@ The site itself is a single static HTML page — no build step, no bundler. It i
 ├── manuscript-bridge.0.1.2.js   # runtime bridge library (synced from /bridge)
 ├── downloads/
 │   ├── manuscript-latest.zip    # extension build
-│   └── manuscript-0.2.3.zip
+│   └── manuscript-0.2.1.zip
 ├── tours/
 │   ├── tour-en.json        # 8-step tour of this landing page (English)
 │   ├── tour-ko.json        # same tour, Korean narration
@@ -95,4 +95,4 @@ starts in `manuscript/site/`.
 
 ## License & contact
 
-v0.2.3. Email feedback to <zendy00@gmail.com>.
+v0.2.1. Email feedback to <zendy00@gmail.com>.
