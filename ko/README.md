@@ -14,9 +14,6 @@
 ├── styles.css              # 디자인 토큰(studio 팔레트) + 레이아웃
 ├── i18n.js                 # 언어 토글, 부드러운 스크롤, TOC 하이라이트
 ├── manuscript-bridge.0.1.2.js  # 런타임 브리지 라이브러리 (/bridge에서 자동 동기화)
-├── downloads/
-│   ├── manuscript-latest.zip    # 확장 빌드
-│   └── manuscript-0.2.1.zip
 ├── tours/
 │   ├── tour-en.json        # 본 랜딩 페이지 8 스텝 투어 (영어)
 │   ├── tour-ko.json        # 같은 투어, 한국어 narration
@@ -34,15 +31,20 @@
 
 랜딩 페이지는 6개 섹션으로 구성됩니다:
 
-1. **Hero** — Manuscript 소개와 다운로드 CTA
+1. **Hero** — Manuscript 소개와 Chrome 웹 스토어 CTA
 2. **Features** — 6가지 차별점
 3. **How it works** — 5단계 저작 흐름 (picker → annotate → replay)
 4. **런타임 브리지** *(v0.1.4 신규)* — 본인이 운영하는 임의의 페이지에
    Manuscript 투어를 임베드하는 방법. `manuscript-bridge.0.1.2.js`,
    `SKILL.md`, 예제 `tour-en.json` / `tour-ko.json` 제공. 페이지 언어에
    맞춰 토글되는 사용 예제 코드와 다운로드 카드 포함.
-5. **Install** — 3분 안에 끝나는 압축 해제 확장 설치
-6. **Guide** — 8 섹션 전체 사용 설명서
+5. **Install** — Chrome 웹 스토어 원클릭 설치
+6. **Guide** — 8 섹션 전체 사용 설명서. 7번 Recording 섹션에 *(v0.2
+   업데이트)* **잠깐 멈추고 내 목소리 보태기** 흐름이 들어 있습니다 —
+   녹화 중에 `Space` 키로 시연만 잠깐 멈추고 (녹화는 계속되니까 그 사이에
+   직접 한마디 보탤 수 있어요), 끝내고 저장은 `Esc`. 안내 창에서 "내
+   목소리도 함께 녹음"을 켜면 내가 말한 내용이 읽어주는 안내와 함께 영상에
+   담깁니다.
 
 우하단의 **"투어 시작"** 플로팅 pill이 Manuscript 확장 설치를 자동 감지하고,
 클릭 시 현재 페이지 언어(EN/KO)에 맞는 투어(`tour-en.json` 또는

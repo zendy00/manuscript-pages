@@ -576,7 +576,7 @@ Annotated highlights:
                 "parentSelector": "main", "tagName": "SECTION" },
     "layer3": { "kind": "visual-heuristic",
                 "x": 0, "y": 0, "width": 1200, "height": 480,
-                "nearbyText": ["Manuscript", "Closed beta"] }
+                "nearbyText": ["Manuscript", "v0.2.1"] }
   },
   "annotations": [{
     "kind": "text", "id": "ann-1-text", "text": "1. Welcome",

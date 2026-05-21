@@ -14,9 +14,6 @@ The site itself is a single static HTML page — no build step, no bundler. It i
 ├── styles.css              # design tokens (studio palette) + layout
 ├── i18n.js                 # language toggle, smooth scroll, TOC highlight
 ├── manuscript-bridge.0.1.2.js   # runtime bridge library (synced from /bridge)
-├── downloads/
-│   ├── manuscript-latest.zip    # extension build
-│   └── manuscript-0.2.1.zip
 ├── tours/
 │   ├── tour-en.json        # 8-step tour of this landing page (English)
 │   ├── tour-ko.json        # same tour, Korean narration
@@ -34,15 +31,20 @@ The site itself is a single static HTML page — no build step, no bundler. It i
 
 The landing page covers six surfaces:
 
-1. **Hero** — what Manuscript is, download CTA.
+1. **Hero** — what Manuscript is, Chrome Web Store CTA.
 2. **Features** — six things that set Manuscript apart.
 3. **How it works** — five-move authoring flow (picker → annotate → replay).
 4. **Runtime bridge** *(new in v0.1.4)* — how to embed a Manuscript tour
    on any page you control: `manuscript-bridge.0.1.2.js`, `SKILL.md`,
    example `tour-en.json` / `tour-ko.json`. Includes usage code (toggles
    to the page's current language) and downloads.
-5. **Install** — under-three-minutes setup for the unpacked extension.
-6. **Guide** — full eight-section user manual.
+5. **Install** — one-click install from the Chrome Web Store.
+6. **Guide** — full eight-section user manual. Section 7 (Recording)
+   walks through the *(v0.2 update)* **pause-to-add-your-voice** flow —
+   tap `Space` mid-recording to pause the tour while the video keeps
+   rolling (great for live commentary), `Esc` to wrap up and save.
+   Turn on "Also record my microphone" on the guide screen to mix
+   your voice into the recording alongside the read-aloud narration.
 
 A floating **"Take the tour"** pill in the bottom-right auto-detects the
 Manuscript extension and plays the matching tour for the current page
