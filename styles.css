@@ -205,8 +205,12 @@ p.lead {
 }
 .hero .container {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: 56px;
+  /* 텍스트 컬럼이 좁아 Korean 한 글자가 다음 줄로 떨어지는 케이스가
+     있었다 — 좌우 비율을 1.05 : 0.95 로 살짝 텍스트 쪽으로 기울이고
+     gap 도 줄였다. video 미리보기는 16:9 라 여유 폭이 약간 깎여도
+     문제 없음. */
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 48px;
   align-items: center;
 }
 .hero-tag {
@@ -237,6 +241,10 @@ p.lead {
   font-weight: 500;
   letter-spacing: -0.01em;
   margin: 24px 0 16px;
+  /* Korean 어절이 잘리지 않도록 단어 단위 줄바꿈만 허용 +
+     라인 폭을 자동 균형. <br /> 로 강제 개행한 위치는 유지된다. */
+  word-break: keep-all;
+  text-wrap: balance;
 }
 .hero h1 em {
   font-style: italic;
@@ -649,72 +657,25 @@ p.lead {
 }
 .callout strong { color: var(--c-text); }
 
-.callout-soft {
-  margin-top: 16px;
-  padding: 12px 14px;
-  background: var(--c-surface-2);
-  border: 1px dashed var(--c-border);
-  border-radius: var(--r-md);
-  font-size: 14px;
-  color: var(--c-text-mute);
-}
-.callout-soft a { color: var(--c-primary); }
-
-/* ───── Roadmap (Coming in v0.3.0) ───── */
-.roadmap {
-  padding: 64px 0 72px;
-  background: var(--c-surface-2);
-  border-top: 1px solid var(--c-border);
-  border-bottom: 1px solid var(--c-border);
-}
-.roadmap .container { max-width: 980px; }
-.roadmap .eyebrow { color: var(--c-primary); }
-.roadmap .section-title em {
-  font-family: var(--ff-serif);
-  font-style: italic;
-  color: var(--c-primary);
-}
-.roadmap .lead {
-  max-width: 720px;
-  color: var(--c-text-mute);
-}
-.roadmap-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-  margin-top: 32px;
-}
-.roadmap-card {
-  position: relative;
-  padding: 24px 22px 22px;
-  background: var(--c-surface);
-  border: 1px solid var(--c-border);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-sm);
-}
-.roadmap-card h3 {
-  margin: 12px 0 8px;
-  font-size: 18px;
-}
-.roadmap-card p {
-  margin: 0;
-  font-size: 14px;
-  color: var(--c-text-mute);
-}
-.roadmap-badge {
+/* ───── NEW v0.3.0 inline badge ───── */
+/* 인라인 신규 표시. 헤딩이나 bullet 첫머리에 붙여 신규 기능 명시.
+   v0.X.Y 가 올라가면 (a) 신규 라벨 제거 또는 (b) 신규 버전으로 갱신. */
+.new-badge {
   display: inline-block;
-  padding: 2px 10px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  padding: 2px 8px;
+  margin-right: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   color: var(--c-bg);
   background: var(--c-primary);
   border-radius: 999px;
   text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
 }
-@media (max-width: 720px) {
-  .roadmap-grid { grid-template-columns: 1fr; }
-}
+/* lead 본문에서는 약간 위로 띄워 둠 — 라인 높이가 크기 때문 */
+.lead .new-badge { vertical-align: baseline; position: relative; top: -2px; }
 
 /* ───── Guide ───── */
 .guide-grid {
@@ -970,9 +931,14 @@ body[lang="ko"] [data-ko] { display: revert; }
   margin-left: 4px;
 }
 
+/* Code blocks intentionally stay dark in BOTH light and dark mode —
+   the syntax-highlight palette (blue/amber/dimmed) only reads on a
+   dark surface. Using var(--c-text) as a background broke this in
+   dark mode (where --c-text flips near-white and the amber strings
+   landed on a white bg). */
 .bridge pre.code {
-  background: var(--c-text);
-  color: var(--c-surface);
+  background: oklch(0.20 0.020 240);
+  color: oklch(0.97 0.003 240);
   padding: 18px 20px;
   border-radius: var(--r-md);
   overflow-x: auto;
@@ -983,7 +949,7 @@ body[lang="ko"] [data-ko] { display: revert; }
 }
 .bridge pre.code .tok-key { color: #82b3ff; }
 .bridge pre.code .tok-str { color: #ffd47a; }
-.bridge pre.code .tok-cmt { color: rgba(255, 255, 255, 0.45); }
+.bridge pre.code .tok-cmt { color: rgba(255, 255, 255, 0.55); }
 
 /* Floating tour pill — appears in the bottom-right when the extension is
    detected. Mirrors the extension's controls pill design tone. */
@@ -1091,4 +1057,365 @@ body[data-palette="studio-dark"] #mn-tour {
   color: var(--c-text);
   border: 1px solid var(--c-border-strong);
   box-shadow: var(--shadow-md);
+}
+
+/* ───── Hero install hint ─────
+   The small "Prefer the dev build?" line under the hero CTAs. Quiet
+   by design — the Web Store button is the main path, this just
+   surfaces the alternative for users who want it. */
+.hero-install-hint {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--c-text-soft);
+}
+.hero-install-hint a { color: var(--c-text-mute); text-decoration: underline; }
+.hero-install-hint a:hover { color: var(--c-primary); }
+.hero-zip-link { font-variant-numeric: tabular-nums; }
+
+/* ───── Install — version chips + tabs ───── */
+.install-intro {
+  margin: 0 0 20px;
+  color: var(--c-text);
+}
+
+.install-versions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px;
+  margin: 0 0 24px;
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  font-size: 14px;
+}
+.ver-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.ver-chip-label {
+  font-size: 11px;
+  letter-spacing: var(--ls-cap);
+  text-transform: uppercase;
+  color: var(--c-text-soft);
+}
+.ver-chip-value {
+  font-family: var(--ff-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text);
+  font-variant-numeric: tabular-nums;
+}
+.ver-chip-sep { color: var(--c-border-strong); }
+.ver-chip-hint {
+  font-size: 12px;
+  color: var(--c-text-soft);
+  font-style: italic;
+}
+
+.install-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 0;
+  border-bottom: 1px solid var(--c-border);
+}
+.install-tab {
+  appearance: none;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: var(--r-md) var(--r-md) 0 0;
+  padding: 12px 18px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--c-text-mute);
+  cursor: pointer;
+  position: relative;
+  bottom: -1px;
+}
+.install-tab small {
+  font-weight: 400;
+  font-size: 11px;
+  margin-left: 4px;
+  color: var(--c-text-soft);
+}
+.install-tab:hover { color: var(--c-text); }
+.install-tab.is-active {
+  background: var(--c-surface);
+  border-color: var(--c-border);
+  border-bottom-color: var(--c-surface);
+  color: var(--c-text);
+}
+.install-tab:focus-visible {
+  outline: 2px solid var(--c-focus);
+  outline-offset: 2px;
+}
+
+.install-panel {
+  padding: 28px 0 0;
+}
+.install-panel[hidden] { display: none; }
+
+.install-sha {
+  margin: 14px 0 8px;
+  font-size: 12px;
+  color: var(--c-text-soft);
+  text-align: center;
+}
+.install-sha-label {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: var(--ls-cap);
+  text-transform: uppercase;
+  padding: 2px 6px;
+  margin-right: 6px;
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-xs);
+  color: var(--c-text-mute);
+}
+.install-sha code {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  word-break: break-all;
+  color: var(--c-text);
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-xs);
+  padding: 2px 6px;
+}
+.install-sha a {
+  color: var(--c-text-mute);
+  text-decoration: underline;
+}
+.install-sha-size { font-variant-numeric: tabular-nums; }
+
+.callout-warn {
+  border-left-color: oklch(0.62 0.16 50);
+  background: oklch(0.96 0.04 70);
+}
+body[data-palette="studio-dark"] .callout-warn {
+  background: oklch(0.30 0.05 65);
+}
+
+.install-changelog-link {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--c-text-soft);
+}
+.install-changelog-link a { font-weight: 500; }
+
+/* ───── Schema compatibility table ───── */
+.schema-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 8px;
+  font-size: 13px;
+}
+.schema-table th,
+.schema-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--c-border);
+  vertical-align: top;
+}
+.schema-table thead th {
+  background: var(--c-surface-2);
+  font-size: 11px;
+  letter-spacing: var(--ls-cap);
+  text-transform: uppercase;
+  color: var(--c-text-soft);
+}
+.schema-table code {
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  padding: 1px 5px;
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-xs);
+}
+.schema-table em {
+  font-style: normal;
+  font-size: 11px;
+  color: var(--c-primary);
+  margin-left: 4px;
+}
+.schema-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--c-text-mute);
+}
+
+/* ───── What's-new toast ───── */
+.whatsnew-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 76px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(100vw - 40px);
+  padding: 10px 14px 10px 14px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--r-pill);
+  box-shadow: var(--shadow-lg);
+  font-size: 13px;
+  color: var(--c-text);
+  transform: translateY(8px);
+  opacity: 0;
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+.whatsnew-toast.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+.whatsnew-toast[hidden] { display: none; }
+.whatsnew-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  flex-shrink: 0;
+  animation: whatsnew-pulse 1.6s ease-in-out infinite;
+}
+@keyframes whatsnew-pulse {
+  0%, 100% { transform: scale(1);   opacity: 1;   }
+  50%      { transform: scale(1.4); opacity: 0.5; }
+}
+.whatsnew-text strong { font-weight: 600; }
+.whatsnew-link {
+  margin-left: 6px;
+  font-weight: 500;
+  color: var(--c-primary);
+}
+.whatsnew-close {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  margin-left: 2px;
+  padding: 2px 6px;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--c-text-mute);
+  cursor: pointer;
+  border-radius: var(--r-xs);
+}
+.whatsnew-close:hover { color: var(--c-text); background: var(--c-surface-2); }
+
+@media (max-width: 640px) {
+  .whatsnew-toast {
+    right: 10px;
+    left: 10px;
+    bottom: 12px;
+    justify-content: space-between;
+  }
+  .install-tabs {
+    flex-wrap: wrap;
+  }
+  .install-versions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ver-chip-sep { display: none; }
+}
+
+/* ───── Changelog page ───── */
+.changelog-hero {
+  padding: 72px 0 32px;
+  border-bottom: 1px solid var(--c-border);
+}
+.changelog-hero .lead {
+  max-width: 720px;
+  margin: 16px 0 0;
+}
+.changelog {
+  padding: 56px 0 96px;
+}
+.changelog .container { max-width: 880px; }
+
+.changelog-entry {
+  padding: 32px 0;
+  border-bottom: 1px solid var(--c-border);
+}
+.changelog-entry:last-of-type { border-bottom: none; }
+.changelog-entry-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.changelog-entry-head h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.changelog-entry-head time {
+  font-size: 13px;
+  color: var(--c-text-soft);
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+}
+.changelog-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: var(--ls-cap);
+  text-transform: uppercase;
+  border-radius: var(--r-pill);
+  background: var(--c-tint);
+  color: var(--c-primary);
+}
+.changelog-tag-current {
+  background: var(--c-primary);
+  color: var(--c-primary-fg);
+}
+.changelog-summary {
+  margin: 6px 0 18px;
+  color: var(--c-text-mute);
+  max-width: 720px;
+}
+.changelog-entry h3 {
+  margin: 18px 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--ls-cap);
+  color: var(--c-text-soft);
+}
+.changelog-entry ul {
+  margin: 0 0 12px;
+  padding: 0 0 0 22px;
+}
+.changelog-entry li {
+  margin: 6px 0;
+  line-height: 1.55;
+}
+.changelog-entry code {
+  font-family: var(--ff-mono);
+  font-size: 12.5px;
+  padding: 1px 5px;
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-xs);
+}
+
+/* Active nav link on the changelog page */
+.nav a.is-current {
+  color: var(--c-text);
+  font-weight: 500;
 }

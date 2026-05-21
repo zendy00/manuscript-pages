@@ -1,6 +1,6 @@
 ---
 name: manuscript-tour-authoring
-description: Generate a Manuscript scenario JSON that walks a user through any web page. Use when the user provides a URL (or raw HTML) and asks for a tour, walkthrough, demo, onboarding, product highlight, or visual guide. The output is a single JSON file conforming to schemaVersion 0.1.1 that the Manuscript Chrome extension (or its runtime bridge) can replay step-by-step.
+description: Generate a Manuscript scenario JSON that walks a user through any web page. Use this skill whenever the user provides a URL (or raw HTML) along with any of these cues — "tour", "walkthrough", "demo", "onboarding", "product highlight", "visual guide", "step-by-step", "Manuscript scenario", or asks for a guided tour of a page — even if they don't explicitly mention Manuscript or this SKILL.md. Also trigger when updating, translating, or localizing an existing `tour-*.json` file (English ↔ Korean), or when adding/removing steps from one. The output is a single JSON file conforming to schemaVersion 0.1.1 that the Manuscript Chrome extension (or its runtime bridge) can replay step-by-step with spotlight, narration, and annotations.
 ---
 
 # Manuscript Scenario Authoring — Agent Skill
@@ -10,47 +10,42 @@ description: Generate a Manuscript scenario JSON that walks a user through any w
 > the user can hand the file to Manuscript and it plays a polished
 > spotlight-and-narration tour with zero extra work.
 
-## How to use this file
+## For the human reader (TL;DR)
 
-You (the human) don't edit anything by hand. The flow is:
+Drop this file (and the URL you want toured) into any AI agent —
+Claude, Cursor, Windsurf, Cline, GPT — and ask for a tour. The agent
+follows the procedure below and returns `tour-<lang>.json`. Save it
+next to the Manuscript runtime bridge, hit play. No DOM picking, no
+manual JSON editing.
 
-1. **Give this `SKILL.md` to an AI agent** alongside the URL you want
-   toured. Any of these work:
-   - Claude.ai / Claude Code / Claude API — paste the contents as a
-     skill, system prompt, or attached file.
-   - Cursor, Windsurf, Cline — drop it in your project as
-     `SKILL.md` and reference it from your prompt.
-   - Any other agent that accepts a markdown skill spec.
-2. **Tell the agent the URL** (and optionally language, length, tone).
-3. **The agent emits `tour-<lang>.json`** following this skill. You
-   save the file, drop it next to the Manuscript bridge, hit play.
+```
+"Use SKILL.md. Generate a Manuscript tour for
+ https://example.com/dashboard. English, 6 steps."
+```
 
-That's the entire loop. No DOM picking, no JSON editing, no per-step
-clicking. The skill below is everything the agent needs.
+Expected response: **JSON only**, no commentary.
 
-A minimal user prompt looks like:
+Everything below is written for the agent.
 
-> *"Use SKILL.md. Generate a Manuscript tour for
-> `https://example.com/dashboard`. English, 6 steps."*
+## For the agent — quick map
 
-The expected response is **only the JSON file content** — no
-preamble, no explanation. Paste it into `tour-en.json`, ship it.
+If you're in a hurry, read in this order:
 
-This document is meant to be followed end-to-end by an AI agent. It
-contains:
+- [§1 Output contract](#1-output-contract) — what to produce
+- [§2 Procedure](#2-procedure-the-algorithm) — the algorithm
+- [§10 Validation checklist](#10-validation-checklist) — verify before emitting
+- [§12 Pseudocode](#12-generation-pseudocode) — the whole flow at a glance
 
-1. [Output contract](#1-output-contract)
-2. [Procedure (the algorithm)](#2-procedure-the-algorithm)
-3. [Inputs you need to ask for](#3-inputs-you-need-to-ask-for)
-4. [Page analysis — finding good tour targets](#4-page-analysis--finding-good-tour-targets)
-5. [JSON schema reference](#5-json-schema-reference)
-6. [Selector chain authoring (the 3-layer rule)](#6-selector-chain-authoring-the-3-layer-rule)
-7. [Annotation patterns](#7-annotation-patterns)
-8. [Narration & pacing](#8-narration--pacing)
-9. [Localization — same selectors, different language](#9-localization--same-selectors-different-language)
-10. [Validation checklist](#10-validation-checklist)
-11. [Worked example](#11-worked-example)
-12. [Generation pseudocode](#12-generation-pseudocode)
+The remaining sections are reference — read when you hit them:
+
+- [§3 Inputs to ask for](#3-inputs-you-need-to-ask-for) · when context is thin
+- [§4 Finding good targets](#4-page-analysis--finding-good-tour-targets) · while planning steps
+- [§5 JSON schema](#5-json-schema-reference) · while emitting
+- [§6 Selector chain (3-layer rule)](#6-selector-chain-authoring-the-3-layer-rule) · per target
+- [§7 Annotation patterns](#7-annotation-patterns) · per step that needs labels/shapes
+- [§8 Narration & pacing](#8-narration--pacing) · per step description
+- [§9 Localization](#9-localization--same-selectors-different-language) · when generating multiple languages
+- [§11 Worked example](#11-worked-example) · concrete model
 
 ---
 
@@ -64,11 +59,14 @@ tour-<lang>.json   // schemaVersion === "0.1.1"
 
 Required:
 
-* `schemaVersion: "0.1.1"` (literal)
+* `schemaVersion: "0.1.1"` (literal — see "Schema version" note at end)
 * `id: string` — stable kebab-case (`tour-acme-onboarding-en`)
 * `name: string` — human title in the tour's language
 * `url: string` — the canonical URL the scenario targets
-* `createdAt`, `updatedAt: ISO-8601 string`
+* `createdAt`, `updatedAt: ISO-8601 / RFC 3339 string with `Z` suffix
+  (e.g. `"2026-05-21T10:30:00Z"`). The extension parses with `new Date()`,
+  so any valid ISO-8601 works, but the trailing `Z` form keeps things
+  unambiguous across time zones.
 * `steps: Step[]` — 4–8 steps is the sweet spot
 
 Each step requires `id`, `name`, `description`, `selectors`, an
@@ -393,7 +391,14 @@ Only fill `framePath` when the target lives inside an iframe:
 "framePath": [{ "index": 0, "url": "https://embed.example.com/widget" }]
 ```
 
-Same-origin iframes only — cross-origin doesn't resolve in v0.1.
+**Same-origin, depth-1 only.** Cross-origin iframes don't resolve at
+replay time — Chrome blocks the resolver from reaching across origins,
+so spotlight + replay show "not found". Picking in cross-origin frames
+works via postMessage relay, but the resulting selectors only run in
+the picker, not in playback. Nested iframes (depth ≥ 2) aren't
+supported in v0.1 either. If the only good target is in a cross-origin
+frame, prefer a wider container in the parent page that visually
+contains the embed, and mention "the embedded panel" in narration.
 
 ---
 
@@ -488,6 +493,13 @@ Roughly **350 ms per spoken word** + 1 s buffer. Examples:
 | 14 words | 6000 |
 | 22 words | 8500 |
 
+**Korean (and other non-space-separated languages):** word-count is a
+poor proxy. Use **~250 ms per Korean syllable (글자)** + 1 s buffer,
+since Web Speech reads Korean character-by-character at a slightly
+faster cadence than English words. A 20-syllable sentence lands around
+6 s. When in doubt, slightly over-estimate — finishing narration before
+auto-advance is preferable to chopping it off.
+
 Set to `null` only if the user explicitly wants manual advance.
 
 ### Action steps (`waitForNavigation: true`)
@@ -555,6 +567,13 @@ Before emitting, verify:
       monotonic.
 - [ ] No step is dead silent — even empty annotations must have
       narration in `description`.
+- [ ] `createdAt` and `updatedAt` are valid ISO-8601 timestamps
+      (`new Date(value)` returns a valid Date, not `Invalid Date`).
+- [ ] If any `framePath` is present, it points at a same-origin,
+      depth-1 iframe — the resolver can't reach into cross-origin or
+      nested frames at replay time.
+- [ ] For freedraw, `pointsAnchorOffset.length === points.length` if
+      both arrays are present.
 
 ---
 
@@ -576,7 +595,7 @@ Annotated highlights:
                 "parentSelector": "main", "tagName": "SECTION" },
     "layer3": { "kind": "visual-heuristic",
                 "x": 0, "y": 0, "width": 1200, "height": 480,
-                "nearbyText": ["Manuscript", "v0.2.1"] }
+                "nearbyText": ["Manuscript", "Tours that don't break"] }
   },
   "annotations": [{
     "kind": "text", "id": "ann-1-text", "text": "1. Welcome",
@@ -608,6 +627,92 @@ Reasoning:
 * **autoAdvanceMs: 6000** — 17 words × ~350 ms ≈ 6 s.
 * **No action step** because the user shouldn't have to click during a
   marketing tour.
+
+### 11.1 Shape annotation — outlining a region
+
+When the spotlight rect can't cleanly enclose a group of cards (e.g.,
+a features grid with uneven gaps), drop a rectangle outline:
+
+```json
+{
+  "kind": "shape",
+  "id": "ann-2-rect",
+  "shapeKind": "rectangle",
+  "bounds":             { "x": 80,  "y": 360, "width": 1040, "height": 320 },
+  "boundsAnchorOffset": { "x": 0,   "y": -8 },
+  "fill": "transparent",
+  "stroke": "#c9445b",
+  "strokeWidth": 3,
+  "fillOpacity": 0,
+  "entryAnimation": { "kind": "fade", "durationMs": 500, "delayMs": 200 }
+}
+```
+
+Notes: `fill: "transparent"` keeps it an outline only; the spotlight
+darkens the surroundings, the outline highlights *which* surroundings.
+`fillOpacity: 0` is redundant with `fill: "transparent"` but is
+explicit for clarity. Use page-accent color for `stroke`.
+
+### 11.2 Arrow annotation — pointing from label to target
+
+When a text label sits some distance from the element it names, an
+arrow ties them together. Anchor both endpoints so window resizing
+doesn't break the pointer:
+
+```json
+{
+  "kind": "arrow",
+  "id": "ann-3-arrow",
+  "style": "excalidraw",
+  "from":             { "x": 240, "y": 120 },
+  "to":               { "x": 480, "y": 220 },
+  "fromAnchorOffset": { "x": 20,  "y": -28 },
+  "toAnchorOffset":   { "x": 18,  "y": 12 },
+  "color": "#1a2438",
+  "strokeWidth": 3,
+  "entryAnimation": { "kind": "slide-right", "durationMs": 600, "delayMs": 300 }
+}
+```
+
+Notes: both `from`/`to` (absolute fallback) AND the two
+`*AnchorOffset` (preferred) are supplied — Manuscript prefers the
+anchored coords when the spotlight element resolves, and falls back
+to absolute if it doesn't. `style: "excalidraw"` is the only kind in
+v0.1 and gives a hand-drawn rough.js look.
+
+### 11.3 Freedraw annotation — hand-drawn circle/underline
+
+Freedraw is for the cases where an arrow feels too formal. A loose
+circle around the target, or an underline beneath a phrase:
+
+```json
+{
+  "kind": "freedraw",
+  "id": "ann-4-circle",
+  "points": [
+    { "x": 720, "y": 60 }, { "x": 760, "y": 50 }, { "x": 790, "y": 58 },
+    { "x": 805, "y": 80 }, { "x": 800, "y": 105 }, { "x": 775, "y": 118 },
+    { "x": 740, "y": 116 }, { "x": 715, "y": 100 }, { "x": 710, "y": 78 },
+    { "x": 720, "y": 60 }
+  ],
+  "pointsAnchorOffset": [
+    { "x": -40, "y": -20 }, { "x": 0,   "y": -30 }, { "x": 30,  "y": -22 },
+    { "x": 45,  "y": 0   }, { "x": 40,  "y": 25  }, { "x": 15,  "y": 38  },
+    { "x": -20, "y": 36  }, { "x": -45, "y": 20  }, { "x": -50, "y": -2  },
+    { "x": -40, "y": -20 }
+  ],
+  "stroke": "#c9445b",
+  "strokeWidth": 4,
+  "strokeOpacity": 0.9,
+  "entryAnimation": { "kind": "fade", "durationMs": 800, "delayMs": 0 }
+}
+```
+
+Notes: `pointsAnchorOffset` must be **the same length as `points`** —
+one offset per point. The circle here is intentionally loose (10
+points, slightly irregular spacing) so rough.js draws it
+hand-sketched, not geometrically clean. Closing the loop by ending at
+roughly the start point feels intentional.
 
 ---
 
@@ -657,8 +762,13 @@ explanation) unless the user explicitly asked for commentary.
 
 ---
 
-*Schema version pinned to `0.1.1`. The bridge library and the
-extension are independently versioned (file name `manuscript-bridge.0.1.2.js`,
-extension `chrome.runtime.getManifest().version`) — they may move
-forward without bumping the scenario schema, since v0.1.x changes are
+*Schema version pinned to `0.1.1` at the time of writing — the
+source-of-truth lives in `src/types/scenario.ts` (`SCHEMA_VERSION`).
+If you see the source repo at a different value, follow that; the
+migration code in `src/lib/json-schema.ts` keeps older scenarios
+readable. The bridge library and the extension are independently
+versioned (current bridge `manuscript-bridge.0.1.3.js`, legacy
+compatibility `0.1.2.js`; extension reads
+`chrome.runtime.getManifest().version`) — they may move forward
+without bumping the scenario schema, since v0.1.x changes are
 additive.*

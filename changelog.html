@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Changelog — Manuscript</title>
+    <meta
+      name="description"
+      content="Per-version release notes for Manuscript — DOM-aware Chrome extension for authoring web demos and manuals. Track what shipped in each release."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c1525" media="(prefers-color-scheme: dark)" />
+
+    <link rel="canonical" href="https://zendy00.github.io/manuscript-pages/changelog.html" />
+    <link rel="alternate" hreflang="en" href="https://zendy00.github.io/manuscript-pages/changelog.html" />
+    <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/manuscript-pages/changelog.html?lang=ko" />
+
+    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./assets/icons/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="./assets/icons/favicon-128.png" />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://zendy00.github.io/manuscript-pages/changelog.html" />
+    <meta property="og:title" content="Manuscript — Changelog" />
+    <meta property="og:description" content="Per-version release notes for Manuscript." />
+    <meta property="og:image" content="https://zendy00.github.io/manuscript-pages/assets/icons/favicon-128.png" />
+  </head>
+  <body data-palette="studio" lang="en">
+    <header class="site-header">
+      <div class="inner">
+        <a href="./" class="brand">
+          <img class="brand-mark" src="./assets/icons/manuscript-inverted.svg" alt="" aria-hidden="true" />
+          <span class="brand-word">Manuscript</span>
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-controls="primary-nav"
+          aria-expanded="false"
+          aria-label="Menu"
+        >
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+            <path class="bar-1" d="M3 6h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path class="bar-2" d="M3 11h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path class="bar-3" d="M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <nav id="primary-nav" class="nav" aria-label="Primary">
+          <a href="./#features" data-en>Features</a><a href="./#features" data-ko>기능</a>
+          <a href="./#how" data-en>How it works</a><a href="./#how" data-ko>동작 방식</a>
+          <a href="./#install" data-en>Install</a><a href="./#install" data-ko>설치</a>
+          <a href="./#guide" data-en>Guide</a><a href="./#guide" data-ko>사용설명서</a>
+          <a href="./changelog.html" class="is-current" data-en>Changelog</a><a href="./changelog.html" class="is-current" data-ko>변경사항</a>
+          <a href="./#faq" data-en>FAQ</a><a href="./#faq" data-ko>FAQ</a>
+          <button
+            id="palette-toggle"
+            class="palette-toggle"
+            type="button"
+            aria-label="Toggle dark mode"
+            aria-pressed="false"
+            title="Toggle dark mode"
+          >
+            <svg class="palette-sun" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="8" cy="8" r="3"></circle>
+              <path d="M8 1.2v1.6M8 13.2v1.6M14.8 8h-1.6M2.8 8H1.2M12.8 3.2l-1.13 1.13M4.33 11.67l-1.13 1.13M12.8 12.8l-1.13-1.13M4.33 4.33L3.2 3.2"></path>
+            </svg>
+            <svg class="palette-moon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M6.5 1.5a6.5 6.5 0 1 0 8 8 5.4 5.4 0 0 1-8-8z"></path>
+            </svg>
+          </button>
+          <select id="lang-select" class="lang-select" aria-label="Language">
+            <option value="en">English</option>
+            <option value="ko">한국어</option>
+          </select>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="changelog-hero">
+        <div class="container">
+          <p class="eyebrow" data-en>Changelog</p>
+          <p class="eyebrow" data-ko>변경사항</p>
+          <h1 class="section-title" data-en>What landed in each release.</h1>
+          <h1 class="section-title" data-ko>버전별로 무엇이 들어갔나.</h1>
+          <p class="lead" data-en>
+            Manuscript versions follow semver-ish: minor bumps gather a batch of
+            user-visible work, patches tidy up bugs and polish. The
+            <a href="./#install">Install</a> page shows what's live on the
+            Chrome Web Store right now vs. what's in the latest <code>.zip</code>
+            build.
+          </p>
+          <p class="lead" data-ko>
+            Manuscript 의 버전은 semver 비슷한 규칙을 따릅니다 — minor 가 오르면
+            사용자 눈에 보이는 작업이 묶여 있고, patch 는 버그·다듬기 위주.
+            현재 <a href="./#install">설치</a> 페이지에서 웹 스토어 라이브 버전과
+            최신 <code>.zip</code> 빌드 버전을 비교해 보실 수 있어요.
+          </p>
+        </div>
+      </section>
+
+      <section class="changelog">
+        <div class="container">
+
+          <!-- ───── v0.3.0 ───── -->
+          <article id="v0-3-0" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2>v0.3.0</h2>
+              <span class="changelog-tag changelog-tag-current" data-en>Current</span>
+              <span class="changelog-tag changelog-tag-current" data-ko>현재</span>
+              <time datetime="2026-05-21">2026-05-21</time>
+            </header>
+            <p class="changelog-summary" data-en>
+              Recording gets a "pause to chip in" mode plus optional microphone
+              capture, so live commentary is no longer a separate take. Popup
+              learned to import JSON manuscripts that colleagues send you.
+            </p>
+            <p class="changelog-summary" data-ko>
+              녹화에 "잠깐 멈추고 직접 거드는" 모드와 마이크 캡처 옵션이 들어왔어요 —
+              라이브 한마디를 위해 따로 녹음할 필요가 없어졌습니다. 팝업에서도 동료가
+              보내준 JSON 매뉴스크립트를 바로 불러올 수 있게 됐어요.
+            </p>
+            <h3 data-en>New</h3>
+            <h3 data-ko>신기능</h3>
+            <ul data-en>
+              <li><strong>Pause-to-narrate</strong> — tap <span class="kbd">Space</span> while recording and the tour holds still while the video keeps rolling. <span class="kbd">Space</span> again resumes.</li>
+              <li><strong>Microphone capture</strong> — opt-in <em>"Also record my microphone"</em> on the recording guide screen. Your voice mixes alongside the TTS narration into one track.</li>
+              <li><strong>Import from popup</strong> — <em>"↑ Open a JSON file"</em> button right under <em>+ New Manuscript</em>. The picked file lands in your <em>Previous Manuscripts</em> list and the panel opens with the scenario pre-loaded.</li>
+            </ul>
+            <ul data-ko>
+              <li><strong>녹화 도중 일시정지</strong> — 녹화 중 <span class="kbd">Space</span> 키로 시연만 일시정지(영상은 계속). <span class="kbd">Space</span> 다시 누르면 이어집니다.</li>
+              <li><strong>마이크 캡처</strong> — 녹화 안내 창의 <em>"내 목소리도 함께 녹음"</em> 옵션. 내 음성이 TTS 안내와 함께 하나의 트랙으로 담깁니다.</li>
+              <li><strong>팝업 가져오기</strong> — <em>+ 새 매뉴스크립트</em> 바로 아래 <em>"↑ JSON 파일 가져오기"</em> 버튼. 선택한 파일이 <em>이전 매뉴스크립트</em>에 추가되고 패널이 그 시연으로 열립니다.</li>
+            </ul>
+            <h3 data-en>Runtime bridge → v0.1.3</h3>
+            <h3 data-ko>런타임 브리지 → v0.1.3</h3>
+            <ul data-en>
+              <li><strong>Store / homepage navigation API</strong> — <code>manuscript.openStore()</code> and <code>manuscript.openHomepage()</code> work from any host button, with optional <code>onInstallClick</code> / <code>onHomeClick</code> callbacks for analytics. <code>openHomepage()</code> is opt-in (no-op + warn unless <code>configure({ homepageUrl })</code> is set).</li>
+              <li><strong>Auto-mounted launcher</strong> — <code>manuscript.mountLauncher({ scenarioUrl })</code> drops a Shadow-DOM-isolated pill in the bottom-right. Same component morphs between "Take the tour" and "Install Manuscript" based on whether the extension is present; dismissal persists in <code>localStorage</code>.</li>
+              <li><strong>isInstalled() cache</strong> — first call pings the extension, subsequent calls return cached. <code>refreshInstalled()</code> busts the cache for SPA routing.</li>
+              <li><strong>Auto language detection</strong> — picks <code>ko</code> when <code>document.documentElement.lang</code> starts with <code>ko</code>; override via <code>configure({ lang })</code>.</li>
+              <li><strong>0.1.2 stays put.</strong> Message protocol unchanged, so hosts pinned to the old URL keep working — the new APIs are simply absent there.</li>
+            </ul>
+            <ul data-ko>
+              <li><strong>Store / 홈페이지 이동 API</strong> — <code>manuscript.openStore()</code> 와 <code>manuscript.openHomepage()</code> 가 어느 호스트 버튼에서도 동작합니다. <code>onInstallClick</code> / <code>onHomeClick</code> 콜백으로 자체 analytics 연동도 가능. <code>openHomepage()</code> 는 opt-in (<code>configure({ homepageUrl })</code> 호출 전엔 경고 + no-op).</li>
+              <li><strong>자동 마운트 launcher</strong> — <code>manuscript.mountLauncher({ scenarioUrl })</code> 한 줄로 Shadow-DOM 격리된 pill 이 우하단에 마운트. 같은 컴포넌트가 확장 유무에 따라 "투어 시작" ↔ "Manuscript 설치" 로 전환되며 dismiss 는 <code>localStorage</code> 에 기억됩니다.</li>
+              <li><strong>isInstalled() 캐시</strong> — 첫 호출만 ping, 이후엔 캐시에서 즉시 응답. SPA 라우팅 후엔 <code>refreshInstalled()</code> 로 캐시 무효화.</li>
+              <li><strong>자동 언어 감지</strong> — <code>document.documentElement.lang</code> 이 <code>ko</code> 로 시작하면 한국어 라벨, 그 외엔 영어. <code>configure({ lang })</code> 로 강제 지정 가능.</li>
+              <li><strong>0.1.2 는 그대로.</strong> 메시지 프로토콜이 동일하므로 이미 그 URL 에 고정해 둔 호스트는 그대로 동작합니다. 신규 API 만 빠져 있어요.</li>
+            </ul>
+
+            <h3 data-en>Site polish</h3>
+            <h3 data-ko>사이트 다듬기</h3>
+            <ul data-en>
+              <li>Bridge-section code blocks now stay dark in both light and dark mode — the amber syntax color was illegible on a white surface when <code>--c-text</code> flipped near-white in dark mode.</li>
+              <li>Paused recording pill picks up the panel palette in dark mode.</li>
+              <li>Store listing copy + screenshots split per locale (KO/EN).</li>
+            </ul>
+            <ul data-ko>
+              <li>Bridge 섹션의 코드블록을 라이트/다크 모드 모두 어두운 배경 고정 — 다크 모드에서 <code>--c-text</code> 가 흰색으로 뒤집히면서 노란 문자열이 안 보이던 문제 해결.</li>
+              <li>일시정지 pill 이 다크모드에서 패널 팔레트를 따라가도록.</li>
+              <li>웹 스토어 게시 문구·스크린샷을 한/영 분리.</li>
+            </ul>
+          </article>
+
+          <!-- ───── v0.2.x ───── -->
+          <article id="v0-2-1" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2>v0.2.1 – v0.2.3</h2>
+              <time datetime="2026-05-15">2026-05-15</time>
+            </header>
+            <p class="changelog-summary" data-en>
+              First Chrome Web Store-ready build — narration, dark mode, screen
+              recording (without pause/mic), and the runtime bridge for
+              embedding tours on your own site.
+            </p>
+            <p class="changelog-summary" data-ko>
+              Chrome 웹 스토어 첫 출시 빌드 — 음성 안내, 다크모드, 화면 녹화
+              (일시정지/마이크 제외), 사이트에 끼워 넣을 수 있는 runtime bridge.
+            </p>
+            <h3 data-en>New</h3>
+            <h3 data-ko>신기능</h3>
+            <ul data-en>
+              <li><strong>Screen recording</strong> — red record button in the panel footer plays the tour into a WebM file with TTS audio.</li>
+              <li><strong>Tutorial mode</strong> for first-time recording users, walking through Chrome's two share dialogs.</li>
+              <li><strong>Dark mode</strong> for the floating panel, annotation editor, launcher pill, and replay controls.</li>
+              <li><strong>Site fonts</strong> show up first in the annotation-editor font picker (alongside the base fonts).</li>
+              <li><strong>Runtime bridge v0.1.2</strong> — drop <code>manuscript-bridge.0.1.2.js</code> on your page and a <code>"Take the tour"</code> button can play saved scenarios.</li>
+              <li><strong>Standalone playback</strong> — bridge-driven tours run view-only and clean up after themselves.</li>
+            </ul>
+            <ul data-ko>
+              <li><strong>화면 녹화</strong> — 패널 footer 의 빨간 녹화 버튼으로 시연을 WebM 파일로 저장 (TTS 음성 포함).</li>
+              <li><strong>녹화 튜토리얼</strong> — 처음 사용자가 Chrome 의 공유 창 두 번을 매끄럽게 통과할 수 있게 안내.</li>
+              <li><strong>다크모드</strong> — floating panel, annotation editor, launcher pill, replay controls 전부 지원.</li>
+              <li><strong>사이트 글꼴 우선 노출</strong> — annotation editor 의 폰트 select 에 사이트 글꼴이 먼저, 그다음 base 글꼴.</li>
+              <li><strong>Runtime bridge v0.1.2</strong> — <code>manuscript-bridge.0.1.2.js</code> 한 줄로 내 페이지에 <code>"투어 시작"</code> 버튼.</li>
+              <li><strong>Standalone 재생</strong> — bridge 로 띄운 시연은 view-only 로 동작하고 종료 시 흔적 없이 정리.</li>
+            </ul>
+          </article>
+
+          <!-- ───── v0.1.x ───── -->
+          <article id="v0-1-5" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2>v0.1.2 – v0.1.5</h2>
+              <time datetime="2026-04-10">2026-04-10</time>
+            </header>
+            <p class="changelog-summary" data-en>
+              Design system landed: 4-palette tokens (Pretendard / EB Garamond),
+              the floating panel layout you see today, the annotation editor
+              popup, and chip-style selection handles. The picker became
+              iframe-aware. Spotlight became clickable for inline edits.
+            </p>
+            <p class="changelog-summary" data-ko>
+              디자인 시스템 도입 — 4-palette 토큰(Pretendard / EB Garamond), 지금의
+              floating panel 레이아웃, annotation editor popup, chip 스타일 선택
+              핸들. picker 가 iframe 을 이해하기 시작했고, spotlight 를 클릭해서
+              바로 편집할 수 있게 됐어요.
+            </p>
+            <h3 data-en>New</h3>
+            <h3 data-ko>신기능</h3>
+            <ul data-en>
+              <li><strong>Site palette / font auto-extract</strong> — Manuscript samples the page's theme color + fonts so your tour fits in.</li>
+              <li><strong>Iframe-aware picker + replay</strong> — same-origin frames work end-to-end; cross-origin picking via postMessage relay.</li>
+              <li><strong>Step <code>pickedAtUrl</code></strong> — each step remembers the URL it was picked on; replay auto-navigates between pages.</li>
+              <li><strong>Action steps</strong> — pause-icon toggle turns a step into "wait for user click" with a "Click or type" bubble.</li>
+              <li><strong>Detached prompter</strong> — separate Chrome window with a 3-column "Steps / Now / Next" layout.</li>
+              <li><strong>Element-anchored annotations</strong> — annotations stay glued to their target element instead of viewport coords.</li>
+              <li><strong>Clickable spotlight</strong> — click the spotlight directly to open the style editor for it.</li>
+            </ul>
+            <ul data-ko>
+              <li><strong>사이트 팔레트 / 글꼴 자동 추출</strong> — 페이지의 테마 색·글꼴을 샘플링해 시연이 페이지에 자연스럽게 어울림.</li>
+              <li><strong>iframe 지원 picker + replay</strong> — same-origin frame 은 end-to-end, cross-origin 은 postMessage 릴레이로 picking.</li>
+              <li><strong>스텝 <code>pickedAtUrl</code></strong> — 각 스텝이 어느 URL 에서 찍혔는지 기억 → 재생 중 자동으로 페이지 이동.</li>
+              <li><strong>Action step</strong> — 일시정지 아이콘 토글로 "사용자 클릭 대기" 모드 + "클릭하거나 입력하세요" 버블.</li>
+              <li><strong>분리된 프롬프터</strong> — 별도 Chrome 창 + 3 열(Steps / Now / Next) 레이아웃.</li>
+              <li><strong>요소 고정 annotation</strong> — annotation 이 뷰포트 좌표가 아니라 대상 요소에 붙어 다님.</li>
+              <li><strong>클릭 가능한 spotlight</strong> — spotlight 를 직접 클릭해 스타일 편집기 열기.</li>
+            </ul>
+          </article>
+
+          <article id="v0-1-1" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2>v0.1.1</h2>
+              <time datetime="2026-03-25">2026-03-25</time>
+            </header>
+            <p class="changelog-summary" data-en>
+              First closed-beta build with the visual design pass: thumbnail
+              cards, custom palette, action replay, 8 shape kinds + freehand
+              draw, per-annotation entry animations, and selection handles for
+              resize/rotate.
+            </p>
+            <p class="changelog-summary" data-ko>
+              비주얼 디자인이 들어간 첫 closed beta 빌드 — thumbnail 카드, custom
+              palette, action replay, 8 종류 도형 + 손그림, annotation 별 등장
+              애니메이션, 크기·회전 핸들.
+            </p>
+            <h3 data-en>New</h3>
+            <h3 data-ko>신기능</h3>
+            <ul data-en>
+              <li>8 shape kinds (rectangle, ellipse, triangle, diamond, star, callout, line, block arrow).</li>
+              <li>Freedraw — hand-drawn polylines via rough.js.</li>
+              <li>Entry animations (Fade / Slide / Bounce / Zoom / Rotate 2×) per annotation.</li>
+              <li>Selection handles — corner resize, top rotate, bottom-left delete, top-right preview.</li>
+              <li>Step thumbnails — each card holds a small preview of its target.</li>
+              <li>Custom palette beyond the 4-palette set.</li>
+            </ul>
+            <ul data-ko>
+              <li>8 종류 도형(사각형 / 타원 / 삼각형 / 마름모 / 별 / 콜아웃 / 선 / 블록 화살표).</li>
+              <li>Freedraw — rough.js 손그림 polyline.</li>
+              <li>annotation 별 등장 애니메이션(Fade / Slide / Bounce / Zoom / Rotate 2×).</li>
+              <li>선택 핸들 — 코너 크기 조절, 상단 회전, 좌하단 삭제, 우상단 미리보기.</li>
+              <li>스텝 thumbnail — 각 카드에 대상 요소의 작은 미리보기.</li>
+              <li>4-palette 외에 custom palette 지원.</li>
+            </ul>
+          </article>
+
+          <article id="v0-1" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2>v0.1</h2>
+              <time datetime="2026-02-15">2026-02-15</time>
+            </header>
+            <p class="changelog-summary" data-en>
+              The vertical slice — the engineering bet that the
+              <strong>3-layer DOM resolver</strong> would hold up under page
+              changes. Wand picker, spotlight, text annotations, step
+              structure, JSON export/import, persistence, and the first replay
+              engine.
+            </p>
+            <p class="changelog-summary" data-ko>
+              세로 단면 — <strong>3-layer DOM resolver</strong> 가 페이지 변경에
+              버텨주리라는 기술적 가설을 검증한 첫 빌드. 픽커, 스포트라이트, 텍스트
+              annotation, 스텝 구조, JSON export/import, 영속화, 첫 replay 엔진.
+            </p>
+            <h3 data-en>New</h3>
+            <h3 data-ko>신기능</h3>
+            <ul data-en>
+              <li>3-layer DOM resolver — stable attribute → text + parent path → viewport position.</li>
+              <li>Wand element picker with pink outline + spotlight.</li>
+              <li>Text annotations + style toolbar.</li>
+              <li>Step cards, drag-to-reorder, panel drag.</li>
+              <li>JSON export/import (<code>schemaVersion: 0.1.0</code>).</li>
+              <li>chrome.storage persistence + popup list of saved manuscripts.</li>
+              <li>Replay engine + closed-beta packaging.</li>
+            </ul>
+            <ul data-ko>
+              <li>3-layer DOM resolver — 안정 속성 → 텍스트+부모 경로 → 뷰포트 좌표 fallback.</li>
+              <li>분홍색 outline + spotlight 의 요소 picker.</li>
+              <li>텍스트 annotation + 스타일 toolbar.</li>
+              <li>스텝 카드, 드래그 재정렬, 패널 드래그.</li>
+              <li>JSON export/import (<code>schemaVersion: 0.1.0</code>).</li>
+              <li>chrome.storage 영속화 + 팝업의 저장된 시연 목록.</li>
+              <li>Replay 엔진 + closed beta 패키징.</li>
+            </ul>
+          </article>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="links">
+          <a href="./" data-en>Home</a><a href="./" data-ko>홈</a>
+          <a href="https://github.com/zendy00/manuscript-pages" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:zendy00@gmail.com">zendy00@gmail.com</a>
+          <a href="./#install" data-en>Install</a><a href="./#install" data-ko>설치</a>
+          <a href="./#guide" data-en>Guide</a><a href="./#guide" data-ko>사용설명서</a>
+          <a href="./#bridge" data-en>Bridge</a><a href="./#bridge" data-ko>브리지</a>
+        </div>
+        <div>
+          <span data-en>Manuscript v0.3.0 · © 2026</span>
+          <span data-ko>Manuscript v0.3.0 · © 2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./i18n.js"></script>
+  </body>
+</html>

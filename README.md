@@ -11,9 +11,21 @@ The site itself is a single static HTML page — no build step, no bundler. It i
 ```
 .
 ├── index.html              # single-page landing (EN default + KO toggle)
+├── changelog.html          # per-version release notes (EN + KO)
 ├── styles.css              # design tokens (studio palette) + layout
 ├── i18n.js                 # language toggle, smooth scroll, TOC highlight
 ├── manuscript-bridge.0.1.2.js   # runtime bridge library (synced from /bridge)
+├── store-version.json      # cron-scraped Web Store version (placeholder until
+│                           #   .github/workflows/store-version.yml runs;
+│                           #   preserved on deploy via pages.yml clean-exclude)
+├── downloads/              # built by scripts/site-zip.mjs in pages.yml:
+│   ├── manuscript-<ver>.zip          # manual install — latest dev build
+│   ├── manuscript-latest.zip         # alias, always == newest versioned zip
+│   ├── manuscript-<ver>.zip.sha256   # sidecar checksums
+│   ├── manuscript-latest.zip.sha256
+│   └── latest.json                   # { version, sha256, sizeBytes, builtAt }
+│                                     #   — index.html reads this to render
+│                                     #   the SHA + manual-install version chip
 ├── tours/
 │   ├── tour-en.json        # 8-step tour of this landing page (English)
 │   ├── tour-ko.json        # same tour, Korean narration
@@ -31,20 +43,28 @@ The site itself is a single static HTML page — no build step, no bundler. It i
 
 The landing page covers six surfaces:
 
-1. **Hero** — what Manuscript is, Chrome Web Store CTA.
+1. **Hero** — what Manuscript is, Chrome Web Store CTA, plus a quiet
+   secondary link to the manual `.zip` install.
 2. **Features** — six things that set Manuscript apart.
 3. **How it works** — five-move authoring flow (picker → annotate → replay).
 4. **Runtime bridge** *(new in v0.1.4)* — how to embed a Manuscript tour
    on any page you control: `manuscript-bridge.0.1.2.js`, `SKILL.md`,
    example `tour-en.json` / `tour-ko.json`. Includes usage code (toggles
    to the page's current language) and downloads.
-5. **Install** — one-click install from the Chrome Web Store.
+5. **Install** — tabbed UI: **Web Store** (recommended) vs. **Manual .zip**
+   (latest dev build, ahead of Web Store review). A version chip row
+   reads `store-version.json` + `downloads/latest.json` at runtime and
+   shows both versions side-by-side; SHA-256 of the zip is click-to-copy.
 6. **Guide** — full eight-section user manual. Section 7 (Recording)
-   walks through the *(v0.2 update)* **pause-to-add-your-voice** flow —
-   tap `Space` mid-recording to pause the tour while the video keeps
-   rolling (great for live commentary), `Esc` to wrap up and save.
-   Turn on "Also record my microphone" on the guide screen to mix
-   your voice into the recording alongside the read-aloud narration.
+   covers the v0.3 **pause-to-add-your-voice** flow (`Space` mid-recording
+   to pause the tour while the video keeps rolling, `Esc` to wrap up).
+   Section 8 ends with the **schema compatibility table** so users know
+   which JSON versions their extension can open.
+
+A floating **"What's new"** toast surfaces in the bottom-right when the
+Chrome Web Store ships a version newer than what the visitor last saw
+(tracked in `localStorage`). Dismissing it records the current version
+as seen.
 
 A floating **"Take the tour"** pill in the bottom-right auto-detects the
 Manuscript extension and plays the matching tour for the current page
@@ -87,14 +107,29 @@ next build will overwrite it.
 
 ## Deployment
 
-A workflow in the main `manuscript` repository (`.github/workflows/pages.yml`)
-watches the `site/` folder. On push to `main`, it mirrors `site/` to the
-`main` branch of this `manuscript-pages` repository, and GitHub Pages
-serves it.
+Two workflows in the main `manuscript` repository drive this site:
+
+- **`.github/workflows/pages.yml`** — on every push to `main` that
+  touches `site/` or extension sources, it runs `npm run site:zip`
+  (build + versioned zip + SHA-256 sidecars + `latest.json`) and then
+  mirrors the whole `site/` folder to the `main` branch of this
+  `manuscript-pages` repository. GitHub Pages serves it. The deploy
+  uses `clean-exclude: store-version.json` so the cron-updated value
+  survives.
+- **`.github/workflows/store-version.yml`** — runs on a daily cron at
+  05:13 UTC. Fetches the Chrome Web Store listing, parses the version
+  out of the server-rendered HTML, and commits `store-version.json`
+  directly to this repository when it changes. Reuses the same
+  `PAGES_DEPLOY_TOKEN` secret. Trigger manually via
+  `gh workflow run "Refresh Chrome Web Store version"` for the first
+  population.
+
+A separate **`.github/workflows/ci.yml`** validates every push/PR to
+`main` (typecheck → vitest → build) but does not deploy.
 
 You do **not** edit files in this repository directly — every change
 starts in `manuscript/site/`.
 
 ## License & contact
 
-v0.2.1. Email feedback to <zendy00@gmail.com>.
+v0.3.0. Email feedback to <zendy00@gmail.com>.

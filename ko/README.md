@@ -11,9 +11,21 @@
 ```
 .
 ├── index.html              # 단일 페이지 랜딩 (영어 default + 한국어 토글)
+├── changelog.html          # 버전별 변경사항 (영/한 모두 수록)
 ├── styles.css              # 디자인 토큰(studio 팔레트) + 레이아웃
 ├── i18n.js                 # 언어 토글, 부드러운 스크롤, TOC 하이라이트
 ├── manuscript-bridge.0.1.2.js  # 런타임 브리지 라이브러리 (/bridge에서 자동 동기화)
+├── store-version.json      # cron 으로 스크래핑한 Chrome 웹 스토어 버전
+│                           # (.github/workflows/store-version.yml 가 갱신,
+│                           #  pages.yml clean-exclude 로 deploy 시 보존)
+├── downloads/              # pages.yml 에서 scripts/site-zip.mjs 가 생성:
+│   ├── manuscript-<버전>.zip         # 수동 설치 — 최신 dev 빌드
+│   ├── manuscript-latest.zip        # 별칭, 항상 최신 버전 zip 과 동일
+│   ├── manuscript-<버전>.zip.sha256  # 사이드카 체크섬
+│   ├── manuscript-latest.zip.sha256
+│   └── latest.json                  # { version, sha256, sizeBytes, builtAt }
+│                                    #   index.html 이 이걸 읽어 SHA + 수동
+│                                    #   설치 버전 chip 을 렌더
 ├── tours/
 │   ├── tour-en.json        # 본 랜딩 페이지 8 스텝 투어 (영어)
 │   ├── tour-ko.json        # 같은 투어, 한국어 narration
@@ -31,20 +43,26 @@
 
 랜딩 페이지는 6개 섹션으로 구성됩니다:
 
-1. **Hero** — Manuscript 소개와 Chrome 웹 스토어 CTA
+1. **Hero** — Manuscript 소개, Chrome 웹 스토어 CTA, 그리고 수동 `.zip`
+   설치로 가는 작은 보조 링크
 2. **Features** — 6가지 차별점
 3. **How it works** — 5단계 저작 흐름 (picker → annotate → replay)
 4. **런타임 브리지** *(v0.1.4 신규)* — 본인이 운영하는 임의의 페이지에
    Manuscript 투어를 임베드하는 방법. `manuscript-bridge.0.1.2.js`,
    `SKILL.md`, 예제 `tour-en.json` / `tour-ko.json` 제공. 페이지 언어에
    맞춰 토글되는 사용 예제 코드와 다운로드 카드 포함.
-5. **Install** — Chrome 웹 스토어 원클릭 설치
-6. **Guide** — 8 섹션 전체 사용 설명서. 7번 Recording 섹션에 *(v0.2
-   업데이트)* **잠깐 멈추고 내 목소리 보태기** 흐름이 들어 있습니다 —
-   녹화 중에 `Space` 키로 시연만 잠깐 멈추고 (녹화는 계속되니까 그 사이에
-   직접 한마디 보탤 수 있어요), 끝내고 저장은 `Esc`. 안내 창에서 "내
-   목소리도 함께 녹음"을 켜면 내가 말한 내용이 읽어주는 안내와 함께 영상에
-   담깁니다.
+5. **Install** — 탭 UI: **웹 스토어**(추천) vs **수동 .zip**(웹 스토어
+   검수 전의 dev 빌드, 보통 한두 단계 앞섬). 버전 chip 행이 런타임에
+   `store-version.json` + `downloads/latest.json` 을 읽어 두 버전을
+   나란히 보여주고, zip 의 SHA-256 은 클릭으로 복사할 수 있습니다.
+6. **Guide** — 8 섹션 전체 사용 설명서. 7번 Recording 섹션에 v0.3
+   **잠깐 멈추고 내 목소리 보태기** 흐름이 있고 (녹화 중 `Space` 로
+   시연 일시정지, 녹화는 계속, `Esc` 로 종료), 8번 끝에는 **JSON 스키마
+   호환표** — 어떤 .json 이 어떤 확장 버전에서 열리는지.
+
+우하단의 **"What's new"** 토스트는 Chrome 웹 스토어에 새 버전이 올라오고
+방문자가 그 버전을 아직 본 적이 없을 때 표시됩니다 (`localStorage` 로 추적).
+닫기 버튼을 누르면 현재 버전을 "본 것" 으로 기록합니다.
 
 우하단의 **"투어 시작"** 플로팅 pill이 Manuscript 확장 설치를 자동 감지하고,
 클릭 시 현재 페이지 언어(EN/KO)에 맞는 투어(`tour-en.json` 또는
@@ -85,14 +103,27 @@ HTML 변경과 함께 commit합니다.
 
 ## 배포
 
-메인 `manuscript` 저장소의 워크플로우 (`.github/workflows/pages.yml`)가
-`site/` 폴더를 감시합니다. `main` 브랜치에 push되면 `site/` 내용을 본
-`manuscript-pages` 저장소의 `main` 브랜치에 mirror하고, GitHub Pages가
-이를 서빙합니다.
+메인 `manuscript` 저장소의 두 워크플로우가 이 사이트를 구동합니다:
+
+- **`.github/workflows/pages.yml`** — `main` 브랜치의 `site/` 또는 확장
+  소스가 변경될 때마다 `npm run site:zip`(build + 버전별 zip + SHA-256
+  사이드카 + `latest.json`)을 실행하고, `site/` 폴더 전체를
+  `manuscript-pages` 저장소의 `main` 브랜치에 미러링합니다. GitHub
+  Pages 가 이를 서빙합니다. deploy 시 `clean-exclude: store-version.json`
+  으로 cron 이 갱신한 값을 보존합니다.
+- **`.github/workflows/store-version.yml`** — 매일 05:13 UTC 에 cron
+  으로 실행. Chrome 웹 스토어 listing 을 fetch 해 서버 렌더링된 HTML
+  에서 버전을 추출하고, 변경이 있으면 `store-version.json` 을 본
+  저장소(`manuscript-pages`)에 직접 커밋합니다. `PAGES_DEPLOY_TOKEN`
+  시크릿을 재사용. 첫 채워넣기는
+  `gh workflow run "Refresh Chrome Web Store version"` 으로 수동 트리거.
+
+별도로 **`.github/workflows/ci.yml`** 이 `main` 의 모든 push/PR 을
+검증합니다 (typecheck → vitest → build, 배포는 안 함).
 
 이 저장소의 파일을 직접 수정하지 **않습니다** — 모든 변경은
 `manuscript/site/`에서 시작합니다.
 
 ## 라이선스 · 문의
 
-v0.2.1. 피드백은 <zendy00@gmail.com> 으로 보내주세요.
+v0.3.0. 피드백은 <zendy00@gmail.com> 으로 보내주세요.

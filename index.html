@@ -95,8 +95,8 @@
           "applicationSubCategory": "DeveloperApplication",
           "operatingSystem": "Windows, macOS, Linux, ChromeOS",
           "browserRequirements": "Requires Google Chrome 88 or newer",
-          "softwareVersion": "0.2.1",
-          "releaseNotes": "Floating panel, spotlight, annotations, narrated replay, screen recording with watermark, detached prompter, runtime bridge, dark mode.",
+          "softwareVersion": "0.3.0",
+          "releaseNotes": "v0.3.0 — Pause-to-narrate (Space mid-recording) + optional microphone capture. Floating panel, spotlight, annotations, narrated replay, screen recording with watermark, detached prompter, runtime bridge, dark mode.",
           "offers": {
             "@type": "Offer",
             "price": "0",
@@ -156,8 +156,8 @@
             { "@type": "ListItem", "position": 3, "name": "How it works", "item": "https://zendy00.github.io/manuscript-pages/#how" },
             { "@type": "ListItem", "position": 4, "name": "Bridge", "item": "https://zendy00.github.io/manuscript-pages/#bridge" },
             { "@type": "ListItem", "position": 5, "name": "Install", "item": "https://zendy00.github.io/manuscript-pages/#install" },
-            { "@type": "ListItem", "position": 6, "name": "What's next", "item": "https://zendy00.github.io/manuscript-pages/#roadmap" },
-            { "@type": "ListItem", "position": 7, "name": "Guide", "item": "https://zendy00.github.io/manuscript-pages/#guide" },
+            { "@type": "ListItem", "position": 6, "name": "Guide", "item": "https://zendy00.github.io/manuscript-pages/#guide" },
+            { "@type": "ListItem", "position": 7, "name": "Changelog", "item": "https://zendy00.github.io/manuscript-pages/changelog.html" },
             { "@type": "ListItem", "position": 8, "name": "FAQ", "item": "https://zendy00.github.io/manuscript-pages/#faq" }
           ]
         },
@@ -271,8 +271,8 @@
           <a href="#how" data-en>How it works</a><a href="#how" data-ko>동작 방식</a>
           <a href="#bridge" data-en>Bridge</a><a href="#bridge" data-ko>브리지</a>
           <a href="#install" data-en>Install</a><a href="#install" data-ko>설치</a>
-          <a href="#roadmap" data-en>What's next</a><a href="#roadmap" data-ko>출시예정</a>
           <a href="#guide" data-en>Guide</a><a href="#guide" data-ko>사용설명서</a>
+          <a href="./changelog.html" data-en>Changelog</a><a href="./changelog.html" data-ko>변경사항</a>
           <a href="#faq" data-en>FAQ</a><a href="#faq" data-ko>FAQ</a>
           <button
             id="palette-toggle"
@@ -304,10 +304,10 @@
         <div class="container">
           <div>
             <span class="hero-tag" data-en>
-              <span class="dot"></span> v0.2.1
+              <span class="dot"></span> v0.3.0
             </span>
             <span class="hero-tag" data-ko>
-              <span class="dot"></span> v0.2.1
+              <span class="dot"></span> v0.3.0
             </span>
 
             <h1 data-en>Tours that <em>don't break</em><br />when your page changes.</h1>
@@ -367,6 +367,15 @@
               <a class="btn btn-ghost" href="#install" data-en>How to install</a>
               <a class="btn btn-ghost" href="#install" data-ko>설치 방법</a>
             </div>
+            <p class="hero-install-hint" data-en>
+              Prefer the dev build? <a href="#install" class="hero-zip-link">
+              <span data-zip-version>v…</span> .zip</a> with manual install instructions below.
+            </p>
+            <p class="hero-install-hint" data-ko>
+              dev 빌드가 필요하신가요? 아래 설치 섹션에
+              <a href="#install" class="hero-zip-link">
+              <span data-zip-version>v…</span> .zip</a> 수동 설치 안내가 있습니다.
+            </p>
           </div>
           <!-- Lite YouTube embed — thumbnail only on first paint; iframe
                swaps in on click so the page doesn't pay YouTube's ~500KB
@@ -429,6 +438,25 @@
                   음성 안내까지 영상에 그대로 들어갑니다. 시연이 끝나면 자동으로 멈추고 저장할
                   위치를 물어봐요.
                 </p>
+                <p class="lead lead-new" data-en>
+                  <span class="new-badge">NEW v0.3.0</span>
+                  Want to chip in with your own voice along the way? Tap <strong>Space</strong>
+                  while you're recording and the tour pauses — the video keeps rolling, so
+                  you can speak up, click around, or just catch your breath. Tap
+                  <strong>Space</strong> again to pick the tour back up. Turn on
+                  <strong>Also record my microphone</strong> on the guide screen first if
+                  you want your voice baked right into the video alongside the read-aloud
+                  narration.
+                </p>
+                <p class="lead lead-new" data-ko>
+                  <span class="new-badge">NEW v0.3.0</span>
+                  녹화 도중에 내 목소리로 한마디 보태고 싶으면? 녹화 중에
+                  <strong>Space</strong> 키를 누르면 시연이 잠깐 멈춰요. 그동안에도 녹화는
+                  계속되니까, 직접 설명을 보태거나, 페이지를 클릭해서 뭔가 보여주거나,
+                  잠깐 숨을 고르세요. <strong>Space</strong>를 다시 누르면 시연이 이어집니다.
+                  안내 창에서 <strong>내 목소리도 함께 녹음</strong>을 켜 두면 내가 말한
+                  내용이 읽어주는 안내와 함께 영상에 자연스럽게 담겨요.
+                </p>
                 <div class="hero-ctas">
                   <a class="btn btn-primary" href="#install" data-en>Install &amp; try</a>
                   <a class="btn btn-primary" href="#install" data-ko>설치하고 사용해보기</a>
@@ -442,6 +470,8 @@
                   <li><strong>Just the page</strong> — the editor panel and controls slide out of view while you record.</li>
                   <li><strong>3-second countdown</strong> so you can get ready, with a Cancel button or Space / Esc to back out.</li>
                   <li><strong>Voice narration included</strong> — the spoken descriptions are captured along with the video.</li>
+                  <li><span class="new-badge">NEW v0.3.0</span> <strong>Pause anytime to chip in</strong> — tap <strong>Space</strong> while recording and the tour holds still. The video keeps rolling, so you can speak up, click around, or just collect your thoughts. <strong>Space</strong> again picks it back up.</li>
+                  <li><span class="new-badge">NEW v0.3.0</span> <strong>Bring your own voice (optional)</strong> — turn on "Also record my microphone" on the guide screen and your voice lands in the video alongside the read-aloud narration.</li>
                   <li><strong>Stops by itself</strong> when the tour reaches the end. Want to stop sooner? Just press <strong>Esc</strong> anywhere on the page.</li>
                   <li><strong>You pick where it saves</strong> — Chrome's Save dialog opens when the tour ends. Nothing is uploaded; everything stays on your computer.</li>
                 </ul>
@@ -449,6 +479,8 @@
                   <li><strong>페이지만 담깁니다</strong> — 녹화 중에는 편집 패널과 컨트롤이 화면에서 사라져요.</li>
                   <li><strong>3 초 카운트다운</strong>으로 마음의 준비를 할 시간이 있고, 취소 버튼이나 Space / Esc 로 언제든 멈출 수 있어요.</li>
                   <li><strong>음성 안내까지 함께</strong> — 읽어주는 설명도 영상에 그대로 담깁니다.</li>
+                  <li><span class="new-badge">NEW v0.3.0</span> <strong>언제든 잠깐 멈추고 거들 수 있어요</strong> — 녹화 중에 <strong>Space</strong> 키를 누르면 시연이 멈춥니다. 녹화는 그대로 계속되니까 한마디 보태거나, 페이지를 클릭해서 뭔가 보여주거나, 잠깐 생각을 정리할 수 있어요. <strong>Space</strong>를 다시 누르면 시연이 이어집니다.</li>
+                  <li><span class="new-badge">NEW v0.3.0</span> <strong>내 목소리도 함께 (선택)</strong> — 안내 창에서 "내 목소리도 함께 녹음"을 체크하면 내가 말한 내용이 읽어주는 안내와 함께 영상에 담깁니다.</li>
                   <li><strong>알아서 멈춥니다</strong> — 시연 마지막에 자동으로 종료. 더 일찍 끝내고 싶으면 페이지 아무 곳에서 <strong>Esc</strong> 키만 누르세요.</li>
                   <li><strong>저장 위치는 직접 선택</strong> — 시연이 끝나면 Chrome 의 "다른 이름으로 저장" 다이얼로그가 뜹니다. 어디로도 업로드되지 않고 컴퓨터 안에만 남습니다.</li>
                 </ul>
@@ -546,7 +578,11 @@
                 <h3 data-ko>매뉴스크립트 열기</h3>
                 <p data-en>Click the Manuscript icon in your toolbar and choose <strong>New Manuscript</strong>. A small panel slides in next to the page, ready to use. It also borrows the page's colors and fonts so your tour fits right in.</p>
                 <p data-ko>브라우저 도구막대의 매뉴스크립트 아이콘을 누르고 <strong>새 시연</strong>을 선택하세요. 페이지 옆에 작은 작업 패널이 나타나고, 페이지의 색과 글꼴까지 자연스럽게 따라가 한 화면처럼 어울립니다.</p>
-                <img src="./assets/screenshots/flow-01-popup.png" alt="Manuscript popup with the New Manuscript button"
+                <img src="./assets/screenshots/flow-01-popup-en.png" alt="Manuscript popup with the New Manuscript button"
+                  data-en
+                  onerror="this.style.display='none'" />
+                <img src="./assets/screenshots/flow-01-popup-ko.png" alt="매뉴스크립트 팝업 — 새 매뉴스크립트 버튼"
+                  data-ko
                   onerror="this.style.display='none'" />
               </div>
             </div>
@@ -612,112 +648,223 @@
 
           <div class="callout" data-en>
             <strong>Your visitors need the Manuscript extension installed.</strong>
-            The bridge is a remote control rather than a player on its own. If a
-            visitor doesn't have the extension yet, a small banner kindly invites
-            them to install. You can hide that banner and show your own message
-            instead with <code>manuscript.configure({ banner: false })</code>.
+            The bridge is a remote control rather than a player on its own.
+            When a visitor doesn't have the extension yet, the bridge can
+            either pop a small install prompt itself or hand the moment
+            back to you via <code>manuscript.openStore()</code> /
+            <code>manuscript.openHomepage()</code>. Both behaviors are
+            opt-in — the bridge never injects UI you didn't ask for.
           </div>
           <div class="callout" data-ko>
             <strong>방문자에게 Manuscript 확장이 설치되어 있어야 합니다.</strong>
             브리지는 사이트 안에서 시연을 실행하는 리모컨 역할이라, 확장이 없으면
-            작은 안내 배너가 친절하게 설치를 권합니다. 직접 메시지를 보여주고 싶다면
-            <code>manuscript.configure({ banner: false })</code> 로 그 배너를 꺼두세요.
+            (a) 브리지가 작은 설치 안내를 직접 띄워주거나 (b)
+            <code>manuscript.openStore()</code> /
+            <code>manuscript.openHomepage()</code> 로 그 순간을 직접 다룰 수
+            있어요. 두 방식 모두 옵션 — 호출하지 않은 UI 는 브리지가 알아서
+            띄우지 않습니다.
           </div>
 
           <p class="lead" data-en>
-            <strong>manuscript-bridge.0.1.2.js</strong> is a small, dependency-free
-            file (about 11 KB) you drop onto your page. From there, your "Take the
+            <strong>manuscript-bridge.0.1.3.js</strong> is a small, dependency-free
+            file (about 14 KB) you drop onto your page. From there, your "Take the
             tour" button can load a saved tour and ask Manuscript to play it — the
             spotlights, notes, and narration take care of themselves. By default
             playback is read-only and cleans up after itself once the tour ends.
           </p>
           <p class="lead" data-ko>
-            <strong>manuscript-bridge.0.1.2.js</strong> 는 의존성 없는 약 11 KB 짜리
-            작은 파일입니다. 내 페이지에 넣어두기만 하면, "둘러보기" 같은 버튼으로
-            저장해 둔 시연을 불러와 Manuscript 에 재생을 부탁할 수 있어요. 강조 표시·
-            메모·음성 안내는 알아서 처리됩니다. 기본 재생은 보기 전용이며 시연이
-            끝나면 흔적 없이 깔끔하게 정리됩니다.
+            <strong>manuscript-bridge.0.1.3.js</strong> 는 의존성 없는 약 14 KB
+            짜리 작은 파일입니다. 내 페이지에 넣어두기만 하면, "둘러보기" 같은
+            버튼으로 저장해 둔 시연을 불러와 Manuscript 에 재생을 부탁할 수 있어요.
+            강조 표시·메모·음성 안내는 알아서 처리됩니다. 기본 재생은 보기 전용이며
+            시연이 끝나면 흔적 없이 깔끔하게 정리됩니다.
           </p>
 
-          <h3 data-en>Usage</h3>
-          <h3 data-ko>사용 예제</h3>
-
-          <p data-en>1) Add the bridge library and your tour to your page:</p>
-          <p data-ko>1) 브리지 라이브러리와 투어 JSON을 페이지에 둡니다:</p>
+          <h3 data-en>Option A — your own button</h3>
+          <h3 data-ko>방법 A — 내 버튼 직접 만들기</h3>
+          <p data-en>
+            Most common pattern. You author the button (any styling you
+            want) and wire it to the bridge. When the extension is
+            missing, send the visitor to the Web Store with
+            <code>openStore()</code>; optionally to your own product page
+            with <code>openHomepage()</code>.
+          </p>
+          <p data-ko>
+            가장 자주 쓰는 패턴. 버튼은 직접 만들고(원하는 디자인 그대로)
+            브리지에 연결만 합니다. 확장이 없으면
+            <code>openStore()</code> 로 웹 스토어로 보내고, 옵션으로
+            <code>openHomepage()</code> 로 본인 제품 페이지로도 안내할 수 있어요.
+          </p>
 
 <pre class="code" data-en><span class="tok-cmt">&lt;!-- in your page --&gt;</span>
-&lt;script src=<span class="tok-str">"/manuscript-bridge.0.1.2.js"</span>&gt;&lt;/script&gt;
+&lt;script src=<span class="tok-str">"/manuscript-bridge.0.1.3.js"</span>&gt;&lt;/script&gt;
 &lt;button id=<span class="tok-str">"start"</span>&gt;Take the tour&lt;/button&gt;
 
 &lt;script&gt;
+  <span class="tok-cmt">// Opt in to the homepage fallback — without this, openHomepage() warns and no-ops.</span>
+  manuscript.configure({
+    homepageUrl: <span class="tok-str">'https://zendy00.github.io/manuscript-pages/'</span>,
+    banner: <span class="tok-key">false</span>,  <span class="tok-cmt">// suppress the bridge's built-in install prompt — we handle it below</span>
+  });
+
   <span class="tok-key">const</span> btn = document.getElementById(<span class="tok-str">'start'</span>);
 
   btn.addEventListener(<span class="tok-str">'click'</span>, <span class="tok-key">async</span> () =&gt; {
-    <span class="tok-cmt">// auto-detect: false → bridge shows the install banner</span>
-    <span class="tok-key">if</span> (!(<span class="tok-key">await</span> manuscript.isInstalled())) <span class="tok-key">return</span>;
+    <span class="tok-key">if</span> (!(<span class="tok-key">await</span> manuscript.isInstalled())) {
+      manuscript.openStore();         <span class="tok-cmt">// or: manuscript.openHomepage()</span>
+      <span class="tok-key">return</span>;
+    }
     btn.hidden = <span class="tok-key">true</span>;
     <span class="tok-key">const</span> scenario = <span class="tok-key">await</span> fetch(<span class="tok-str">'/tours/tour-en.json'</span>).then(r =&gt; r.json());
     <span class="tok-key">await</span> manuscript.load(scenario);
     <span class="tok-key">await</span> manuscript.play({ standalone: <span class="tok-key">true</span> });
   });
 
-  <span class="tok-cmt">// Re-show the button when replay ends (user hit ✕ or last step finished).</span>
   manuscript.onExit(() =&gt; { btn.hidden = <span class="tok-key">false</span>; });
-  <span class="tok-cmt">// Or use the DOM event form:</span>
-  <span class="tok-cmt">// window.addEventListener('manuscript:exited', () =&gt; { btn.hidden = false; });</span>
 &lt;/script&gt;</pre>
 <pre class="code" data-ko><span class="tok-cmt">&lt;!-- 호스트 페이지 안에 둡니다 --&gt;</span>
-&lt;script src=<span class="tok-str">"/manuscript-bridge.0.1.2.js"</span>&gt;&lt;/script&gt;
+&lt;script src=<span class="tok-str">"/manuscript-bridge.0.1.3.js"</span>&gt;&lt;/script&gt;
 &lt;button id=<span class="tok-str">"start"</span>&gt;투어 시작&lt;/button&gt;
 
 &lt;script&gt;
+  <span class="tok-cmt">// 홈페이지 fallback 은 opt-in — 호출하지 않으면 openHomepage() 는 경고만 출력하고 no-op.</span>
+  manuscript.configure({
+    homepageUrl: <span class="tok-str">'https://zendy00.github.io/manuscript-pages/'</span>,
+    banner: <span class="tok-key">false</span>,  <span class="tok-cmt">// 기본 설치 안내 끄기 — 아래에서 직접 처리</span>
+  });
+
   <span class="tok-key">const</span> btn = document.getElementById(<span class="tok-str">'start'</span>);
 
   btn.addEventListener(<span class="tok-str">'click'</span>, <span class="tok-key">async</span> () =&gt; {
-    <span class="tok-cmt">// 자동 감지: false 면 브리지가 설치 안내 배너를 띄움</span>
-    <span class="tok-key">if</span> (!(<span class="tok-key">await</span> manuscript.isInstalled())) <span class="tok-key">return</span>;
+    <span class="tok-key">if</span> (!(<span class="tok-key">await</span> manuscript.isInstalled())) {
+      manuscript.openStore();         <span class="tok-cmt">// 또는: manuscript.openHomepage()</span>
+      <span class="tok-key">return</span>;
+    }
     btn.hidden = <span class="tok-key">true</span>;
     <span class="tok-key">const</span> scenario = <span class="tok-key">await</span> fetch(<span class="tok-str">'/tours/tour-ko.json'</span>).then(r =&gt; r.json());
     <span class="tok-key">await</span> manuscript.load(scenario);
     <span class="tok-key">await</span> manuscript.play({ standalone: <span class="tok-key">true</span> });
   });
 
-  <span class="tok-cmt">// 재생 종료(✕ 또는 마지막 step 완료) 시 버튼을 다시 보이게.</span>
   manuscript.onExit(() =&gt; { btn.hidden = <span class="tok-key">false</span>; });
-  <span class="tok-cmt">// 또는 DOM 이벤트 형태로:</span>
-  <span class="tok-cmt">// window.addEventListener('manuscript:exited', () =&gt; { btn.hidden = false; });</span>
 &lt;/script&gt;</pre>
 
-          <p data-en>2) Public API surface (<code>manuscript.*</code>):</p>
-          <p data-ko>2) 공개 API (<code>manuscript.*</code>):</p>
+          <h3 data-en>Option B — let the bridge mount the launcher</h3>
+          <h3 data-ko>방법 B — 브리지가 런처를 직접 띄우기</h3>
+          <p data-en>
+            Zero-DOM-touch path. <code>mountLauncher()</code> attaches a
+            Shadow-DOM-isolated pill to the bottom-right of your page.
+            When the extension is installed it reads "Take the tour" and
+            runs the configured scenario on click; when it's missing the
+            same pill morphs into "Install Manuscript" (plus an optional
+            "Learn more" link if you set <code>homepageUrl</code>). A
+            small ✕ on the install prompt persists dismissal to
+            <code>localStorage</code>.
+          </p>
+          <p data-ko>
+            DOM 안 건드리는 경로. <code>mountLauncher()</code> 가
+            Shadow DOM 격리된 pill 을 페이지 우하단에 띄웁니다. 확장이 설치돼
+            있으면 "투어 시작" 으로, 미설치면 같은 자리에 "Manuscript 설치" 가
+            뜨고 <code>homepageUrl</code> 을 지정해 두면 "자세히 보기" 링크도
+            함께 나옵니다. 안내의 ✕ 닫기 버튼은 <code>localStorage</code> 에
+            기억되어 같은 사이트에서 다시 뜨지 않아요.
+          </p>
 
-<pre class="code" data-en><span class="tok-cmt">// Discovery</span>
-manuscript.isInstalled() <span class="tok-cmt">// → Promise&lt;boolean&gt;</span>
-manuscript.configure({ banner: <span class="tok-key">false</span>, timeoutMs: 2000 })
+<pre class="code" data-en><span class="tok-cmt">&lt;!-- in your page --&gt;</span>
+&lt;script src=<span class="tok-str">"/manuscript-bridge.0.1.3.js"</span>&gt;&lt;/script&gt;
+&lt;script&gt;
+  manuscript.configure({
+    homepageUrl: <span class="tok-str">'https://zendy00.github.io/manuscript-pages/'</span>,  <span class="tok-cmt">// optional "Learn more"</span>
+    lang: <span class="tok-str">'auto'</span>,           <span class="tok-cmt">// 'auto' (default) / 'en' / 'ko'</span>
+  });
 
-<span class="tok-cmt">// Lifecycle</span>
-manuscript.load(scenario)                <span class="tok-cmt">// object or JSON string</span>
+  manuscript.mountLauncher({
+    scenarioUrl: <span class="tok-str">'/tours/tour-en.json'</span>,  <span class="tok-cmt">// or scenario: {...}</span>
+    label: <span class="tok-str">'Take the tour'</span>,             <span class="tok-cmt">// optional override</span>
+  });
+&lt;/script&gt;</pre>
+<pre class="code" data-ko><span class="tok-cmt">&lt;!-- 호스트 페이지 안에 둡니다 --&gt;</span>
+&lt;script src=<span class="tok-str">"/manuscript-bridge.0.1.3.js"</span>&gt;&lt;/script&gt;
+&lt;script&gt;
+  manuscript.configure({
+    homepageUrl: <span class="tok-str">'https://zendy00.github.io/manuscript-pages/'</span>,  <span class="tok-cmt">// 옵션: "자세히 보기"</span>
+    lang: <span class="tok-str">'auto'</span>,           <span class="tok-cmt">// 'auto'(기본) / 'en' / 'ko'</span>
+  });
+
+  manuscript.mountLauncher({
+    scenarioUrl: <span class="tok-str">'/tours/tour-ko.json'</span>,  <span class="tok-cmt">// 또는 scenario: {...}</span>
+    label: <span class="tok-str">'투어 시작'</span>,                  <span class="tok-cmt">// 옵션: 라벨 직접 지정</span>
+  });
+&lt;/script&gt;</pre>
+
+          <h3 data-en>Public API (<code>manuscript.*</code>)</h3>
+          <h3 data-ko>공개 API (<code>manuscript.*</code>)</h3>
+
+<pre class="code" data-en><span class="tok-cmt">// ── Discovery</span>
+manuscript.isInstalled()                    <span class="tok-cmt">// → Promise&lt;boolean&gt; (cached per page)</span>
+manuscript.refreshInstalled()               <span class="tok-cmt">// re-ping, bust the cache</span>
+
+<span class="tok-cmt">// ── Lifecycle</span>
+manuscript.load(scenario)                   <span class="tok-cmt">// object or JSON string</span>
 manuscript.play({ startIndex, paused, standalone })
 manuscript.pause() / manuscript.next() / manuscript.prev()
 manuscript.jump(index)
 manuscript.exit()
 
-<span class="tok-cmt">// Replay-end notification — fires on ✕ or natural end of tour</span>
+<span class="tok-cmt">// ── Navigation (new in 0.1.3) — works with or without a launcher</span>
+manuscript.openStore()                      <span class="tok-cmt">// opens Chrome Web Store in a new tab</span>
+manuscript.openHomepage()                   <span class="tok-cmt">// opens configured homepageUrl, or warns + no-ops</span>
+
+<span class="tok-cmt">// ── Auto-mounted launcher (new in 0.1.3)</span>
+manuscript.mountLauncher({ scenarioUrl, scenario, label, standalone })
+manuscript.unmountLauncher()
+
+<span class="tok-cmt">// ── Configure</span>
+manuscript.configure({
+  banner: <span class="tok-key">true</span>,                         <span class="tok-cmt">// show install prompt on missing extension</span>
+  timeoutMs: 1500,
+  lang: <span class="tok-str">'auto'</span>,                          <span class="tok-cmt">// 'auto' | 'en' | 'ko'</span>
+  storeUrl: <span class="tok-str">'https://chromewebstore.google.com/...'</span>,
+  homepageUrl: <span class="tok-str">'https://example.com'</span>,     <span class="tok-cmt">// opt-in extra link</span>
+  onInstallClick: () =&gt; analytics.track(<span class="tok-str">'mn:install'</span>),
+  onHomeClick:    () =&gt; analytics.track(<span class="tok-str">'mn:learn-more'</span>),
+})
+
+<span class="tok-cmt">// ── Replay-end — fires on ✕ or natural end of tour</span>
 <span class="tok-key">const</span> off = manuscript.onExit(() =&gt; { <span class="tok-cmt">/* restore your UI */</span> });
 <span class="tok-cmt">// off()  ← call to unregister</span>
 <span class="tok-cmt">// or:    window.addEventListener('manuscript:exited', handler)</span></pre>
-<pre class="code" data-ko><span class="tok-cmt">// 발견</span>
-manuscript.isInstalled() <span class="tok-cmt">// → Promise&lt;boolean&gt;</span>
-manuscript.configure({ banner: <span class="tok-key">false</span>, timeoutMs: 2000 })
+<pre class="code" data-ko><span class="tok-cmt">// ── 발견</span>
+manuscript.isInstalled()                    <span class="tok-cmt">// → Promise&lt;boolean&gt; (페이지 내 캐시)</span>
+manuscript.refreshInstalled()               <span class="tok-cmt">// 캐시 초기화 후 재핑</span>
 
-<span class="tok-cmt">// 라이프사이클</span>
-manuscript.load(scenario)                <span class="tok-cmt">// 객체 또는 JSON 문자열</span>
+<span class="tok-cmt">// ── 라이프사이클</span>
+manuscript.load(scenario)                   <span class="tok-cmt">// 객체 또는 JSON 문자열</span>
 manuscript.play({ startIndex, paused, standalone })
 manuscript.pause() / manuscript.next() / manuscript.prev()
 manuscript.jump(index)
 manuscript.exit()
 
-<span class="tok-cmt">// 재생 종료 알림 — ✕ 클릭 또는 마지막 step 완료 시 발생</span>
+<span class="tok-cmt">// ── 이동 API (0.1.3 신규) — 런처 유무와 무관하게 호출 가능</span>
+manuscript.openStore()                      <span class="tok-cmt">// 새 탭에서 Chrome 웹 스토어 열기</span>
+manuscript.openHomepage()                   <span class="tok-cmt">// homepageUrl 열기 (미설정 시 경고 + no-op)</span>
+
+<span class="tok-cmt">// ── 자동 마운트 런처 (0.1.3 신규)</span>
+manuscript.mountLauncher({ scenarioUrl, scenario, label, standalone })
+manuscript.unmountLauncher()
+
+<span class="tok-cmt">// ── 설정</span>
+manuscript.configure({
+  banner: <span class="tok-key">true</span>,                         <span class="tok-cmt">// 확장 미설치 시 설치 안내 자동 표시</span>
+  timeoutMs: 1500,
+  lang: <span class="tok-str">'auto'</span>,                          <span class="tok-cmt">// 'auto' | 'en' | 'ko'</span>
+  storeUrl: <span class="tok-str">'https://chromewebstore.google.com/...'</span>,
+  homepageUrl: <span class="tok-str">'https://example.com'</span>,     <span class="tok-cmt">// opt-in 추가 링크</span>
+  onInstallClick: () =&gt; analytics.track(<span class="tok-str">'mn:install'</span>),
+  onHomeClick:    () =&gt; analytics.track(<span class="tok-str">'mn:learn-more'</span>),
+})
+
+<span class="tok-cmt">// ── 재생 종료 — ✕ 클릭 또는 마지막 step 완료 시</span>
 <span class="tok-key">const</span> off = manuscript.onExit(() =&gt; { <span class="tok-cmt">/* 사용자 UI 복원 */</span> });
 <span class="tok-cmt">// off()  ← 호출해서 등록 해제</span>
 <span class="tok-cmt">// 또는:  window.addEventListener('manuscript:exited', handler)</span></pre>
@@ -727,10 +874,16 @@ manuscript.exit()
 
           <div class="bridge-cards">
             <div class="card">
-              <h3>manuscript-bridge.0.1.2.js</h3>
-              <p data-en>The bridge library. Drop it into your page and the <code>manuscript.*</code> global appears.</p>
-              <p data-ko>브리지 라이브러리. 페이지에 추가하면 <code>manuscript.*</code> 전역이 노출됩니다.</p>
-              <a class="dl" href="./manuscript-bridge.0.1.2.js" download>↓ Download</a>
+              <h3>manuscript-bridge.0.1.3.js <small>(current)</small></h3>
+              <p data-en>The bridge library, current version. Adds <code>openStore()</code>, <code>openHomepage()</code>, <code>mountLauncher()</code>, and a Shadow-DOM-isolated install prompt. Drop it into your page and the <code>manuscript.*</code> global appears.</p>
+              <p data-ko>현재 버전 브리지 라이브러리. <code>openStore()</code>, <code>openHomepage()</code>, <code>mountLauncher()</code> 와 Shadow DOM 격리된 설치 안내가 추가됐어요. 페이지에 추가하면 <code>manuscript.*</code> 전역이 노출됩니다.</p>
+              <a class="dl" href="./manuscript-bridge.0.1.3.js" download>↓ Download 0.1.3</a>
+            </div>
+            <div class="card">
+              <h3>manuscript-bridge.0.1.2.js <small>(legacy)</small></h3>
+              <p data-en>Previous bridge library, kept for hosts already pinned to this URL. <code>load</code>/<code>play</code>/<code>onExit</code> all behave identically to 0.1.3; the new APIs are simply absent.</p>
+              <p data-ko>이전 버전 — 이미 이 URL 에 고정해 둔 호스트 호환용. <code>load</code>/<code>play</code>/<code>onExit</code> 동작은 0.1.3 과 동일하며, 신규 API 만 빠져 있습니다.</p>
+              <a class="dl" href="./manuscript-bridge.0.1.2.js" download>↓ Download 0.1.2</a>
             </div>
             <div class="card">
               <h3>SKILL.md</h3>
@@ -757,74 +910,264 @@ manuscript.exit()
         <div class="container">
           <p class="eyebrow" data-en>Install</p>
           <p class="eyebrow" data-ko>설치</p>
-          <h2 class="section-title" data-en>One click from the Chrome Web Store.</h2>
-          <h2 class="section-title" data-ko>Chrome 웹 스토어에서 한 번 클릭.</h2>
+          <h2 class="section-title" data-en>Two ways in — pick the one that fits.</h2>
+          <h2 class="section-title" data-ko>두 가지 설치 방법 — 본인에게 맞는 쪽으로.</h2>
 
-          <p data-en>
-            Manuscript is live on the Chrome Web Store. Hit the button below,
-            confirm <strong>Add to Chrome</strong>, and you're ready to go in
-            seconds — Chrome keeps it updated on its own.
+          <p class="install-intro" data-en>
+            Most people want the <strong>Web Store</strong> path — one click and
+            Chrome handles updates. If you'd rather test the latest dev build
+            before it clears Web Store review, the <strong>manual .zip</strong>
+            path below has you covered.
           </p>
-          <p data-ko>
-            Manuscript 는 Chrome 웹 스토어에서 바로 받을 수 있습니다. 아래 버튼을 누르고
-            <strong>Chrome 에 추가</strong>만 확인하면 몇 초 만에 준비 완료 — 업데이트는
-            Chrome 이 알아서 챙겨줍니다.
-          </p>
-
-          <p class="install-cta" data-en>
-            <a
-              class="btn btn-primary"
-              href="https://chromewebstore.google.com/detail/manuscript/feihbocomfcdghadlmnmkamehfkmdall"
-              target="_blank"
-              rel="noopener"
-            >→ Add to Chrome (Web Store)</a>
-          </p>
-          <p class="install-cta" data-ko>
-            <a
-              class="btn btn-primary"
-              href="https://chromewebstore.google.com/detail/manuscript/feihbocomfcdghadlmnmkamehfkmdall"
-              target="_blank"
-              rel="noopener"
-            >→ Chrome 에 추가 (웹 스토어)</a>
+          <p class="install-intro" data-ko>
+            대부분은 <strong>웹 스토어</strong> 경로가 편합니다 — 한 번 클릭하면
+            Chrome 이 업데이트까지 알아서 챙겨요. 웹 스토어 검수 전의 dev 빌드를
+            먼저 써보고 싶다면 아래 <strong>수동 .zip</strong> 경로를 골라주세요.
           </p>
 
-          <ol class="install-list" data-en>
-            <li>
-              Click the button above — it opens Manuscript's page on the Chrome Web Store.
-            </li>
-            <li>
-              Hit <strong>Add to Chrome</strong>, then <strong>Add extension</strong> when
-              Chrome asks to confirm.
-            </li>
-            <li>
-              Click the puzzle-piece icon in Chrome's toolbar and <strong>pin</strong>
-              Manuscript so it's always one click away.
-            </li>
-            <li>
-              Open any regular web page (<code>github.com</code>, a help page, your own
-              product) and click the Manuscript icon. The first time, Chrome will ask
-              for page access — say yes and you're ready to go.
-            </li>
-          </ol>
+          <!-- Version comparison row, filled in by the inline script
+               below from store-version.json and downloads/latest.json. -->
+          <div class="install-versions" role="status" aria-live="polite">
+            <span class="ver-chip ver-chip-store">
+              <span class="ver-chip-label" data-en>Web Store</span>
+              <span class="ver-chip-label" data-ko>웹 스토어</span>
+              <span class="ver-chip-value" data-store-version>v…</span>
+            </span>
+            <span class="ver-chip-sep" aria-hidden="true">·</span>
+            <span class="ver-chip ver-chip-zip">
+              <span class="ver-chip-label" data-en>Manual .zip</span>
+              <span class="ver-chip-label" data-ko>수동 .zip</span>
+              <span class="ver-chip-value" data-zip-version>v…</span>
+            </span>
+            <span class="ver-chip-hint" data-version-hint data-en></span>
+            <span class="ver-chip-hint" data-version-hint data-ko></span>
+          </div>
 
-          <ol class="install-list" data-ko>
-            <li>
-              위 버튼을 누르면 Chrome 웹 스토어의 Manuscript 페이지가 열립니다.
-            </li>
-            <li>
-              <strong>Chrome 에 추가</strong> → 확인 창에서 <strong>확장 프로그램 추가</strong>
-              를 누릅니다.
-            </li>
-            <li>
-              Chrome 도구막대의 퍼즐 아이콘에서 Manuscript 를 <strong>고정</strong>해 두면
-              언제든 한 번 클릭으로 열 수 있어요.
-            </li>
-            <li>
-              아무 웹 페이지(<code>github.com</code>, 도움말 페이지, 본인의 사이트 등)를 열고
-              Manuscript 아이콘을 누르세요. 처음 한 번은 페이지 접근 권한을 묻는데, 허용하시면
-              바로 시연을 만들 준비가 끝납니다.
-            </li>
-          </ol>
+          <div class="install-tabs" role="tablist" aria-label="Install method">
+            <button
+              type="button"
+              role="tab"
+              id="install-tab-store"
+              aria-controls="install-panel-store"
+              aria-selected="true"
+              class="install-tab is-active"
+              data-target="store"
+            >
+              <span data-en>Web Store <small>(recommended)</small></span>
+              <span data-ko>웹 스토어 <small>(추천)</small></span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="install-tab-zip"
+              aria-controls="install-panel-zip"
+              aria-selected="false"
+              class="install-tab"
+              data-target="zip"
+            >
+              <span data-en>Manual .zip <small>(latest build)</small></span>
+              <span data-ko>수동 .zip <small>(최신 빌드)</small></span>
+            </button>
+          </div>
+
+          <!-- ── Tab: Web Store ── -->
+          <div
+            id="install-panel-store"
+            role="tabpanel"
+            aria-labelledby="install-tab-store"
+            class="install-panel is-active"
+            data-panel="store"
+          >
+            <p data-en>
+              Manuscript is live on the Chrome Web Store. Hit the button below,
+              confirm <strong>Add to Chrome</strong>, and you're ready to go in
+              seconds — Chrome keeps it updated on its own.
+            </p>
+            <p data-ko>
+              Manuscript 는 Chrome 웹 스토어에서 바로 받을 수 있습니다. 아래 버튼을 누르고
+              <strong>Chrome 에 추가</strong>만 확인하면 몇 초 만에 준비 완료 — 업데이트는
+              Chrome 이 알아서 챙겨줍니다.
+            </p>
+
+            <p class="install-cta" data-en>
+              <a
+                class="btn btn-primary"
+                href="https://chromewebstore.google.com/detail/manuscript/feihbocomfcdghadlmnmkamehfkmdall"
+                target="_blank"
+                rel="noopener"
+              >→ Add to Chrome (<span data-store-version>Web Store</span>)</a>
+            </p>
+            <p class="install-cta" data-ko>
+              <a
+                class="btn btn-primary"
+                href="https://chromewebstore.google.com/detail/manuscript/feihbocomfcdghadlmnmkamehfkmdall"
+                target="_blank"
+                rel="noopener"
+              >→ Chrome 에 추가 (<span data-store-version>웹 스토어</span>)</a>
+            </p>
+
+            <ol class="install-list" data-en>
+              <li>
+                Click the button above — it opens Manuscript's page on the Chrome Web Store.
+              </li>
+              <li>
+                Hit <strong>Add to Chrome</strong>, then <strong>Add extension</strong> when
+                Chrome asks to confirm.
+              </li>
+              <li>
+                Click the puzzle-piece icon in Chrome's toolbar and <strong>pin</strong>
+                Manuscript so it's always one click away.
+              </li>
+              <li>
+                Open any regular web page (<code>github.com</code>, a help page, your own
+                product) and click the Manuscript icon. The first time, Chrome will ask
+                for page access — say yes and you're ready to go.
+              </li>
+            </ol>
+
+            <ol class="install-list" data-ko>
+              <li>
+                위 버튼을 누르면 Chrome 웹 스토어의 Manuscript 페이지가 열립니다.
+              </li>
+              <li>
+                <strong>Chrome 에 추가</strong> → 확인 창에서 <strong>확장 프로그램 추가</strong>
+                를 누릅니다.
+              </li>
+              <li>
+                Chrome 도구막대의 퍼즐 아이콘에서 Manuscript 를 <strong>고정</strong>해 두면
+                언제든 한 번 클릭으로 열 수 있어요.
+              </li>
+              <li>
+                아무 웹 페이지(<code>github.com</code>, 도움말 페이지, 본인의 사이트 등)를 열고
+                Manuscript 아이콘을 누르세요. 처음 한 번은 페이지 접근 권한을 묻는데, 허용하시면
+                바로 시연을 만들 준비가 끝납니다.
+              </li>
+            </ol>
+          </div>
+
+          <!-- ── Tab: Manual .zip ── -->
+          <div
+            id="install-panel-zip"
+            role="tabpanel"
+            aria-labelledby="install-tab-zip"
+            class="install-panel"
+            data-panel="zip"
+            hidden
+          >
+            <p data-en>
+              The latest dev build straight from <code>main</code> — typically a
+              release or two ahead of the Web Store, since Google's review takes
+              a few days. You'll handle updates yourself by re-downloading this
+              file when a new version lands. Good fit for: testing pre-release
+              features, internal tools that can't reach the Web Store, or
+              <em>"I want it now"</em>.
+            </p>
+            <p data-ko>
+              <code>main</code> 브랜치의 최신 dev 빌드 — Google 검수가 며칠 걸리므로
+              보통 웹 스토어 버전보다 한두 단계 앞서 있습니다. 새 버전이 나오면 이
+              파일을 다시 받아 직접 갱신해 주셔야 합니다. 추천 대상: 출시 전 기능을
+              먼저 써보고 싶은 분, 웹 스토어 접근이 어려운 사내 환경, 또는
+              <em>"지금 당장 써보고 싶다"</em>는 분.
+            </p>
+
+            <p class="install-cta" data-en>
+              <a class="btn btn-primary" href="./downloads/manuscript-latest.zip" download>
+                ↓ Download <span data-zip-version>v…</span> (.zip)
+              </a>
+            </p>
+            <p class="install-cta" data-ko>
+              <a class="btn btn-primary" href="./downloads/manuscript-latest.zip" download>
+                ↓ <span data-zip-version>v…</span> 다운로드 (.zip)
+              </a>
+            </p>
+
+            <p class="install-sha" data-en>
+              <span class="install-sha-label">SHA-256</span>
+              <code data-zip-sha title="Click to copy">checking…</code>
+              · <a href="./downloads/manuscript-latest.zip.sha256" download>.sha256</a>
+              · <span class="install-sha-size" data-zip-size></span>
+            </p>
+            <p class="install-sha" data-ko>
+              <span class="install-sha-label">SHA-256</span>
+              <code data-zip-sha title="클릭하여 복사">확인 중…</code>
+              · <a href="./downloads/manuscript-latest.zip.sha256" download>.sha256</a>
+              · <span class="install-sha-size" data-zip-size></span>
+            </p>
+
+            <ol class="install-list" data-en>
+              <li>
+                <strong>Grab the file above</strong> and unzip it somewhere you'll keep it
+                (for example <code>C:\Users\&lt;you&gt;\Documents\manuscript</code>). Leave
+                the folder where it is — Chrome reads from there every time it starts.
+              </li>
+              <li>
+                Open a new Chrome tab and type <code>chrome://extensions/</code> in the address bar.
+              </li>
+              <li>
+                Flip the <strong>Developer mode</strong> switch on (top-right corner).
+              </li>
+              <li>
+                Click <strong>Load unpacked</strong> (top-left).
+              </li>
+              <li>
+                Choose the unzipped <code>manuscript-<span data-zip-version-plain>x.y.z</span></code>
+                folder. Manuscript pops into the list.
+              </li>
+              <li>
+                Click the puzzle-piece icon in Chrome's toolbar and <strong>pin</strong>
+                Manuscript so it's always one click away.
+              </li>
+              <li>
+                Open any regular web page (<code>github.com</code>, a help page, your own
+                product) and click the Manuscript icon. Chrome asks for page access on
+                first run — say yes and you're done.
+              </li>
+            </ol>
+
+            <ol class="install-list" data-ko>
+              <li>
+                위의 <strong>다운로드</strong> 버튼으로 파일을 받고, 잘 두실 폴더(예:
+                <code>C:\Users\&lt;본인&gt;\Documents\manuscript</code>)에 압축을 풀어 주세요.
+                그 폴더는 그대로 두시면 됩니다 — Chrome 이 켜질 때마다 그곳에서 읽어옵니다.
+              </li>
+              <li>
+                Chrome 의 새 탭을 열고 주소창에 <code>chrome://extensions/</code> 를 입력하세요.
+              </li>
+              <li>
+                오른쪽 위의 <strong>개발자 모드</strong> 스위치를 켭니다.
+              </li>
+              <li>
+                왼쪽 위의 <strong>압축해제된 확장 프로그램 로드</strong> 버튼을 누릅니다.
+              </li>
+              <li>
+                압축을 푼 <code>manuscript-<span data-zip-version-plain>x.y.z</span></code>
+                폴더를 선택하면 Manuscript 가 목록에 나타납니다.
+              </li>
+              <li>
+                Chrome 도구막대의 퍼즐 아이콘에서 Manuscript 를 <strong>고정</strong>해 두면
+                언제든 한 번 클릭으로 열 수 있어요.
+              </li>
+              <li>
+                일반 웹 페이지(<code>github.com</code>, 도움말 페이지, 본인의 사이트 등)에서
+                Manuscript 아이콘을 누르세요. 처음 한 번은 페이지 접근 권한 — 허용하시면 끝.
+              </li>
+            </ol>
+
+            <div class="callout callout-warn" data-en>
+              <strong>Auto-update doesn't apply here.</strong> Chrome only updates
+              Web Store extensions — manual installs stay frozen at whatever
+              build you unzipped. Re-download this zip whenever you want to pull
+              new features. Or remove the unpacked extension and install from
+              the Web Store tab above for hands-off updates.
+            </div>
+            <div class="callout callout-warn" data-ko>
+              <strong>자동 업데이트는 이 경로에서 작동하지 않습니다.</strong>
+              Chrome 은 웹 스토어 확장만 자동 업데이트해요. 수동 설치본은 받아둔
+              버전 그대로 멈춰 있습니다. 새 기능을 받으려면 이 zip 을 다시 받아
+              덮어 주세요. 손 안 대고 업데이트를 받고 싶다면 위의 웹 스토어 탭으로
+              전환하시면 됩니다.
+            </div>
+          </div>
 
           <div class="callout" data-en>
             <strong>One small thing:</strong> Manuscript can't open on Chrome's own pages
@@ -836,63 +1179,15 @@ manuscript.exit()
             새 탭에서는 동작하지 않아요 — Chrome 정책으로 막혀 있습니다. 설치 전에 열려
             있던 탭은 한 번만 새로고침해 주시면 됩니다.
           </div>
-        </div>
-      </section>
 
-      <!-- ───── Roadmap (Coming in v0.3.0) ───── -->
-      <section id="roadmap" class="roadmap">
-        <div class="container">
-          <p class="eyebrow" data-en>★ Coming up</p>
-          <p class="eyebrow" data-ko>★ 출시 예정</p>
-          <h2 class="section-title" data-en>What's landing in <em>v0.3.0</em>.</h2>
-          <h2 class="section-title" data-ko><em>v0.3.0</em> 에 들어올 기능.</h2>
-
-          <p class="lead" data-en>
-            The current Web Store build is <strong>v0.2.1</strong>. Two recording upgrades
-            are queued for the next release — Chrome will update you automatically the
-            moment they ship.
+          <p class="install-changelog-link" data-en>
+            Wondering what changed between versions?
+            <a href="./changelog.html">→ See the changelog</a>
           </p>
-          <p class="lead" data-ko>
-            현재 Chrome 웹 스토어 배포 버전은 <strong>v0.2.1</strong> 입니다. 다음 릴리스
-            <strong>v0.3.0</strong> 에 아래 두 가지 녹화 기능이 들어갈 예정이며, 출시 즉시
-            Chrome 이 자동으로 업데이트해 드립니다.
+          <p class="install-changelog-link" data-ko>
+            버전별로 무엇이 바뀌었는지 궁금하다면?
+            <a href="./changelog.html">→ 변경사항 보기</a>
           </p>
-
-          <div class="roadmap-grid">
-            <div class="roadmap-card">
-              <span class="roadmap-badge" data-en>v0.3.0</span>
-              <span class="roadmap-badge" data-ko>v0.3.0</span>
-              <h3 data-en>Pause anytime to chip in</h3>
-              <h3 data-ko>잠깐 멈추고 내 목소리 보태기</h3>
-              <p data-en>
-                Tap <span class="kbd">Space</span> while recording and the tour holds
-                still while the video keeps rolling — perfect for live commentary or a
-                quick aside. Tap <span class="kbd">Space</span> again to resume.
-              </p>
-              <p data-ko>
-                녹화 도중 <span class="kbd">Space</span> 키를 누르면 시연이 그 자리에 멈추고
-                녹화는 그대로 진행됩니다. 라이브 한마디나 즉석 보충 설명에 안성맞춤.
-                <span class="kbd">Space</span> 를 다시 누르면 시연이 이어집니다.
-              </p>
-            </div>
-
-            <div class="roadmap-card">
-              <span class="roadmap-badge" data-en>v0.3.0</span>
-              <span class="roadmap-badge" data-ko>v0.3.0</span>
-              <h3 data-en>Bring your own voice</h3>
-              <h3 data-ko>내 목소리도 함께 녹음</h3>
-              <p data-en>
-                Toggle <strong>Also record my microphone</strong> on the guide screen and
-                your voice mixes in alongside the read-aloud narration into one clean
-                audio track. Chrome asks for mic permission only when you opt in.
-              </p>
-              <p data-ko>
-                안내 창에서 <strong>내 목소리도 함께 녹음</strong> 을 켜면 내 음성이
-                읽어주는 안내와 함께 하나의 트랙으로 깔끔하게 담깁니다. 마이크 권한은
-                옵션을 켤 때만 한 번 물어봅니다.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -1117,32 +1412,63 @@ manuscript.exit()
                 <h3 data-ko>녹화 방법</h3>
                 <ol data-en>
                   <li>Click the red <span class="iicon is-record"><svg><use href="#i-record"/></svg></span> in the panel footer.</li>
-                  <li>A guide screen explains the two share dialogs Chrome will show. Click <strong>Start recording</strong> to continue.</li>
+                  <li>A guide screen explains the two share dialogs Chrome will show. Want your voice in the video too? Turn on <strong>Also record my microphone</strong>. Click <strong>Start recording</strong>.</li>
                   <li>First Chrome dialog: keep <strong>Chrome Tab</strong>, pick this tab, click <strong>Allow</strong> (video).</li>
                   <li>Second Chrome dialog: switch to <strong>Window</strong>, pick a browser window, tick <strong>Also share system audio</strong>, then <strong>Share</strong> (this is what captures the TTS voice; cancelling it keeps the recording running but TTS will be silent).</li>
                   <li>3-second countdown plays on screen; the panel + controls pill disappear so they don't end up in the frame.</li>
-                  <li>The tour plays itself. Press <span class="kbd">Esc</span> when you want to wrap things up and save. The recording also stops on its own when the last step finishes.</li>
+                  <li>The tour plays itself. Tap <span class="kbd">Space</span> anywhere on the page to pause it (the recording keeps going — handy if you want to add your own voice while it's paused). Press <span class="kbd">Esc</span> when you want to wrap things up and save. The recording also stops on its own when the last step finishes.</li>
                   <li>Chrome's save dialog opens with a filename like <code>manuscript-recording-YYYYMMDD-HHMM.webm</code>.</li>
                 </ol>
                 <ol data-ko>
                   <li>패널 footer 의 빨간 <span class="iicon is-record"><svg><use href="#i-record"/></svg></span> 버튼을 클릭합니다.</li>
-                  <li>Chrome 이 두 번 띄울 공유 창의 진행 방법을 안내해주는 창이 표시됩니다. <strong>녹화 시작</strong> 을 누르면 진행됩니다.</li>
+                  <li>Chrome 이 두 번 띄울 공유 창의 진행 방법을 안내해주는 창이 표시됩니다. 내 목소리도 영상에 담고 싶으면 <strong>내 목소리도 함께 녹음</strong>을 켜 두세요. <strong>녹화 시작</strong>을 누르면 됩니다.</li>
                   <li>첫 번째 Chrome 다이얼로그: <strong>Chrome 탭</strong> 그대로 두고 현재 탭 선택 → <strong>허용</strong> 클릭 (영상).</li>
                   <li>두 번째 Chrome 다이얼로그: <strong>Window(윈도우)</strong> 탭으로 이동 → 브라우저 창 선택 → <strong>시스템 오디오 공유</strong> 체크 → <strong>공유</strong> (TTS 음성이 여기서 잡힙니다. 취소해도 녹화는 진행되지만 TTS 는 무음).</li>
                   <li>3 초 카운트다운이 화면에 표시되고, 그 동안 패널과 controls pill 이 사라져 영상에 들어가지 않습니다.</li>
-                  <li>시연이 알아서 재생됩니다. 끝내고 저장하고 싶으면 <span class="kbd">Esc</span> 키를 누르세요. 마지막 단계가 끝나면 자동으로 정지됩니다.</li>
+                  <li>시연이 알아서 재생됩니다. 페이지 어디서든 <span class="kbd">Space</span> 키로 시연을 잠깐 멈출 수 있어요 (녹화는 그대로 계속되니까 멈춘 동안 직접 한마디 보태기 좋아요). 끝내고 저장하고 싶으면 <span class="kbd">Esc</span> 키. 마지막 단계가 끝나면 자동으로 정지됩니다.</li>
                   <li><code>manuscript-recording-YYYYMMDD-HHMM.webm</code> 형태의 파일명으로 Chrome 저장 다이얼로그가 열립니다.</li>
                 </ol>
 
-                <p class="callout-soft" data-en>
-                  Want to pause mid-recording to add your own voice, or mix in your
-                  microphone alongside the read-aloud narration? Both are landing in
-                  <a href="#roadmap"><strong>v0.3.0</strong></a>.
+                <h3 data-en><span class="new-badge">NEW v0.3.0</span> Pause anytime to add your voice</h3>
+                <h3 data-ko><span class="new-badge">NEW v0.3.0</span> 잠깐 멈추고 내 목소리 보태기</h3>
+                <figure class="record-paused-figure" data-en>
+                  <img src="./assets/screenshots/paused-pill-en.png" alt="Small Recording pill in the top-right corner of the screen — a blinking red dot next to the label 'Recording'." />
+                  <figcaption>While the tour is paused, this little Recording pill sits in the top-right corner — the red dot keeps blinking so you can tell the video is still rolling. Click the pill (or tap <span class="kbd">Space</span> again) to pick the tour back up.</figcaption>
+                </figure>
+                <figure class="record-paused-figure" data-ko>
+                  <img src="./assets/screenshots/paused-pill-ko.png" alt="화면 우상단에 떠 있는 작은 녹화 pill — 깜빡이는 빨간 점 옆에 '녹화 중' 라벨." />
+                  <figcaption>시연이 멈춰 있는 동안 이 작은 녹화 pill 이 화면 우상단에 떠 있어요 — 빨간 점이 깜빡이면서 녹화가 계속되고 있다는 걸 알려줍니다. pill 을 클릭하거나 <span class="kbd">Space</span> 를 다시 누르면 시연이 이어집니다.</figcaption>
+                </figure>
+                <p data-en>
+                  Any time during recording, tap <span class="kbd">Space</span> and the
+                  tour stops where it is. The page stays put — and now it's your turn.
+                  Talk through what's on screen (if you turned the mic on), click around
+                  to show something interactive, or just catch your breath. Tap
+                  <span class="kbd">Space</span> again and the tour picks up like nothing
+                  happened.
                 </p>
-                <p class="callout-soft" data-ko>
-                  녹화 도중 잠깐 멈추고 내 목소리를 보태거나, 마이크 음성을 읽어주는
-                  안내와 함께 담고 싶으신가요?
-                  <a href="#roadmap"><strong>v0.3.0</strong></a> 에서 만나실 수 있습니다.
+                <p data-ko>
+                  녹화 도중 언제든 <span class="kbd">Space</span> 키를 누르면 시연이 그 자리에
+                  그대로 멈춥니다. 화면도 그대로 멈춰 있어요. 이제 내 차례 — 마이크를 켜
+                  뒀다면 화면을 보면서 한마디 보태고, 직접 클릭해서 뭔가 보여주거나, 잠깐 숨을
+                  고르세요. <span class="kbd">Space</span> 를 다시 누르면 시연이 아무 일도
+                  없었던 것처럼 이어집니다.
+                </p>
+
+                <h3 data-en><span class="new-badge">NEW v0.3.0</span> Want your voice in too?</h3>
+                <h3 data-ko><span class="new-badge">NEW v0.3.0</span> 내 목소리도 같이 담고 싶다면?</h3>
+                <p data-en>
+                  Turn on <strong>Also record my microphone</strong> on the guide screen
+                  before you start (it's off by default). Your voice mixes in alongside
+                  the read-aloud narration and the page sounds — everything ends up on
+                  one neat audio track. Chrome only asks for microphone permission when
+                  this is on; the normal recording never bothers you with it.
+                </p>
+                <p data-ko>
+                  녹화를 시작하기 전, 안내 창에서 <strong>내 목소리도 함께 녹음</strong>을
+                  켜 두세요 (기본은 꺼짐). 내가 말한 내용이 읽어주는 안내·페이지 소리와 함께
+                  하나의 트랙으로 깔끔하게 담깁니다. 이 옵션을 켰을 때만 Chrome 이 마이크
+                  권한을 한 번 물어봐요 — 평소 녹화에서는 권한 창이 뜨지 않아요.
                 </p>
 
                 <h3 data-en>Limits &amp; gotchas</h3>
@@ -1169,14 +1495,96 @@ manuscript.exit()
                   manuscript as a single JSON file (selectors, annotations, site
                   colors, fonts, iframe paths). Import is the inverse —
                   Manuscript runs schema migrations automatically when the file
-                  is older than the current <code>SCHEMA_VERSION</code>. Commit
-                  these JSONs to git to version your demos like code.
+                  is older than the current <code>SCHEMA_VERSION</code>. Hand
+                  the JSON to a teammate by email or chat, or keep it next to
+                  your code so the manual stays versioned with what it documents.
                 </p>
                 <p data-ko>
                   패널 하단 export 버튼으로 시연 전체를 단일 JSON 파일로 내려받습니다
                   (셀렉터·annotation·사이트 색·글꼴·iframe path 모두 포함). import는 그 역방향이며
                   현재 <code>SCHEMA_VERSION</code>보다 오래된 파일은 자동으로 마이그레이션됩니다.
-                  JSON을 git에 commit해서 시연을 코드처럼 버전 관리하세요.
+                  JSON 파일을 메일이나 메신저로 동료에게 보내거나, 코드 옆에 같이 보관해
+                  시연을 코드와 함께 버전 관리하세요.
+                </p>
+
+                <h3 data-en><span class="new-badge">NEW v0.3.0</span> Import from the popup</h3>
+                <h3 data-ko><span class="new-badge">NEW v0.3.0</span> 팝업에서 바로 가져오기</h3>
+                <p data-en>
+                  Received a JSON walkthrough from a colleague? Click the
+                  Manuscript icon to open the popup, then hit
+                  <strong>↑ Open a JSON file</strong> right below the
+                  <em>+ New Manuscript</em> button. The picked file is added to
+                  your <em>Previous Manuscripts</em> list, and the panel opens
+                  on the current tab with that scenario already loaded —
+                  one click, ready to replay or edit.
+                </p>
+                <p data-ko>
+                  동료에게 JSON 시연 파일을 받았다면? Manuscript 아이콘을 눌러 팝업을
+                  열고 <em>+ 새 매뉴스크립트</em> 버튼 바로 아래의
+                  <strong>↑ JSON 파일 가져오기</strong> 를 누르세요. 선택한 파일이
+                  <em>이전 매뉴스크립트</em> 목록에 추가되고, 현재 탭에 패널이 열리면서
+                  그 시연이 바로 로드됩니다 — 한 번 클릭으로 재생·편집 준비 완료.
+                </p>
+
+                <h3 data-en>Schema compatibility</h3>
+                <h3 data-ko>스키마 호환표</h3>
+                <p data-en>
+                  Each manuscript JSON carries a <code>schemaVersion</code> field
+                  the extension reads on import. Older files are migrated to the
+                  current schema in-place — they never get rewritten on disk
+                  until you save again. The table below shows what every
+                  extension release expects.
+                </p>
+                <p data-ko>
+                  모든 매뉴스크립트 JSON 에는 <code>schemaVersion</code> 필드가 들어
+                  있고, 확장은 가져올 때 이 값을 보고 현재 스키마로 자동 변환합니다.
+                  파일을 저장하기 전까지는 디스크의 원본은 그대로예요. 아래 표는 각
+                  확장 버전이 어떤 스키마를 기대하는지 정리한 것입니다.
+                </p>
+                <table class="schema-table">
+                  <thead>
+                    <tr>
+                      <th data-en>schemaVersion</th><th data-ko>schemaVersion</th>
+                      <th data-en>Written by</th><th data-ko>저장한 버전</th>
+                      <th data-en>Readable by</th><th data-ko>읽을 수 있는 버전</th>
+                      <th data-en>Migration</th><th data-ko>변환</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>0.1.0</code></td>
+                      <td data-en>v0.1.0 – v0.1.4</td>
+                      <td data-ko>v0.1.0 – v0.1.4</td>
+                      <td data-en>All releases (auto-migrated)</td>
+                      <td data-ko>전체 (자동 변환)</td>
+                      <td data-en>0.1.0 → 0.1.1 adds <code>url</code>, <code>name</code>, <code>description</code>, <code>thumbnailDataUrl</code>, <code>waitForNavigation</code> with safe defaults.</td>
+                      <td data-ko>0.1.0 → 0.1.1 변환 시 <code>url</code>, <code>name</code>, <code>description</code>, <code>thumbnailDataUrl</code>, <code>waitForNavigation</code> 가 안전 기본값으로 추가됩니다.</td>
+                    </tr>
+                    <tr>
+                      <td><code>0.1.1</code> <em data-en>(current)</em><em data-ko>(현재)</em></td>
+                      <td data-en>v0.1.5 – v0.3.x</td>
+                      <td data-ko>v0.1.5 – v0.3.x</td>
+                      <td data-en>v0.1.5 onwards</td>
+                      <td data-ko>v0.1.5 이상</td>
+                      <td data-en>None — current schema. New fields added by v0.2 and v0.3 (palette, freedraw, action steps, narration, recording metadata, dark mode tokens, …) all default safely on older files.</td>
+                      <td data-ko>없음 — 현재 스키마. v0.2 와 v0.3 이 추가한 필드(팔레트, freedraw, action step, narration, 녹화 메타, dark mode 토큰 등)는 이전 파일에서도 모두 안전한 기본값으로 동작합니다.</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="schema-note" data-en>
+                  <strong>Forward-incompatibility:</strong> a future
+                  <code>0.2.0</code> schema would <em>not</em> open in v0.1.x
+                  releases — the import refuses unknown
+                  <code>schemaVersion</code> values rather than silently
+                  losing fields. Keep the extension up to date if you share
+                  manuscripts with newer authors.
+                </p>
+                <p class="schema-note" data-ko>
+                  <strong>전방 비호환:</strong> 미래의 <code>0.2.0</code> 스키마는
+                  v0.1.x 릴리스에서 <em>열리지 않습니다</em> — 모르는
+                  <code>schemaVersion</code> 값은 조용히 필드를 잃는 대신 import
+                  자체를 거부합니다. 최신 매뉴스크립트를 받는다면 확장도 함께
+                  업데이트해 주세요.
                 </p>
               </section>
 
@@ -1231,12 +1639,13 @@ manuscript.exit()
           <a href="mailto:zendy00@gmail.com">zendy00@gmail.com</a>
           <a href="#install" data-en>Install</a><a href="#install" data-ko>설치</a>
           <a href="#guide" data-en>Guide</a><a href="#guide" data-ko>사용설명서</a>
+          <a href="./changelog.html" data-en>Changelog</a><a href="./changelog.html" data-ko>변경사항</a>
           <a href="#bridge" data-en>Bridge</a><a href="#bridge" data-ko>브리지</a>
           <a href="./tours/SKILL.md" download>SKILL.md</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.2.1 · © 2026</span>
-          <span data-ko>Manuscript v0.2.1 · © 2026</span>
+          <span data-en>Manuscript v0.3.0 · © 2026</span>
+          <span data-ko>Manuscript v0.3.0 · © 2026</span>
         </div>
       </div>
     </footer>
@@ -1251,22 +1660,248 @@ manuscript.exit()
       <span class="label" data-ko>투어 시작</span>
     </button>
 
-    <script src="./manuscript-bridge.0.1.2.js"></script>
+    <!-- ───── What's new toast ─────
+         Hidden by default. The version script below fills in the
+         version number and unhides it the first time someone visits
+         after the Web Store has shipped a new build. -->
+    <div id="mn-whatsnew" class="whatsnew-toast" role="status" hidden>
+      <span class="whatsnew-dot" aria-hidden="true"></span>
+      <span class="whatsnew-text">
+        <strong>
+          <span data-en>New on Web Store —</span>
+          <span data-ko>웹 스토어 새 버전 —</span>
+          <span data-whatsnew-version>v…</span>
+        </strong>
+        <a href="./changelog.html" class="whatsnew-link">
+          <span data-en>What's new →</span>
+          <span data-ko>변경사항 →</span>
+        </a>
+      </span>
+      <button
+        type="button"
+        class="whatsnew-close"
+        id="mn-whatsnew-close"
+        aria-label="Dismiss"
+      >×</button>
+    </div>
+
+    <script src="./manuscript-bridge.0.1.3.js"></script>
     <script src="./i18n.js"></script>
     <script>
-      // Wire the tour launcher to the bridge. The pill is hidden by
-      // default and only appears once we've confirmed the Manuscript
-      // extension is installed. Clicking loads the language-matching
-      // tour JSON and plays it as a standalone (view-only) session.
+      // Manuscript version badges + What's-new toast.
+      //
+      // Pulls two JSON files:
+      //   - ./store-version.json     ← cron-scraped from Chrome Web Store
+      //   - ./downloads/latest.json  ← written by scripts/site-zip.mjs
+      // and fills [data-store-version] / [data-zip-version] across
+      // the page. Also drives the small "ahead by N" hint next to the
+      // version chips when the dev .zip is newer than the Web Store
+      // build (which is the steady state during review weeks).
+      //
+      // Local-dev fallback: if store-version.json is the placeholder
+      // (empty version), the script just shows "—" so the chip doesn't
+      // confuse anyone. Same for downloads/latest.json when the file
+      // hasn't been built yet (typical on first PR review).
+      (function () {
+        const TAB_BTN_SEL = '.install-tab';
+        const PANEL_SEL = '.install-panel';
+
+        // 1) Install tab switcher.
+        const tabs = Array.from(document.querySelectorAll(TAB_BTN_SEL));
+        const panels = Array.from(document.querySelectorAll(PANEL_SEL));
+        function selectTab(target) {
+          tabs.forEach((t) => {
+            const on = t.dataset.target === target;
+            t.classList.toggle('is-active', on);
+            t.setAttribute('aria-selected', on ? 'true' : 'false');
+          });
+          panels.forEach((p) => {
+            const on = p.dataset.panel === target;
+            p.classList.toggle('is-active', on);
+            if (on) p.removeAttribute('hidden');
+            else p.setAttribute('hidden', '');
+          });
+          try {
+            localStorage.setItem('mn:install-tab', target);
+          } catch (_) {}
+        }
+        tabs.forEach((t) => {
+          t.addEventListener('click', () => selectTab(t.dataset.target));
+        });
+        // Restore last-used tab, unless the visitor landed via a hero
+        // link explicitly aimed at the zip flow.
+        try {
+          const wantZip =
+            location.hash === '#install' &&
+            document.referrer === '' &&
+            new URLSearchParams(location.search).get('m') === 'zip';
+          const restored = localStorage.getItem('mn:install-tab');
+          if (wantZip) selectTab('zip');
+          else if (restored === 'zip') selectTab('zip');
+        } catch (_) {}
+
+        // 2) Version-string helpers.
+        function parseVer(s) {
+          if (typeof s !== 'string' || !s) return null;
+          const m = s.match(/^(\d+)\.(\d+)\.(\d+)(?:\.(\d+))?$/);
+          if (!m) return null;
+          return [m[1], m[2], m[3], m[4] || '0'].map((n) => parseInt(n, 10));
+        }
+        function cmpVer(a, b) {
+          for (let i = 0; i < 4; i++) {
+            if (a[i] !== b[i]) return a[i] < b[i] ? -1 : 1;
+          }
+          return 0;
+        }
+        function setText(sel, value) {
+          document.querySelectorAll(sel).forEach((el) => {
+            el.textContent = value;
+          });
+        }
+        function fmtBytes(n) {
+          if (!Number.isFinite(n) || n <= 0) return '';
+          const kb = n / 1024;
+          if (kb < 1024) return kb.toFixed(0) + ' KB';
+          return (kb / 1024).toFixed(2) + ' MB';
+        }
+
+        // 3) Fetch + apply.
+        Promise.allSettled([
+          fetch('./store-version.json', { cache: 'no-cache' }).then((r) =>
+            r.ok ? r.json() : null,
+          ),
+          fetch('./downloads/latest.json', { cache: 'no-cache' }).then((r) =>
+            r.ok ? r.json() : null,
+          ),
+        ]).then(([storeRes, zipRes]) => {
+          const store = storeRes.status === 'fulfilled' ? storeRes.value : null;
+          const zip = zipRes.status === 'fulfilled' ? zipRes.value : null;
+
+          const storeVer = store && store.version ? store.version : '';
+          const zipVer = zip && zip.version ? zip.version : '';
+
+          setText('[data-store-version]', storeVer ? 'v' + storeVer : '—');
+          setText('[data-zip-version]', zipVer ? 'v' + zipVer : '—');
+          setText('[data-zip-version-plain]', zipVer || 'x.y.z');
+          if (zip && zip.sha256) {
+            setText('[data-zip-sha]', zip.sha256);
+            // Make the SHA click-to-copy. Clipboard API needs HTTPS, which
+            // GH Pages provides.
+            document.querySelectorAll('[data-zip-sha]').forEach((el) => {
+              el.style.cursor = 'pointer';
+              el.addEventListener('click', () => {
+                navigator.clipboard?.writeText(zip.sha256).then(
+                  () => {
+                    const prev = el.textContent;
+                    el.textContent = (document.body.getAttribute('lang') === 'ko' ? '복사됨 ✓' : 'copied ✓');
+                    setTimeout(() => { el.textContent = prev; }, 1500);
+                  },
+                  () => {},
+                );
+              });
+            });
+          }
+          if (zip && zip.sizeBytes) {
+            setText('[data-zip-size]', fmtBytes(zip.sizeBytes));
+          }
+
+          // Hint text: "Web Store is current" / ".zip is N release ahead"
+          const sv = parseVer(storeVer);
+          const zv = parseVer(zipVer);
+          const hintEn = document.querySelector('[data-version-hint][data-en]');
+          const hintKo = document.querySelector('[data-version-hint][data-ko]');
+          if (sv && zv) {
+            const c = cmpVer(zv, sv);
+            if (c > 0) {
+              if (hintEn) hintEn.textContent = '— .zip is ahead of the Web Store build';
+              if (hintKo) hintKo.textContent = '— .zip 이 웹 스토어 빌드보다 앞서 있어요';
+            } else if (c === 0) {
+              if (hintEn) hintEn.textContent = '— in sync';
+              if (hintKo) hintKo.textContent = '— 동기화됨';
+            } else {
+              if (hintEn) hintEn.textContent = '— Web Store is ahead';
+              if (hintKo) hintKo.textContent = '— 웹 스토어가 더 최신이에요';
+            }
+          }
+
+          // 4) What's-new toast — only when we have a real store
+          //    version and the visitor hasn't seen it yet.
+          if (storeVer) {
+            try {
+              const seen = localStorage.getItem('mn:last-seen-store-version');
+              if (seen && seen !== storeVer) {
+                const sParsed = parseVer(seen);
+                const cur = parseVer(storeVer);
+                if (sParsed && cur && cmpVer(cur, sParsed) > 0) {
+                  const toast = document.getElementById('mn-whatsnew');
+                  const verSpan = toast?.querySelector('[data-whatsnew-version]');
+                  if (toast && verSpan) {
+                    verSpan.textContent = 'v' + storeVer;
+                    toast.hidden = false;
+                    toast.classList.add('is-visible');
+                  }
+                }
+              } else if (!seen) {
+                // First-ever visit: record but don't toast.
+                localStorage.setItem('mn:last-seen-store-version', storeVer);
+              }
+            } catch (_) {}
+          }
+        });
+
+        // 5) Toast close button — record dismissal so it doesn't pop
+        //    again for the same version.
+        const closeBtn = document.getElementById('mn-whatsnew-close');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            const toast = document.getElementById('mn-whatsnew');
+            if (toast) {
+              toast.classList.remove('is-visible');
+              toast.hidden = true;
+            }
+            const verSpan = document.querySelector('[data-whatsnew-version]');
+            if (verSpan) {
+              const v = (verSpan.textContent || '').replace(/^v/, '');
+              if (v) {
+                try {
+                  localStorage.setItem('mn:last-seen-store-version', v);
+                } catch (_) {}
+              }
+            }
+          });
+        }
+      })();
+
+      // Wire the tour launcher to the bridge. This is the host-owned
+      // button pattern: we already shipped a styled #mn-tour pill, so
+      // we keep it and just adapt its label/action based on whether
+      // the extension is installed.
+      //   - extension present  → "Take the tour" / "투어 시작"     → starts replay
+      //   - extension missing  → "Install Manuscript" / "Manuscript 설치"
+      //                           → manuscript.openStore() opens the
+      //                              Web Store listing in a new tab
+      // The auto install prompt from the bridge is suppressed because
+      // we handle the moment ourselves with a single styled button.
       (async () => {
         if (typeof manuscript === 'undefined') return;
         const btn = document.getElementById('mn-tour');
         if (!btn) return;
-        manuscript.configure({ banner: false });
-        const installed = await manuscript.isInstalled();
-        if (!installed) return;
-        btn.hidden = false;
-        btn.addEventListener('click', async () => {
+
+        // We're hosting our own button, so disable bridge's own
+        // install banner. openStore() / openHomepage() still work.
+        manuscript.configure({
+          banner: false,
+          homepageUrl: 'https://zendy00.github.io/manuscript-pages/',
+        });
+
+        const labelEn = btn.querySelector('.label[data-en]');
+        const labelKo = btn.querySelector('.label[data-ko]');
+        function setLabels(en, ko) {
+          if (labelEn) labelEn.textContent = en;
+          if (labelKo) labelKo.textContent = ko;
+        }
+
+        async function startTour() {
           btn.disabled = true;
           const lang = document.body.getAttribute('lang') === 'ko' ? 'ko' : 'en';
           try {
@@ -1279,11 +1914,18 @@ manuscript.exit()
             btn.disabled = false;
             console.warn('[manuscript-site] tour failed:', err);
           }
-        });
+        }
 
-        // Bring the launcher back when the user exits the tour (✕ on the
-        // controls pill, or natural end after the last step). The bridge
-        // fires 'manuscript:exited' on window when replay returns to idle.
+        const installed = await manuscript.isInstalled();
+        btn.hidden = false;
+        if (installed) {
+          btn.addEventListener('click', startTour);
+        } else {
+          setLabels('Install Manuscript', 'Manuscript 설치');
+          btn.classList.add('is-install');
+          btn.addEventListener('click', () => manuscript.openStore());
+        }
+
         manuscript.onExit(() => {
           btn.disabled = false;
           btn.hidden = false;
