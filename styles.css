@@ -213,26 +213,8 @@ p.lead {
   gap: 48px;
   align-items: center;
 }
-.hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  background: var(--c-surface);
-  border: 1px solid var(--c-border);
-  border-radius: var(--r-pill);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--c-text-mute);
-  letter-spacing: 0.02em;
-  margin-bottom: 28px;
-}
-.hero-tag .dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--c-primary);
-}
 /* EB Garamond's tall ascenders + line-height 1.1 swallow the visible
-   gap between the pill and the heading, so add explicit margin-top
+   gap with whatever sits above the heading, so add explicit margin-top
    on the heading itself. */
 .hero h1 {
   font-family: var(--ff-serif);

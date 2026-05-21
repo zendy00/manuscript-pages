@@ -3,8 +3,8 @@
   "id": "tour-site-en",
   "name": "Tour of the Manuscript landing page (EN)",
   "url": "https://zendy00.github.io/manuscript-pages/",
-  "createdAt": "2026-05-18T15:00:00.000Z",
-  "updatedAt": "2026-05-18T15:00:00.000Z",
+  "createdAt": "2026-05-21T10:30:00.000Z",
+  "updatedAt": "2026-05-21T10:30:00.000Z",
   "siteFonts": [
     "'Pretendard Variable', Pretendard, -apple-system, 'Asta Sans', sans-serif"
   ],
@@ -12,12 +12,12 @@
     {
       "id": "step-1",
       "name": "Welcome",
-      "description": "Welcome to Manuscript — a Chrome extension for authoring DOM-aware product tours and manuals. Let me show you around.",
+      "description": "Welcome to Manuscript — a Chrome extension that pins each step of your tour to the actual element so a page redesign won't break your manual.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": "section.hero" },
-        "layer2": { "kind": "text-parent", "text": "DOM-aware", "parentSelector": "main", "tagName": "SECTION" },
-        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 0, "width": 1200, "height": 480, "nearbyText": ["Manuscript", "v0.2.1"] }
+        "layer2": { "kind": "text-parent", "text": "Tours that", "parentSelector": "main", "tagName": "SECTION" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 0, "width": 1280, "height": 560, "nearbyText": ["Manuscript", "Tours that", "don't break"] }
       },
       "annotations": [
         {
@@ -37,26 +37,26 @@
           }
         }
       ],
-      "autoAdvanceMs": 6000,
+      "autoAdvanceMs": 8500,
       "waitForNavigation": false
     },
     {
       "id": "step-2",
-      "name": "One-click download",
-      "description": "You can grab v0.2.1 in a single click. Manuscript ships as an unpacked Chrome extension, so the whole tool runs locally on your machine.",
+      "name": "Tour to video",
+      "description": "New in v0.3.0 — press one button and your tour plays itself into a video file, with spotlights, notes, and narration baked in. Optional microphone capture too.",
       "thumbnailDataUrl": null,
       "selectors": {
-        "layer1": { "kind": "stable-attr", "cssSelector": ".hero-ctas" },
-        "layer2": { "kind": "text-parent", "text": "Download", "parentSelector": "section.hero", "tagName": "DIV" },
-        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 320, "width": 480, "height": 64, "nearbyText": ["Download", "How to install"] }
+        "layer1": { "kind": "stable-attr", "cssSelector": "#record" },
+        "layer2": { "kind": "text-parent", "text": "Turn your tour into a", "parentSelector": "main", "tagName": "SECTION" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 700, "width": 1280, "height": 720, "nearbyText": ["Output as video", "Turn your tour into a video", "NEW v0.3.0"] }
       },
       "annotations": [
         {
           "kind": "text",
           "id": "ann-2-text",
-          "text": "2. Download",
-          "position": { "x": 80, "y": 280 },
-          "anchorOffset": { "x": 0, "y": -44 },
+          "text": "2. Output as video",
+          "position": { "x": 80, "y": 720 },
+          "anchorOffset": { "x": 24, "y": -52 },
           "style": {
             "fontFamily": "'EB Garamond', Garamond, serif",
             "fontSize": 18,
@@ -68,25 +68,25 @@
           }
         }
       ],
-      "autoAdvanceMs": 6000,
+      "autoAdvanceMs": 9000,
       "waitForNavigation": false
     },
     {
       "id": "step-3",
-      "name": "Six features",
-      "description": "Six things set Manuscript apart: a three-layer DOM resolver, iframe support, cross-page replay, animated annotations, narrated playback, and a detached presenter view.",
+      "name": "Six little touches",
+      "description": "Six little touches that make it nice — stays put when pages change, works inside embedded frames, jumps across pages, notes and arrows, read-aloud narration, and a speaker-notes window.",
       "thumbnailDataUrl": null,
       "selectors": {
-        "layer1": { "kind": "stable-attr", "cssSelector": "#features .section-title[data-en]" },
-        "layer2": { "kind": "text-parent", "text": "Six things that matter.", "parentSelector": "#features .container", "tagName": "H2" },
-        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 760, "width": 720, "height": 56, "nearbyText": ["What's inside", "Six things that matter"] }
+        "layer1": { "kind": "stable-attr", "cssSelector": "#features" },
+        "layer2": { "kind": "text-parent", "text": "Six little touches that make it nice.", "parentSelector": "#features .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 1500, "width": 1280, "height": 720, "nearbyText": ["What's inside", "Six little touches"] }
       },
       "annotations": [
         {
           "kind": "text",
           "id": "ann-3-text",
           "text": "3. What's inside",
-          "position": { "x": 80, "y": 760 },
+          "position": { "x": 80, "y": 1500 },
           "anchorOffset": { "x": 24, "y": -52 },
           "style": {
             "fontFamily": "'EB Garamond', Garamond, serif",
@@ -99,25 +99,25 @@
           }
         }
       ],
-      "autoAdvanceMs": 7000,
+      "autoAdvanceMs": 10000,
       "waitForNavigation": false
     },
     {
       "id": "step-4",
-      "name": "From picker to replay",
-      "description": "Authoring is five moves: start a manuscript, pick an element, layer text or shapes, add more steps, and replay. Each move is one click.",
+      "name": "Five easy steps",
+      "description": "Authoring is five easy steps from start to finish — open Manuscript, click the part you want to show, add a note or doodle, build out more steps, then press play.",
       "thumbnailDataUrl": null,
       "selectors": {
-        "layer1": { "kind": "stable-attr", "cssSelector": "#how .section-title[data-en]" },
-        "layer2": { "kind": "text-parent", "text": "From picker to replay in five moves.", "parentSelector": "#how .container", "tagName": "H2" },
-        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 1360, "width": 720, "height": 56, "nearbyText": ["How it works", "From picker to replay"] }
+        "layer1": { "kind": "stable-attr", "cssSelector": "#how" },
+        "layer2": { "kind": "text-parent", "text": "Five easy steps, start to finish.", "parentSelector": "#how .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 2400, "width": 1280, "height": 720, "nearbyText": ["How it works", "Five easy steps"] }
       },
       "annotations": [
         {
           "kind": "text",
           "id": "ann-4-text",
           "text": "4. How it works",
-          "position": { "x": 80, "y": 1360 },
+          "position": { "x": 80, "y": 2400 },
           "anchorOffset": { "x": 24, "y": -52 },
           "style": {
             "fontFamily": "'EB Garamond', Garamond, serif",
@@ -130,25 +130,25 @@
           }
         }
       ],
-      "autoAdvanceMs": 6500,
+      "autoAdvanceMs": 9000,
       "waitForNavigation": false
     },
     {
       "id": "step-5",
-      "name": "Runtime bridge",
-      "description": "The runtime bridge lets you drop a Manuscript tour into any page you control — a small JavaScript library, the user's installed extension, and one JSON file. SKILL.md walks an AI agent through authoring that JSON.",
+      "name": "Embed on your site",
+      "description": "Drop a Take the tour button on your own page. The 14 KB bridge library lets your site load a saved tour and ask Manuscript to play it — spotlights, notes, and narration take care of themselves.",
       "thumbnailDataUrl": null,
       "selectors": {
-        "layer1": { "kind": "stable-attr", "cssSelector": "#bridge .section-title[data-en]" },
-        "layer2": { "kind": "text-parent", "text": "Embed Manuscript on any page you control.", "parentSelector": "#bridge .container", "tagName": "H2" },
-        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2160, "width": 720, "height": 56, "nearbyText": ["Runtime bridge", "Embed Manuscript", "SKILL.md"] }
+        "layer1": { "kind": "stable-attr", "cssSelector": "#bridge" },
+        "layer2": { "kind": "text-parent", "text": "Put a \"Take the tour\" button on your own page.", "parentSelector": "#bridge .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 3300, "width": 1280, "height": 720, "nearbyText": ["Embed it on your own site", "Take the tour", "manuscript-bridge"] }
       },
       "annotations": [
         {
           "kind": "text",
           "id": "ann-5-text",
           "text": "5. Bridge",
-          "position": { "x": 80, "y": 2160 },
+          "position": { "x": 80, "y": 3300 },
           "anchorOffset": { "x": 24, "y": -52 },
           "style": {
             "fontFamily": "'EB Garamond', Garamond, serif",
@@ -161,25 +161,25 @@
           }
         }
       ],
-      "autoAdvanceMs": 8000,
+      "autoAdvanceMs": 10000,
       "waitForNavigation": false
     },
     {
       "id": "step-6",
-      "name": "Install in under 3 minutes",
-      "description": "Installation takes under three minutes. Download the zip, unzip it, load it as an unpacked extension, and pin the icon. You are done.",
+      "name": "Two install paths",
+      "description": "Two ways in — the Chrome Web Store path with auto-updates, or a manual zip for the latest dev build. Pick whichever fits.",
       "thumbnailDataUrl": null,
       "selectors": {
-        "layer1": { "kind": "stable-attr", "cssSelector": "#install .section-title[data-en]" },
-        "layer2": { "kind": "text-parent", "text": "Manual install in under 3 minutes.", "parentSelector": "#install .container", "tagName": "H2" },
-        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2880, "width": 720, "height": 56, "nearbyText": ["Install", "Manual install"] }
+        "layer1": { "kind": "stable-attr", "cssSelector": "#install" },
+        "layer2": { "kind": "text-parent", "text": "Two ways in — pick the one that fits.", "parentSelector": "#install .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 4400, "width": 1280, "height": 720, "nearbyText": ["Install", "Two ways in", "Web Store", "Manual .zip"] }
       },
       "annotations": [
         {
           "kind": "text",
           "id": "ann-6-text",
           "text": "6. Install",
-          "position": { "x": 80, "y": 2880 },
+          "position": { "x": 80, "y": 4400 },
           "anchorOffset": { "x": 24, "y": -52 },
           "style": {
             "fontFamily": "'EB Garamond', Garamond, serif",
@@ -192,25 +192,25 @@
           }
         }
       ],
-      "autoAdvanceMs": 6500,
+      "autoAdvanceMs": 7500,
       "waitForNavigation": false
     },
     {
       "id": "step-7",
-      "name": "Full user guide",
-      "description": "The full user guide covers picking, annotating, action steps, replay, prompter, export and import — everything you need to ship a manual.",
+      "name": "Friendly handbook",
+      "description": "A friendly handbook to walk you through — quick start, picking, annotations, action steps, replay, prompter, recording, and import-export.",
       "thumbnailDataUrl": null,
       "selectors": {
-        "layer1": { "kind": "stable-attr", "cssSelector": "#guide .section-title[data-en]" },
-        "layer2": { "kind": "text-parent", "text": "Everything you need to ship a manual.", "parentSelector": "#guide .container", "tagName": "H2" },
-        "layer3": { "kind": "visual-heuristic", "x": 80, "y": 3760, "width": 720, "height": 56, "nearbyText": ["User guide", "Everything you need"] }
+        "layer1": { "kind": "stable-attr", "cssSelector": "#guide" },
+        "layer2": { "kind": "text-parent", "text": "A friendly handbook to walk you through.", "parentSelector": "#guide .container", "tagName": "H2" },
+        "layer3": { "kind": "visual-heuristic", "x": 0, "y": 5300, "width": 1280, "height": 720, "nearbyText": ["How to use it", "friendly handbook", "Quick start"] }
       },
       "annotations": [
         {
           "kind": "text",
           "id": "ann-7-text",
-          "text": "7. User guide",
-          "position": { "x": 80, "y": 3760 },
+          "text": "7. Guide",
+          "position": { "x": 80, "y": 5300 },
           "anchorOffset": { "x": 24, "y": -52 },
           "style": {
             "fontFamily": "'EB Garamond', Garamond, serif",
@@ -223,18 +223,18 @@
           }
         }
       ],
-      "autoAdvanceMs": 6500,
+      "autoAdvanceMs": 8500,
       "waitForNavigation": false
     },
     {
       "id": "step-8",
-      "name": "Switch language any time",
-      "description": "You can switch between English and Korean at any time using this dropdown. Try it after the tour.",
+      "name": "Switch language",
+      "description": "Switch between English and Korean any time with this dropdown. Try it after the tour.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": "#lang-select" },
         "layer2": { "kind": "text-parent", "text": "English", "parentSelector": ".site-header .nav", "tagName": "SELECT" },
-        "layer3": { "kind": "visual-heuristic", "x": 1080, "y": 16, "width": 92, "height": 32, "nearbyText": ["English", "한국어"] }
+        "layer3": { "kind": "visual-heuristic", "x": 1100, "y": 16, "width": 100, "height": 32, "nearbyText": ["English", "한국어"] }
       },
       "annotations": [
         {
@@ -254,7 +254,7 @@
           }
         }
       ],
-      "autoAdvanceMs": 5000,
+      "autoAdvanceMs": 5500,
       "waitForNavigation": false
     }
   ]
