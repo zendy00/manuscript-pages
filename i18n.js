@@ -34,6 +34,13 @@ function togglePalette() {
 }
 
 function pickInitialLang() {
+  // ?lang=en|ko wins over stored preference so shared links land in the
+  // intended language. applyLang() writes it back to localStorage so the
+  // choice persists across subsequent visits.
+  try {
+    const param = new URLSearchParams(window.location.search).get('lang');
+    if (param && SUPPORTED.includes(param.toLowerCase())) return param.toLowerCase();
+  } catch (_) {}
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored && SUPPORTED.includes(stored)) return stored;

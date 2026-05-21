@@ -19,4 +19,13 @@
     <xhtml:link rel="alternate" hreflang="ko" href="https://zendy00.github.io/manuscript-pages/changelog.html?lang=ko"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://zendy00.github.io/manuscript-pages/changelog.html"/>
   </url>
+  <url>
+    <loc>https://zendy00.github.io/manuscript-pages/privacy.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zendy00.github.io/manuscript-pages/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://zendy00.github.io/manuscript-pages/privacy.html?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zendy00.github.io/manuscript-pages/privacy.html"/>
+  </url>
 </urlset>
