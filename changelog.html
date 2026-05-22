@@ -7,7 +7,7 @@
     <title>Changelog — Manuscript</title>
     <meta
       name="description"
-      content="Per-version release notes for Manuscript — DOM-aware Chrome extension for authoring web demos and manuals. Track what shipped in each release."
+      content="Per-version release notes for Manuscript — DOM-aware browser extension for authoring web demos and manuals. Track what shipped in each release."
     />
     <meta name="robots" content="index, follow" />
     <meta name="color-scheme" content="light dark" />
@@ -105,7 +105,7 @@
             Manuscript versions follow semver-ish: minor bumps gather a batch of
             user-visible work, patches tidy up bugs and polish. The
             <a href="./#install">Install</a> page shows what's live on the
-            Chrome Web Store right now vs. what's in the latest <code>.zip</code>
+            extension store right now vs. what's in the latest <code>.zip</code>
             build.
           </p>
           <p class="lead" data-ko>
@@ -188,19 +188,19 @@
               <time datetime="2026-05-15">2026-05-15</time>
             </header>
             <p class="changelog-summary" data-en>
-              First Chrome Web Store-ready build — narration, dark mode, screen
+              First store-ready build — narration, dark mode, screen
               recording (without pause/mic), and the runtime bridge for
               embedding tours on your own site.
             </p>
             <p class="changelog-summary" data-ko>
-              Chrome 웹 스토어 첫 출시 빌드 — 음성 안내, 다크모드, 화면 녹화
+              스토어 첫 출시 빌드 — 음성 안내, 다크모드, 화면 녹화
               (일시정지/마이크 제외), 사이트에 끼워 넣을 수 있는 runtime bridge.
             </p>
             <h3 data-en>New</h3>
             <h3 data-ko>신기능</h3>
             <ul data-en>
               <li><strong>Screen recording</strong> — red record button in the panel footer plays the tour into a WebM file with TTS audio.</li>
-              <li><strong>Tutorial mode</strong> for first-time recording users, walking through Chrome's two share dialogs.</li>
+              <li><strong>Tutorial mode</strong> for first-time recording users, walking through the browser's two share dialogs.</li>
               <li><strong>Dark mode</strong> for the floating panel, annotation editor, launcher pill, and replay controls.</li>
               <li><strong>Site fonts</strong> show up first in the annotation-editor font picker (alongside the base fonts).</li>
               <li><strong>Runtime bridge v0.1.2</strong> — drop <code>manuscript-bridge.0.1.2.js</code> on your page and a <code>"Take the tour"</code> button can play saved scenarios.</li>
@@ -208,7 +208,7 @@
             </ul>
             <ul data-ko>
               <li><strong>화면 녹화</strong> — 패널 footer 의 빨간 녹화 버튼으로 시연을 WebM 파일로 저장 (TTS 음성 포함).</li>
-              <li><strong>녹화 튜토리얼</strong> — 처음 사용자가 Chrome 의 공유 창 두 번을 매끄럽게 통과할 수 있게 안내.</li>
+              <li><strong>녹화 튜토리얼</strong> — 처음 사용자가 브라우저의 공유 창 두 번을 매끄럽게 통과할 수 있게 안내.</li>
               <li><strong>다크모드</strong> — floating panel, annotation editor, launcher pill, replay controls 전부 지원.</li>
               <li><strong>사이트 글꼴 우선 노출</strong> — annotation editor 의 폰트 select 에 사이트 글꼴이 먼저, 그다음 base 글꼴.</li>
               <li><strong>Runtime bridge v0.1.2</strong> — <code>manuscript-bridge.0.1.2.js</code> 한 줄로 내 페이지에 <code>"투어 시작"</code> 버튼.</li>
@@ -241,7 +241,7 @@
               <li><strong>Iframe-aware picker + replay</strong> — same-origin frames work end-to-end; cross-origin picking via postMessage relay.</li>
               <li><strong>Step <code>pickedAtUrl</code></strong> — each step remembers the URL it was picked on; replay auto-navigates between pages.</li>
               <li><strong>Action steps</strong> — pause-icon toggle turns a step into "wait for user click" with a "Click or type" bubble.</li>
-              <li><strong>Detached prompter</strong> — separate Chrome window with a 3-column "Steps / Now / Next" layout.</li>
+              <li><strong>Detached prompter</strong> — separate browser window with a 3-column "Steps / Now / Next" layout.</li>
               <li><strong>Element-anchored annotations</strong> — annotations stay glued to their target element instead of viewport coords.</li>
               <li><strong>Clickable spotlight</strong> — click the spotlight directly to open the style editor for it.</li>
             </ul>
@@ -250,7 +250,7 @@
               <li><strong>iframe 지원 picker + replay</strong> — same-origin frame 은 end-to-end, cross-origin 은 postMessage 릴레이로 picking.</li>
               <li><strong>스텝 <code>pickedAtUrl</code></strong> — 각 스텝이 어느 URL 에서 찍혔는지 기억 → 재생 중 자동으로 페이지 이동.</li>
               <li><strong>Action step</strong> — 일시정지 아이콘 토글로 "사용자 클릭 대기" 모드 + "클릭하거나 입력하세요" 버블.</li>
-              <li><strong>분리된 프롬프터</strong> — 별도 Chrome 창 + 3 열(Steps / Now / Next) 레이아웃.</li>
+              <li><strong>분리된 프롬프터</strong> — 별도 브라우저 창 + 3 열(Steps / Now / Next) 레이아웃.</li>
               <li><strong>요소 고정 annotation</strong> — annotation 이 뷰포트 좌표가 아니라 대상 요소에 붙어 다님.</li>
               <li><strong>클릭 가능한 spotlight</strong> — spotlight 를 직접 클릭해 스타일 편집기 열기.</li>
             </ul>
@@ -344,6 +344,10 @@
           <a href="./#install" data-en>Install</a><a href="./#install" data-ko>설치</a>
           <a href="./#guide" data-en>Guide</a><a href="./#guide" data-ko>사용설명서</a>
           <a href="./#bridge" data-en>Bridge</a><a href="./#bridge" data-ko>브리지</a>
+          <a href="./privacy.html" data-en>Privacy</a><a href="./privacy.html" data-ko>개인정보</a>
+        </div>
+        <div class="sponsor-row">
+          <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
         </div>
         <div>
           <span data-en>Manuscript v0.3.0 · © 2026</span>

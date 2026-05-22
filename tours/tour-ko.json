@@ -12,7 +12,7 @@
     {
       "id": "step-1",
       "name": "환영합니다",
-      "description": "Manuscript에 오신 것을 환영합니다. 페이지의 각 단계를 실제 요소에 단단히 고정시켜, 디자인이 바뀌어도 시연이 깨지지 않는 Chrome 확장입니다.",
+      "description": "Manuscript에 오신 것을 환영합니다. 페이지의 각 단계를 실제 요소에 단단히 고정시켜, 디자인이 바뀌어도 시연이 깨지지 않는 브라우저 확장입니다.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": "section.hero" },
@@ -167,7 +167,7 @@
     {
       "id": "step-6",
       "name": "두 가지 설치",
-      "description": "두 가지 설치 방법 — 자동 업데이트를 받는 Chrome 웹 스토어, 또는 최신 dev 빌드 수동 zip. 본인에게 맞는 쪽으로 고르세요.",
+      "description": "두 가지 설치 방법 — 자동 업데이트를 받는 웹 스토어, 또는 최신 dev 빌드 수동 zip. 본인에게 맞는 쪽으로 고르세요.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": "#install" },

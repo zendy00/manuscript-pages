@@ -1,6 +1,6 @@
 # Manuscript — 랜딩 사이트
 
-[**Manuscript**](https://github.com/zendy00/manuscript)의 공개 랜딩 페이지를 호스팅하는 저장소입니다. Manuscript는 DOM 인식 기반의 웹 시연·매뉴얼 저작 Chrome 확장 프로그램이며, 본 사이트는 임의의 웹 페이지에 Manuscript 투어를 임베드할 수 있는 **런타임 브리지**도 함께 제공합니다.
+[**Manuscript**](https://github.com/zendy00/manuscript)의 공개 랜딩 페이지를 호스팅하는 저장소입니다. Manuscript는 DOM 인식 기반의 웹 시연·매뉴얼 저작 브라우저 확장 프로그램 (Chrome · Edge) 이며, 본 사이트는 임의의 웹 페이지에 Manuscript 투어를 임베드할 수 있는 **런타임 브리지**도 함께 제공합니다.
 
 > English: [../README.md](../README.md)
 
@@ -96,10 +96,13 @@ HTML 변경과 함께 commit합니다.
 
 ## 브리지 라이브러리 — 단일 소스
 
-`manuscript-bridge.0.1.2.js`는 메인 저장소의
-[`bridge/manuscript-bridge.0.1.2.js`](https://github.com/zendy00/manuscript/tree/main/bridge)가
-원본입니다. `prebuild` 단계(`npm run sync:bridge`)에서 자동으로 본 폴더로
-복사되므로 여기서 직접 편집하지 마세요 — 다음 빌드에서 덮어쓰여집니다.
+`manuscript-bridge.0.1.3.js`는 메인 저장소의
+[`bridge/manuscript-bridge.0.1.3.js`](https://github.com/zendy00/manuscript/tree/main/bridge)가
+원본입니다. `prebuild` 단계(`npm run sync:bridge`)에서 본 폴더로 자동
+복사되며, 같은 바이트가 `manuscript-bridge.0.1.2.js` 이름으로도 함께
+복사됩니다 — 구버전 URL 에 고정해 둔 외부 호스트가 깨지지 않게 alias
+로 유지. 어느 쪽이든 여기서 직접 편집하지 마세요 — 다음 빌드에서
+덮어쓰여집니다.
 
 ## 배포
 

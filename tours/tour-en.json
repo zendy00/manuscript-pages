@@ -12,7 +12,7 @@
     {
       "id": "step-1",
       "name": "Welcome",
-      "description": "Welcome to Manuscript — a Chrome extension that pins each step of your tour to the actual element so a page redesign won't break your manual.",
+      "description": "Welcome to Manuscript — a browser extension that pins each step of your tour to the actual element so a page redesign won't break your manual.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": "section.hero" },
@@ -167,7 +167,7 @@
     {
       "id": "step-6",
       "name": "Two install paths",
-      "description": "Two ways in — the Chrome Web Store path with auto-updates, or a manual zip for the latest dev build. Pick whichever fits.",
+      "description": "Two ways in — the Web Store path with auto-updates, or a manual zip for the latest dev build. Pick whichever fits.",
       "thumbnailDataUrl": null,
       "selectors": {
         "layer1": { "kind": "stable-attr", "cssSelector": "#install" },

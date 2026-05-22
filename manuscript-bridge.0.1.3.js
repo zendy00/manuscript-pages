@@ -1,7 +1,7 @@
 /**
  * Manuscript runtime bridge — v0.1.3
  *
- * Host page integration for the Manuscript Chrome extension.
+ * Host page integration for the Manuscript browser extension (Chrome / Edge).
  * The extension's content script must be injected on the host page —
  * this library only sends postMessage commands; it does not replay on
  * its own. If the extension is missing, `load()` rejects and (by
@@ -13,7 +13,7 @@
  *   - mountLauncher() renders a tokens-aligned launcher pill in the
  *     bottom-right of the host page inside its own Shadow DOM so host
  *     CSS can't shift it. When the extension is missing, the same
- *     pill morphs into an "Install on Chrome Web Store" prompt.
+ *     pill morphs into an "Install Manuscript" prompt.
  *     Host-page launcher buttons (the v0.1.2 pattern) keep working —
  *     just don't call mountLauncher() if you have your own.
  *   - configure() accepts: homepageUrl (opt-in extra link in the
@@ -373,7 +373,7 @@
   //
   //   - "tour mode"    : extension is installed → shows the Take-the-tour
   //                      pill. Click runs the configured scenario.
-  //   - "install mode" : extension is missing → shows Install on Chrome
+  //   - "install mode" : extension is missing → shows Install Manuscript
   //                      Web Store, plus optional Learn-more link if
   //                      homepageUrl is configured. Has a × dismiss
   //                      that persists in localStorage.
@@ -417,7 +417,7 @@
       install:    { en: 'Install Manuscript',    ko: 'Manuscript 설치' },
       learnMore:  { en: 'Learn more',            ko: '자세히 보기' },
       dismiss:    { en: 'Dismiss',               ko: '닫기' },
-      installAria:{ en: 'Install the Manuscript Chrome extension', ko: 'Manuscript Chrome 확장 설치' },
+      installAria:{ en: 'Install the Manuscript extension', ko: 'Manuscript 확장 설치' },
       tourAria:   { en: 'Start the Manuscript tour', ko: 'Manuscript 투어 시작' },
     };
     return (dict[key] && dict[key][L]) || (dict[key] && dict[key].en) || key;

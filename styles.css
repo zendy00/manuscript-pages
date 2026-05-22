@@ -786,6 +786,41 @@ p.lead {
 .site-footer a { color: var(--c-text-mute); text-decoration: none; }
 .site-footer a:hover { color: var(--c-text); }
 
+/* GitHub-style Sponsor pill — self-styled, no external widget.
+   Lives in its own row in the footer so its taller padded box doesn't
+   force the plain text links to wrap. */
+.site-footer .sponsor-row {
+  display: flex;
+  justify-content: center;
+  margin: 4px 0 10px;
+}
+.btn-sponsor {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 12px;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  background: var(--c-surface-2, var(--c-surface));
+  color: var(--c-text) !important;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  transition: border-color 120ms ease, background 120ms ease;
+}
+.btn-sponsor:hover { border-color: #db61a2; background: var(--c-surface); }
+.btn-sponsor svg { color: #db61a2; flex: 0 0 14px; }
+/* The i18n visibility rule below (body[lang="..."] [data-en/ko])
+   has higher specificity and would otherwise revert this pill back
+   to an anchor's default `display: inline`, which collapses the
+   flex layout and stacks the heart above the label. Re-apply
+   `inline-flex` under the matching lang to win specificity. */
+body[lang="en"] .btn-sponsor[data-en],
+body[lang="ko"] .btn-sponsor[data-ko] {
+  display: inline-flex;
+}
+
+
 /* ───── Responsive ───── */
 @media (max-width: 880px) {
   :root { --section-pad: 64px; }

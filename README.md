@@ -1,6 +1,6 @@
 # Manuscript — landing site
 
-Public landing page for [**Manuscript**](https://github.com/zendy00/manuscript) — a Chrome extension for authoring DOM-aware web demos and manuals, plus a tiny **runtime bridge** that lets any web page embed a Manuscript tour.
+Public landing page for [**Manuscript**](https://github.com/zendy00/manuscript) — a browser extension (Chrome / Edge) for authoring DOM-aware web demos and manuals, plus a tiny **runtime bridge** that lets any web page embed a Manuscript tour.
 
 > 한국어 버전: [ko/README.md](./ko/README.md)
 
@@ -99,11 +99,13 @@ PNGs together with any HTML changes that reference them.
 
 ## The bridge library — single source
 
-`manuscript-bridge.0.1.2.js` lives upstream at
-[`bridge/manuscript-bridge.0.1.2.js`](https://github.com/zendy00/manuscript/tree/main/bridge)
+`manuscript-bridge.0.1.3.js` lives upstream at
+[`bridge/manuscript-bridge.0.1.3.js`](https://github.com/zendy00/manuscript/tree/main/bridge)
 in the main repo. The `prebuild` step (`npm run sync:bridge`) copies it
-into this folder automatically; don't edit the file here directly — the
-next build will overwrite it.
+into this folder under both `0.1.3.js` and `0.1.2.js` filenames — the
+legacy URL is kept as an alias so hosts pinned to it keep working.
+Don't edit either file here directly; the next build will overwrite
+them.
 
 ## Deployment
 
