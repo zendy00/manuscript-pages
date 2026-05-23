@@ -2522,6 +2522,11 @@ manuscript.configure({
         const btn = document.getElementById('mn-tour');
         if (!btn) return;
 
+        // Mobile Chrome/Edge can't install extensions, so the tour /
+        // install pill has nowhere useful to lead. Leave the button
+        // hidden (it starts with `hidden`) and bail.
+        if (manuscript.isMobile && manuscript.isMobile()) return;
+
         // We're hosting our own button, so disable bridge's own
         // install banner. openStore() / openHomepage() still work.
         manuscript.configure({

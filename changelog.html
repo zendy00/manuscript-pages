@@ -471,6 +471,75 @@
       </div>
     </footer>
 
+    <!-- Floating "Take the tour" launcher — visible only when the
+         Manuscript extension is detected. Same pattern as index.html;
+         only the tour JSON path differs. -->
+    <button id="mn-tour" type="button" hidden>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+        <path d="M3 2.5v9l8-4.5-8-4.5z"/>
+      </svg>
+      <span class="label" data-en>Take the tour</span>
+      <span class="label" data-ko>투어 시작</span>
+    </button>
+
+    <script src="./manuscript-bridge.0.1.3.js"></script>
     <script src="./i18n.js"></script>
+    <script>
+      // Wire the changelog tour launcher to the bridge.
+      // Mirrors the host-owned button pattern from index.html — the only
+      // difference is the scenario filename (tours/changelog-<lang>.json).
+      (async () => {
+        if (typeof manuscript === 'undefined') return;
+        const btn = document.getElementById('mn-tour');
+        if (!btn) return;
+
+        // Mobile Chrome/Edge can't install extensions, so the tour /
+        // install pill has nowhere useful to lead. Leave the button
+        // hidden (it starts with `hidden`) and bail.
+        if (manuscript.isMobile && manuscript.isMobile()) return;
+
+        manuscript.configure({
+          banner: false,
+          homepageUrl: 'https://zendy00.github.io/manuscript-pages/',
+        });
+
+        const labelEn = btn.querySelector('.label[data-en]');
+        const labelKo = btn.querySelector('.label[data-ko]');
+        function setLabels(en, ko) {
+          if (labelEn) labelEn.textContent = en;
+          if (labelKo) labelKo.textContent = ko;
+        }
+
+        async function startTour() {
+          btn.disabled = true;
+          const lang = document.body.getAttribute('lang') === 'ko' ? 'ko' : 'en';
+          try {
+            const res = await fetch('./tours/changelog-' + lang + '.json');
+            const scenario = await res.json();
+            await manuscript.load(scenario);
+            await manuscript.play({ standalone: true });
+            btn.hidden = true;
+          } catch (err) {
+            btn.disabled = false;
+            console.warn('[manuscript-site] tour failed:', err);
+          }
+        }
+
+        const installed = await manuscript.isInstalled();
+        btn.hidden = false;
+        if (installed) {
+          btn.addEventListener('click', startTour);
+        } else {
+          setLabels('Install Manuscript', 'Manuscript 설치');
+          btn.classList.add('is-install');
+          btn.addEventListener('click', () => manuscript.openStore());
+        }
+
+        manuscript.onExit(() => {
+          btn.disabled = false;
+          btn.hidden = false;
+        });
+      })();
+    </script>
   </body>
 </html>

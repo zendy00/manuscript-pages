@@ -193,6 +193,45 @@ Avoid:
 Order targets so the scroll path looks smooth — not jumping from
 bottom back to top.
 
+### Group homogeneous peers into one step (prefer sub-elements)
+
+Whenever you spot **2+ visually similar peer items** on the same page —
+feature cards in a grid, numbered process steps, pricing tiers, tab
+buttons, navigation links, table column headers, settings tabs, FAQ
+rows — strongly prefer a **single step with sub-elements** over
+separate steps for each item. This is the default move, not an
+advanced trick.
+
+Why subs beat split steps for peer groups:
+
+* **One coherent narration** — "여섯 가지 특징을 차례로 살펴봅니다…"
+  reads more naturally than six separate sentences.
+* **The walk shows structure** — the camera glides peer-to-peer with
+  350 ms transitions, so the user *sees* this is a group, not a
+  collection of unrelated highlights.
+* **Step budget stays small** — a six-card grid collapses from 6 steps
+  to 1, leaving room for the rest of the page inside the 4–8 sweet
+  spot.
+
+Practical pattern:
+
+* Primary = the first item in visit order (top-left or step 1).
+* `subElements[]` = the remaining peers, in DOM order.
+* Pick `autoAdvanceMs` for the *whole* narration, then split into
+  `subDwellsMs` of `(subs + 1)` entries. Even split is fine; bias the
+  primary slightly longer if it's the lede.
+
+Fall back to separate steps only when:
+
+* Items are too dissimilar to share one narration (a hero + a CTA
+  aren't peers — they're different beats).
+* Items live on different pages — constraint G (§5.6) forbids
+  cross-page subs; use separate steps with `pickedAtUrl` instead.
+* Each item warrants its own user action (`waitForNavigation: true`)
+  — only one action per step, so subs can't represent N click-targets.
+
+Schema and timing details in §5.6 and §8. Worked example in §11.4.
+
 ---
 
 ## 5. JSON schema reference
@@ -372,12 +411,17 @@ Timing pairs with `Step.subDwellsMs`:
 
 * `subDwellsMs[0]` = dwell on the primary element.
 * `subDwellsMs[i]` = dwell on `subElements[i-1]`.
-* For **non-action** steps: `Σ subDwellsMs === autoAdvanceMs`. When the
-  total is edited, redistribute the gaps proportionally; the per-gap
-  minimum is **100 ms**.
-* For **action** steps (`waitForNavigation: true`): `Σ subDwellsMs` is
-  just the playback length of the sub sequence — after the last node
-  finishes, the action wait begins **on the final sub element**.
+* Whenever subs exist: `Σ subDwellsMs === autoAdvanceMs`, regardless of
+  `waitForNavigation`. When the total is edited, redistribute the gaps
+  proportionally; the per-gap minimum is **100 ms**.
+* For **action** steps with subs (`waitForNavigation: true`): same Σ
+  invariant holds — the timed sub-walk plays first, then the action
+  wait kicks in **on the final sub element** after its dwell finishes.
+* For **pure action** steps (`waitForNavigation: true` AND no subs):
+  `autoAdvanceMs` is `null` (the click is the only advance signal).
+  Adding the first sub initializes `autoAdvanceMs` to
+  `(subs + 1) × 2000 ms` so the invariant can hold; removing the last
+  sub releases it back to `null`.
 
 ---
 
@@ -680,13 +724,15 @@ Before emitting, verify:
       parent step's `pickedAtUrl` (origin + pathname only — query and
       hash are ignored).
 - [ ] If `subDwellsMs` is set: length === `(subElements?.length ?? 0) + 1`,
-      every entry ≥ 100, and for non-action steps
-      `Σ subDwellsMs === autoAdvanceMs`.
+      every entry ≥ 100, and `Σ subDwellsMs === autoAdvanceMs`
+      (the invariant now applies to action *and* non-action steps).
 - [ ] If `waitForNavigation: true` AND `subElements` is set:
-      `Σ subDwellsMs` covers only the sub-sequence playback. The
-      action wait begins **on the final sub element** after its dwell
-      finishes; `autoAdvanceMs` is irrelevant for action steps and
-      should be `null`.
+      `autoAdvanceMs` is the total playback length of the sub-walk
+      (non-null, same as non-action). The action wait kicks in
+      **on the final sub element** after its dwell finishes.
+- [ ] If `waitForNavigation: true` AND no `subElements`:
+      `autoAdvanceMs` must be `null` (pure action step — click is the
+      only advance signal).
 
 ---
 

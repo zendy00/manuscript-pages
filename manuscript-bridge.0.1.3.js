@@ -9,7 +9,11 @@
  *
  * What changed in 0.1.3 (additive — 0.1.2 hosts keep working):
  *   - New API: openStore(), openHomepage(), mountLauncher(),
- *              unmountLauncher().
+ *              unmountLauncher(), isMobile().
+ *   - Mobile suppression: on phones / tablets where neither Chrome nor
+ *     Edge can install extensions, mountLauncher() and the auto install
+ *     banner become no-ops. Host pages with their own "Take the tour"
+ *     buttons can call manuscript.isMobile() to hide them too.
  *   - mountLauncher() renders a tokens-aligned launcher pill in the
  *     bottom-right of the host page inside its own Shadow DOM so host
  *     CSS can't shift it. When the extension is missing, the same
@@ -57,6 +61,8 @@
  *   manuscript.refreshInstalled()            — clear cache + re-ping
  *   manuscript.openStore()                   — open Web Store in a new tab
  *   manuscript.openHomepage()                — open homepageUrl (no-op + warn if unset)
+ *   manuscript.isMobile()                    — true on phones/tablets where Chrome/Edge
+ *                                              extensions cannot be installed
  *   manuscript.mountLauncher({ scenario?, scenarioUrl?, label?, lang? })
  *   manuscript.unmountLauncher()
  *   manuscript.configure({
@@ -198,6 +204,32 @@
 
       tryOnce();
     });
+  }
+
+  // --- Mobile detection ---------------------------------------------------
+  // Chrome and Edge do not support extensions on iOS or Android, so any
+  // "Take the tour" / "Install Manuscript" UI is dead weight on those
+  // devices — clicking it lands the visitor on a Web Store page that
+  // refuses to install. Conservative UA sniff: only suppress on devices
+  // that genuinely can't install. Desktop Chrome on a touch laptop
+  // (Surface, ChromeOS) still gets the launcher.
+  var mobileResult = null;
+  function isMobile() {
+    if (mobileResult !== null) return mobileResult;
+    try {
+      var ua = (navigator.userAgent || '').toLowerCase();
+      if (/android|iphone|ipod|ipad|windows phone|blackberry|opera mini|iemobile|mobile safari/.test(ua)) {
+        mobileResult = true;
+        return true;
+      }
+      // iPadOS 13+ reports a desktop Mac UA; disambiguate via touch points.
+      if (ua.indexOf('macintosh') >= 0 && navigator.maxTouchPoints > 1) {
+        mobileResult = true;
+        return true;
+      }
+    } catch (_) {}
+    mobileResult = false;
+    return false;
   }
 
   // --- isInstalled cache --------------------------------------------------
@@ -597,6 +629,7 @@
   function showLauncher(opts) {
     var force = opts && opts.forceInstallMode === true;
     if (!config.banner && force) return; // host opted out of all UI
+    if (force && isMobile()) return; // mobile can't install — don't dangle a dead CTA
     if (dismissedForCurrentVersion() && force) return;
     ensureHost();
     if (!launcherHost) return;
@@ -632,6 +665,11 @@
         );
       } catch (_) {}
     }
+    // Mobile Chrome/Edge can't install extensions — neither the tour
+    // pill nor the install prompt can lead anywhere useful, so don't
+    // mount at all. Host pages can check manuscript.isMobile() to keep
+    // their own "Take the tour" buttons hidden too.
+    if (isMobile()) return;
     ensureHost();
     if (!launcherHost) return;
 
@@ -685,6 +723,7 @@
     // discovery
     isInstalled: isInstalled,
     refreshInstalled: refreshInstalled,
+    isMobile: isMobile,
     // navigation (new in 0.1.3)
     openStore: openStore,
     openHomepage: openHomepage,
