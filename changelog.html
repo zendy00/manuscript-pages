@@ -120,12 +120,63 @@
       <section class="changelog">
         <div class="container">
 
+          <!-- ───── v0.4.1 ───── -->
+          <article id="v0-4-1" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2>v0.4.1</h2>
+              <span class="changelog-tag changelog-tag-current" data-en>Current</span>
+              <span class="changelog-tag changelog-tag-current" data-ko>현재</span>
+              <time datetime="2026-05-23">2026-05-23</time>
+            </header>
+            <p class="changelog-summary" data-en>
+              Sub-element re-pick gets a clear toggle with a heartbeat cue,
+              and the narrated replay now picks up where you left off —
+              the voice, the spotlight walk, the timer, and the progress
+              bar all resume in sync after a pause.
+            </p>
+            <p class="changelog-summary" data-ko>
+              sub 요소 재선택이 명확한 토글로 정리됐고, 시연 재생도
+              일시정지한 자리부터 그대로 이어집니다 — 음성·spotlight 이동·타이머·진행
+              막대가 함께 동기화돼 다시 출발해요.
+            </p>
+            <h3 data-en>New</h3>
+            <h3 data-ko>신기능</h3>
+            <ul data-en>
+              <li><strong>Sub re-pick toggle</strong> — clicking a sub in the panel focuses the element on the page; clicking the same sub a second time arms the picker (with a heartbeat outline) so the next click on the page swaps that sub's element. A third click — or Esc — cancels.</li>
+              <li><strong>Heartbeat on the picker target only</strong> — when the step thumb's wand is armed it pulses; when a sub's re-pick is armed, only that sub pulses. No more two-elements-pulsing-at-once confusion.</li>
+              <li><strong>Pause/resume continues in place</strong> — pressing ▶ after ⏸ keeps the spotlight on the sub it was on, finishes the dwell that was already partway done, and the timer counts the remaining seconds instead of restarting from the top. Works across multiple pauses.</li>
+              <li><strong>Narration resumes where it stopped</strong> — even on voices that don't report word-by-word progress (Google US English among others), the next ▶ picks up at the nearest word boundary instead of restarting the sentence.</li>
+              <li><strong>Don't repeat the narration</strong> — if a step's TTS already finished while you paused, ▶ doesn't replay it; only the spotlight + timer pick back up.</li>
+              <li><strong>Progress bar tracks the resume</strong> — the bar jumps to the matching position when ▶ is pressed instead of snapping back to 0.</li>
+            </ul>
+            <ul data-ko>
+              <li><strong>sub 재선택 토글</strong> — 패널의 sub 를 한 번 클릭하면 페이지의 그 요소에 spotlight 가 맞춰지고, 같은 sub 를 한 번 더 클릭하면 picker 가 켜집니다 (heartbeat 윤곽선 표시). 그 상태에서 페이지의 다른 요소를 클릭하면 그 sub 의 element 가 교체돼요. 세 번째 클릭 또는 Esc 로 취소.</li>
+              <li><strong>heartbeat 는 한 곳에만</strong> — 스텝 썸네일(wand) 이 armed 면 그것만, sub 의 re-pick 이 armed 면 그 sub 만 깜박입니다. 두 군데가 동시에 깜박여서 헷갈리던 문제 정리.</li>
+              <li><strong>재생이 멈췄던 자리에서 이어집니다</strong> — ⏸ 후 ▶ 를 누르면 그 sub 위에서 그대로 출발하고, 이미 흐른 dwell 시간만큼은 빼고 남은 시간만 셉니다. 여러 번 ⏸→▶ 해도 누적되어 정확하게.</li>
+              <li><strong>나레이션도 멈췄던 곳부터</strong> — 단어 단위 진행을 보고하지 않는 음성 (Google US English 등) 에서도, 다음 ▶ 가 가장 가까운 어절 경계에서 다시 시작해요. 처음부터 다시 안 읽습니다.</li>
+              <li><strong>한 번 끝난 나레이션은 다시 읽지 않음</strong> — ⏸ 시점에 이미 TTS 가 끝나 있었다면 ▶ 가 음성을 다시 재생하지 않고, spotlight·타이머만 이어 갑니다.</li>
+              <li><strong>진행 막대가 멈춘 자리로 점프</strong> — ▶ 누르는 순간 막대가 0 으로 떨어지지 않고 일치하는 위치에서 이어 채워져요.</li>
+            </ul>
+            <h3 data-en>Fixes</h3>
+            <h3 data-ko>버그 픽스</h3>
+            <ul data-en>
+              <li>Last step pause/resume no longer jumps back to step 1 — only an auto-finished scenario (timer ran off the last step) treats ▶ as "restart from the top"; a user pause stays put.</li>
+              <li>Sub thumbnails no longer steal clicks meant for the gap or neighboring sub — the hover bridge only activates while you're actually hovering or selected.</li>
+              <li>Action step + sub: removing the last sub used to silently reset the step duration back to 5 s. It now keeps whatever duration you (or the implicit first-sub-add) set.</li>
+              <li>Adding a sub now focuses the newly picked element instead of staying on the previously anchored sub.</li>
+            </ul>
+            <ul data-ko>
+              <li>마지막 스텝에서 ⏸→▶ 누르면 1번 스텝으로 점프하던 문제 해결 — 시나리오가 자동으로 끝까지 도달한 경우에만 ▶ 가 "처음부터 다시" 로 동작하고, 사용자가 직접 ⏸ 한 마지막 스텝은 같은 자리에서 이어 재생.</li>
+              <li>sub 썸네일 사이 간격을 클릭하면 옆 sub 이 잘못 선택되던 현상 — hover bridge 가 hover/선택 상태에서만 활성화되도록 조정.</li>
+              <li>action 스텝 + sub: 마지막 sub 를 지우면 스텝 시간이 슬그머니 5초로 떨어지던 버그 — 사용자가 입력한(또는 첫 sub-add 가 잡아준) 시간을 그대로 유지.</li>
+              <li>sub 추가 직후, 이전에 anchor 되어 있던 sub 가 아니라 방금 픽한 새 요소로 spotlight 가 이동합니다.</li>
+            </ul>
+          </article>
+
           <!-- ───── v0.4.0 ───── -->
           <article id="v0-4-0" class="changelog-entry">
             <header class="changelog-entry-head">
               <h2>v0.4.0</h2>
-              <span class="changelog-tag changelog-tag-current" data-en>Current</span>
-              <span class="changelog-tag changelog-tag-current" data-ko>현재</span>
               <time datetime="2026-05-23">2026-05-23</time>
             </header>
             <p class="changelog-summary" data-en>
@@ -414,8 +465,8 @@
           <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.4.0 · © 2026</span>
-          <span data-ko>Manuscript v0.4.0 · © 2026</span>
+          <span data-en>Manuscript v0.4.1 · © 2026</span>
+          <span data-ko>Manuscript v0.4.1 · © 2026</span>
         </div>
       </div>
     </footer>

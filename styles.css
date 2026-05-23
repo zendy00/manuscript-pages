@@ -293,27 +293,6 @@ p.lead {
   flex-shrink: 0;
 }
 
-.hero-etymology {
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--c-text-mute);
-  background: var(--c-tint);
-  border-left: 3px solid var(--c-primary);
-  border-radius: var(--r-sm);
-  padding: 10px 14px;
-  margin: 0 0 24px;
-  max-width: 560px;
-}
-.hero-etymology strong {
-  color: var(--c-text);
-  font-weight: 600;
-  letter-spacing: -0.005em;
-}
-.hero-etymology em {
-  font-style: italic;
-  color: var(--c-primary);
-}
-
 .hero p.lead { margin-bottom: 28px; }
 .hero-ctas {
   display: flex;

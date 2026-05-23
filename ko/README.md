@@ -129,4 +129,4 @@ HTML 변경과 함께 commit합니다.
 
 ## 라이선스 · 문의
 
-v0.4.0. 피드백은 <zendy00@gmail.com> 으로 보내주세요.
+v0.4.1. 피드백은 <zendy00@gmail.com> 으로 보내주세요.

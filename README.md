@@ -134,4 +134,4 @@ starts in `manuscript/site/`.
 
 ## License & contact
 
-v0.4.0. Email feedback to <zendy00@gmail.com>.
+v0.4.1. Email feedback to <zendy00@gmail.com>.
