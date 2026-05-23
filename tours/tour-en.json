@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "0.1.1",
+  "schemaVersion": "0.1.2",
   "id": "tour-site-en",
   "name": "Tour of the Manuscript landing page (EN)",
   "url": "https://zendy00.github.io/manuscript-pages/",
@@ -131,7 +131,60 @@
         }
       ],
       "autoAdvanceMs": 9000,
-      "waitForNavigation": false
+      "waitForNavigation": false,
+      "subElements": [
+        {
+          "id": "sub-step-4-1",
+          "thumbnailDataUrl": null,
+          "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+          "selectors": {
+            "layer1": { "kind": "stable-attr", "cssSelector": "#how .sequence-step:nth-of-type(1) h3[data-en]" },
+            "layer2": { "kind": "text-parent", "text": "Open Manuscript", "parentSelector": "#how .sequence-step:nth-of-type(1) .body", "tagName": "H3" },
+            "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2520, "width": 600, "height": 32, "nearbyText": ["Open Manuscript", "New Manuscript", "1"] }
+          }
+        },
+        {
+          "id": "sub-step-4-2",
+          "thumbnailDataUrl": null,
+          "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+          "selectors": {
+            "layer1": { "kind": "stable-attr", "cssSelector": "#how .sequence-step:nth-of-type(2) h3[data-en]" },
+            "layer2": { "kind": "text-parent", "text": "Tap the part you want to show", "parentSelector": "#how .sequence-step:nth-of-type(2) .body", "tagName": "H3" },
+            "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2740, "width": 600, "height": 32, "nearbyText": ["Tap the part", "wand", "2"] }
+          }
+        },
+        {
+          "id": "sub-step-4-3",
+          "thumbnailDataUrl": null,
+          "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+          "selectors": {
+            "layer1": { "kind": "stable-attr", "cssSelector": "#how .sequence-step:nth-of-type(3) h3[data-en]" },
+            "layer2": { "kind": "text-parent", "text": "Add a note, shape, or doodle", "parentSelector": "#how .sequence-step:nth-of-type(3) .body", "tagName": "H3" },
+            "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2960, "width": 600, "height": 32, "nearbyText": ["Add a note", "freehand", "3"] }
+          }
+        },
+        {
+          "id": "sub-step-4-4",
+          "thumbnailDataUrl": null,
+          "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+          "selectors": {
+            "layer1": { "kind": "stable-attr", "cssSelector": "#how .sequence-step:nth-of-type(4) h3[data-en]" },
+            "layer2": { "kind": "text-parent", "text": "Build out the rest of the tour", "parentSelector": "#how .sequence-step:nth-of-type(4) .body", "tagName": "H3" },
+            "layer3": { "kind": "visual-heuristic", "x": 80, "y": 3180, "width": 600, "height": 32, "nearbyText": ["Build out", "reorder", "4"] }
+          }
+        },
+        {
+          "id": "sub-step-4-5",
+          "thumbnailDataUrl": null,
+          "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+          "selectors": {
+            "layer1": { "kind": "stable-attr", "cssSelector": "#how .sequence-step:nth-of-type(5) h3[data-en]" },
+            "layer2": { "kind": "text-parent", "text": "Press play — and you're done", "parentSelector": "#how .sequence-step:nth-of-type(5) .body", "tagName": "H3" },
+            "layer3": { "kind": "visual-heuristic", "x": 80, "y": 3400, "width": 600, "height": 32, "nearbyText": ["Press play", "playback bar", "5"] }
+          }
+        }
+      ],
+      "subDwellsMs": [1500, 1500, 1500, 1500, 1500, 1500]
     },
     {
       "id": "step-5",

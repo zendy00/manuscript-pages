@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "0.1.1",
+  "schemaVersion": "0.1.2",
   "id": "tour-site-ko",
   "name": "Manuscript 랜딩 페이지 투어 (KO)",
   "url": "https://zendy00.github.io/manuscript-pages/?lang=ko",
@@ -131,7 +131,60 @@
         }
       ],
       "autoAdvanceMs": 12500,
-      "waitForNavigation": false
+      "waitForNavigation": false,
+      "subElements": [
+        {
+          "id": "sub-step-4-1",
+          "thumbnailDataUrl": null,
+          "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+          "selectors": {
+            "layer1": { "kind": "stable-attr", "cssSelector": "#how .sequence-step:nth-of-type(1) h3[data-ko]" },
+            "layer2": { "kind": "text-parent", "text": "매뉴스크립트 열기", "parentSelector": "#how .sequence-step:nth-of-type(1) .body", "tagName": "H3" },
+            "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2520, "width": 600, "height": 32, "nearbyText": ["매뉴스크립트 열기", "새 시연", "1"] }
+          }
+        },
+        {
+          "id": "sub-step-4-2",
+          "thumbnailDataUrl": null,
+          "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+          "selectors": {
+            "layer1": { "kind": "stable-attr", "cssSelector": "#how .sequence-step:nth-of-type(2) h3[data-ko]" },
+            "layer2": { "kind": "text-parent", "text": "강조하고 싶은 곳을 클릭", "parentSelector": "#how .sequence-step:nth-of-type(2) .body", "tagName": "H3" },
+            "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2740, "width": 600, "height": 32, "nearbyText": ["강조하고 싶은", "픽커", "2"] }
+          }
+        },
+        {
+          "id": "sub-step-4-3",
+          "thumbnailDataUrl": null,
+          "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+          "selectors": {
+            "layer1": { "kind": "stable-attr", "cssSelector": "#how .sequence-step:nth-of-type(3) h3[data-ko]" },
+            "layer2": { "kind": "text-parent", "text": "메모·도형·낙서 더하기", "parentSelector": "#how .sequence-step:nth-of-type(3) .body", "tagName": "H3" },
+            "layer3": { "kind": "visual-heuristic", "x": 80, "y": 2960, "width": 600, "height": 32, "nearbyText": ["메모·도형·낙서", "손그림", "3"] }
+          }
+        },
+        {
+          "id": "sub-step-4-4",
+          "thumbnailDataUrl": null,
+          "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+          "selectors": {
+            "layer1": { "kind": "stable-attr", "cssSelector": "#how .sequence-step:nth-of-type(4) h3[data-ko]" },
+            "layer2": { "kind": "text-parent", "text": "나머지 단계 차곡차곡", "parentSelector": "#how .sequence-step:nth-of-type(4) .body", "tagName": "H3" },
+            "layer3": { "kind": "visual-heuristic", "x": 80, "y": 3180, "width": 600, "height": 32, "nearbyText": ["나머지 단계", "순서", "4"] }
+          }
+        },
+        {
+          "id": "sub-step-4-5",
+          "thumbnailDataUrl": null,
+          "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+          "selectors": {
+            "layer1": { "kind": "stable-attr", "cssSelector": "#how .sequence-step:nth-of-type(5) h3[data-ko]" },
+            "layer2": { "kind": "text-parent", "text": "재생만 누르면 완성", "parentSelector": "#how .sequence-step:nth-of-type(5) .body", "tagName": "H3" },
+            "layer3": { "kind": "visual-heuristic", "x": 80, "y": 3400, "width": 600, "height": 32, "nearbyText": ["재생만 누르면", "재생 바", "5"] }
+          }
+        }
+      ],
+      "subDwellsMs": [2084, 2083, 2083, 2083, 2083, 2084]
     },
     {
       "id": "step-5",

@@ -581,6 +581,67 @@ p.lead {
   box-shadow: var(--shadow-md);
 }
 
+/* ───── AI agent authoring ───── */
+.agent .container { max-width: 980px; }
+.agent-lead {
+  margin: 20px 0 8px;
+  font-size: var(--fs-lead, 18px);
+  color: var(--c-text);
+  max-width: 720px;
+}
+.agent-lead code,
+.agent-prompt pre code {
+  font-family: var(--ff-mono);
+}
+.agent-lead code {
+  background: var(--c-surface-2);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.92em;
+}
+.agent-sequence { margin-top: 28px; }
+.agent-prompt {
+  margin: 28px 0 8px;
+  max-width: 720px;
+}
+.agent-prompt-label {
+  font-size: var(--fs-small);
+  color: var(--c-text-mute);
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.agent-prompt pre {
+  background: oklch(0.20 0.020 240);
+  color: oklch(0.97 0.003 240);
+  padding: 16px 20px;
+  border-radius: var(--r-md);
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+  white-space: pre;
+}
+.agent-prompt pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+.agent-note {
+  margin: 20px 0 24px;
+  max-width: 720px;
+  font-size: var(--fs-small);
+  color: var(--c-text-mute);
+  border-left: 2px solid var(--c-border);
+  padding-left: 14px;
+}
+.agent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
 /* ───── Install ───── */
 .install .container { max-width: 880px; }
 .install-cta {
@@ -1131,6 +1192,10 @@ body[data-palette="studio-dark"] #mn-tour {
   font-variant-numeric: tabular-nums;
 }
 .ver-chip-sep { color: var(--c-border-strong); }
+/* Mirror the secondary-path treatment from .install-tab — the .zip chip
+   reads as a quieter sibling of the Web Store chip. */
+.ver-chip-zip { opacity: 0.7; }
+.ver-chip-zip:hover { opacity: 1; }
 .ver-chip-hint {
   font-size: 12px;
   color: var(--c-text-soft);
@@ -1171,6 +1236,14 @@ body[data-palette="studio-dark"] #mn-tour {
   border-bottom-color: var(--c-surface);
   color: var(--c-text);
 }
+/* Secondary path: Web Store is the recommended default, so the manual
+   .zip tab carries lower visual weight when inactive. Activates back to
+   full weight on hover or selection so the cohort can still find it. */
+.install-tab[data-target="zip"]:not(.is-active) {
+  opacity: 0.7;
+  font-weight: 400;
+}
+.install-tab[data-target="zip"]:not(.is-active):hover { opacity: 1; }
 .install-tab:focus-visible {
   outline: 2px solid var(--c-focus);
   outline-offset: 2px;
@@ -1271,6 +1344,34 @@ body[data-palette="studio-dark"] .callout-warn {
   font-size: 13px;
   color: var(--c-text-mute);
 }
+
+/* Guide TOC version chip — tiny "v0.4" badge next to new entries. */
+.guide-toc .toc-new {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--c-primary) 16%, transparent);
+  color: var(--c-primary);
+  letter-spacing: 0.02em;
+}
+
+/* Validation-status dots inside the guide's color legend. */
+#g-validate .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  border: 1px solid color-mix(in oklab, currentColor 30%, transparent);
+}
+#g-validate .dot-green  { background: oklch(0.74 0.18 145); }
+#g-validate .dot-yellow { background: oklch(0.86 0.16 95);  }
+#g-validate .dot-red    { background: oklch(0.65 0.21 28);  }
+#g-validate .dot-gray   { background: oklch(0.78 0.01 240); }
 
 /* ───── What's-new toast ───── */
 .whatsnew-toast {

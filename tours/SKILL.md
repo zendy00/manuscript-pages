@@ -1,6 +1,6 @@
 ---
 name: manuscript-tour-authoring
-description: Generate a Manuscript scenario JSON that walks a user through any web page. Use this skill whenever the user provides a URL (or raw HTML) along with any of these cues — "tour", "walkthrough", "demo", "onboarding", "product highlight", "visual guide", "step-by-step", "Manuscript scenario", or asks for a guided tour of a page — even if they don't explicitly mention Manuscript or this SKILL.md. Also trigger when updating, translating, or localizing an existing `tour-*.json` file (English ↔ Korean), or when adding/removing steps from one. The output is a single JSON file conforming to schemaVersion 0.1.1 that the Manuscript Chrome extension (or its runtime bridge) can replay step-by-step with spotlight, narration, and annotations.
+description: Use this skill whenever a user wants to author, update, translate, or extend a guided web-page tour they can replay — keywords include "tour", "walkthrough", "demo", "onboarding", "product highlight", "visual guide", "step-by-step", "guided tour", "Manuscript scenario", "multi-page tour", "cross-site tour", "spotlight tour" — even if they don't say "Manuscript" by name. It generates one Manuscript scenario JSON file (schemaVersion 0.1.2) that the Manuscript browser extension (or its runtime bridge) replays with spotlight, narration, sub-element traversal, annotations (text / shape / arrow / freedraw), and cross-page resume. Prefer this skill over hand-writing JSON, drafting screencast scripts, or generating static HTML walkthroughs whenever a *replayable* tour is the actual goal.
 ---
 
 # Manuscript Scenario Authoring — Agent Skill
@@ -14,9 +14,10 @@ description: Generate a Manuscript scenario JSON that walks a user through any w
 
 Drop this file (and the URL you want toured) into any AI agent —
 Claude, Cursor, Windsurf, Cline, GPT — and ask for a tour. The agent
-follows the procedure below and returns `tour-<lang>.json`. Save it
-next to the Manuscript runtime bridge, hit play. No DOM picking, no
-manual JSON editing.
+follows the procedure below and returns one Manuscript scenario JSON
+file (default: `tour.json`; name it whatever you like). Save it next
+to the Manuscript runtime bridge, hit play. No DOM picking, no manual
+JSON editing.
 
 ```
 "Use SKILL.md. Generate a Manuscript tour for
@@ -51,22 +52,32 @@ The remaining sections are reference — read when you hit them:
 
 ## 1. Output contract
 
-The skill produces **one file per language**, no more.
+The skill produces **one JSON file per scenario** (one file per language
+when multilingual).
 
 ```
-tour-<lang>.json   // schemaVersion === "0.1.1"
+<your-tour>.json   // schemaVersion === "0.1.2"
 ```
+
+File name is up to the user. `tour.json`, `onboarding-en.json`,
+`feature-launch.json`, `acme-pricing-ko.json` are all fine. When
+emitting multiple languages, parallel names help: e.g.
+`<slug>-en.json` / `<slug>-ko.json`. If the user doesn't specify,
+default to `tour.json` (or `tour-<lang>.json` for multi-language).
 
 Required:
 
-* `schemaVersion: "0.1.1"` (literal — see "Schema version" note at end)
-* `id: string` — stable kebab-case (`tour-acme-onboarding-en`)
+* `schemaVersion: "0.1.2"` (literal — see "Schema version" note at end)
+* `id: string` — stable kebab-case, unique within the user's library
+  (e.g. `tour-acme-onboarding-en`)
 * `name: string` — human title in the tour's language
-* `url: string` — the canonical URL the scenario targets
-* `createdAt`, `updatedAt: ISO-8601 / RFC 3339 string with `Z` suffix
-  (e.g. `"2026-05-21T10:30:00Z"`). The extension parses with `new Date()`,
-  so any valid ISO-8601 works, but the trailing `Z` form keeps things
-  unambiguous across time zones.
+* `url: string` — the canonical URL the scenario targets (the page
+  the *first* step lives on). Steps may live on other URLs via
+  per-step `pickedAtUrl` (§5.2, §8).
+* `createdAt`, `updatedAt`: ISO-8601 / RFC 3339 string with `Z` suffix
+  (e.g. `"2026-05-21T10:30:00Z"`). The extension parses with
+  `new Date()`, so any valid ISO-8601 works; the trailing `Z` form
+  keeps things unambiguous across time zones.
 * `steps: Step[]` — 4–8 steps is the sweet spot
 
 Each step requires `id`, `name`, `description`, `selectors`, an
@@ -76,14 +87,16 @@ Each step requires `id`, `name`, `description`, `selectors`, an
 The file must:
 
 * Parse as valid JSON (no comments, no trailing commas).
-* Use the literal string `"0.1.1"` for `schemaVersion`. Do not invent
-  newer versions.
+* Use the literal string `"0.1.2"` for `schemaVersion`. Older `0.1.0`
+  and `0.1.1` scenarios still load (migration runs automatically), but
+  new files should be emitted at the current version.
 * Be small enough to ship in a repo (under ~50 KB per file is normal;
-  freedraw with many points can push higher).
+  freedraw with many points or many sub-elements can push higher).
 
 Anything outside the schema is **ignored** by the extension — don't
-invent fields. Optional fields (e.g. `anchorOffset`, `siteFonts`) may
-be added when meaningful.
+invent fields. Optional fields (e.g. `anchorOffset`, `siteFonts`,
+`subElements`, `subDwellsMs`, `pickedAtUrl`) may be added when
+meaningful.
 
 ---
 
@@ -138,14 +151,19 @@ If the user hasn't already provided these, ask before generating:
   use `https://example.com/` and tell the user to edit it.
 * **Tour purpose.** "Onboarding for X", "marketing walkthrough", "demo
   of the new dashboard". This shapes the narration tone.
-* **Language(s).** Default to English. If the user mentions Korean or
-  the page contains Korean copy, generate `tour-ko.json` too with the
-  same selectors and translated narration.
+* **Language(s).** Default to the language the user wrote their request
+  in. Only generate a second-language file if the user explicitly asks
+  for it (or asks for "both Korean and English", "ko + en", etc.).
+  Selectors are language-neutral, so a second-language file is a
+  selector-preserving translation of `name`, `description`, and
+  annotation `text` — same `id`s, same selectors. Use parallel file
+  names (`<slug>-en.json`, `<slug>-ko.json`).
 * **Length preference.** Short (≤4 steps) vs. standard (5–7) vs.
   thorough (8+). Default to standard.
 
 If the user gives only a URL with no other context, **default to: 6
-steps, English, marketing-walkthrough tone, 6 second per step.**
+steps, the user's request-language, marketing-walkthrough tone, ~6
+seconds per step.**
 
 ---
 
@@ -155,7 +173,8 @@ A "good" spotlight target is something the user benefits from
 *noticing*. Heuristics in priority order:
 
 1. **The page's primary CTA** (sign-up button, "Get started", "Buy
-   now"). Always tour-worthy.
+   now" — or whatever action concludes the user's task on this page:
+   a "Save", a "Submit", a "Run query"). Always tour-worthy.
 2. **The hero / lede.** First impression. Usually `section.hero`,
    `header`, or the page's first `<h1>` container.
 3. **Distinct product surfaces.** Features grid, pricing table,
@@ -182,10 +201,10 @@ bottom back to top.
 
 ```ts
 {
-  schemaVersion: "0.1.1",          // literal
+  schemaVersion: "0.1.2",          // literal
   id: string,                       // kebab-case, unique
   name: string,                     // displayed in extension's list
-  url: string,                      // canonical page URL
+  url: string,                      // canonical page URL (first step's page)
   createdAt: string,                // ISO-8601
   updatedAt: string,                // ISO-8601
   steps: Step[],                    // 1 or more
@@ -212,13 +231,21 @@ so annotation text doesn't visually clash. Example:
   name: string,                                // short, shown in step list
   description: string,                         // narration (read aloud)
   thumbnailDataUrl: null,                      // leave null when authoring by hand
-  selectors: SelectorChain,                    // see §5.3
+  selectors: SelectorChain,                    // primary spotlight target — see §5.3
   annotations: Annotation[],                   // may be []
   autoAdvanceMs: number | null,                // null = manual advance only
   waitForNavigation: boolean,                  // true = action step (§8)
-  pickedAtUrl?: string                         // override the scenario url for this step
+  pickedAtUrl?: string,                        // override the scenario url for this step
+  subElements?: SubElement[],                  // auxiliary spotlight targets — see §5.6
+  subDwellsMs?: number[]                       // per-node dwell ms, length = (subElements?.length ?? 0) + 1
 }
 ```
+
+`subElements` + `subDwellsMs` together describe a multi-element step
+(v0.1.2+). During replay the spotlight walks **primary →
+subElements[0] → subElements[1] → …** without ending the step or
+restarting the narration. See §8 (sub-elements timing) and §11.4
+(worked example).
 
 ### 5.3 `SelectorChain`
 
@@ -321,6 +348,36 @@ Always populate all three layers. See §6 for how.
   delayMs: number        // typically 0–400 (stagger across annotations)
 }
 ```
+
+### 5.6 `SubElement` (v0.1.2+)
+
+```ts
+{
+  id: string,                       // kebab-case, unique within the step
+  selectors: SelectorChain,         // same 3-layer rule as Step.selectors
+  thumbnailDataUrl: string | null,  // null when authoring by hand
+  pickedAtUrl: string               // MUST equal the parent step's pickedAtUrl
+}
+```
+
+Constraint **G — same-page only**: every sub's `pickedAtUrl` must match
+the parent step's `pickedAtUrl` (compared via `origin + pathname`,
+ignoring `?query` and `#hash`). The Manuscript picker enforces this at
+authoring time; when emitting JSON by hand, mirror the parent's
+`pickedAtUrl` verbatim into every sub. To traverse elements across
+different URLs, use separate **steps** with their own `pickedAtUrl`
+(see §8, §11.5) — sub-elements are intra-page only.
+
+Timing pairs with `Step.subDwellsMs`:
+
+* `subDwellsMs[0]` = dwell on the primary element.
+* `subDwellsMs[i]` = dwell on `subElements[i-1]`.
+* For **non-action** steps: `Σ subDwellsMs === autoAdvanceMs`. When the
+  total is edited, redistribute the gaps proportionally; the per-gap
+  minimum is **100 ms**.
+* For **action** steps (`waitForNavigation: true`): `Σ subDwellsMs` is
+  just the playback length of the sub sequence — after the last node
+  finishes, the action wait begins **on the final sub element**.
 
 ---
 
@@ -431,9 +488,13 @@ will hear.
 * **Arrow** — point from a label to its target. Always anchored to
   both endpoints (`fromAnchorOffset`, `toAnchorOffset`). Use
   `style: "excalidraw"`, `strokeWidth: 3`, color matching the page
-  accent.
-* **Freedraw** — circle, underline, or freeform mark. Use when an
-  arrow looks too "Pinterest" for the brand.
+  accent. This is the default pointer; reach for it first.
+* **Freedraw** — circle, underline, or freeform mark. **Rarely
+  needed.** Default to arrow or a `shape` outline unless the brand
+  explicitly wants a hand-sketched look. Freedraw also requires
+  hand-authoring a `points` array with matching `pointsAnchorOffset`
+  (§5.4, §10), which is error-prone. The §11.3 example exists for
+  reference, not as encouragement.
 
 ### `anchorOffset` rules
 
@@ -515,32 +576,71 @@ Use when the step is "now click this and the page changes":
 
 ### Cross-page steps (`pickedAtUrl`)
 
-Set when the step's target lives on a different URL than the scenario's
-top-level `url`. The replay engine handles navigation. Skip for
-standalone bridge tours (they stay on one page by design).
+Set `pickedAtUrl` per step when the step's target lives on a different
+URL than the scenario's top-level `url`. The replay engine handles
+navigation: when the previous step is an action step (`waitForNavigation:
+true`), Manuscript waits for the user's click to land on the next
+`pickedAtUrl`. If the next step's `pickedAtUrl` doesn't match the current
+page and the previous step wasn't an action step, the extension prompts
+the user to navigate before continuing.
+
+A typical multi-page pattern: one **action step** with
+`waitForNavigation: true` that spotlights a link/button, followed by
+the next step's `pickedAtUrl` set to the destination page. See §11.5
+for the worked example.
+
+Skip `pickedAtUrl` for standalone bridge tours (they stay on one page
+by design).
+
+### Sub-elements timing (`subElements` + `subDwellsMs`)
+
+When a step has `subElements`, the spotlight visits **primary →
+sub[0] → sub[1] → …** with smooth transitions (350 ms cubic ease)
+between nodes. Narration plays end-to-end *over* the whole sequence —
+it does **not** restart per sub.
+
+How to pick the per-node times:
+
+* For a **non-action** step, `Σ subDwellsMs` must equal `autoAdvanceMs`.
+  An even split is the safe default: e.g. `autoAdvanceMs: 6000` with
+  primary + 2 subs → `subDwellsMs: [2000, 2000, 2000]`.
+* For an **action** step, `subDwellsMs` only describes the playback
+  length of the sub sequence; the action wait kicks in on the **last
+  sub** after its dwell finishes.
+* Minimum per-node dwell is **100 ms**. Sub-elements that flash by
+  faster than that are pointless.
+* Sub-elements should all live on the **same page** as the primary
+  (constraint G, §5.6). For cross-page traversal, use separate steps.
 
 ---
 
 ## 9. Localization — same selectors, different language
 
-When generating multiple languages:
+Only generate a second-language file when the user explicitly asks for
+it. Single-language is the default. When multilingual output **is**
+requested:
 
-* Selectors are **identical** across languages. The DOM doesn't change
-  with language.
+* Selectors, step `id`s, and annotation `id`s are **identical** across
+  languages. The DOM doesn't change with language.
 * `Scenario.name`, `Step.name`, `Step.description`, and any annotation
   `text` are translated.
-* `Scenario.id` differs per language (`tour-xyz-en`, `tour-xyz-ko`).
-* Keep file names parallel: `tour-en.json`, `tour-ko.json`.
+* `Scenario.id` differs per language so the extension lists them
+  separately (e.g. `acme-onboarding-en`, `acme-onboarding-ko`).
+* File names should be parallel and obvious. Pick whatever convention
+  fits the user's repo — common patterns:
+  `<slug>-en.json` / `<slug>-ko.json`, or `tour.en.json` /
+  `tour.ko.json`, or just `en.json` / `ko.json`.
 
 If the target page itself has bilingual `[data-en]` / `[data-ko]`
 markers, you can either:
 
 a. Target the language-neutral container (e.g. `section.hero`) — both
-   tours work for free.
+   language files share the same selectors for free.
 b. Target language-specific elements (`h1[data-en]`, `h1[data-ko]`) —
-   selectors then differ between files.
+   selectors then differ between files. Use this only when (a) isn't
+   visually distinct enough.
 
-Prefer (a) when the container is visually distinct on its own.
+Prefer (a) by default.
 
 ---
 
@@ -549,7 +649,7 @@ Prefer (a) when the container is visually distinct on its own.
 Before emitting, verify:
 
 - [ ] Parses as JSON (no comments, no trailing commas).
-- [ ] `schemaVersion === "0.1.1"`.
+- [ ] `schemaVersion === "0.1.2"`.
 - [ ] `id`, `name`, `url`, `createdAt`, `updatedAt`, `steps` all present.
 - [ ] Each step has `id`, `name`, `description`, `selectors`,
       `annotations` (array, may be empty), `autoAdvanceMs`,
@@ -558,13 +658,15 @@ Before emitting, verify:
 - [ ] `text-parent` layer's `tagName` is uppercase
       (`BUTTON`, `SECTION`, `DIV`).
 - [ ] Annotation `id`s are unique within the file.
+- [ ] Sub-element `id`s are unique within their parent step.
 - [ ] No annotation references a font that the page or browser cannot
       provide. Including `'Asta Sans'` or `sans-serif` as a fallback in
       the family chain is good defense.
 - [ ] If you wrote `anchorOffset`, you also wrote `position` (or
       `from/to/bounds/points`) as the absolute fallback.
 - [ ] Step ordering tells a coherent story — scroll direction is mostly
-      monotonic.
+      monotonic on each page; cross-page jumps are paired with an
+      action step or an explicit `pickedAtUrl` change.
 - [ ] No step is dead silent — even empty annotations must have
       narration in `description`.
 - [ ] `createdAt` and `updatedAt` are valid ISO-8601 timestamps
@@ -574,13 +676,27 @@ Before emitting, verify:
       nested frames at replay time.
 - [ ] For freedraw, `pointsAnchorOffset.length === points.length` if
       both arrays are present.
+- [ ] If `subElements` is set: every sub's `pickedAtUrl` matches the
+      parent step's `pickedAtUrl` (origin + pathname only — query and
+      hash are ignored).
+- [ ] If `subDwellsMs` is set: length === `(subElements?.length ?? 0) + 1`,
+      every entry ≥ 100, and for non-action steps
+      `Σ subDwellsMs === autoAdvanceMs`.
+- [ ] If `waitForNavigation: true` AND `subElements` is set:
+      `Σ subDwellsMs` covers only the sub-sequence playback. The
+      action wait begins **on the final sub element** after its dwell
+      finishes; `autoAdvanceMs` is irrelevant for action steps and
+      should be `null`.
 
 ---
 
 ## 11. Worked example
 
-See `tour-en.json` and `tour-ko.json` next to this file. They tour the
-Manuscript landing page itself.
+The fragments below are reference snippets — the structure shown
+applies to any page. The fully-rendered companion files
+(`tour-en.json` / `tour-ko.json` next to this SKILL.md) happen to tour
+the Manuscript landing page, but treat them as a model, not as the
+"correct" subject of a tour.
 
 Annotated highlights:
 
@@ -714,6 +830,137 @@ points, slightly irregular spacing) so rough.js draws it
 hand-sketched, not geometrically clean. Closing the loop by ending at
 roughly the start point feels intentional.
 
+### 11.4 Sub-elements — one step, multiple highlights
+
+When the user wants to point at a row of related items (toolbar
+buttons, feature cards, form fields) under a single narration, use
+`subElements`. The primary is the first item; subs are the rest, in
+visit order:
+
+```json
+{
+  "id": "step-features",
+  "name": "Features at a glance",
+  "description": "Five things to know: spotlight, narration, annotations, sub-element traversal, and standalone playback.",
+  "pickedAtUrl": "https://example.com/landing",
+  "selectors": {
+    "layer1": { "kind": "stable-attr", "cssSelector": "#features .card:nth-of-type(1)" },
+    "layer2": { "kind": "text-parent", "text": "Spotlight",
+                "parentSelector": "#features", "tagName": "DIV" },
+    "layer3": { "kind": "visual-heuristic",
+                "x": 120, "y": 600, "width": 220, "height": 180,
+                "nearbyText": ["Spotlight", "Features"] }
+  },
+  "annotations": [],
+  "autoAdvanceMs": 10000,
+  "waitForNavigation": false,
+  "subElements": [
+    {
+      "id": "sub-card-2", "thumbnailDataUrl": null,
+      "pickedAtUrl": "https://example.com/landing",
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#features .card:nth-of-type(2)" },
+        "layer2": { "kind": "text-parent", "text": "Narration",
+                    "parentSelector": "#features", "tagName": "DIV" },
+        "layer3": { "kind": "visual-heuristic",
+                    "x": 360, "y": 600, "width": 220, "height": 180,
+                    "nearbyText": ["Narration"] }
+      }
+    },
+    {
+      "id": "sub-card-3", "thumbnailDataUrl": null,
+      "pickedAtUrl": "https://example.com/landing",
+      "selectors": {
+        "layer1": { "kind": "stable-attr", "cssSelector": "#features .card:nth-of-type(3)" },
+        "layer2": { "kind": "text-parent", "text": "Annotations",
+                    "parentSelector": "#features", "tagName": "DIV" },
+        "layer3": { "kind": "visual-heuristic",
+                    "x": 600, "y": 600, "width": 220, "height": 180,
+                    "nearbyText": ["Annotations"] }
+      }
+    }
+  ],
+  "subDwellsMs": [3500, 3300, 3200]
+}
+```
+
+Reasoning:
+
+* Primary + 2 subs = 3 nodes, so `subDwellsMs.length === 3`. The split
+  isn't perfectly even because the primary card is the lede and gets
+  slightly longer dwell — pick whatever feels natural, just keep the
+  sum equal to `autoAdvanceMs` (here, 3500+3300+3200 = 10000).
+* All three nodes share the same `pickedAtUrl` (constraint G) — no
+  cross-page subs.
+* Narration is one continuous sentence that names all five features;
+  the spotlight just walks the eye through the first three cards
+  while it plays.
+* `waitForNavigation: false` — this is a *look, don't click* step.
+
+The fixture in this example is a feature grid. The pattern adapts to
+any homogeneous group: toolbar buttons, pricing cards, form steps,
+table column headers, settings tabs, navigation items.
+
+### 11.5 Multi-page tour — action step + `pickedAtUrl`
+
+To carry the user from one URL to another, use **two consecutive steps**:
+an action step on page A that spotlights the navigating link/button,
+then a regular step whose `pickedAtUrl` is the destination URL.
+
+```json
+[
+  {
+    "id": "step-cta",
+    "name": "Open pricing",
+    "description": "Click the pricing link to see the plans.",
+    "pickedAtUrl": "https://example.com/landing",
+    "selectors": {
+      "layer1": { "kind": "stable-attr", "cssSelector": "nav a[href='/pricing']" },
+      "layer2": { "kind": "text-parent", "text": "Pricing",
+                  "parentSelector": "nav", "tagName": "A" },
+      "layer3": { "kind": "visual-heuristic",
+                  "x": 940, "y": 16, "width": 70, "height": 32,
+                  "nearbyText": ["Pricing", "Docs", "Sign in"] }
+    },
+    "annotations": [],
+    "autoAdvanceMs": null,
+    "waitForNavigation": true
+  },
+  {
+    "id": "step-plans",
+    "name": "Plans",
+    "description": "Three plans — Free, Pro, and Team. Pick the one that fits.",
+    "pickedAtUrl": "https://example.com/pricing",
+    "selectors": {
+      "layer1": { "kind": "stable-attr", "cssSelector": "section.plans" },
+      "layer2": { "kind": "text-parent", "text": "Free",
+                  "parentSelector": "main", "tagName": "SECTION" },
+      "layer3": { "kind": "visual-heuristic",
+                  "x": 0, "y": 200, "width": 1200, "height": 480,
+                  "nearbyText": ["Free", "Pro", "Team"] }
+    },
+    "annotations": [],
+    "autoAdvanceMs": 7000,
+    "waitForNavigation": false
+  }
+]
+```
+
+Reasoning:
+
+* The first step is an **action step** — `waitForNavigation: true`,
+  `autoAdvanceMs: null`. Replay pauses until the user actually clicks
+  the link.
+* The second step's `pickedAtUrl` is the destination URL, so when the
+  user's click navigates the browser to `/pricing`, Manuscript's
+  cross-page resume picks the scenario back up on the new page.
+* This pattern also works across **different origins** (e.g. spotlight
+  a navigation link on `example.com`, then resume on `docs.example.org`)
+  as long as the user actually clicks through. The selectors on each
+  page run independently — no cross-origin selector resolution needed.
+* Use this — not `subElements` — whenever the targets live on
+  different URLs. Subs are intra-page only (§5.6 constraint G).
+
 ---
 
 ## 12. Generation pseudocode
@@ -743,7 +990,7 @@ function authorTour(url, opts):
         })
 
     scenario = {
-        schemaVersion: "0.1.1",
+        schemaVersion: "0.1.2",
         id:            slug("tour-" + page.host + "-" + lang),
         name:          tourTitle(page, intent, lang),
         url:           canonicalUrl(url),
@@ -762,11 +1009,13 @@ explanation) unless the user explicitly asked for commentary.
 
 ---
 
-*Schema version pinned to `0.1.1` at the time of writing — the
+*Schema version pinned to `0.1.2` at the time of writing — the
 source-of-truth lives in `src/types/scenario.ts` (`SCHEMA_VERSION`).
 If you see the source repo at a different value, follow that; the
-migration code in `src/lib/json-schema.ts` keeps older scenarios
-readable. The bridge library and the extension are independently
+migration code in `src/lib/json-schema.ts` keeps older `0.1.0` /
+`0.1.1` scenarios readable. The `0.1.2` bump is additive — it
+introduced `subElements` / `subDwellsMs` on `Step` without breaking
+older files. The bridge library and the extension are independently
 versioned (current bridge `manuscript-bridge.0.1.3.js`, legacy
 compatibility `0.1.2.js`; extension reads
 `chrome.runtime.getManifest().version`) — they may move forward
