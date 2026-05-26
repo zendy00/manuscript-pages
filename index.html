@@ -360,6 +360,14 @@
               <a class="btn btn-ghost" href="#install" data-en>How to install</a>
               <a class="btn btn-ghost" href="#install" data-ko>설치 방법</a>
             </div>
+            <!-- Shown by the version script ONLY when the dev .zip is ahead of
+                 the live Web Store build (review weeks). Hidden otherwise. -->
+            <p class="hero-install-hint" data-region="hero-zip-hint" data-en hidden>
+              Web Store update in review — grab <a href="#install" class="hero-zip-link"><span data-zip-version>v…</span> .zip</a> now with manual install instructions below.
+            </p>
+            <p class="hero-install-hint" data-region="hero-zip-hint" data-ko hidden>
+              웹 스토어 업데이트 심사 중 — 지금 바로 <a href="#install" class="hero-zip-link"><span data-zip-version>v…</span> .zip</a> 을 받아 아래 안내대로 수동 설치할 수 있어요.
+            </p>
           </div>
           <!-- Lite YouTube embed — thumbnail only on first paint; iframe
                swaps in on click so the page doesn't pay YouTube's ~500KB
@@ -2622,6 +2630,17 @@ manuscript.configure({
             } else {
               if (hintEn) hintEn.textContent = '— Web Store is ahead';
               if (hintKo) hintKo.textContent = '— 웹 스토어가 더 최신이에요';
+            }
+            // Hero install hint: only surface the manual-install nudge while
+            // the dev .zip is genuinely ahead of the live Web Store build.
+            // When both versions are known and equal (or store is ahead),
+            // leave it hidden — the Web Store button is the only path users
+            // need. Requires BOTH versions; an unknown store version (empty
+            // store-version.json) keeps it hidden.
+            if (c > 0) {
+              document
+                .querySelectorAll('[data-region="hero-zip-hint"]')
+                .forEach((el) => { el.hidden = false; });
             }
           }
 
