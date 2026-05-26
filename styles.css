@@ -1116,19 +1116,6 @@ body[data-palette="studio-dark"] #mn-tour {
   box-shadow: var(--shadow-md);
 }
 
-/* ───── Hero install hint ─────
-   The small "Prefer the dev build?" line under the hero CTAs. Quiet
-   by design — the Web Store button is the main path, this just
-   surfaces the alternative for users who want it. */
-.hero-install-hint {
-  margin: 12px 0 0;
-  font-size: 13px;
-  color: var(--c-text-soft);
-}
-.hero-install-hint a { color: var(--c-text-mute); text-decoration: underline; }
-.hero-install-hint a:hover { color: var(--c-primary); }
-.hero-zip-link { font-variant-numeric: tabular-nums; }
-
 /* ───── Install — version chips + tabs ───── */
 .install-intro {
   margin: 0 0 20px;
