@@ -1074,7 +1074,7 @@ body[lang="ko"] [data-ko] { display: revert; }
 /* ─────────────────────────────────────────────────────────────
    Dark palette — mirrors src/styles/tokens.css [data-palette="studio-dark"].
    Shadow opacity bumped ~4× because black-on-black shadow is weak.
-   Mirrors design/dark-mode-design.md §4.1 + §5.
+   Mirrors docs/design/dark-mode-design.md §4.1 + §5.
    ───────────────────────────────────────────────────────────── */
 body[data-palette="studio-dark"] {
   --c-bg:        oklch(0.16  0.012 245);
@@ -1481,6 +1481,14 @@ body[data-palette="studio-dark"] .callout-warn {
   background: var(--c-primary);
   color: var(--c-primary-fg);
 }
+/* .changelog-tag 가 display:inline-block 를 지정하면 전역 lang-visibility
+   규칙 [data-en],[data-ko]{display:none} 의 specificity 와 동률이라
+   선언 순서상 hide 가 무시된다. 같은 specificity 라도 더 뒤에 와서
+   override 되도록 명시. */
+.changelog-tag[data-en],
+.changelog-tag[data-ko] { display: none; }
+body[lang="en"] .changelog-tag[data-en],
+body[lang="ko"] .changelog-tag[data-ko] { display: inline-block; }
 .changelog-summary {
   margin: 6px 0 18px;
   color: var(--c-text-mute);

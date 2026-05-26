@@ -1,10 +1,10 @@
 # Manuscript — landing site
 
-Public landing page for [**Manuscript**](https://github.com/zendy00/manuscript) — a browser extension (Chrome / Edge) for authoring DOM-aware web demos and manuals, plus a tiny **runtime bridge** that lets any web page embed a Manuscript tour.
+Public landing page for **Manuscript** — a browser extension (Chrome / Edge) for authoring DOM-aware web demos and manuals, plus a tiny **runtime bridge** that lets any web page embed a Manuscript tour.
 
 > 한국어 버전: [ko/README.md](./ko/README.md)
 
-The site itself is a single static HTML page — no build step, no bundler. It is mirrored from the [`site/`](https://github.com/zendy00/manuscript/tree/main/site) folder of the main `manuscript` repository by a GitHub Action.
+The site itself is a single static HTML page — no build step, no bundler. It is mirrored from the `site/` folder of the main `manuscript` repository by a GitHub Action.
 
 ## What's here
 
@@ -12,9 +12,12 @@ The site itself is a single static HTML page — no build step, no bundler. It i
 .
 ├── index.html              # single-page landing (EN default + KO toggle)
 ├── changelog.html          # per-version release notes (EN + KO)
+├── privacy.html            # privacy policy (EN + KO)
 ├── styles.css              # design tokens (studio palette) + layout
 ├── i18n.js                 # language toggle, smooth scroll, TOC highlight
-├── manuscript-bridge.0.1.2.js   # runtime bridge library (synced from /bridge)
+├── manuscript-bridge.0.1.3.js   # runtime bridge library (synced from /bridge)
+├── manuscript-bridge.0.1.2.js   # byte-identical alias of 0.1.3 — kept so
+│                           #   hosts pinned to the older URL keep working
 ├── store-version.json      # cron-scraped Web Store version (placeholder until
 │                           #   .github/workflows/store-version.yml runs;
 │                           #   preserved on deploy via pages.yml clean-exclude)
@@ -27,8 +30,12 @@ The site itself is a single static HTML page — no build step, no bundler. It i
 │                                     #   — index.html reads this to render
 │                                     #   the SHA + manual-install version chip
 ├── tours/
-│   ├── tour-en.json        # 8-step tour of this landing page (English)
+│   ├── tour-en.json        # tour of this landing page (English)
 │   ├── tour-ko.json        # same tour, Korean narration
+│   ├── changelog-en.json   # tour of changelog.html (English)
+│   ├── changelog-ko.json   # same, Korean narration
+│   ├── privacy-en.json     # tour of privacy.html (English)
+│   ├── privacy-ko.json     # same, Korean narration
 │   └── SKILL.md            # agent skill — drop into Claude/Cursor/etc
 │                           #   to author a tour for any URL
 ├── assets/
@@ -41,25 +48,28 @@ The site itself is a single static HTML page — no build step, no bundler. It i
 
 ## What's on the page
 
-The landing page covers six surfaces:
+The landing page covers the following surfaces:
 
 1. **Hero** — what Manuscript is, Chrome Web Store CTA, plus a quiet
    secondary link to the manual `.zip` install.
-2. **Features** — six things that set Manuscript apart.
+2. **Features** — what sets Manuscript apart.
 3. **How it works** — five-move authoring flow (picker → annotate → replay).
-4. **Runtime bridge** *(new in v0.1.4)* — how to embed a Manuscript tour
-   on any page you control: `manuscript-bridge.0.1.2.js`, `SKILL.md`,
-   example `tour-en.json` / `tour-ko.json`. Includes usage code (toggles
-   to the page's current language) and downloads.
-5. **Install** — tabbed UI: **Web Store** (recommended) vs. **Manual .zip**
+4. **Record** — the **pause-to-add-your-voice** recording flow (`Space`
+   mid-recording to pause the tour while the video keeps rolling, `Esc`
+   to wrap up).
+5. **AI agent** — drop `tours/SKILL.md` into Claude / Cursor / etc. to
+   author a tour JSON for any URL without leaving the editor.
+6. **Install** — tabbed UI: **Web Store** (recommended) vs. **Manual .zip**
    (latest dev build, ahead of Web Store review). A version chip row
    reads `store-version.json` + `downloads/latest.json` at runtime and
    shows both versions side-by-side; SHA-256 of the zip is click-to-copy.
-6. **Guide** — full eight-section user manual. Section 7 (Recording)
-   covers the v0.3 **pause-to-add-your-voice** flow (`Space` mid-recording
-   to pause the tour while the video keeps rolling, `Esc` to wrap up).
-   Section 8 ends with the **schema compatibility table** so users know
-   which JSON versions their extension can open.
+7. **Guide** — full user manual, ending with the **schema compatibility
+   table** so users know which JSON versions their extension can open.
+8. **Bridge** — how to embed a Manuscript tour on any page you control:
+   `manuscript-bridge.0.1.3.js`, `SKILL.md`, example tour JSONs. Usage
+   code toggles to the page's current language. The legacy
+   `manuscript-bridge.0.1.2.js` URL stays live as a byte-identical alias.
+9. **FAQ** — short answers to recurring questions.
 
 A floating **"What's new"** toast surfaces in the bottom-right when the
 Chrome Web Store ships a version newer than what the visitor last saw
@@ -100,8 +110,7 @@ PNGs together with any HTML changes that reference them.
 ## The bridge library — single source
 
 `manuscript-bridge.0.1.3.js` lives upstream at
-[`bridge/manuscript-bridge.0.1.3.js`](https://github.com/zendy00/manuscript/tree/main/bridge)
-in the main repo. The `prebuild` step (`npm run sync:bridge`) copies it
+`bridge/manuscript-bridge.0.1.3.js` in the main repo. The `prebuild` step (`npm run sync:bridge`) copies it
 into this folder under both `0.1.3.js` and `0.1.2.js` filenames — the
 legacy URL is kept as an alias so hosts pinned to it keep working.
 Don't edit either file here directly; the next build will overwrite
@@ -134,4 +143,4 @@ starts in `manuscript/site/`.
 
 ## License & contact
 
-v0.4.1. Email feedback to <zendy00@gmail.com>.
+v0.5.0. Email feedback to <zendy00@gmail.com>.

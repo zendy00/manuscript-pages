@@ -1,10 +1,10 @@
 # Manuscript — 랜딩 사이트
 
-[**Manuscript**](https://github.com/zendy00/manuscript)의 공개 랜딩 페이지를 호스팅하는 저장소입니다. Manuscript는 DOM 인식 기반의 웹 시연·매뉴얼 저작 브라우저 확장 프로그램 (Chrome · Edge) 이며, 본 사이트는 임의의 웹 페이지에 Manuscript 투어를 임베드할 수 있는 **런타임 브리지**도 함께 제공합니다.
+**Manuscript**의 공개 랜딩 페이지를 호스팅하는 저장소입니다. Manuscript는 DOM 인식 기반의 웹 시연·매뉴얼 저작 브라우저 확장 프로그램 (Chrome · Edge) 이며, 본 사이트는 임의의 웹 페이지에 Manuscript 투어를 임베드할 수 있는 **런타임 브리지**도 함께 제공합니다.
 
 > English: [../README.md](../README.md)
 
-사이트는 단일 정적 HTML 페이지로 별도 빌드·번들러가 없습니다. 본 저장소(`manuscript-pages`)는 메인 [`manuscript` 저장소](https://github.com/zendy00/manuscript/tree/main/site)의 `site/` 폴더가 GitHub Action에 의해 자동으로 미러링된 결과입니다.
+사이트는 단일 정적 HTML 페이지로 별도 빌드·번들러가 없습니다. 본 저장소(`manuscript-pages`)는 메인 `manuscript` 저장소의 `site/` 폴더가 GitHub Action에 의해 자동으로 미러링된 결과입니다.
 
 ## 구조
 
@@ -12,9 +12,12 @@
 .
 ├── index.html              # 단일 페이지 랜딩 (영어 default + 한국어 토글)
 ├── changelog.html          # 버전별 변경사항 (영/한 모두 수록)
+├── privacy.html            # 개인정보 처리방침 (영/한)
 ├── styles.css              # 디자인 토큰(studio 팔레트) + 레이아웃
 ├── i18n.js                 # 언어 토글, 부드러운 스크롤, TOC 하이라이트
-├── manuscript-bridge.0.1.2.js  # 런타임 브리지 라이브러리 (/bridge에서 자동 동기화)
+├── manuscript-bridge.0.1.3.js  # 런타임 브리지 라이브러리 (/bridge에서 자동 동기화)
+├── manuscript-bridge.0.1.2.js  # 0.1.3 과 byte-identical alias —
+│                           #   구버전 URL 에 핀된 호스트 호환용
 ├── store-version.json      # cron 으로 스크래핑한 Chrome 웹 스토어 버전
 │                           # (.github/workflows/store-version.yml 가 갱신,
 │                           #  pages.yml clean-exclude 로 deploy 시 보존)
@@ -27,8 +30,12 @@
 │                                    #   index.html 이 이걸 읽어 SHA + 수동
 │                                    #   설치 버전 chip 을 렌더
 ├── tours/
-│   ├── tour-en.json        # 본 랜딩 페이지 8 스텝 투어 (영어)
+│   ├── tour-en.json        # 본 랜딩 페이지 투어 (영어)
 │   ├── tour-ko.json        # 같은 투어, 한국어 narration
+│   ├── changelog-en.json   # changelog.html 투어 (영어)
+│   ├── changelog-ko.json   # 같은 투어, 한국어 narration
+│   ├── privacy-en.json     # privacy.html 투어 (영어)
+│   ├── privacy-ko.json     # 같은 투어, 한국어 narration
 │   └── SKILL.md            # agent 스킬 — Claude/Cursor 등에 던지면
 │                           #   임의 URL에 대해 투어 JSON 자동 생성
 ├── assets/
@@ -41,24 +48,28 @@
 
 ## 페이지 구성
 
-랜딩 페이지는 6개 섹션으로 구성됩니다:
+랜딩 페이지는 다음 섹션으로 구성됩니다:
 
 1. **Hero** — Manuscript 소개, Chrome 웹 스토어 CTA, 그리고 수동 `.zip`
-   설치로 가는 작은 보조 링크
-2. **Features** — 6가지 차별점
-3. **How it works** — 5단계 저작 흐름 (picker → annotate → replay)
-4. **런타임 브리지** *(v0.1.4 신규)* — 본인이 운영하는 임의의 페이지에
-   Manuscript 투어를 임베드하는 방법. `manuscript-bridge.0.1.2.js`,
-   `SKILL.md`, 예제 `tour-en.json` / `tour-ko.json` 제공. 페이지 언어에
-   맞춰 토글되는 사용 예제 코드와 다운로드 카드 포함.
-5. **Install** — 탭 UI: **웹 스토어**(추천) vs **수동 .zip**(웹 스토어
+   설치로 가는 작은 보조 링크.
+2. **Features** — 차별점 요약.
+3. **How it works** — 5단계 저작 흐름 (picker → annotate → replay).
+4. **Record** — **잠깐 멈추고 내 목소리 보태기** 녹화 흐름 (녹화 중
+   `Space` 로 시연 일시정지, 녹화는 계속, `Esc` 로 종료).
+5. **AI agent** — `tours/SKILL.md` 를 Claude / Cursor 등에 던져 임의의
+   URL 에 대해 투어 JSON 을 자동 생성.
+6. **Install** — 탭 UI: **웹 스토어**(추천) vs **수동 .zip**(웹 스토어
    검수 전의 dev 빌드, 보통 한두 단계 앞섬). 버전 chip 행이 런타임에
    `store-version.json` + `downloads/latest.json` 을 읽어 두 버전을
    나란히 보여주고, zip 의 SHA-256 은 클릭으로 복사할 수 있습니다.
-6. **Guide** — 8 섹션 전체 사용 설명서. 7번 Recording 섹션에 v0.3
-   **잠깐 멈추고 내 목소리 보태기** 흐름이 있고 (녹화 중 `Space` 로
-   시연 일시정지, 녹화는 계속, `Esc` 로 종료), 8번 끝에는 **JSON 스키마
-   호환표** — 어떤 .json 이 어떤 확장 버전에서 열리는지.
+7. **Guide** — 전체 사용 설명서. 마지막에 **JSON 스키마 호환표** —
+   어떤 .json 이 어떤 확장 버전에서 열리는지.
+8. **Bridge** — 본인이 운영하는 임의의 페이지에 Manuscript 투어를
+   임베드하는 방법. `manuscript-bridge.0.1.3.js`, `SKILL.md`, 예제 투어
+   JSON 제공. 페이지 언어에 맞춰 토글되는 사용 예제 코드와 다운로드
+   카드 포함. 구버전 `manuscript-bridge.0.1.2.js` URL 도 byte-identical
+   alias 로 유지.
+9. **FAQ** — 자주 묻는 질문에 대한 짧은 답변.
 
 우하단의 **"What's new"** 토스트는 Chrome 웹 스토어에 새 버전이 올라오고
 방문자가 그 버전을 아직 본 적이 없을 때 표시됩니다 (`localStorage` 로 추적).
@@ -97,8 +108,7 @@ HTML 변경과 함께 commit합니다.
 ## 브리지 라이브러리 — 단일 소스
 
 `manuscript-bridge.0.1.3.js`는 메인 저장소의
-[`bridge/manuscript-bridge.0.1.3.js`](https://github.com/zendy00/manuscript/tree/main/bridge)가
-원본입니다. `prebuild` 단계(`npm run sync:bridge`)에서 본 폴더로 자동
+`bridge/manuscript-bridge.0.1.3.js`가 원본입니다. `prebuild` 단계(`npm run sync:bridge`)에서 본 폴더로 자동
 복사되며, 같은 바이트가 `manuscript-bridge.0.1.2.js` 이름으로도 함께
 복사됩니다 — 구버전 URL 에 고정해 둔 외부 호스트가 깨지지 않게 alias
 로 유지. 어느 쪽이든 여기서 직접 편집하지 마세요 — 다음 빌드에서
@@ -129,4 +139,4 @@ HTML 변경과 함께 commit합니다.
 
 ## 라이선스 · 문의
 
-v0.4.1. 피드백은 <zendy00@gmail.com> 으로 보내주세요.
+v0.5.0. 피드백은 <zendy00@gmail.com> 으로 보내주세요.

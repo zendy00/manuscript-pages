@@ -95,8 +95,8 @@
           "applicationSubCategory": "DeveloperApplication",
           "operatingSystem": "Windows, macOS, Linux, ChromeOS",
           "browserRequirements": "Chromium-based browsers (Chrome, Edge) 88 or newer",
-          "softwareVersion": "0.4.1",
-          "releaseNotes": "v0.4.1 — Sub-element re-pick toggle with heartbeat cue + accurate pause/resume for narrated replay: TTS lands at a word boundary even on voices without onboundary, sub-walk and timer pick up where you left off (works across multiple pauses), and the progress bar resumes mid-track instead of restarting.",
+          "softwareVersion": "0.5.0",
+          "releaseNotes": "v0.5.0 — While paused, you can edit a step from the prompter window: rewrite its title and description, switch between auto-advance and click-to-continue, change how long each on-screen element stays, all in place. Pressing play replays the edited step from the top so the new text and narration are heard from the beginning. The authoring panel now lists every annotation on each step with a small preview — one click opens the editor, even across pages. The prompter's progress bar also resumes mid-track instead of restarting.",
           "offers": {
             "@type": "Offer",
             "price": "0",
@@ -331,9 +331,9 @@
               the perfect web demo in a minute.
             </p>
             <p class="lead" data-ko>
-              더 이상 번거로운 화면 녹화와 버벅이는 내레이션으로 시간 낭비하지
-              마세요. 클릭 한 번이면 내가 짠 안내할 내용(텍스트)에 맞춰 음성
-              안내가 흐르고, 웹 화면이 <em>살아 움직이듯</em> 자동으로 재생됩니다.
+              번거로운 화면 녹화도, 어색한 내레이션도 필요 없어요. 클릭 한 번이면
+              직접 작성한 설명에 맞춰 음성이 흘러나오고, 화면이 단계별로
+              <em>살아 움직입니다.</em>
             </p>
             <p class="lead" data-ko>
               내가 원하는 웹사이트 가이드라인 구성만 쏙쏙 골라 클릭해도 맞춤형
@@ -1028,11 +1028,11 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
               <ol>
                 <li><a href="#g-quickstart" data-en>Quick start</a><a href="#g-quickstart" data-ko>퀵 스타트</a></li>
                 <li><a href="#g-pick" data-en>Picking elements</a><a href="#g-pick" data-ko>요소 선택</a></li>
-                <li><a href="#g-annotate" data-en>Annotations</a><a href="#g-annotate" data-ko>annotation 편집</a></li>
+                <li><a href="#g-annotate" data-en>Annotation tools <span class="toc-new">v0.5</span></a><a href="#g-annotate" data-ko>주석 도구 <span class="toc-new">v0.5</span></a></li>
                 <li><a href="#g-steps" data-en>Steps &amp; reorder</a><a href="#g-steps" data-ko>스텝과 재배치</a></li>
-                <li><a href="#g-subs" data-en>Sub-elements <span class="toc-new">v0.4</span></a><a href="#g-subs" data-ko>서브 요소 <span class="toc-new">v0.4</span></a></li>
+                <li><a href="#g-subs" data-en>Inner flow <span class="toc-new">v0.5</span></a><a href="#g-subs" data-ko>내부 흐름 <span class="toc-new">v0.5</span></a></li>
                 <li><a href="#g-action" data-en>Action steps</a><a href="#g-action" data-ko>action 스텝</a></li>
-                <li><a href="#g-replay" data-en>Replay &amp; prompter</a><a href="#g-replay" data-ko>재생과 프롬프터</a></li>
+                <li><a href="#g-replay" data-en>Replay &amp; prompter <span class="toc-new">v0.5</span></a><a href="#g-replay" data-ko>재생과 발표자 창 <span class="toc-new">v0.5</span></a></li>
                 <li><a href="#g-record" data-en>Recording</a><a href="#g-record" data-ko>녹화</a></li>
                 <li><a href="#g-validate" data-en>Check steps still match <span class="toc-new">v0.4</span></a><a href="#g-validate" data-ko>스텝 점검 <span class="toc-new">v0.4</span></a></li>
                 <li><a href="#g-io" data-en>Export &amp; import</a><a href="#g-io" data-ko>내보내기·불러오기</a></li>
@@ -1070,13 +1070,13 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li>Hit <span class="iicon"><svg><use href="#i-play"/></svg></span> to replay. Use <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> <span class="kbd">Esc</span>.</li>
                 </ol>
                 <ol data-ko>
-                  <li>일반 웹 페이지를 엽니다 (<code>chrome://</code>·새 탭 불가).</li>
-                  <li>Manuscript 아이콘 클릭 → <strong>새 매뉴스크립트</strong> 클릭.</li>
-                  <li>페이지 우상단에 floating panel이 등장. 페이지의 테마 색·폰트가 팔레트에 자동 추가됩니다.</li>
-                  <li>패널 타이틀을 클릭해 이름 변경 (예: "결제 페이지 가이드").</li>
-                  <li>스텝 카드의 <strong>picker</strong> → 페이지 hover → 대상 요소 클릭.</li>
-                  <li>툴바 버튼(<span class="iicon"><svg><use href="#i-text"/></svg></span>, 도형, freedraw)으로 annotation 추가.</li>
-                  <li><span class="iicon"><svg><use href="#i-play"/></svg></span>로 재생. <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> <span class="kbd">Esc</span> 사용.</li>
+                  <li>일반 웹 페이지를 엽니다 (<code>chrome://</code>·새 탭 페이지에서는 동작하지 않아요).</li>
+                  <li>Manuscript 아이콘을 클릭하고 <strong>새 매뉴스크립트</strong>를 누르세요.</li>
+                  <li>페이지 오른쪽 위에 작성 패널이 나타납니다. 페이지의 테마 색과 글꼴이 자동으로 팔레트에 들어와요.</li>
+                  <li>패널 제목을 클릭해 이름을 바꿔 보세요 (예: "결제 페이지 가이드").</li>
+                  <li>단계 카드의 <strong>선택 도구</strong>를 누른 뒤 페이지에서 원하는 부분에 마우스를 올리고 클릭하세요.</li>
+                  <li>상단 주석 도구(<span class="iicon"><svg><use href="#i-text"/></svg></span>, 도형, 손그림)로 설명을 덧붙입니다.</li>
+                  <li><span class="iicon"><svg><use href="#i-play"/></svg></span> 로 재생. 단축키 <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> <span class="kbd">Esc</span>.</li>
                 </ol>
                 <figure>
                   <img
@@ -1087,12 +1087,12 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   />
                   <img
                     src="./assets/screenshots/quickstart-panel-ko.png"
-                    alt="페이지 오른쪽에 떠 있는 floating panel — 새 매뉴스크립트 직후, 'Step 1' 카드 하나, picker arm, 상단에 페이지 테마 색에서 추출한 팔레트, 하단 컨트롤."
+                    alt="페이지 오른쪽에 떠 있는 작성 패널 — 새 매뉴스크립트 직후 모습. 'Step 1' 카드 하나, 선택 도구 준비, 상단에 페이지 테마 색에서 가져온 팔레트, 하단 컨트롤 영역."
                     data-ko
                     onerror="this.style.display='none'"
                   />
                   <figcaption data-en>Floating panel right after <em>New Manuscript</em> — palette across the top (auto-populated from the page's theme color + fonts), one empty step card, picker ready to arm, footer with play / record / validate / export controls.</figcaption>
-                  <figcaption data-ko><em>새 매뉴스크립트</em> 직후의 floating panel — 상단 팔레트 (페이지 테마 색·폰트가 자동 추가됨), 빈 스텝 카드 하나, picker arm 준비, 하단에 재생 / 녹화 / 검증 / 내보내기 컨트롤.</figcaption>
+                  <figcaption data-ko><em>새 매뉴스크립트</em> 직후의 작성 패널 — 상단 팔레트(페이지 테마 색·글꼴이 자동으로 들어옴), 빈 단계 카드 하나, 선택 도구 준비, 하단에 재생 / 녹화 / 점검 / 내보내기 컨트롤.</figcaption>
                 </figure>
               </section>
 
@@ -1109,15 +1109,15 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   tries each clue in turn until one of them lands on the right spot.
                 </p>
                 <p data-ko>
-                  요소를 한 번 픽하면 Manuscript는 그 자리를 다시 찾기 위한 단서
-                  세 가지를 적어둡니다. <strong>첫째</strong> — 페이지가 그 요소에
-                  붙여둔 내부 이름표. <strong>둘째</strong> — 화면에 보이는 글자와
+                  요소를 한 번 고르면 Manuscript 는 그 자리를 다시 찾기 위한 단서
+                  세 가지를 적어 둡니다. <strong>첫째</strong> — 페이지가 그 요소에
+                  붙여 둔 내부 이름표. <strong>둘째</strong> — 화면에 보이는 글자와
                   그 주변 위치. <strong>셋째</strong> — 화면 안에서의 위치와 근처에
-                  있는 글자들. 나중에 페이지가 바뀌어도 Manuscript는 이 세 단서를
-                  차례로 시도해 같은 자리를 다시 찾아냅니다.
+                  있는 글자들. 나중에 페이지가 조금 바뀌어도 Manuscript 는 이 세
+                  단서를 차례로 시도해 같은 자리를 다시 찾아냅니다.
                 </p>
                 <p data-en><strong>Pages inside pages (iframe, one level deep):</strong> If the inner page comes from the same website, picking and playback both work. If it comes from a different website, the first click still registers, but the browser locks Manuscript out at playback time so that step shows a "couldn't find it" message. Pages nested two or more levels deep aren't supported yet.</p>
-                <p data-ko><strong>페이지 안에 들어 있는 또 다른 페이지(iframe, 1단 깊이):</strong> 안쪽이 같은 사이트면 픽·재생 모두 정상 동작합니다. 안쪽이 다른 사이트면 클릭은 잡히지만, 재생 시점에는 브라우저가 접근을 막아 "요소를 찾지 못함" 안내가 뜹니다. 두 단계 이상 중첩된 페이지는 아직 지원하지 않습니다.</p>
+                <p data-ko><strong>페이지 안에 들어 있는 또 다른 페이지(iframe, 한 단계 깊이):</strong> 안쪽이 같은 사이트라면 선택과 재생 모두 정상으로 동작합니다. 안쪽이 다른 사이트라면 클릭은 등록되지만, 재생할 때 브라우저가 접근을 막아 "요소를 찾지 못했어요" 라는 안내가 뜹니다. 두 단계 이상 깊게 들어간 페이지는 아직 지원하지 않습니다.</p>
                 <figure>
                   <img
                     src="./assets/screenshots/flow-02-picker-en.png"
@@ -1127,16 +1127,16 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   />
                   <img
                     src="./assets/screenshots/flow-02-picker-ko.png"
-                    alt="페이지 위에서 picker arm 상태 — 분홍색 사각형 outline이 마우스를 따라 움직임."
+                    alt="페이지 위에서 선택 모드가 켜진 상태 — 분홍색 사각형 테두리가 마우스를 따라 움직입니다."
                     data-ko
                     onerror="this.style.display='none'"
                   />
                   <figcaption data-en>Picker armed — a pink outline tracks the mouse; one click locks the target and the spotlight darkens the rest of the page.</figcaption>
-                  <figcaption data-ko>Picker arm 상태 — 분홍 outline이 마우스를 따라옵니다. 클릭 한 번이면 대상이 고정되고 페이지의 나머지가 spotlight로 어두워집니다.</figcaption>
+                  <figcaption data-ko>선택 모드가 켜진 상태 — 분홍색 테두리가 마우스를 따라옵니다. 클릭 한 번이면 그 자리가 고정되고 페이지의 나머지 부분이 어두워지면서 강조 표시가 나타나요.</figcaption>
                 </figure>
 
                 <h3 data-en>Edit the ring &amp; the dim background</h3>
-                <h3 data-ko>Spotlight ring·dim 편집</h3>
+                <h3 data-ko>강조 테두리·어두운 배경 편집</h3>
                 <p data-en>
                   Once a step has a picked element, the spotlight draws a colored
                   ring around the target and dims everything else. Both are
@@ -1145,11 +1145,11 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   swatch + slider model as the annotation property popup.
                 </p>
                 <p data-ko>
-                  스텝에 요소가 잡혀 있으면 spotlight가 그 요소 주위에 색 ring을
-                  그리고 나머지 페이지는 dim 처리합니다. 둘 다 스텝 단위로 설정.
-                  <strong>ring(테두리) 부분을 클릭</strong>하면 <em>Spotlight</em>
-                  popup이 열립니다 — annotation 속성 popup과 동일한 swatch + 슬라이더
-                  구조입니다.
+                  단계에 요소가 선택되어 있으면 강조 표시가 그 요소 둘레에 색
+                  테두리를 그리고 나머지 페이지는 어둡게 처리합니다. 둘 다 단계
+                  단위로 설정돼요. <strong>테두리(요소 둘레의 색 띠)를 클릭</strong>
+                  하면 <em>강조 표시</em> 속성 창이 열립니다 — 주석 속성 창과 같은
+                  색 견본 + 슬라이더 구성이에요.
                 </p>
 
                 <figure>
@@ -1161,12 +1161,12 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   />
                   <img
                     src="./assets/screenshots/spotlight-editor-ko.png"
-                    alt="Spotlight 속성 popup — 상단 SPOTLIGHT 라벨과 Muted/Vibrant 토글, Ring 행에 swatch 팔레트와 Width 슬라이더, 구분선, Dim 행에 swatch 팔레트와 Opacity 슬라이더, 하단 기본값 복원 버튼과 닫기 X."
+                    alt="강조 표시 속성 창 — 상단 SPOTLIGHT 라벨과 Muted/Vibrant 토글, 테두리 줄에 색 견본 팔레트와 굵기 슬라이더, 구분선, 어두운 배경 줄에 색 견본 팔레트와 투명도 슬라이더, 하단 기본값 복원 버튼과 닫기 X."
                     data-ko
                     onerror="this.style.display='none'"
                   />
                   <figcaption data-en>The Spotlight property popup — Ring section (color + Width slider) on top, Dim section (color + Opacity slider) below, with the Muted / Vibrant swatch toggle and a Reset to default button along the edges.</figcaption>
-                  <figcaption data-ko>Spotlight 속성 popup — 상단 Ring 영역 (색 + Width 슬라이더), 하단 Dim 영역 (색 + Opacity 슬라이더), Muted / Vibrant swatch 토글과 기본값 복원 버튼이 가장자리에 배치.</figcaption>
+                  <figcaption data-ko>강조 표시 속성 창 — 상단 테두리 영역(색 + 굵기 슬라이더), 하단 어두운 배경 영역(색 + 투명도 슬라이더). Muted / Vibrant 색 견본 토글과 기본값 복원 버튼이 가장자리에 배치돼 있습니다.</figcaption>
                 </figure>
 
                 <ul data-en>
@@ -1179,13 +1179,13 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li><strong>×</strong> or click outside — closes the popup. Changes save as you edit; no separate apply step.</li>
                 </ul>
                 <ul data-ko>
-                  <li><strong>Muted / Vibrant 토글</strong> — annotation 편집기와 같은 swatch 세트. ring 색이 같은 스텝의 annotation과 톤이 맞습니다.</li>
-                  <li><strong>Ring 색</strong> — 현재 swatch 모드의 8 swatch. 기본값은 테마 primary 블루(<code>oklch(0.42 0.09 250)</code>).</li>
-                  <li><strong>Width</strong> 슬라이더 — 0 ~ 12 px. 기본 <strong>3 px</strong>. 0으로 두면 ring만 사라지고 dim은 유지됩니다.</li>
-                  <li><strong>Dim 색</strong> — 같은 8 swatch. 기본 검정(<code>#000000</code>). spotlight rect 바깥 영역이 이 색으로 덮입니다.</li>
-                  <li><strong>Opacity</strong> 슬라이더 — 0 ~ 100 %. 기본 <strong>55 %</strong>.</li>
-                  <li><strong>Reset to default</strong> — 그 스텝의 <code>spotlight</code> 필드를 비웁니다. 비어 있으면 확장이 hardcoded default로 그립니다.</li>
-                  <li><strong>×</strong> 또는 popup 바깥 클릭 — 닫기. 변경은 즉시 저장되며 별도 적용 버튼은 없습니다.</li>
+                  <li><strong>Muted / Vibrant 토글</strong> — 주석 편집기와 같은 색 견본 묶음이라서, 테두리 색이 같은 단계의 주석과 자연스럽게 어울립니다.</li>
+                  <li><strong>테두리 색</strong> — 현재 모드의 색 견본 8 개. 기본값은 테마의 주 색(파랑).</li>
+                  <li><strong>굵기</strong> 슬라이더 — 0 ~ 12 px. 기본 <strong>3 px</strong>. 0 으로 두면 테두리는 사라지고 어두운 배경만 남습니다.</li>
+                  <li><strong>어두운 배경 색</strong> — 같은 색 견본 8 개. 기본은 검정. 강조된 영역 바깥쪽 페이지가 이 색으로 덮입니다.</li>
+                  <li><strong>투명도</strong> 슬라이더 — 0 ~ 100 %. 기본 <strong>55 %</strong>.</li>
+                  <li><strong>기본값 복원</strong> — 그 단계의 강조 표시 설정을 비웁니다. 비워두면 기본 스타일로 자동으로 그려져요.</li>
+                  <li><strong>×</strong> 또는 창 바깥 클릭 — 닫기. 변경은 그 자리에서 저장되며 별도의 적용 버튼은 없습니다.</li>
                 </ul>
 
                 <p class="callout" data-en>
@@ -1196,11 +1196,10 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   global "apply to all" yet.
                 </p>
                 <p class="callout" data-ko>
-                  <strong>스텝 단위, 전역 아님.</strong> spotlight 스타일은 각
-                  <code>Step</code>에 저장됩니다(<code>Step.spotlight</code>).
-                  매뉴스크립트 전체에 같은 톤을 적용하려면 첫 스텝의 값을 다른
-                  스텝에 직접 복사해야 합니다 — 아직 "전체 스텝에 적용" 옵션은
-                  없습니다.
+                  <strong>단계마다 따로 저장됩니다.</strong> 강조 표시 스타일은 단계
+                  단위로 저장되기 때문에, 매뉴스크립트 전체에 같은 톤을 입히고
+                  싶다면 첫 단계의 값을 다른 단계에 똑같이 맞춰 두세요. 아직
+                  "모든 단계에 한꺼번에 적용" 옵션은 없습니다.
                 </p>
 
                 <p class="callout" data-en>
@@ -1209,27 +1208,32 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   doesn't interfere with action steps or page interactions.
                 </p>
                 <p class="callout" data-ko>
-                  <strong>편집 모드 전용.</strong> popup은 편집(authoring) 중에만
-                  열립니다. 재생 중에는 ring 클릭이 통과되어 action 스텝과 페이지
-                  상호작용을 방해하지 않습니다.
+                  <strong>편집 중에만 열립니다.</strong> 이 속성 창은 매뉴스크립트를
+                  만들고 있을 때만 열려요. 재생 중에는 테두리 클릭이 그대로 통과돼
+                  사용자가 페이지를 누르는 동작이나 액션 단계의 흐름을 방해하지
+                  않습니다.
                 </p>
               </section>
 
               <section id="g-annotate">
-                <h2 data-en>3. Annotations</h2>
-                <h2 data-ko>3. annotation 편집</h2>
+                <h2 data-en>3. Annotation tools</h2>
+                <h2 data-ko>3. 주석 도구</h2>
                 <p data-en>
-                  Three kinds — text, shape (8 sub-kinds: rectangle, ellipse,
-                  triangle, diamond, star, callout, line, block arrow), and
-                  freedraw (hand-drawn via rough.js). Click any annotation to
-                  open the property popup.
+                  The palette across the top of the panel — labelled
+                  <strong>Annotation tools</strong> — holds three kinds: text,
+                  shape (8 sub-kinds: rectangle, ellipse, triangle, diamond,
+                  star, callout, line, block arrow), and freedraw (hand-drawn
+                  via rough.js). Click any annotation on the page to open its
+                  property popup.
                 </p>
                 <p data-ko>
-                  3종 — text, shape(8가지: 사각형/타원/삼각형/마름모/별/콜아웃/선/블록 화살표),
-                  freedraw(rough.js 손그림). annotation을 클릭하면 속성 popup이 열립니다.
+                  패널 상단의 <strong>주석 도구</strong> 영역에 세 종류가 있습니다 —
+                  글상자, 도형 (사각형·타원·삼각형·마름모·별·콜아웃·선·블록 화살표
+                  8가지), 손그림 (rough.js). 페이지에 그려진 주석을 클릭하면 그 자리에
+                  속성 popup이 열립니다.
                 </p>
                 <h3 data-en>Property popup</h3>
-                <h3 data-ko>속성 popup</h3>
+                <h3 data-ko>속성 창</h3>
                 <ul data-en>
                   <li><strong>Color</strong> — 8 swatches + site-extracted colors + custom picker.</li>
                   <li><strong>Muted / Vibrant</strong> toggle — swaps the 8-swatch palette without changing the UI palette.</li>
@@ -1238,11 +1242,11 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li><strong>Opacity</strong> slider — separate for stroke, fill, text background.</li>
                 </ul>
                 <ul data-ko>
-                  <li><strong>색상</strong> — 8 swatch + 사이트에서 추출한 색 + custom picker.</li>
-                  <li><strong>Muted / Vibrant</strong> 토글 — UI 팔레트 변경 없이 8 swatch만 교체.</li>
-                  <li><strong>글꼴</strong> — 사이트 글꼴 먼저, 그다음 base 글꼴. <strong>Asta Sans</strong> fallback 포함으로 페이지 컨텍스트가 바뀌어도 글꼴 유지.</li>
-                  <li><strong>효과</strong> — Fade / Slide / Bounce / Zoom / Rotate 2× 등장 애니메이션.</li>
-                  <li><strong>투명도</strong> 슬라이더 — stroke / fill / text 배경 각각.</li>
+                  <li><strong>색상</strong> — 색 견본 8 개 + 사이트에서 추출한 색 + 직접 색 고르기.</li>
+                  <li><strong>Muted / Vibrant</strong> 토글 — 패널 자체 색은 그대로 두고 색 견본 묶음만 두 톤으로 전환합니다.</li>
+                  <li><strong>글꼴</strong> — 사이트 글꼴이 먼저 나오고, 그다음 기본 글꼴. <strong>Asta Sans</strong> 가 예비 글꼴로 들어가 있어 페이지가 바뀌어도 글꼴이 유지돼요.</li>
+                  <li><strong>등장 효과</strong> — Fade / Slide / Bounce / Zoom / Rotate 2× 중 선택할 수 있습니다.</li>
+                  <li><strong>투명도</strong> 슬라이더 — 선 / 채움 / 글상자 배경 각각 따로 조절합니다.</li>
                 </ul>
                 <figure>
                   <img
@@ -1253,17 +1257,59 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   />
                   <img
                     src="./assets/screenshots/flow-03-annotate-ko.png"
-                    alt="annotation 속성 popup — 폰트 select, 크기, 굵게/기울임, Text/Bg/Border swatch 행, Effect 드롭다운, Alpha 슬라이더"
+                    alt="주석 속성 창 — 글꼴 선택, 크기, 굵게/기울임, 글자색·배경·테두리 색 견본 줄, 등장 효과 드롭다운, 투명도 슬라이더."
                     data-ko
                     onerror="this.style.display='none'"
                   />
                   <figcaption data-en>The property popup — font picker on top, swatch rows for Text / Bg / Border in the middle, Effect dropdown and Alpha slider at the bottom.</figcaption>
-                  <figcaption data-ko>속성 popup — 상단 폰트 select, 중앙 Text / Bg / Border swatch 행, 하단 Effect 드롭다운과 Alpha 슬라이더.</figcaption>
+                  <figcaption data-ko>속성 창 — 상단 글꼴 선택, 가운데 글자색·배경·테두리 색 견본 줄, 하단 등장 효과 드롭다운과 투명도 슬라이더.</figcaption>
                 </figure>
+                <h3 data-en>Per-step annotation list <span class="new-badge">NEW v0.5.0</span></h3>
+                <h3 data-ko>스텝별 주석 목록 <span class="new-badge">NEW v0.5.0</span></h3>
+                <p data-en>
+                  Every step card now opens an <strong>Annotation tools (N)</strong>
+                  section that lists every text box, shape, and drawing on that
+                  step. Each row carries a small preview that reflects the
+                  actual colors and shape kind, so you can spot the right one
+                  at a glance.
+                </p>
+                <p data-ko>
+                  단계 카드마다 <strong>주석 도구 (N)</strong> 영역이 열려
+                  그 단계에 그려진 모든 글상자·도형·손그림을 한 줄씩 보여줍니다.
+                  각 항목 옆 작은 미리보기에 실제 색과 도형 종류가 그대로
+                  반영되어 한눈에 어느 항목인지 알아볼 수 있어요.
+                </p>
+                <ul data-en>
+                  <li><strong>Click a row</strong> — opens that annotation's property panel. If the annotation belongs to another step, the panel switches step automatically. If it lives on another page, that page loads and the annotation is selected when it's ready.</li>
+                  <li><strong>Trash icon</strong> — removes the annotation from the step.</li>
+                  <li><strong>Header click</strong> — folds the list. The Inner flow section right above folds the same way.</li>
+                </ul>
+                <ul data-ko>
+                  <li><strong>항목 클릭</strong> — 해당 주석의 속성 패널이 열립니다. 다른 단계의 주석이면 단계가 함께 전환되고, 다른 페이지의 주석이면 그 페이지를 자동으로 불러와 선택해 줍니다.</li>
+                  <li><strong>휴지통 아이콘</strong> — 단계에서 해당 주석을 삭제합니다.</li>
+                  <li><strong>머리글 클릭</strong> — 목록을 접습니다. 바로 위의 내부 흐름 영역도 같은 방식으로 접고 펼 수 있어요.</li>
+                </ul>
+                <figure>
+                  <img
+                    src="./assets/screenshots/step-annotations-list-en.png"
+                    alt="Step card in the floating panel showing the Inner flow row and an expanded Annotation tools section with three rows — each row has a small kind icon (T, square, scribble) followed by a color-accurate mini preview, and a trash icon on the right."
+                    data-en
+                    onerror="this.style.display='none'"
+                  />
+                  <img
+                    src="./assets/screenshots/step-annotations-list-ko.png"
+                    alt="플로팅 패널의 단계 카드 — 내부 흐름 줄과 펼쳐진 주석 도구 영역. 각 항목은 작은 종류 아이콘 (T, 도형, 손그림) + 실제 색이 반영된 미리보기 + 우측 휴지통 아이콘."
+                    data-ko
+                    onerror="this.style.display='none'"
+                  />
+                  <figcaption data-en>The annotation list inside a step card — color-accurate previews per kind, single-click to open the property popup, trash to delete. The Inner flow header above it folds and unfolds with the same gesture.</figcaption>
+                  <figcaption data-ko>단계 카드 안 주석 목록 — 종류별로 실제 색이 반영된 미리보기, 클릭 한 번으로 속성 popup, 휴지통으로 삭제. 그 위의 내부 흐름 머리글도 같은 방식으로 접고 펼 수 있습니다.</figcaption>
+                </figure>
+
                 <h3 data-en>Resize, rotate, animate</h3>
                 <h3 data-ko>크기 조절·회전·애니메이션</h3>
                 <p data-en>Click an annotation to reveal handles. Corner drag = resize, top <span class="iicon"><svg><use href="#i-rotate"/></svg></span> = rotate, bottom-left <span class="iicon is-trash"><svg><use href="#i-trash"/></svg></span> = delete. Rotation + animation combine, the annotation lands at the chosen angle.</p>
-                <p data-ko>annotation을 클릭하면 핸들이 표시됩니다. 코너 드래그로 크기 조절, 상단 <span class="iicon"><svg><use href="#i-rotate"/></svg></span>로 회전, 좌하단 <span class="iicon is-trash"><svg><use href="#i-trash"/></svg></span>로 삭제. 회전과 애니메이션이 결합되어 최종 각도로 안착합니다.</p>
+                <p data-ko>주석을 클릭하면 모서리 손잡이가 나타납니다. 모서리를 드래그하면 크기 조절, 상단의 <span class="iicon"><svg><use href="#i-rotate"/></svg></span> 로 회전, 좌측 아래의 <span class="iicon is-trash"><svg><use href="#i-trash"/></svg></span> 로 삭제. 회전과 등장 효과가 결합되어 최종 각도로 자연스럽게 안착합니다.</p>
               </section>
 
               <section id="g-steps">
@@ -1274,66 +1320,77 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li><strong>Append</strong> — large <span class="iicon"><svg><use href="#i-plus"/></svg></span> at the bottom.</li>
                   <li><strong>Reorder</strong> — drag a step card to move it.</li>
                   <li><strong>Spotlight a step</strong> — click the card. The page auto-scrolls to the picked element and shows the spotlight.</li>
-                  <li><strong>Description</strong> — contenteditable text on the card. Used as the presenter note and read aloud during replay.</li>
-                  <li><strong>Timer chip</strong> — click the seconds value on the top-right of a card to set auto-advance.</li>
-                  <li><strong>Action toggle</strong> — pause icon on the top-right toggles "wait for user click".</li>
+                  <li><strong>Title &amp; description</strong> — both editable directly on the card. Description doubles as the presenter note and is read aloud during replay.</li>
+                  <li><strong>Timer chip</strong> — click the seconds value on the top-right to set auto-advance.</li>
+                  <li><strong>Action toggle</strong> — pause icon on the top-right switches the step between auto-advance and wait-for-user-click.</li>
+                  <li><strong>Inner flow &amp; Annotation tools</strong> <span class="new-badge">NEW v0.5.0</span> — two collapsible sections at the bottom of the card. Click a header to fold or unfold; see §3 (Annotation tools) and §5 (Inner flow) for details.</li>
                 </ul>
                 <ul data-ko>
                   <li><strong>스텝 사이 삽입</strong> — 카드 사이 작은 <span class="iicon"><svg><use href="#i-plus"/></svg></span>.</li>
                   <li><strong>끝에 추가</strong> — 하단 큰 <span class="iicon"><svg><use href="#i-plus"/></svg></span>.</li>
-                  <li><strong>순서 변경</strong> — 스텝카드를 드래그.</li>
+                  <li><strong>순서 변경</strong> — 스텝 카드를 드래그.</li>
                   <li><strong>스텝 spotlight</strong> — 카드 클릭. 페이지가 해당 요소로 자동 스크롤되고 spotlight 표시.</li>
-                  <li><strong>설명</strong> — 카드의 contenteditable 텍스트. 발표자 노트로 사용되며 재생 중 음성으로 읽힙니다.</li>
-                  <li><strong>타이머 chip</strong> — 카드 우상단의 초 단위 값 클릭으로 자동 진행 시간 설정.</li>
-                  <li><strong>action 토글</strong> — 우상단 일시정지 아이콘으로 "사용자 클릭 대기" 토글.</li>
+                  <li><strong>제목 · 설명</strong> — 카드에서 직접 편집 가능. 설명은 발표자 노트로 쓰이고 재생 중 음성으로 읽힙니다.</li>
+                  <li><strong>타이머 chip</strong> — 카드 우상단 초 단위 값을 클릭해 자동 진행 시간 설정.</li>
+                  <li><strong>action 토글</strong> — 우상단 일시정지 아이콘으로 자동 진행과 클릭 대기를 전환.</li>
+                  <li><strong>내부 흐름 · 주석 도구</strong> <span class="new-badge">NEW v0.5.0</span> — 카드 하단의 두 영역. 머리글 클릭으로 접고 펼 수 있습니다. 자세한 동작은 §3 (주석 도구) 와 §5 (내부 흐름) 참고.</li>
                 </ul>
                 <figure>
                   <img
                     src="./assets/screenshots/flow-04-steps-en.png"
-                    alt="Floating panel with three step cards stacked vertically — each card shows a number badge, a thumbnail of its picked element, a description block, and the timer chip + action toggle in the corner. The middle step also shows a sub-element track below the card."
+                    alt="Floating panel with three step cards stacked vertically — each card shows a number badge, a thumbnail of its picked element, a title and description block, and the timer chip + action toggle in the corner. The middle step has an Inner flow timeline plus an Annotation tools section, both collapsible."
                     data-en
                     onerror="this.style.display='none'"
                   />
                   <img
                     src="./assets/screenshots/flow-04-steps-ko.png"
-                    alt="패널에 세 개의 스텝 카드가 세로로 쌓여 있는 모습 — 각 카드에 번호 뱃지, picked element thumbnail, 설명 블록, 타이머 chip 과 action 토글. 가운데 스텝에는 카드 아래 sub-element 트랙도 보임."
+                    alt="플로팅 패널에 세 개의 단계 카드가 세로로 쌓여 있는 모습 — 각 카드에 번호 배지, picked element 썸네일, 제목·설명 블록, 우상단의 타이머 chip 과 action 토글. 가운데 단계 카드에는 접고 펼 수 있는 내부 흐름 타임라인과 주석 도구 영역도 함께 보임."
                     data-ko
                     onerror="this.style.display='none'"
                   />
-                  <figcaption data-en>Step cards stacked in the panel — drag a card to reorder, click between cards to insert, click a card to jump the spotlight to that step.</figcaption>
-                  <figcaption data-ko>패널에 쌓인 스텝 카드 — 스텝카드를 드래그해 순서 변경, 카드 사이를 클릭해 끼워 넣기, 카드를 클릭하면 그 스텝으로 spotlight 이동.</figcaption>
+                  <figcaption data-en>Step cards stacked in the panel — drag to reorder, click between cards to insert, click a card to jump the spotlight to that step. Inner flow and Annotation tools sections at the bottom fold and unfold with their headers.</figcaption>
+                  <figcaption data-ko>패널에 쌓인 단계 카드 — 드래그로 순서 변경, 카드 사이 클릭으로 끼워 넣기, 카드 클릭으로 그 단계로 spotlight 이동. 하단의 내부 흐름·주석 도구 영역은 머리글 클릭으로 접고 펼 수 있습니다.</figcaption>
                 </figure>
               </section>
 
               <section id="g-subs">
-                <h2 data-en>5. Sub-elements <span class="new-badge">NEW v0.4.0</span></h2>
-                <h2 data-ko>5. 서브 요소 <span class="new-badge">NEW v0.4.0</span></h2>
+                <h2 data-en>5. Inner flow <span class="new-badge">renamed v0.5.0</span></h2>
+                <h2 data-ko>5. 내부 흐름 <span class="new-badge">renamed v0.5.0</span></h2>
                 <p data-en>
                   A single step can spotlight a <strong>row of related items</strong>
                   in sequence while the same description plays — toolbar buttons,
-                  feature cards, form fields. The primary element is what you
-                  pick first; sub-elements are added below the step card and
-                  visited one by one during replay with smooth transitions.
+                  feature cards, form fields. The first element you pick is
+                  the main one; extra elements join the step's <strong>Inner flow</strong>
+                  section below the card and are visited one by one during
+                  replay with smooth transitions.
                 </p>
                 <p data-ko>
-                  하나의 스텝이 <strong>여러 요소를 순서대로</strong> 비춥니다 — 툴바
-                  버튼, 카드 묶음, 폼 필드 같은 묶음. 처음 picker 로 잡은 게 primary,
-                  스텝 카드 아래에 sub-element 가 줄지어 추가되고 재생 시 부드러운
-                  전환으로 하나씩 강조됩니다. 스텝카드에 작성하신 설명이 읽히는 동안
-                  움직여요.
+                  하나의 단계가 <strong>여러 요소를 순서대로</strong> 비춥니다 —
+                  툴바 버튼, 카드 묶음, 폼 필드 같은 묶음. 처음 picker 로 잡은 게
+                  대표 요소이고, 추가 요소는 단계 카드 아래 <strong>내부 흐름</strong>
+                  영역에 줄지어 추가되어 재생 시 부드러운 전환으로 하나씩
+                  강조됩니다. 단계의 설명이 읽히는 동안 움직여요.
+                </p>
+                <p class="callout" data-en>
+                  <strong>Naming note (v0.5.0)</strong> — what used to be called
+                  "Sub-elements" is now <strong>Inner flow</strong>.
+                </p>
+                <p class="callout" data-ko>
+                  <strong>용어 변경 (v0.5.0)</strong> — 예전의 "보조 요소" 영역이
+                  <strong>내부 흐름</strong> 으로 바뀌었습니다.
                 </p>
 
                 <h3 data-en>Adding sub-elements</h3>
-                <h3 data-ko>서브 요소 추가</h3>
+                <h3 data-ko>내부 요소 추가</h3>
                 <ul data-en>
                   <li>Below the step card, click the dashed <strong>+</strong> at the right end of the sub track. The picker turns on — click an element on the page to add it as a sub.</li>
                   <li><strong>Subs have to live on the same page as the primary.</strong> If you've navigated to a different page, the picker refuses. Either go back to the original page, or rebuild the step from the right page.</li>
                   <li>When you add a new sub, the step's remaining time is split evenly across the primary and every sub.</li>
                 </ul>
                 <ul data-ko>
-                  <li>스텝 카드 아래 서브 트랙 오른쪽 끝의 점선 <strong>+</strong> 를 누르면 picker 가 켜집니다 — 페이지에서 원하는 요소를 클릭하면 sub 로 추가됩니다.</li>
-                  <li><strong>서브 요소는 primary 와 같은 페이지에서만 잡을 수 있습니다.</strong> 다른 페이지로 이동한 상태면 picker 가 거부합니다. 원래 페이지로 돌아가거나, 맞는 페이지에서 스텝을 다시 만드세요.</li>
-                  <li>새 sub 를 추가하면 스텝의 남은 시간이 primary 와 모든 sub 에 균등하게 나눠집니다.</li>
+                  <li>단계 카드 아래 내부 흐름 줄 오른쪽 끝의 점선 <strong>+</strong> 를 누르면 선택 모드가 켜집니다 — 페이지에서 원하는 부분을 클릭하면 그 자리에 추가됩니다.</li>
+                  <li><strong>내부 요소는 대표 요소와 같은 페이지에서만 선택할 수 있습니다.</strong> 다른 페이지로 이동한 상태라면 선택이 거부돼요. 원래 페이지로 돌아가거나, 맞는 페이지에서 단계를 새로 만드세요.</li>
+                  <li>새 요소를 추가하면 단계의 남은 시간이 대표 요소와 추가된 모든 내부 요소에 똑같이 나눠집니다.</li>
                 </ul>
 
                 <figure>
@@ -1345,12 +1402,12 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   />
                   <img
                     src="./assets/screenshots/sub-track-ko.png"
-                    alt="floating panel 스텝 카드 아래 서브 트랙 — primary thumbnail(1번), sub thumbnails(2, 3, 4번), 우측 끝의 점선 + 버튼."
+                    alt="플로팅 패널 단계 카드 아래 내부 흐름 줄 — 대표 썸네일(1번), 추가된 내부 요소 썸네일(2, 3, 4번)이 가로로, 우측 끝에 점선 + 버튼."
                     data-ko
                     onerror="this.style.display='none'"
                   />
                   <figcaption data-en>Sub-element track on a step card — primary thumbnail (1), sub thumbnails (2, 3, 4), gap labels between them, dashed + at the right end to add a new sub.</figcaption>
-                  <figcaption data-ko>스텝 카드의 서브 트랙 — primary thumbnail(1), sub thumbnails(2, 3, 4), 그 사이의 간격 라벨, 우측 끝 점선 + 로 새 sub 추가.</figcaption>
+                  <figcaption data-ko>단계 카드의 내부 흐름 줄 — 대표 썸네일(1번), 추가된 내부 요소들(2, 3, 4번), 그 사이의 시간 라벨, 우측 끝의 점선 + 로 새 요소 추가.</figcaption>
                 </figure>
 
                 <h3 data-en>Numbered badges &amp; replay order</h3>
@@ -1363,9 +1420,9 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   to the next.
                 </p>
                 <p data-ko>
-                  각 노드에 동그라미 번호 뱃지가 붙습니다 — primary = 1, 첫 sub = 2,
-                  두 번째 sub = 3, … 재생 시 spotlight 가 이 번호 순서로 방문합니다.
-                  노드 사이 전환은 350 ms ease-in-out-cubic 으로 부드럽게 이어집니다.
+                  각 요소에 동그라미 번호 배지가 붙습니다 — 대표 요소가 1, 첫 내부 요소가 2,
+                  두 번째 내부 요소가 3 … 식이에요. 재생할 때 강조 표시가 이 번호 순서대로
+                  옮겨갑니다. 요소 사이의 전환은 0.35 초 동안 부드럽게 흘러가요.
                 </p>
 
                 <h3 data-en>Timing model</h3>
@@ -1377,14 +1434,14 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li><strong>Voice narration runs separately.</strong> The step's description is read aloud once over the whole sub sequence, and the step waits for whichever finishes last — narration or the last sub.</li>
                 </ul>
                 <ul data-ko>
-                  <li><strong>스텝 전체 시간은 그대로 유지됩니다.</strong> 각 노드(primary + 모든 sub)에 머무는 시간의 합이 스텝의 자동 진행 초와 같아요. 자동 진행 값이 기준이고, 나머지는 그 안에서 나뉩니다.</li>
-                  <li><strong>노드 사이의 간격 라벨을 드래그</strong>하면 시간 분배가 바뀝니다. 라벨이 너무 빨리 따라오지 않도록 살짝 제한이 걸려 있어 원하는 값에 정확히 멈출 수 있고, 다른 간격은 비례적으로 늘거나 줄어 전체 시간이 그대로 유지됩니다.</li>
-                  <li><strong>한 노드의 최소 시간은 100 ms.</strong> 가장 짧게 잡아도 각 요소에서 그 시간만큼은 머무릅니다.</li>
-                  <li><strong>음성 안내는 별도로 흐릅니다.</strong> 스텝 설명은 sub 시퀀스 전체에 걸쳐 한 번 읽히고, 음성과 마지막 sub 중 늦게 끝나는 쪽까지 기다린 다음 다음 스텝으로 넘어갑니다.</li>
+                  <li><strong>단계 전체 시간은 그대로 유지됩니다.</strong> 각 요소에 머무는 시간을 다 더하면 단계의 자동 진행 시간과 같아요. 자동 진행 값이 기준이고, 그 안에서 요소마다 나눠 갖습니다.</li>
+                  <li><strong>요소 사이의 시간 라벨을 드래그</strong>하면 시간 배분이 바뀝니다. 라벨이 미세하게 따라오도록 살짝 제한이 걸려 있어 원하는 값에 정확히 멈출 수 있고, 다른 시간은 그만큼 비례해 늘거나 줄어 전체 시간은 그대로 유지됩니다.</li>
+                  <li><strong>한 요소의 최소 시간은 0.1 초.</strong> 가장 짧게 잡아도 그만큼은 머무릅니다.</li>
+                  <li><strong>음성 안내는 별도로 흐릅니다.</strong> 단계 설명은 내부 흐름 전체에 걸쳐 한 번 읽히고, 음성과 마지막 요소 중 늦게 끝나는 쪽까지 기다린 다음 다음 단계로 넘어갑니다.</li>
                 </ul>
 
                 <h3 data-en>Time-shift — pull a sub earlier / push later</h3>
-                <h3 data-ko>시간 이동 — sub 를 앞당기거나 늦추기</h3>
+                <h3 data-ko>시간 이동 — 요소를 앞당기거나 늦추기</h3>
                 <p data-en>
                   When a sub is selected, two small chevron buttons appear at its
                   bottom corners — <span class="kbd">‹</span> pulls it 0.1 s earlier,
@@ -1394,10 +1451,11 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   they don't clutter the track when you're not adjusting timing.
                 </p>
                 <p data-ko>
-                  sub 를 선택하면 그 아래 양 모서리에 작은 갈매기 버튼이 나타납니다 —
-                  <span class="kbd">‹</span> 누르면 0.1 s 앞당기기, <span class="kbd">›</span>
-                  누르면 0.1 s 늦추기. 키보드는 <span class="kbd">←</span> / <span class="kbd">→</span>.
-                  버튼은 hover 시 + 선택 상태에서만 보여 평소에 트랙이 어수선하지 않습니다.
+                  내부 요소를 선택하면 그 아래 양쪽 모서리에 작은 화살표 버튼이 나타납니다 —
+                  <span class="kbd">‹</span> 누르면 0.1 초 앞당기기, <span class="kbd">›</span>
+                  누르면 0.1 초 늦추기. 키보드로는 <span class="kbd">←</span> / <span class="kbd">→</span>
+                  로도 같은 동작이 됩니다. 버튼은 요소 위에 마우스를 올렸거나 선택된 상태일 때만
+                  나타나서 평소엔 화면이 어수선하지 않아요.
                 </p>
                 <ul data-en>
                   <li><strong>One sub selected</strong> — only the gap just before it shrinks or grows. The sub plays for the same length of time, just earlier or later in the sequence.</li>
@@ -1406,10 +1464,10 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li><strong>Nothing happens if a 0.1 s shift would squeeze any gap below 100 ms.</strong> Either select fewer items, or stretch the step's overall time.</li>
                 </ul>
                 <ul data-ko>
-                  <li><strong>sub 하나 선택</strong> — 그 sub 바로 앞의 간격만 줄거나 늘어납니다. sub 자체의 재생 시간은 그대로이고, 시퀀스 안에서 시작 시각만 앞으로 / 뒤로 이동합니다.</li>
-                  <li><strong>연속해서 붙어 있는 묶음 선택</strong> — 묶음 전체가 함께 이동합니다. 묶음 내부의 간격은 변하지 않아요.</li>
-                  <li><strong>트랙 전체 선택</strong> — 시작 (primary 머무는 시간) 과 끝 (마지막 sub 머무는 시간) 양쪽에 같은 규칙이 적용됩니다.</li>
-                  <li><strong>0.1 s 이동했을 때 어느 간격이라도 100 ms 아래로 떨어지면 아무 일도 일어나지 않습니다.</strong> 선택을 줄이거나 스텝 전체 시간을 늘려주세요.</li>
+                  <li><strong>요소 하나 선택</strong> — 그 요소 바로 앞 시간만 줄거나 늘어납니다. 요소 자체가 화면에 머무는 길이는 그대로이고, 단계 안에서 시작 시각만 앞이나 뒤로 옮겨가요.</li>
+                  <li><strong>붙어 있는 여러 요소 선택</strong> — 묶음 전체가 함께 이동합니다. 묶음 안쪽 시간은 변하지 않아요.</li>
+                  <li><strong>전체 선택</strong> — 시작(대표 요소가 머무는 시간) 과 끝(마지막 내부 요소가 머무는 시간) 양쪽에 같은 규칙이 적용됩니다.</li>
+                  <li><strong>0.1 초 이동했을 때 어느 시간이라도 0.1 초 아래로 떨어지면 아무 변화도 일어나지 않습니다.</strong> 선택을 줄이거나, 단계 전체 시간을 늘려주세요.</li>
                 </ul>
 
                 <figure>
@@ -1421,12 +1479,12 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   />
                   <img
                     src="./assets/screenshots/sub-timeshift-ko.png"
-                    alt="두 개의 sub thumbnail 중 오른쪽 sub 가 선택된 상태 — 선택된 sub 아래 모서리에 작은 ‹ 와 › 갈매기 버튼."
+                    alt="두 내부 요소 썸네일 중 오른쪽이 선택된 상태 — 선택된 요소 아래 모서리에 작은 ‹ 와 › 화살표 버튼."
                     data-ko
                     onerror="this.style.display='none'"
                   />
                   <figcaption data-en>Selected sub shows the ‹ › chevrons at its bottom corners. Hover the buttons or press ← / → to shift the sub by 0.1 s.</figcaption>
-                  <figcaption data-ko>선택된 sub 의 양 아래 모서리에 ‹ › 갈매기 버튼이 표시. 버튼을 hover 하거나 ← / → 키로 0.1 s 단위 이동.</figcaption>
+                  <figcaption data-ko>선택된 내부 요소의 양쪽 아래 모서리에 ‹ › 화살표 버튼이 나타납니다. 버튼을 누르거나 ← / → 키로 0.1 초씩 이동.</figcaption>
                 </figure>
 
                 <h3 data-en>Multi-select &amp; deletion</h3>
@@ -1440,12 +1498,12 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li><strong>Delete / Backspace</strong> while subs are selected — removes them all. The remaining gaps share out the freed time so the step's total stays the same. If you're typing into a step name, description, or the panel title, the key is left alone so your typing isn't interrupted.</li>
                 </ul>
                 <ul data-ko>
-                  <li><strong>클릭</strong> — sub 하나만 선택하고 그 요소로 spotlight 가 이동합니다.</li>
-                  <li><strong>Ctrl / Cmd + 클릭</strong> — 이 sub 를 현재 선택에 더하거나 빼기.</li>
-                  <li><strong>Shift + 클릭</strong> — 마지막으로 클릭한 sub 부터 이번 sub 까지 범위 선택.</li>
-                  <li><strong>Esc</strong> 또는 트랙 바깥 클릭 — 선택 해제.</li>
-                  <li><strong>primary 썸네일 클릭</strong> (1번 뱃지) — sub 가 아닌 primary 가 선택되고 spotlight 가 그쪽으로 돌아갑니다.</li>
-                  <li><strong>Delete / Backspace</strong> — 선택된 sub 가 전부 삭제됩니다. 남은 간격이 비워진 시간을 나눠 가져, 스텝 전체 시간은 그대로 유지됩니다. 스텝 이름·설명·패널 타이틀에 글을 입력 중일 때는 이 키가 그대로 입력에 쓰여, 작성에 방해되지 않습니다.</li>
+                  <li><strong>클릭</strong> — 내부 요소 하나만 선택하고 강조 표시가 그 요소로 이동합니다.</li>
+                  <li><strong>Ctrl / Cmd + 클릭</strong> — 클릭한 요소를 현재 선택에 더하거나 빼기.</li>
+                  <li><strong>Shift + 클릭</strong> — 마지막으로 클릭한 요소부터 이번 요소까지 범위 선택.</li>
+                  <li><strong>Esc</strong> 또는 줄 바깥을 클릭 — 선택 해제.</li>
+                  <li><strong>대표 썸네일(1번 배지) 클릭</strong> — 내부 요소 대신 대표 요소가 선택되고 강조 표시가 그쪽으로 돌아갑니다.</li>
+                  <li><strong>Delete / Backspace</strong> — 선택된 내부 요소가 모두 삭제됩니다. 남은 요소들이 비워진 시간을 나눠 가져 단계 전체 시간은 그대로 유지돼요. 단계 이름·설명·패널 제목에 글을 입력 중일 때는 이 키가 그대로 입력에 쓰여 작성에 방해되지 않습니다.</li>
                 </ul>
 
                 <h3 data-en>Reorder</h3>
@@ -1584,6 +1642,62 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 <h3 data-ko>음성 안내</h3>
                 <p data-en>Toggle the speaker icon on the control bar (or in the prompter window's footer). Step descriptions are read out loud by the browser's built-in voice. Pick a voice in the panel's gear settings. Auto-advance waits for the narration to finish before moving on.</p>
                 <p data-ko>컨트롤 바(또는 프롬프터 창 하단)의 스피커 아이콘으로 켜고 끕니다. 스텝 설명을 브라우저 내장 음성으로 읽어 주고, 사용할 목소리는 패널의 기어(설정) 메뉴에서 고를 수 있어요. 자동 진행은 음성이 끝날 때까지 기다린 다음 다음 스텝으로 넘어갑니다.</p>
+
+                <h3 data-en>Edit a step from the prompter <span class="new-badge">NEW v0.5.0</span></h3>
+                <h3 data-ko>발표자 창에서 단계 편집 <span class="new-badge">NEW v0.5.0</span></h3>
+                <p data-en>
+                  While the prompter is <strong>paused</strong>, the current
+                  step card in the middle column doubles as a light editor.
+                  Click any field below, type, then click away — the change
+                  saves on the spot. Pressing play after an edit rewinds that
+                  step so the timer, the highlight walk, and the spoken
+                  narration all start over with the new content.
+                </p>
+                <p data-ko>
+                  발표자 창이 <strong>일시정지</strong> 상태일 때는 가운데 단계 카드가
+                  가벼운 편집기 역할을 합니다. 아래 항목을 클릭해 입력한 뒤 다른
+                  곳을 클릭하면 자동 저장돼요. 편집 후 재생 버튼을 누르면 그 단계가
+                  처음으로 돌아가 타이머·강조 표시·음성 안내가 모두 새 내용으로
+                  다시 시작됩니다.
+                </p>
+                <ul data-en>
+                  <li><strong>Title and description</strong> — click the text and type. Tab moves between fields, click away to save.</li>
+                  <li><strong>Action toggle</strong> — the small badge next to the timer switches the step between auto-advance and wait-for-click.</li>
+                  <li><strong>Step timer</strong> — click the ⏱ 9.5s badge and type a new number. The number is pre-selected so you can replace it in one keystroke.</li>
+                  <li><strong>Each inner element's screen time</strong> — if the step walks through inner-flow elements, they stack vertically under the main thumbnail with each duration underneath. Click one to select it, then <span class="kbd">←</span> / <span class="kbd">→</span> nudges its time by 0.1 seconds. The step's total length stays the same. Press <span class="kbd">Esc</span> to clear the selection.</li>
+                </ul>
+                <ul data-ko>
+                  <li><strong>제목과 설명</strong> — 글자를 클릭하고 바로 입력. Tab 으로 다음 칸 이동, 다른 곳을 클릭하면 저장.</li>
+                  <li><strong>액션 토글</strong> — 타이머 옆 작은 배지로 자동 진행 ↔ 클릭 대기를 전환합니다.</li>
+                  <li><strong>단계 타이머</strong> — ⏱ 9.5s 배지를 클릭하고 새 숫자를 입력하세요. 들어가면 숫자가 선택돼 있어 그대로 새 값을 입력하면 됩니다.</li>
+                  <li><strong>각 내부 요소가 화면에 머무는 시간</strong> — 단계가 여러 요소를 순서대로 보여주는 경우, 발표자 창에 대표 썸네일 아래로 요소들이 세로로 쌓이고 각 요소 아래에 머무는 시간이 표시됩니다. 한 요소를 클릭해 선택한 뒤 <span class="kbd">←</span> / <span class="kbd">→</span> 키로 0.1 초씩 조절하세요. 단계 전체 시간은 그대로 유지됩니다. <span class="kbd">Esc</span> 키로 선택을 해제할 수 있어요.</li>
+                </ul>
+                <figure>
+                  <img
+                    src="./assets/screenshots/prompter-edit-en.png"
+                    alt="Prompter window in paused state with the middle column showing inline-editable fields — title and description are highlighted, the timer pill shows ⏱ 9.5s with the number selected, and inner-flow rows stack under the main thumbnail with one row selected (highlighted) and its dwell time visible underneath."
+                    data-en
+                    onerror="this.style.display='none'"
+                  />
+                  <img
+                    src="./assets/screenshots/prompter-edit-ko.png"
+                    alt="일시정지 상태의 발표자 창 — 가운데 컬럼의 제목·설명이 편집 가능, 타이머 배지 ⏱ 9.5s 의 숫자가 선택된 상태, 대표 썸네일 아래 내부 흐름 요소들이 세로로 쌓여 있고 한 요소가 강조 선택된 모습 + 각 요소 아래의 머무는 시간 표시."
+                    data-ko
+                    onerror="this.style.display='none'"
+                  />
+                  <figcaption data-en>Paused prompter as a light editor — title, description, action badge, timer (number-only), and per-element screen time all editable in place. Select an inner element with a click, then ← / → nudges its time ±0.1 seconds.</figcaption>
+                  <figcaption data-ko>일시정지 상태의 발표자 창이 가벼운 편집기로 — 제목·설명·액션 배지·타이머 (숫자만) 와 내부 요소별 머무는 시간을 그 자리에서 수정. 내부 요소를 클릭해 선택하면 ← / → 키로 ±0.1 초씩 조절.</figcaption>
+                </figure>
+                <p class="callout" data-en>
+                  <strong>Paused only.</strong> The editor opens while the
+                  prompter is paused. Press play after an edit to replay that
+                  step from the top with the new copy.
+                </p>
+                <p class="callout" data-ko>
+                  <strong>일시정지 상태에서만.</strong> 편집기는 발표자 창이
+                  일시정지 상태일 때 열립니다. 편집 후 재생 버튼을 누르면 그 단계가
+                  새 내용으로 처음부터 다시 재생돼요.
+                </p>
               </section>
 
               <section id="g-record">
@@ -2279,8 +2393,8 @@ manuscript.configure({
           <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.4.1 · © 2026</span>
-          <span data-ko>Manuscript v0.4.1 · © 2026</span>
+          <span data-en>Manuscript v0.5.0 · © 2026</span>
+          <span data-ko>Manuscript v0.5.0 · © 2026</span>
         </div>
       </div>
     </footer>
