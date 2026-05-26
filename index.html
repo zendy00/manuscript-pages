@@ -95,8 +95,8 @@
           "applicationSubCategory": "DeveloperApplication",
           "operatingSystem": "Windows, macOS, Linux, ChromeOS",
           "browserRequirements": "Chromium-based browsers (Chrome, Edge) 88 or newer",
-          "softwareVersion": "0.5.1",
-          "releaseNotes": "v0.5.1 — A new setting lets a manuscript match pages by their full web address, including the part after the ? or #. Turn it on for sites that switch screens with a query or hash (like ?tab=billing or #/reports) so playback starts on the right view and steps move between pages correctly. Ordinary sites are unaffected — by default matching still ignores tracking parameters so links like ?utm_source never trip it up.",
+          "softwareVersion": "0.6.0",
+          "releaseNotes": "v0.6.0 — Recording now runs from a separate recorder window that shows your script as the tour plays, and it keeps going when your tour moves between pages, so a multi-page tour saves as one continuous video. The page starts in fullscreen after a short countdown, and sharing is simpler: one share dialog — pick a window and turn on system audio.",
           "offers": {
             "@type": "Offer",
             "price": "0",
@@ -599,7 +599,7 @@
                   while you're recording and the tour pauses — the video keeps rolling, so
                   you can speak up, click around, or just catch your breath. Tap
                   <strong>Space</strong> again to pick the tour back up. Turn on
-                  <strong>Also record my microphone</strong> on the guide screen first if
+                  <strong>Also record my microphone</strong> in the recorder window first if
                   you want your voice baked right into the video alongside the read-aloud
                   narration.
                 </p>
@@ -608,7 +608,7 @@
                   <strong>Space</strong> 키를 누르면 시연이 잠깐 멈춰요. 그동안에도 녹화는
                   계속되니까, 직접 설명을 보태거나, 페이지를 클릭해서 뭔가 보여주거나,
                   잠깐 숨을 고르세요. <strong>Space</strong>를 다시 누르면 시연이 이어집니다.
-                  안내 창에서 <strong>내 목소리도 함께 녹음</strong>을 켜 두면 내가 말한
+                  녹화 창에서 <strong>내 목소리도 함께 녹음</strong>을 켜 두면 내가 말한
                   내용이 읽어주는 안내와 함께 영상에 자연스럽게 담겨요.
                 </p>
                 <div class="hero-ctas">
@@ -621,20 +621,22 @@
 
               <div class="record-col">
                 <ul class="record-bullets" data-en>
-                  <li><strong>Just the page</strong> — the editor panel and controls slide out of view while you record.</li>
+                  <li><strong>Just the page</strong> — the editor panel and controls slide out of view while you record, and the page goes fullscreen.</li>
+                  <li><strong>Spans multiple pages</strong> — if your tour moves between pages, the recording follows along and lands as one continuous video.</li>
                   <li><strong>3-second countdown</strong> so you can get ready, with a Cancel button or Space / Esc to back out.</li>
                   <li><strong>Voice narration included</strong> — the spoken descriptions are captured along with the video.</li>
                   <li><strong>Pause anytime to chip in</strong> — tap <strong>Space</strong> while recording and the tour holds still. The video keeps rolling, so you can speak up, click around, or just collect your thoughts. <strong>Space</strong> again picks it back up.</li>
-                  <li><strong>Bring your own voice (optional)</strong> — turn on "Also record my microphone" on the guide screen and your voice lands in the video alongside the read-aloud narration.</li>
+                  <li><strong>Bring your own voice (optional)</strong> — turn on "Also record my microphone" in the recorder window and your voice lands in the video alongside the read-aloud narration.</li>
                   <li><strong>Stops by itself</strong> when the tour reaches the end. Want to stop sooner? Just press <strong>Esc</strong> anywhere on the page.</li>
                   <li><strong>You pick where it saves</strong> — the browser's Save dialog opens when the tour ends. Nothing is uploaded; everything stays on your computer.</li>
                 </ul>
                 <ul class="record-bullets" data-ko>
-                  <li><strong>페이지만 담깁니다</strong> — 녹화 중에는 편집 패널과 컨트롤이 화면에서 사라져요.</li>
+                  <li><strong>페이지만 담깁니다</strong> — 녹화 중에는 편집 패널과 컨트롤이 화면에서 사라지고, 페이지가 전체 화면으로 바뀌어요.</li>
+                  <li><strong>여러 페이지도 OK</strong> — 시연이 페이지를 오가도 녹화가 따라가면서 하나의 영상으로 이어집니다.</li>
                   <li><strong>3 초 카운트다운</strong>으로 마음의 준비를 할 시간이 있고, 취소 버튼이나 Space / Esc 로 언제든 멈출 수 있어요.</li>
                   <li><strong>음성 안내까지 함께</strong> — 읽어주는 설명도 영상에 그대로 담깁니다.</li>
                   <li><strong>언제든 잠깐 멈추고 거들 수 있어요</strong> — 녹화 중에 <strong>Space</strong> 키를 누르면 시연이 멈춥니다. 녹화는 그대로 계속되니까 한마디 보태거나, 페이지를 클릭해서 뭔가 보여주거나, 잠깐 생각을 정리할 수 있어요. <strong>Space</strong>를 다시 누르면 시연이 이어집니다.</li>
-                  <li><strong>내 목소리도 함께 (선택)</strong> — 안내 창에서 "내 목소리도 함께 녹음"을 체크하면 내가 말한 내용이 읽어주는 안내와 함께 영상에 담깁니다.</li>
+                  <li><strong>내 목소리도 함께 (선택)</strong> — 녹화 창에서 "내 목소리도 함께 녹음"을 체크하면 내가 말한 내용이 읽어주는 안내와 함께 영상에 담깁니다.</li>
                   <li><strong>알아서 멈춥니다</strong> — 시연 마지막에 자동으로 종료. 더 일찍 끝내고 싶으면 페이지 아무 곳에서 <strong>Esc</strong> 키만 누르세요.</li>
                   <li><strong>저장 위치는 직접 선택</strong> — 시연이 끝나면 브라우저의 "다른 이름으로 저장" 다이얼로그가 뜹니다. 어디로도 업로드되지 않고 컴퓨터 안에만 남습니다.</li>
                 </ul>
@@ -1032,8 +1034,8 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 <li><a href="#g-subs" data-en>Inner flow <span class="toc-new">v0.5</span></a><a href="#g-subs" data-ko>내부 흐름 <span class="toc-new">v0.5</span></a></li>
                 <li><a href="#g-action" data-en>Action steps</a><a href="#g-action" data-ko>action 스텝</a></li>
                 <li><a href="#g-replay" data-en>Replay &amp; prompter <span class="toc-new">v0.5</span></a><a href="#g-replay" data-ko>재생과 발표자 창 <span class="toc-new">v0.5</span></a></li>
-                <li><a href="#g-record" data-en>Recording</a><a href="#g-record" data-ko>녹화</a></li>
-                <li><a href="#g-validate" data-en>Check steps still match <span class="toc-new">v0.4</span></a><a href="#g-validate" data-ko>스텝 점검 <span class="toc-new">v0.4</span></a></li>
+                <li><a href="#g-record" data-en>Recording <span class="toc-new">v0.6</span></a><a href="#g-record" data-ko>녹화 <span class="toc-new">v0.6</span></a></li>
+                <li><a href="#g-validate" data-en>Check steps still match</a><a href="#g-validate" data-ko>스텝 점검</a></li>
                 <li><a href="#g-io" data-en>Export &amp; import</a><a href="#g-io" data-ko>내보내기·불러오기</a></li>
                 <li><a href="#g-popup" data-en>Previous Manuscripts</a><a href="#g-popup" data-ko>이전 매뉴스크립트</a></li>
               </ol>
@@ -1760,83 +1762,112 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
               </section>
 
               <section id="g-record">
-                <h2 data-en>8. Recording</h2>
-                <h2 data-ko>8. 녹화</h2>
+                <h2 data-en>8. Recording <span class="new-badge">updated v0.6.0</span></h2>
+                <h2 data-ko>8. 녹화 <span class="new-badge">updated v0.6.0</span></h2>
                 <p data-en>
                   The red <span class="iicon is-record"><svg><use href="#i-record"/></svg></span>
-                  button in the panel footer turns your tour into a video file. It plays
-                  the whole tour by itself while hiding every Manuscript control, captures
-                  the voice narration along with the page, and stops on its own when the
-                  last step finishes. The file is offered to you through the browser's
-                  normal save dialog.
+                  button in the panel footer turns your tour into a video file. A separate
+                  recorder window opens to run it — it plays the whole tour by itself, keeps
+                  every Manuscript control off the page, and captures the voice narration
+                  along with everything on screen. It even keeps recording when your tour
+                  moves between pages, so a multi-page tour comes out as one continuous
+                  video. When the last step finishes it stops on its own and hands you the
+                  file through the browser's normal save dialog.
                 </p>
                 <p data-ko>
                   패널 아래쪽의 빨간
                   <span class="iicon is-record"><svg><use href="#i-record"/></svg></span>
-                  버튼이 만들어 둔 시연을 동영상으로 만들어 줍니다. 시연을 스스로 끝까지
-                  재생하면서 Manuscript 의 모든 도구는 화면에서 숨기고, 음성 안내까지 함께
-                  담아냅니다. 마지막 단계가 끝나면 알아서 멈추고, 브라우저의 저장 다이얼로그로
+                  버튼이 만들어 둔 시연을 동영상으로 만들어 줍니다. 녹화를 진행하는 별도의
+                  녹화 창이 열려요 — 시연을 스스로 끝까지 재생하면서, Manuscript 도구는 페이지에
+                  내보내지 않고, 화면에 보이는 것과 음성 안내를 함께 담습니다. 시연이 여러
+                  페이지를 오가도 녹화가 끊기지 않아서, 여러 페이지짜리 시연도 하나의 영상으로
+                  이어져요. 마지막 단계가 끝나면 알아서 멈추고, 브라우저의 저장 다이얼로그로
                   파일을 건네줍니다.
                 </p>
+
+                <figure class="record-window-figure" data-en>
+                  <img src="./assets/screenshots/recorder-guide-en.png" alt="The Manuscript recorder window — a 'this window is not recorded' note, a screenshot of the browser's share dialog with the Window tab and 'Also share system audio' highlighted, an 'Also record my microphone' option, and a Start recording button." onerror="this.style.display='none'" />
+                  <figcaption>The recorder window. It walks you through the one share dialog — pick a <strong>Window</strong> and turn on <strong>Share system audio</strong> — with an optional microphone switch and the keyboard hints. This window controls the recording and never shows up in the video.</figcaption>
+                </figure>
+                <figure class="record-window-figure" data-ko>
+                  <img src="./assets/screenshots/recorder-guide-ko.png" alt="Manuscript 녹화 창 — '이 창은 녹화되지 않습니다' 안내, 브라우저 공유 다이얼로그에서 창 탭과 '시스템 오디오 공유'가 강조된 스크린샷, '내 목소리도 함께 녹음' 옵션, 녹화 시작 버튼." onerror="this.style.display='none'" />
+                  <figcaption>녹화 창이에요. 공유 다이얼로그 진행을 짚어 줍니다 — <strong>창(Window)</strong>을 고르고 <strong>시스템 오디오 공유</strong>를 켜세요 — 마이크 옵션과 단축키 안내도 함께. 이 창이 녹화를 제어하고, 영상에는 들어가지 않습니다.</figcaption>
+                </figure>
 
                 <h3 data-en>How to record</h3>
                 <h3 data-ko>녹화 방법</h3>
                 <ol data-en>
                   <li>Click the red <span class="iicon is-record"><svg><use href="#i-record"/></svg></span> in the panel footer.</li>
-                  <li>A guide screen explains the two share dialogs the browser will show. Want your voice in the video too? Turn on <strong>Also record my microphone</strong>. Click <strong>Start recording</strong>.</li>
-                  <li>First share dialog: keep the <strong>Tab</strong> tab, pick this tab, click <strong>Allow</strong> (video).</li>
-                  <li>Second share dialog: switch to <strong>Window</strong>, pick a browser window, tick <strong>Also share system audio</strong>, then <strong>Share</strong> (this is what captures the voice narration; cancelling it keeps the recording running but the narration will be silent).</li>
-                  <li>3-second countdown plays on screen; the panel and the control bar disappear so they don't end up in the frame.</li>
-                  <li>The tour plays itself. Tap <span class="kbd">Space</span> anywhere on the page to pause it (the recording keeps going — handy if you want to add your own voice while it's paused). Press <span class="kbd">Esc</span> when you want to wrap things up and save. The recording also stops on its own when the last step finishes.</li>
+                  <li>A small recorder window opens — it runs the recording and shows your script (the current and next step) as it plays. This window itself is never in the video. Want your voice in there too? Turn on <strong>Also record my microphone</strong>, then click <strong>Start recording</strong>.</li>
+                  <li>The browser asks what to share. Pick a <strong>Window</strong> — your browser window, not a single tab — tick <strong>Also share system audio</strong>, then <strong>Share</strong>. That's what carries the voice narration into the video; skip it and the recording still runs, just silent.</li>
+                  <li>Your page jumps to fullscreen and a 3-2-1 countdown gives you a moment to get ready, then recording begins. The panel and control bar are already out of the frame.</li>
+                  <li>The tour plays itself. The recorder window keeps a red dot blinking the whole time so you can tell it's rolling. Tap <span class="kbd">Space</span> to pause the tour (the recording keeps going); press <span class="kbd">Esc</span> when you want to wrap up and save. It also stops on its own when the last step finishes.</li>
                   <li>The browser's save dialog opens with a filename like <code>manuscript-recording-YYYYMMDD-HHMM.webm</code>.</li>
                 </ol>
                 <ol data-ko>
                   <li>패널 하단의 빨간 <span class="iicon is-record"><svg><use href="#i-record"/></svg></span> 버튼을 클릭합니다.</li>
-                  <li>브라우저가 두 번 띄울 공유 창의 진행 방법을 안내해 주는 창이 표시됩니다. 내 목소리도 영상에 담고 싶으면 <strong>내 목소리도 함께 녹음</strong>을 켜 두세요. <strong>녹화 시작</strong>을 누르면 됩니다.</li>
-                  <li>첫 번째 공유 다이얼로그: <strong>탭</strong> 탭 그대로 두고 현재 탭 선택 → <strong>허용</strong> 클릭 (영상).</li>
-                  <li>두 번째 공유 다이얼로그: <strong>Window(윈도우)</strong> 탭으로 이동 → 브라우저 창 선택 → <strong>시스템 오디오 공유</strong> 체크 → <strong>공유</strong> (음성 안내가 여기서 함께 잡힙니다. 취소해도 녹화는 진행되지만 음성 안내는 무음으로 들어갑니다).</li>
-                  <li>3 초 카운트다운이 화면에 표시되고, 그 동안 패널과 컨트롤 바가 사라져 영상에 들어가지 않습니다.</li>
-                  <li>시연이 알아서 재생됩니다. 페이지 어디서든 <span class="kbd">Space</span> 키로 시연을 잠깐 멈출 수 있어요 (녹화는 그대로 계속되니까 멈춘 동안 직접 한마디 보태기 좋아요). 끝내고 저장하고 싶으면 <span class="kbd">Esc</span> 키. 마지막 단계가 끝나면 자동으로 정지됩니다.</li>
+                  <li>작은 녹화 창이 열립니다 — 녹화를 진행하고, 재생되는 대로 대본(현재·다음 단계)을 보여줘요. 이 창 자체는 영상에 들어가지 않습니다. 내 목소리도 함께 담고 싶으면 <strong>내 목소리도 함께 녹음</strong>을 켜고 <strong>녹화 시작</strong>을 누르세요.</li>
+                  <li>브라우저가 무엇을 공유할지 물어봅니다. 탭 하나가 아니라 <strong>창(Window)</strong> — 내 브라우저 창 — 을 고르고 <strong>시스템 오디오 공유</strong>를 체크한 뒤 <strong>공유</strong>를 누르세요. 음성 안내가 여기서 영상에 함께 담깁니다. 건너뛰면 녹화는 되지만 소리는 빠져요.</li>
+                  <li>페이지가 전체 화면으로 바뀌고 3·2·1 카운트다운으로 잠깐 준비할 틈을 준 뒤 녹화가 시작됩니다. 패널과 컨트롤 바는 이미 화면 밖으로 빠져 있어요.</li>
+                  <li>시연이 알아서 재생됩니다. 녹화 창에서는 빨간 점이 계속 깜빡여서 녹화 중이라는 걸 알 수 있어요. <span class="kbd">Space</span> 로 시연을 잠깐 멈출 수 있고(녹화는 계속됩니다), 끝내고 저장하려면 <span class="kbd">Esc</span> 를 누르세요. 마지막 단계가 끝나면 알아서 멈춥니다.</li>
                   <li><code>manuscript-recording-YYYYMMDD-HHMM.webm</code> 형태의 파일명으로 브라우저 저장 다이얼로그가 열립니다.</li>
                 </ol>
 
+                <h3 data-en>Multi-page tours record in one take <span class="new-badge">NEW v0.6.0</span></h3>
+                <h3 data-ko>여러 페이지 시연도 한 번에 <span class="new-badge">NEW v0.6.0</span></h3>
+                <p data-en>
+                  If your tour walks across several pages, the recording follows along
+                  through every page change and stitches it all into a single video — no
+                  stopping and restarting for each page. Build your tour as usual and hit
+                  record; the recorder window stays open through the moves and keeps the
+                  take going.
+                </p>
+                <p data-ko>
+                  여러 페이지를 오가는 시연이라면, 페이지가 바뀔 때마다 녹화가 따라가면서
+                  전부 하나의 영상으로 이어 붙입니다 — 페이지마다 멈췄다 다시 시작할 필요가
+                  없어요. 평소처럼 시연을 만들고 녹화만 누르면, 페이지를 이동하는 동안에도
+                  녹화 창이 그대로 열려 있으면서 녹화를 계속 이어 갑니다.
+                </p>
+
                 <h3 data-en>Pause anytime to add your voice</h3>
                 <h3 data-ko>잠깐 멈추고 내 목소리 보태기</h3>
-                <figure class="record-paused-figure" data-en>
-                  <img src="./assets/screenshots/paused-pill-en.png" alt="Small Recording pill in the top-right corner of the screen — a blinking red dot next to the label 'Recording'." />
-                  <figcaption>While the tour is paused, this little Recording pill sits in the top-right corner — the red dot keeps blinking so you can tell the video is still rolling. Click the pill (or tap <span class="kbd">Space</span> again) to pick the tour back up.</figcaption>
+                <figure class="record-window-figure" data-en>
+                  <img src="./assets/screenshots/recorder-live-en.png" alt="The recorder window while recording — a red 'Recording' badge with a blinking dot, a 'Scenario playing' chip, a step counter, the step list, and the current and next step with their descriptions." onerror="this.style.display='none'" />
+                  <figcaption>While it's rolling, the recorder window shows your script — the current and next step — with a step list and a red <strong>Recording</strong> badge that keeps blinking. The chip beside it flips between <em>Scenario playing</em> and <em>Scenario paused</em> when you tap <span class="kbd">Space</span>.</figcaption>
                 </figure>
-                <figure class="record-paused-figure" data-ko>
-                  <img src="./assets/screenshots/paused-pill-ko.png" alt="화면 우상단에 떠 있는 작은 녹화 pill — 깜빡이는 빨간 점 옆에 '녹화 중' 라벨." />
-                  <figcaption>시연이 멈춰 있는 동안 이 작은 녹화 pill 이 화면 우상단에 떠 있어요 — 빨간 점이 깜빡이면서 녹화가 계속되고 있다는 걸 알려줍니다. pill 을 클릭하거나 <span class="kbd">Space</span> 를 다시 누르면 시연이 이어집니다.</figcaption>
+                <figure class="record-window-figure" data-ko>
+                  <img src="./assets/screenshots/recorder-live-ko.png" alt="녹화 중인 녹화 창 — 깜빡이는 점이 있는 빨간 '녹화 중' 배지, '시나리오 재생 중' 칩, 단계 카운터, 단계 목록, 그리고 현재·다음 단계와 설명." onerror="this.style.display='none'" />
+                  <figcaption>녹화가 도는 동안 녹화 창은 대본 — 현재·다음 단계 — 을 단계 목록과 함께 보여주고, 빨간 <strong>녹화 중</strong> 배지가 계속 깜빡입니다. 옆의 칩은 <span class="kbd">Space</span> 를 누를 때마다 <em>시나리오 재생 중</em> 과 <em>시나리오 일시정지 중</em> 사이를 오갑니다.</figcaption>
                 </figure>
                 <p data-en>
                   Any time during recording, tap <span class="kbd">Space</span> and the
-                  tour stops where it is. The page stays put — and now it's your turn.
-                  Talk through what's on screen (if you turned the mic on), click around
-                  to show something interactive, or just catch your breath. Tap
-                  <span class="kbd">Space</span> again and the tour picks up like nothing
-                  happened.
+                  tour freezes where it is. The page holds still and the recorder window
+                  shows it's paused — but the red dot keeps blinking, because the recording
+                  never stopped. Now it's your turn: talk through what's on screen (if you
+                  turned the mic on), click around to show something interactive, or just
+                  catch your breath. Tap <span class="kbd">Space</span> again and the tour
+                  picks up like nothing happened.
                 </p>
                 <p data-ko>
                   녹화 도중 언제든 <span class="kbd">Space</span> 키를 누르면 시연이 그 자리에
-                  그대로 멈춥니다. 화면도 그대로 멈춰 있어요. 이제 내 차례 — 마이크를 켜
-                  뒀다면 화면을 보면서 한마디 보태고, 직접 클릭해서 뭔가 보여주거나, 잠깐 숨을
-                  고르세요. <span class="kbd">Space</span> 를 다시 누르면 시연이 아무 일도
-                  없었던 것처럼 이어집니다.
+                  그대로 멈춥니다. 화면은 멈춰 있고 녹화 창에는 일시정지 상태가 표시돼요 —
+                  하지만 빨간 점은 계속 깜빡입니다. 녹화는 멈추지 않았거든요. 이제 내 차례 —
+                  마이크를 켜 뒀다면 화면을 보면서 한마디 보태고, 직접 클릭해서 뭔가 보여주거나,
+                  잠깐 숨을 고르세요. <span class="kbd">Space</span> 를 다시 누르면 시연이 아무
+                  일도 없었던 것처럼 이어집니다.
                 </p>
 
                 <h3 data-en>Want your voice in too?</h3>
                 <h3 data-ko>내 목소리도 같이 담고 싶다면?</h3>
                 <p data-en>
-                  Turn on <strong>Also record my microphone</strong> on the guide screen
+                  Turn on <strong>Also record my microphone</strong> in the recorder window
                   before you start (it's off by default). Your voice mixes in alongside
                   the read-aloud narration and the page sounds — everything ends up on
                   one neat audio track. The browser only asks for microphone permission when
                   this is on; the normal recording never bothers you with it.
                 </p>
                 <p data-ko>
-                  녹화를 시작하기 전, 안내 창에서 <strong>내 목소리도 함께 녹음</strong>을
+                  녹화를 시작하기 전, 녹화 창에서 <strong>내 목소리도 함께 녹음</strong>을
                   켜 두세요 (기본은 꺼짐). 내가 말한 내용이 읽어주는 안내·페이지 소리와 함께
                   하나의 트랙으로 깔끔하게 담깁니다. 이 옵션을 켰을 때만 브라우저가 마이크
                   권한을 한 번 물어봐요 — 평소 녹화에서는 권한 창이 뜨지 않아요.
@@ -1845,13 +1876,13 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 <h3 data-en>Limits &amp; gotchas</h3>
                 <h3 data-ko>제한 &amp; 주의사항</h3>
                 <ul data-en>
-                  <li><strong>You'll see two share dialogs.</strong> The browser doesn't let a single recording of one tab include the page's sound, so the second dialog is unavoidable. If you don't need the voice narration captured, you can cancel it.</li>
+                  <li><strong>Share a Window, not a Tab.</strong> When the browser asks what to share, pick a Window and turn on "Share system audio" — that's the only way the voice narration makes it into the video. A single tab can't carry the page's sound.</li>
                   <li><strong>WebM video file.</strong> Most modern players open it just fine — Chrome, Edge, VLC, the built-in Media Player on Windows 11. Older Windows Media Player just needs Microsoft's free <strong>Web Media Extensions</strong> + <strong>VP9 Video Extensions</strong> from the Microsoft Store (Windows Update often slips these in for you already). Need an MP4 instead? Run the file through ffmpeg to convert it.</li>
                   <li><strong>Tours that play through the embedded launcher on another site can't be recorded.</strong> Those are view-only on that site by design — record from your own Manuscript panel instead.</li>
                   <li><strong>Browser-internal pages</strong> (<code>chrome://</code>, <code>edge://</code>) and the new-tab page can't be recorded — same browser rule that blocks the rest of Manuscript on those pages.</li>
                 </ul>
                 <ul data-ko>
-                  <li><strong>공유 다이얼로그가 두 번 나옵니다.</strong> 브라우저는 탭 하나만 녹화할 때 그 페이지의 소리를 함께 담지 못하게 막아 두기 때문에, 두 번째 다이얼로그는 피할 수 없어요. 음성 안내를 녹음할 필요가 없다면 두 번째는 취소해도 됩니다.</li>
+                  <li><strong>탭 말고 창을 공유하세요.</strong> 브라우저가 무엇을 공유할지 물으면 창(Window)을 고르고 "시스템 오디오 공유"를 켜세요 — 음성 안내가 영상에 담기는 유일한 방법이에요. 탭 하나로는 페이지 소리가 담기지 않습니다.</li>
                   <li><strong>WebM 동영상 파일.</strong> 요즘 플레이어는 대부분 잘 엽니다 — Chrome, Edge, VLC, Windows 11 기본 Media Player 모두 OK. 구형 Windows Media Player 는 Microsoft Store 의 무료 <strong>Web Media Extensions</strong> + <strong>VP9 Video Extensions</strong> 가 있으면 재생됩니다 (Windows Update 로 이미 깔려 있는 경우도 많아요). MP4 가 필요하면 ffmpeg 로 변환해서 쓰세요.</li>
                   <li><strong>다른 사이트에 임베드된 런처에서 재생되는 시연은 녹화할 수 없습니다.</strong> 그쪽은 보기 전용으로 설계돼 있어요 — 녹화는 본인의 Manuscript 패널에서 진행하세요.</li>
                   <li><strong>브라우저 자체 페이지</strong>(<code>chrome://</code>, <code>edge://</code>) 와 새 탭은 녹화 불가 — Manuscript 의 다른 기능과 동일한 브라우저 정책 때문입니다.</li>
@@ -1859,8 +1890,8 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
               </section>
 
               <section id="g-validate">
-                <h2 data-en>9. Check that steps still match the page <span class="new-badge">NEW v0.4.0</span></h2>
-                <h2 data-ko>9. 스텝이 페이지와 여전히 맞는지 점검 <span class="new-badge">NEW v0.4.0</span></h2>
+                <h2 data-en>9. Check that steps still match the page</h2>
+                <h2 data-ko>9. 스텝이 페이지와 여전히 맞는지 점검</h2>
                 <p data-en>
                   Pages change over time — internal names get renamed, ids get
                   regenerated, words get rewritten. Validation walks through every
@@ -2453,8 +2484,8 @@ manuscript.configure({
           <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.5.1 · © 2026</span>
-          <span data-ko>Manuscript v0.5.1 · © 2026</span>
+          <span data-en>Manuscript v0.6.0 · © 2026</span>
+          <span data-ko>Manuscript v0.6.0 · © 2026</span>
         </div>
       </div>
     </footer>

@@ -761,10 +761,6 @@ p.lead {
   border: 1px solid var(--c-border);
   box-shadow: var(--shadow-md);
 }
-.guide-body figure.record-paused-figure img {
-  max-width: 240px;
-  margin: 0 auto;
-}
 .guide-body figcaption {
   font-size: 13px;
   color: var(--c-text-soft);
