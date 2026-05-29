@@ -1,8 +1,8 @@
 {
   "version": "0.6.0",
-  "sha256": "430e9b459cb0f08afab40601d859593ca72aaa5374209b47e60b7fa3b668bcfa",
-  "sizeBytes": 2217914,
-  "builtAt": "2026-05-29T04:10:07.622Z",
+  "sha256": "0aeb375e27bf361b20066abbee258b3524d00a3b1c9d07ac2c1823734a656409",
+  "sizeBytes": 2217921,
+  "builtAt": "2026-05-29T04:15:47.813Z",
   "zip": "manuscript-0.6.0.zip",
   "latestAlias": "manuscript-latest.zip"
 }
