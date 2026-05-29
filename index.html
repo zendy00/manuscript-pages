@@ -95,8 +95,8 @@
           "applicationSubCategory": "DeveloperApplication",
           "operatingSystem": "Windows, macOS, Linux, ChromeOS",
           "browserRequirements": "Chromium-based browsers (Chrome, Edge) 88 or newer",
-          "softwareVersion": "0.6.0",
-          "releaseNotes": "v0.6.0 — Recording now runs from a separate recorder window that shows your script as the tour plays, and it keeps going when your tour moves between pages, so a multi-page tour saves as one continuous video. The page starts in fullscreen after a short countdown, and sharing is simpler: one share dialog — pick a window and turn on system audio.",
+          "softwareVersion": "0.7.0",
+          "releaseNotes": "v0.7.0 — Remote Library. Connect a public GitHub repo and replay shared manuscripts from the new Remote Library tab without importing the JSON. Edits stay temporary so a teammate's working copy is never overwritten; one click on the in-panel banner saves the scenario to your own library when you want to keep a copy.",
           "offers": {
             "@type": "Offer",
             "price": "0",
@@ -128,6 +128,7 @@
             "Screen recording with burn-in watermark and TTS audio capture",
             "Detached presenter prompter window",
             "Runtime bridge for embedded tours via postMessage",
+            "Remote library — replay shared scenarios from public GitHub repos with edits kept temporary",
             "Dark mode and four color palettes",
             "Versioned JSON export and import"
           ]
@@ -271,6 +272,7 @@
           <a href="#how" data-en>How it works</a><a href="#how" data-ko>동작 방식</a>
           <a href="#record" data-en>Record</a><a href="#record" data-ko>녹화</a>
           <a href="#agent" data-en>AI agent</a><a href="#agent" data-ko>AI 작성</a>
+          <a href="#remote" data-en><span class="new-badge nav-new">NEW</span>Remote Library</a><a href="#remote" data-ko><span class="new-badge nav-new">NEW</span>원격저장소</a>
           <a href="#install" data-en>Install</a><a href="#install" data-ko>설치</a>
           <a href="#guide" data-en>Guide</a><a href="#guide" data-ko>사용설명서</a>
           <a href="#bridge" data-en>Bridge</a><a href="#bridge" data-ko>브리지</a>
@@ -371,17 +373,21 @@
           </div>
           <!-- Lite YouTube embed — thumbnail only on first paint; iframe
                swaps in on click so the page doesn't pay YouTube's ~500KB
-               of player JS until the viewer asks for it. -->
+               of player JS until the viewer asks for it. Two cards —
+               one per language. The body[lang] CSS rule shows only the
+               matching one; both share the same .hero-video script
+               binding so each lang plays its own intro video. -->
           <div
             class="hero-video"
-            data-yt-id="g_YSpY9xgFg"
+            data-en
+            data-yt-id="Hh5h8KBLf68"
             role="button"
             tabindex="0"
             aria-label="Play the Manuscript demo video on YouTube"
           >
             <img
               class="hero-video-thumb"
-              src="https://i.ytimg.com/vi/g_YSpY9xgFg/maxresdefault.jpg"
+              src="https://i.ytimg.com/vi/Hh5h8KBLf68/maxresdefault.jpg"
               alt="Manuscript demo — floating panel, spotlight, and annotations over a web page"
               loading="lazy"
               decoding="async"
@@ -396,8 +402,34 @@
                 <path d="M45 24L27 14v20z" fill="#fff" />
               </svg>
             </span>
-            <span class="hero-video-caption" data-en>Watch the 30-second demo</span>
-            <span class="hero-video-caption" data-ko>30초 데모 보기</span>
+            <span class="hero-video-caption">Watch the demo</span>
+          </div>
+          <div
+            class="hero-video"
+            data-ko
+            data-yt-id="9yB0Ko-repU"
+            role="button"
+            tabindex="0"
+            aria-label="유튜브에서 Manuscript 소개 영상 보기"
+          >
+            <img
+              class="hero-video-thumb"
+              src="https://i.ytimg.com/vi/9yB0Ko-repU/maxresdefault.jpg"
+              alt="Manuscript 소개 — 작성 패널, 강조 표시, 주석을 페이지 위에"
+              loading="lazy"
+              decoding="async"
+              onerror="this.onerror=null; this.src='./assets/screenshots/hero-panel.png';"
+            />
+            <span class="hero-video-play" aria-hidden="true">
+              <svg viewBox="0 0 68 48">
+                <path
+                  d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z"
+                  fill="#f00"
+                />
+                <path d="M45 24L27 14v20z" fill="#fff" />
+              </svg>
+            </span>
+            <span class="hero-video-caption">소개 영상 보기</span>
           </div>
         </div>
       </section>
@@ -721,6 +753,139 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
           <div class="agent-actions">
             <a class="btn btn-primary" href="./tours/SKILL.md" download data-en>↓ Download SKILL.md</a>
             <a class="btn btn-primary" href="./tours/SKILL.md" download data-ko>↓ SKILL.md 다운로드</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───── Remote library (v0.7.0+) ───── -->
+      <section id="remote" class="remote-spotlight">
+        <div class="container">
+          <p class="eyebrow" data-en>★ Shared library <span class="new-badge">NEW v0.7.0</span></p>
+          <p class="eyebrow" data-ko>★ 공유 라이브러리 <span class="new-badge">NEW v0.7.0</span></p>
+
+          <h2 class="section-title" data-en>
+            A team's tours, from <em>their</em> repo.
+          </h2>
+          <h2 class="section-title" data-ko>
+            팀의 시연을, <em>리포에서 그대로</em>.
+          </h2>
+
+          <p class="lead" data-en>
+            Hand a public GitHub repo to Manuscript and the popup gains
+            a <strong>Remote Library</strong> tab. Tours your team pushes to that
+            repo show up there, ready to play in any tab — no JSON file
+            handoff, no manual import, no second copy in your library to
+            keep in sync.
+          </p>
+          <p class="lead" data-ko>
+            GitHub 공개 리포 주소를 매뉴스크립트에 알려주면 팝업에 <strong>원격저장소</strong>
+            탭이 생깁니다. 팀이 그 리포에 푸시한 시연이 거기 그대로 떠서, 어느 탭에서든
+            바로 재생할 수 있어요 — JSON 파일을 주고받거나, 직접 가져오기 하거나,
+            내 라이브러리에 사본을 두고 동기화할 필요 없이.
+          </p>
+
+          <div class="remote-rows">
+
+            <!-- Row 1: Connect a repo + catalog -->
+            <div class="remote-row">
+              <div class="remote-row-copy">
+                <h3 data-en>Connect a GitHub repo</h3>
+                <h3 data-ko>GitHub 리포 연결</h3>
+                <p data-en>
+                  Paste a repo URL (or just <code>owner/repo</code>) in
+                  the Remote Library tab and the catalog populates from the
+                  files at the repo root or whatever folder you point
+                  at. Each scenario shows its title and step count —
+                  click the manuscript icon to play. Sub-folders are
+                  navigable too, with a small back chip at the top.
+                </p>
+                <p data-ko>
+                  원격저장소 탭에 리포 URL (혹은 짧게 <code>owner/repo</code>)
+                  만 붙여넣으면, 리포 루트나 지정한 폴더의 시나리오 목록이
+                  채워집니다. 시나리오마다 제목과 단계 수가 보이고,
+                  매뉴스크립트 아이콘을 누르면 재생돼요. 하위 폴더도 들어갈
+                  수 있고, 위쪽 작은 ← 표시로 다시 나옵니다.
+                </p>
+              </div>
+              <div class="remote-row-image">
+                <img src="./assets/screenshots/remote-tab-en.png"
+                  alt="The popup's Remote Library tab listing scenarios from a GitHub repo"
+                  data-en
+                  onerror="this.style.display='none'" />
+                <img src="./assets/screenshots/remote-tab-ko.png"
+                  alt="팝업 원격저장소 탭에서 GitHub 리포의 시나리오 목록"
+                  data-ko
+                  onerror="this.style.display='none'" />
+              </div>
+            </div>
+
+            <!-- Row 2: HIGHLIGHT — edits won't be saved -->
+            <div class="remote-row remote-row-highlight">
+              <div class="remote-row-copy">
+                <h3 data-en>Edits won't be saved <span class="remote-pin">important</span></h3>
+                <h3 data-ko>편집은 저장되지 않습니다 <span class="remote-pin">꼭 알아두세요</span></h3>
+                <p data-en>
+                  Every remote play opens with a sticky banner above
+                  the panel header that names the source
+                  (📡 owner/repo · file.json) and reminds you that
+                  edits are temporary. The teammate who owns the repo
+                  is the only one whose version is authoritative — your
+                  tweaks live just for this play, and the next refresh
+                  brings their copy back untouched.
+                </p>
+                <p data-ko>
+                  원격저장소 시나리오를 재생할 때마다 패널 위쪽에 작은 배너가
+                  떠서, 어디서 온 시나리오인지 (📡 owner/repo · file.json)
+                  알려주고 편집해도 저장되지 않는다고 분명히 안내합니다.
+                  리포 주인의 버전이 진본이라서, 내가 만진 부분은 이번
+                  재생에만 남고 다음에 다시 열면 원본 그대로예요.
+                </p>
+              </div>
+              <div class="remote-row-image">
+                <img src="./assets/screenshots/remote-banner-en.png"
+                  alt="The in-panel banner: 'Edits won't be saved' with a Save to local button"
+                  data-en
+                  onerror="this.style.display='none'" />
+                <img src="./assets/screenshots/remote-banner-ko.png"
+                  alt="패널 배너: '편집은 저장되지 않습니다' + 내 라이브러리에 저장 버튼"
+                  data-ko
+                  onerror="this.style.display='none'" />
+              </div>
+            </div>
+
+            <!-- Row 3: Save to local -->
+            <div class="remote-row">
+              <div class="remote-row-copy">
+                <h3 data-en>Save to local — when you want to keep a copy</h3>
+                <h3 data-ko>내 라이브러리에 저장 — 갖고 있고 싶을 때</h3>
+                <p data-en>
+                  Made changes you don't want to lose? The banner has a
+                  <strong>Save to local</strong> button right there.
+                  One click promotes the current scenario into your own
+                  library with a fresh id, the banner disappears, and
+                  you're back in normal editing mode — your copy now,
+                  with no link back to the repo.
+                </p>
+                <p data-ko>
+                  편집한 내용을 잃고 싶지 않다면 배너의
+                  <strong>내 라이브러리에 저장</strong> 버튼을 누르세요.
+                  지금 재생 중인 시나리오가 새 id 로 내 라이브러리에
+                  들어가고, 배너는 사라지고, 평소처럼 편집·저장이 됩니다 —
+                  그때부터는 내 사본이고, 리포와는 분리돼요.
+                </p>
+              </div>
+              <div class="remote-row-image">
+                <img src="./assets/screenshots/remote-save-en.png"
+                  alt="After clicking Save to local — the scenario appears in the Local tab"
+                  data-en
+                  onerror="this.style.display='none'" />
+                <img src="./assets/screenshots/remote-save-ko.png"
+                  alt="내 라이브러리에 저장 클릭 후 — 시나리오가 내 라이브러리 탭에 등장"
+                  data-ko
+                  onerror="this.style.display='none'" />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -2484,8 +2649,8 @@ manuscript.configure({
           <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.6.0 · © 2026</span>
-          <span data-ko>Manuscript v0.6.0 · © 2026</span>
+          <span data-en>Manuscript v0.7.0 · © 2026</span>
+          <span data-ko>Manuscript v0.7.0 · © 2026</span>
         </div>
       </div>
     </footer>
@@ -2665,14 +2830,14 @@ manuscript.configure({
             // Hero install hint: only surface the manual-install nudge while
             // the dev .zip is genuinely ahead of the live Web Store build.
             // When both versions are known and equal (or store is ahead),
-            // leave it hidden — the Web Store button is the only path users
-            // need. Requires BOTH versions; an unknown store version (empty
+            // restore hidden — explicitly, because Chrome's `display: revert`
+            // on the language-toggle rule overrides the markup's `hidden`
+            // attribute in KO mode (see styles.css `.hero-install-hint`).
+            // Requires BOTH versions; an unknown store version (empty
             // store-version.json) keeps it hidden.
-            if (c > 0) {
-              document
-                .querySelectorAll('[data-region="hero-zip-hint"]')
-                .forEach((el) => { el.hidden = false; });
-            }
+            document
+              .querySelectorAll('[data-region="hero-zip-hint"]')
+              .forEach((el) => { el.hidden = c <= 0; });
           }
 
           // 4) What's-new toast — only when we have a real store

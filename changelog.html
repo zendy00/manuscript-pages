@@ -66,6 +66,7 @@
           <a href="./#how" data-en>How it works</a><a href="./#how" data-ko>동작 방식</a>
           <a href="./#record" data-en>Record</a><a href="./#record" data-ko>녹화</a>
           <a href="./#agent" data-en>AI agent</a><a href="./#agent" data-ko>AI 작성</a>
+          <a href="./#remote" data-en><span class="new-badge nav-new">NEW</span>Remote Library</a><a href="./#remote" data-ko><span class="new-badge nav-new">NEW</span>원격저장소</a>
           <a href="./#install" data-en>Install</a><a href="./#install" data-ko>설치</a>
           <a href="./#guide" data-en>Guide</a><a href="./#guide" data-ko>사용설명서</a>
           <a href="./#bridge" data-en>Bridge</a><a href="./#bridge" data-ko>브리지</a>
@@ -121,12 +122,68 @@
       <section class="changelog">
         <div class="container">
 
+          <!-- ───── v0.7.0 ───── -->
+          <article id="v0-7-0" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2>v0.7.0</h2>
+              <span class="changelog-tag changelog-tag-current" data-en>Current</span>
+              <span class="changelog-tag changelog-tag-current" data-ko>현재</span>
+              <time datetime="2026-05-29">2026-05-29</time>
+            </header>
+            <p class="changelog-summary" data-en>
+              Remote Library. Connect a public GitHub repo and replay
+              shared manuscripts from the new Remote Library tab — no JSON
+              import, no copy in your library. Edits to a remote
+              scenario stay temporary so a teammate's working copy is
+              never overwritten; one click on the in-panel banner saves
+              the scenario to your library when you want to keep a copy.
+            </p>
+            <p class="changelog-summary" data-ko>
+              원격저장소 라이브러리가 들어왔어요. GitHub 공개 리포를 연결하면
+              팝업의 새 [원격저장소] 탭에서 공유된 매뉴스크립트를 그대로 재생합니다 —
+              JSON 가져오기도, 내 라이브러리에 사본도 없이요. 원격저장소 시나리오의
+              편집은 저장되지 않아서 팀원이 만든 원본을 덮어쓸 일이 없고,
+              마음에 들면 패널 위쪽 배너의 [내 라이브러리에 저장] 한 번으로
+              내 라이브러리에 옮길 수 있습니다.
+            </p>
+            <h3 data-en>New</h3>
+            <h3 data-ko>신기능</h3>
+            <ul data-en>
+              <li><strong>Remote Library tab</strong> — paste a GitHub repo URL (or just <code>owner/repo</code>) in the popup's Remote Library tab and the catalog populates. Each scenario gets its own row with the title and step count; click the manuscript icon to play.
+                <ul>
+                  <li><strong>Sub-folders</strong> — if the repo organizes scenarios into folders, the Remote Library tab shows the folders too. Step into one with a click and the breadcrumb at the top brings you back.</li>
+                  <li><strong>Stays fresh</strong> — opening the popup quietly refetches each source so the latest push from the repo's owner is what plays, without you clicking refresh.</li>
+                  <li><strong>One repo, many scenarios, no copies</strong> — your library stays your own; the Remote Library tab just reaches into the repo whenever you play.</li>
+                </ul>
+              </li>
+              <li><strong>"Edits won't be saved" banner</strong> — every remote play opens with a sticky banner above the panel header that names the source (📡 owner/repo · file.json) and reminds you that local edits are temporary. The banner stays put as you scroll the steps, so the context never disappears.</li>
+              <li><strong>Save to local</strong> — when you've tweaked a remote scenario and want to keep the changes, the banner's [Save to local] button promotes the current scenario into your own library with a fresh id. The banner then disappears and you're back in normal editing mode.</li>
+            </ul>
+            <ul data-ko>
+              <li><strong>원격저장소 탭</strong> — 팝업의 [원격저장소] 탭에 GitHub 리포 URL (혹은 짧게 <code>owner/repo</code>) 만 붙여넣으면 시나리오 목록이 채워집니다. 시나리오마다 제목과 단계 수가 보이고, 매뉴스크립트 아이콘을 누르면 그대로 재생돼요.
+                <ul>
+                  <li><strong>하위 폴더</strong> — 리포가 시나리오를 폴더로 정리해두면 그 폴더도 같이 보입니다. 폴더를 누르면 안으로 들어가고, 위쪽 작은 표시 (← 폴더명) 로 다시 돌아올 수 있어요.</li>
+                  <li><strong>항상 최신</strong> — 팝업을 다시 열 때마다 등록된 소스를 조용히 다시 불러옵니다. 리포 주인이 새로 푸시한 버전이 자동으로 반영돼서, 새로고침 버튼을 따로 누르지 않아도 돼요.</li>
+                  <li><strong>한 리포에 시나리오 여러 개, 내 라이브러리는 깨끗하게</strong> — 내 라이브러리는 내가 만든 것만. 원격저장소 탭은 재생할 때마다 리포에서 바로 불러옵니다.</li>
+                </ul>
+              </li>
+              <li><strong>편집은 저장되지 않습니다 배너</strong> — 원격저장소 시나리오를 재생할 때마다 패널 위쪽에 작은 배너가 떠서 어디서 온 시나리오인지 (📡 owner/repo · file.json) 알려주고, 편집해도 저장되지 않는다고 안내합니다. 단계를 스크롤해도 배너는 그대로 머물러서 맥락이 사라지지 않아요.</li>
+              <li><strong>내 라이브러리에 저장</strong> — 원격저장소 시나리오를 만져보다가 이 상태로 갖고 있고 싶을 때, 배너의 [내 라이브러리에 저장] 버튼을 누르면 새 id 로 내 라이브러리에 들어갑니다. 그 뒤로는 평소처럼 편집·저장이 됩니다.</li>
+            </ul>
+            <h3 data-en>Fixes</h3>
+            <h3 data-ko>버그 픽스</h3>
+            <ul data-en>
+              <li><strong>Bridge plays no longer leak into your library</strong> — host-page-launched tours (the runtime bridge path) used to pile up in the popup's saved list. The same temporary model now covers them too, so external pages can play your tours without polluting your own collection.</li>
+            </ul>
+            <ul data-ko>
+              <li><strong>외부 페이지 재생이 라이브러리에 쌓이던 문제</strong> — 호스트 페이지에서 runtime bridge 로 실행한 시연이 팝업의 저장 목록에 누적되던 현상이 있었어요. 이제 그쪽도 동일한 임시 모델을 따라서, 외부 페이지에서 시연을 실행해도 내 라이브러리는 깨끗하게 유지됩니다.</li>
+            </ul>
+          </article>
+
           <!-- ───── v0.6.0 ───── -->
           <article id="v0-6-0" class="changelog-entry">
             <header class="changelog-entry-head">
               <h2>v0.6.0</h2>
-              <span class="changelog-tag changelog-tag-current" data-en>Current</span>
-              <span class="changelog-tag changelog-tag-current" data-ko>현재</span>
               <time datetime="2026-05-26">2026-05-26</time>
             </header>
             <p class="changelog-summary" data-en>
@@ -627,8 +684,8 @@
           <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.6.0 · © 2026</span>
-          <span data-ko>Manuscript v0.6.0 · © 2026</span>
+          <span data-en>Manuscript v0.7.0 · © 2026</span>
+          <span data-ko>Manuscript v0.7.0 · © 2026</span>
         </div>
       </div>
     </footer>

@@ -486,6 +486,102 @@ p.lead {
   color: var(--c-text);
   font-weight: 600;
 }
+
+/* ───── Remote library spotlight (v0.7.0) ───── */
+.remote-spotlight {
+  background:
+    radial-gradient(ellipse 700px 400px at 0% 0%,
+      color-mix(in oklch, var(--c-primary) 14%, transparent) 0%,
+      transparent 65%),
+    var(--c-surface);
+  padding: var(--section-pad) 0;
+  border-bottom: 1px solid var(--c-border);
+}
+.remote-spotlight .section-title {
+  font-family: var(--ff-serif);
+  font-size: 44px;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+}
+.remote-spotlight .section-title em {
+  font-style: italic;
+  color: var(--c-primary);
+}
+.remote-spotlight .eyebrow { color: var(--c-primary); }
+.remote-spotlight p.lead { margin-bottom: 40px; }
+.remote-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+.remote-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  padding: 24px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+}
+/* The "important" row that carries the "Edits won't be saved" message.
+   Higher visual weight — primary tint background + thicker border.
+   This is the single most safety-critical message in the Remote feature
+   (users editing remote scenarios may otherwise expect persistence). */
+.remote-row-highlight {
+  background:
+    linear-gradient(0deg,
+      color-mix(in oklch, var(--c-primary) 6%, transparent),
+      color-mix(in oklch, var(--c-primary) 6%, transparent)),
+    var(--c-bg);
+  border-color: color-mix(in oklch, var(--c-primary) 40%, var(--c-border));
+}
+.remote-row:nth-child(even) .remote-row-image { order: -1; }
+/* Keep h3 as block (UA default) so the [data-en/ko] hide rule still
+   wins — overriding display: here broke the language toggle for the
+   highlight row. The chip floats inline via .remote-pin's own rules. */
+.remote-row-copy h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+.remote-row-copy p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--c-text-mute);
+}
+.remote-row-copy code {
+  font-family: var(--ff-mono);
+  font-size: 13px;
+  padding: 2px 6px;
+  background: var(--c-surface-2);
+  border-radius: var(--r-sm);
+}
+.remote-row-image img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: var(--r-md);
+  border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-md);
+  background: var(--c-surface);
+}
+.remote-pin {
+  display: inline-block;
+  vertical-align: 0.18em;
+  margin-left: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--c-primary);
+  color: var(--c-on-primary, #fff);
+}
+
 /* ───── Feature grid ───── */
 .features {
   background: var(--c-surface-2);
@@ -698,6 +794,14 @@ p.lead {
 }
 /* lead 본문에서는 약간 위로 띄워 둠 — 라인 높이가 크기 때문 */
 .lead .new-badge { vertical-align: baseline; position: relative; top: -2px; }
+/* nav 안에서는 더 작게 — 메뉴 폭이 좁아 NEW 칩이 시각 잡음이 되면 안 됨. */
+.nav-new {
+  font-size: 9px;
+  padding: 1px 5px;
+  margin-right: 4px;
+  vertical-align: 1px;
+  letter-spacing: 0.04em;
+}
 
 /* ───── Guide ───── */
 .guide-grid {
@@ -865,13 +969,20 @@ body[lang="ko"] .btn-sponsor[data-ko] {
   .hero h1 { font-size: 40px; }
   .record-spotlight .section-title { font-size: 32px; }
   .record-grid { grid-template-columns: 1fr; gap: 24px; }
+  .remote-spotlight .section-title { font-size: 32px; }
+  .remote-row { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
+  .remote-row:nth-child(even) .remote-row-image { order: 0; }
   .feature-grid { grid-template-columns: 1fr; }
   .guide-grid { grid-template-columns: 1fr; gap: 24px; }
   .guide-toc { position: static; }
 }
 
-/* Collapse the header nav into a hamburger panel below 720px. */
-@media (max-width: 720px) {
+/* Collapse the header nav into a hamburger panel below 1080px. The
+   previous 720px threshold left ~720–1080px viewports with menu items
+   wrapping to two awkward lines (NEW badge on Remote + KO labels push
+   the row past the available width). Switch to hamburger early so the
+   header stays a single line at every desktop width. */
+@media (max-width: 1080px) {
   .nav-toggle { display: inline-flex; }
   .site-header .inner { gap: 12px; }
 
@@ -1122,6 +1233,13 @@ body[data-palette="studio-dark"] #mn-tour {
   color: var(--c-text-soft);
 }
 .hero-install-hint[hidden] { display: none; }
+/* The language-toggle rule `body[lang="ko"] [data-ko] { display: revert }`
+   has higher specificity (0,2,1) than `.hero-install-hint[hidden]` (0,2,0),
+   and Chrome's revert resolves to display:block for <p> instead of honoring
+   the UA-level [hidden] rule. Result: in KO mode the hint paints even with
+   the hidden attribute set. Out-rank the lang rule when hidden is present. */
+body[lang="en"] [data-en].hero-install-hint[hidden],
+body[lang="ko"] [data-ko].hero-install-hint[hidden] { display: none; }
 .hero-install-hint a { color: var(--c-text-mute); text-decoration: underline; }
 .hero-install-hint a:hover { color: var(--c-primary); }
 .hero-zip-link { font-variant-numeric: tabular-nums; }
