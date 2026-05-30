@@ -254,13 +254,6 @@ p.lead {
   height: 100%;
   display: block;
 }
-/* Record-themed pill — explicit vivid red dot (rather than the muted
-   --c-error brand red) so the recording cue is unmistakable. */
-.iicon.is-record {
-  color: #ff0033;
-  background: color-mix(in oklch, #ff0033, transparent 86%);
-  border-color: color-mix(in oklch, #ff0033, transparent 60%);
-}
 .iicon.is-trash { color: var(--c-error); }
 
 /* Hero keyword pill row — three short labels of what Manuscript makes. */
@@ -859,6 +852,7 @@ p.lead {
 .guide-body li { margin-bottom: 6px; }
 .guide-body figure {
   margin: 20px 0;
+  text-align: center;
 }
 .guide-body figure img {
   border-radius: var(--r-md);

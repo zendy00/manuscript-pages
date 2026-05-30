@@ -21,7 +21,7 @@ The site itself is a single static HTML page — no build step, no bundler. It i
 ├── store-version.json      # cron-scraped Web Store version (placeholder until
 │                           #   .github/workflows/store-version.yml runs;
 │                           #   preserved on deploy via pages.yml clean-exclude)
-├── downloads/              # built by scripts/site-zip.mjs in pages.yml:
+├── downloads/              # built by scripts/01.build/site-zip.mjs in pages.yml:
 │   ├── manuscript-<ver>.zip          # manual install — latest dev build
 │   ├── manuscript-latest.zip         # alias, always == newest versioned zip
 │   ├── manuscript-<ver>.zip.sha256   # sidecar checksums

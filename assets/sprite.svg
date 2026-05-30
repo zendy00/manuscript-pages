@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-plus" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M 8 4 L 8 12" />
+      <path d="M 4 8 L 12 8" />
+    </symbol>
+    <symbol id="i-trash" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2.5 4 L13.5 4" />
+      <path d="M6 4 L6 2.5 L10 2.5 L10 4" />
+      <path d="M4 4 L4.6 13.5 A 1 1 0 0 0 5.6 14.5 L10.4 14.5 A 1 1 0 0 0 11.4 13.5 L12 4" />
+      <path d="M6.6 6.8 L6.6 12" />
+      <path d="M9.4 6.8 L9.4 12" />
+    </symbol>
+    <symbol id="i-timer" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="8" cy="8" r="6" />
+      <path d="M8 4.5 L8 8 L10.4 9.4" />
+    </symbol>
+    <symbol id="i-pause" viewBox="0 0 16 16" fill="currentColor">
+      <rect x="4" y="3" width="2.6" height="10" rx="0.6" />
+      <rect x="9.4" y="3" width="2.6" height="10" rx="0.6" />
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M 4.5 3 L 13 8 L 4.5 13 Z" />
+    </symbol>
+    <symbol id="i-rotate" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 4 11 A 5 5 0 1 1 11 4" />
+      <path d="M 11 1.5 L 14 4 L 11 6.5 Z" fill="currentColor" stroke="none" />
+    </symbol>
+    <symbol id="i-link" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 4 12 L 12 4 M 6 4 L 12 4 L 12 10" />
+    </symbol>
+    <symbol id="i-record" viewBox="0 0 16 16" fill="currentColor">
+      <circle cx="8" cy="8" r="5" />
+    </symbol>
+    <symbol id="i-text" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M 3 3 L 13 3 L 13 5 L 9 5 L 9 13 L 7 13 L 7 5 L 3 5 Z" />
+    </symbol>
+    <symbol id="i-prompter" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="3" width="11" height="9" rx="1" />
+      <path d="M 4.5 5.8 L 11.5 5.8 M 4.5 8 L 11.5 8 M 4.5 10.2 L 9 10.2" />
+    </symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24" fill="currentColor">
+      <path fill-rule="evenodd" d="M10.44 4.15L9.85 1.21L14.15 1.21L13.56 4.15A8 8 0 0 1 16.44 5.35L18.11 2.85L21.15 5.89L18.65 7.56A8 8 0 0 1 19.85 10.44L22.79 9.85L22.79 14.15L19.85 13.56A8 8 0 0 1 18.65 16.44L21.15 18.11L18.11 21.15L16.44 18.65A8 8 0 0 1 13.56 19.85L14.15 22.79L9.85 22.79L10.44 19.85A8 8 0 0 1 7.56 18.65L5.89 21.15L2.85 18.11L5.35 16.44A8 8 0 0 1 4.15 13.56L1.21 14.15L1.21 9.85L4.15 10.44A8 8 0 0 1 5.35 7.56L2.85 5.89L5.89 2.85L7.56 5.35A8 8 0 0 1 10.44 4.15ZM9.5 12A2.5 2.5 0 1 0 14.5 12A2.5 2.5 0 1 0 9.5 12Z" />
+    </symbol>
+    <symbol id="i-picker" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="2.5" width="11" height="11" rx="2.5" />
+      <path d="M5.5 8 L10.5 8 M8 5.5 L8 10.5" />
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 8.5 L6.5 12 L13 4.5" />
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <path d="M4 4 L12 12 M12 4 L4 12" />
+    </symbol>
+  </defs>
+</svg>

@@ -21,7 +21,7 @@
 ├── store-version.json      # cron 으로 스크래핑한 Chrome 웹 스토어 버전
 │                           # (.github/workflows/store-version.yml 가 갱신,
 │                           #  pages.yml clean-exclude 로 deploy 시 보존)
-├── downloads/              # pages.yml 에서 scripts/site-zip.mjs 가 생성:
+├── downloads/              # pages.yml 에서 scripts/01.build/site-zip.mjs 가 생성:
 │   ├── manuscript-<버전>.zip         # 수동 설치 — 최신 dev 빌드
 │   ├── manuscript-latest.zip        # 별칭, 항상 최신 버전 zip 과 동일
 │   ├── manuscript-<버전>.zip.sha256  # 사이드카 체크섬

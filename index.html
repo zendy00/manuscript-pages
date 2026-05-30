@@ -60,6 +60,9 @@
     />
     <link rel="stylesheet" href="./styles.css" />
 
+    <!-- Preload the icon sprite so the externalized <use> refs paint without FOUC. -->
+    <link rel="preload" href="./assets/sprite.svg" as="image" type="image/svg+xml" />
+
     <!-- ───── Open Graph ───── -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://zendy00.github.io/manuscript-pages/" />
@@ -205,49 +208,10 @@
     </script>
   </head>
   <body data-palette="studio" lang="en">
-    <!--
-      Inline SVG sprite — mirrors src/content/floating-panel/panel-icons.ts
-      and panel-shell.ts so the user-facing guide shows the exact same
-      icons the extension renders. <use href="#i-…"> picks one up.
-    -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-      <defs>
-        <symbol id="i-plus" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M 8 4 L 8 12" />
-          <path d="M 4 8 L 12 8" />
-        </symbol>
-        <symbol id="i-trash" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2.5 4 L13.5 4" />
-          <path d="M6 4 L6 2.5 L10 2.5 L10 4" />
-          <path d="M4 4 L4.6 13.5 A 1 1 0 0 0 5.6 14.5 L10.4 14.5 A 1 1 0 0 0 11.4 13.5 L12 4" />
-          <path d="M6.6 6.8 L6.6 12" />
-          <path d="M9.4 6.8 L9.4 12" />
-        </symbol>
-        <symbol id="i-play" viewBox="0 0 16 16" fill="currentColor">
-          <path d="M 4.5 3 L 13 8 L 4.5 13 Z" />
-        </symbol>
-        <symbol id="i-rotate" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M 4 11 A 5 5 0 1 1 11 4" />
-          <path d="M 11 1.5 L 14 4 L 11 6.5 Z" fill="currentColor" stroke="none" />
-        </symbol>
-        <symbol id="i-link" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M 4 12 L 12 4 M 6 4 L 12 4 L 12 10" />
-        </symbol>
-        <symbol id="i-record" viewBox="0 0 16 16" fill="currentColor">
-          <circle cx="8" cy="8" r="5" />
-        </symbol>
-        <symbol id="i-text" viewBox="0 0 16 16" fill="currentColor">
-          <path d="M 3 3 L 13 3 L 13 5 L 9 5 L 9 13 L 7 13 L 7 5 L 3 5 Z" />
-        </symbol>
-        <symbol id="i-prompter" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2.5" y="3" width="11" height="9" rx="1" />
-          <path d="M 4.5 5.8 L 11.5 5.8 M 4.5 8 L 11.5 8 M 4.5 10.2 L 9 10.2" />
-        </symbol>
-        <symbol id="i-gear" viewBox="0 0 24 24" fill="currentColor">
-          <path fill-rule="evenodd" d="M10.44 4.15L9.85 1.21L14.15 1.21L13.56 4.15A8 8 0 0 1 16.44 5.35L18.11 2.85L21.15 5.89L18.65 7.56A8 8 0 0 1 19.85 10.44L22.79 9.85L22.79 14.15L19.85 13.56A8 8 0 0 1 18.65 16.44L21.15 18.11L18.11 21.15L16.44 18.65A8 8 0 0 1 13.56 19.85L14.15 22.79L9.85 22.79L10.44 19.85A8 8 0 0 1 7.56 18.65L5.89 21.15L2.85 18.11L5.35 16.44A8 8 0 0 1 4.15 13.56L1.21 14.15L1.21 9.85L4.15 10.44A8 8 0 0 1 5.35 7.56L2.85 5.89L5.89 2.85L7.56 5.35A8 8 0 0 1 10.44 4.15ZM9.5 12A2.5 2.5 0 1 0 14.5 12A2.5 2.5 0 1 0 9.5 12Z" />
-        </symbol>
-      </defs>
-    </svg>
+    <!-- ICON SPRITE — externalized to ./assets/sprite.svg, preloaded in <head>;
+         prose references it via <use href="./assets/sprite.svg#i-…">. The sprite
+         mirrors src/content/floating-panel/panel-icons.ts + panel-shell.ts so the
+         guide shows the exact icons the extension renders. -->
     <header class="site-header">
       <div class="inner">
         <a href="#top" class="brand">
@@ -489,8 +453,8 @@
               </div>
               <h3 data-en>Reads your tour out loud</h3>
               <h3 data-ko>설명을 소리 내어 읽어줘요</h3>
-              <p data-en>Type a short description for each step and Manuscript will speak it during playback. Arrow keys move between steps, Space pauses, Esc exits.</p>
-              <p data-ko>각 스텝에 짧은 설명을 적어 두면 재생할 때 목소리로 읽어줍니다. 방향키로 이동, Space 로 일시정지, Esc 로 종료.</p>
+              <p data-en>Type a short description for each step and Manuscript will speak it during playback. Arrow keys move between steps, <span class="kbd">Space</span> pauses, <span class="kbd">Esc</span> exits.</p>
+              <p data-ko>각 스텝에 짧은 설명을 적어 두면 재생할 때 목소리로 읽어줍니다. 방향키로 이동, <span class="kbd">Space</span> 로 일시정지, <span class="kbd">Esc</span> 로 종료.</p>
             </div>
 
             <div class="feature-card">
@@ -536,8 +500,8 @@
               <div class="body">
                 <h3 data-en>Tap the part you want to show</h3>
                 <h3 data-ko>강조하고 싶은 곳을 클릭</h3>
-                <p data-en>On each step, click the small wand to start picking. Hover over the page and a pink outline follows your mouse — click once to lock in your target. That part shines while everything else softly dims.</p>
-                <p data-ko>각 스텝의 작은 픽커 버튼을 누른 다음 페이지 위로 마우스를 움직이면 분홍색 테두리가 따라옵니다. 원하는 곳을 한 번 클릭하면 그 부분만 또렷이 강조되고 나머지는 살짝 어두워져요.</p>
+                <p data-en>On each step, click the small wand <span class="iicon"><svg><use href="./assets/sprite.svg#i-picker"/></svg></span> to start picking. Hover over the page and a pink outline follows your mouse — click once to lock in your target. That part shines while everything else softly dims.</p>
+                <p data-ko>각 스텝의 작은 픽커 버튼 <span class="iicon"><svg><use href="./assets/sprite.svg#i-picker"/></svg></span> 을 누른 다음 페이지 위로 마우스를 움직이면 분홍색 테두리가 따라옵니다. 원하는 곳을 한 번 클릭하면 그 부분만 또렷이 강조되고 나머지는 살짝 어두워져요.</p>
                 <img src="./assets/screenshots/flow-02-picker-en.png" alt="A page element being picked, surrounded by a pink outline"
                   data-en
                   onerror="this.style.display='none'" />
@@ -552,8 +516,8 @@
               <div class="body">
                 <h3 data-en>Add a note, shape, or doodle</h3>
                 <h3 data-ko>메모·도형·낙서 더하기</h3>
-                <p data-en>Press <span class="iicon"><svg><use href="#i-text"/></svg></span> for a text box, pick one of eight shapes, or sketch with the freehand tool. Click anything you've added to change its color, font, or how it floats in.</p>
-                <p data-ko><span class="iicon"><svg><use href="#i-text"/></svg></span> 버튼으로 텍스트 상자, 여덟 가지 도형, 손그림까지 자유롭게 더할 수 있어요. 추가한 항목을 클릭하면 색·글꼴·등장 효과를 그 자리에서 바꿀 수 있습니다.</p>
+                <p data-en>Press <span class="iicon"><svg><use href="./assets/sprite.svg#i-text"/></svg></span> for a text box, pick one of eight shapes, or sketch with the freehand tool. Click anything you've added to change its color, font, or how it floats in.</p>
+                <p data-ko><span class="iicon"><svg><use href="./assets/sprite.svg#i-text"/></svg></span> 버튼으로 텍스트 상자, 여덟 가지 도형, 손그림까지 자유롭게 더할 수 있어요. 추가한 항목을 클릭하면 색·글꼴·등장 효과를 그 자리에서 바꿀 수 있습니다.</p>
                 <img src="./assets/screenshots/flow-03-annotate-en.png" alt="Annotation editor showing color and font options"
                   data-en
                   onerror="this.style.display='none'" />
@@ -568,8 +532,8 @@
               <div class="body">
                 <h3 data-en>Build out the rest of the tour</h3>
                 <h3 data-ko>나머지 단계 차곡차곡</h3>
-                <p data-en>Use the <span class="iicon"><svg><use href="#i-plus"/></svg></span> between cards to insert a step, or the bigger <span class="iicon"><svg><use href="#i-plus"/></svg></span> at the end to add one. Drag cards around to reorder. Click any card and the page scrolls to that step with the spotlight on.</p>
-                <p data-ko>카드 사이의 <span class="iicon"><svg><use href="#i-plus"/></svg></span> 로 중간에 끼워넣고, 맨 아래 큰 <span class="iicon"><svg><use href="#i-plus"/></svg></span> 로 새 단계를 추가합니다. 카드를 끌어서 순서를 바꿀 수도 있어요. 카드를 누르면 그 단계로 페이지가 자연스럽게 이동하면서 강조 표시가 나타납니다.</p>
+                <p data-en>Use the <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span> between cards to insert a step, or the bigger <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span> at the end to add one. Drag cards around to reorder. Click any card and the page scrolls to that step with the spotlight on.</p>
+                <p data-ko>카드 사이의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span> 로 중간에 끼워넣고, 맨 아래 큰 <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span> 로 새 단계를 추가합니다. 카드를 끌어서 순서를 바꿀 수도 있어요. 카드를 누르면 그 단계로 페이지가 자연스럽게 이동하면서 강조 표시가 나타납니다.</p>
                 <img src="./assets/screenshots/flow-04-steps-en.png" alt="Floating panel with several step cards"
                   data-en
                   onerror="this.style.display='none'" />
@@ -584,8 +548,8 @@
               <div class="body">
                 <h3 data-en>Press play — and you're done</h3>
                 <h3 data-ko>재생만 누르면 완성</h3>
-                <p data-en>Tap <span class="iicon"><svg><use href="#i-play"/></svg></span> at the bottom of the panel to start the tour. A small playback bar appears. Use <span class="kbd">←</span> <span class="kbd">→</span> to move, <span class="kbd">Space</span> to pause, <span class="kbd">Esc</span> to exit. Want to read your notes on another screen? Pop out the speaker-notes window.</p>
-                <p data-ko>패널 아래쪽의 <span class="iicon"><svg><use href="#i-play"/></svg></span> 를 누르면 시연이 시작됩니다. 작은 재생 바가 나타나요. <span class="kbd">←</span> <span class="kbd">→</span> 로 이동, <span class="kbd">Space</span> 로 일시정지, <span class="kbd">Esc</span> 로 종료. 노트를 다른 화면에서 보고 싶다면 발표자 노트 창을 따로 띄울 수 있어요.</p>
+                <p data-en>Tap <span class="iicon"><svg><use href="./assets/sprite.svg#i-play"/></svg></span> at the bottom of the panel to start the tour. A small playback bar appears. Use <span class="kbd">←</span> <span class="kbd">→</span> to move, <span class="kbd">Space</span> to pause, <span class="kbd">Esc</span> to exit. Want to read your notes on another screen? Pop out the speaker-notes window.</p>
+                <p data-ko>패널 아래쪽의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-play"/></svg></span> 를 누르면 시연이 시작됩니다. 작은 재생 바가 나타나요. <span class="kbd">←</span> <span class="kbd">→</span> 로 이동, <span class="kbd">Space</span> 로 일시정지, <span class="kbd">Esc</span> 로 종료. 노트를 다른 화면에서 보고 싶다면 발표자 노트 창을 따로 띄울 수 있어요.</p>
                 <img src="./assets/screenshots/flow-05-replay-en.png" alt="Replay controls bar at the bottom of the screen with a spotlight"
                   data-en
                   onerror="this.style.display='none'" />
@@ -627,19 +591,19 @@
                   위치를 물어봐요.
                 </p>
                 <p class="lead" data-en>
-                  Want to chip in with your own voice along the way? Tap <strong>Space</strong>
+                  Want to chip in with your own voice along the way? Tap <span class="kbd">Space</span>
                   while you're recording and the tour pauses — the video keeps rolling, so
                   you can speak up, click around, or just catch your breath. Tap
-                  <strong>Space</strong> again to pick the tour back up. Turn on
+                  <span class="kbd">Space</span> again to pick the tour back up. Turn on
                   <strong>Also record my microphone</strong> in the recorder window first if
                   you want your voice baked right into the video alongside the read-aloud
                   narration.
                 </p>
                 <p class="lead" data-ko>
                   녹화 도중에 내 목소리로 한마디 보태고 싶으면? 녹화 중에
-                  <strong>Space</strong> 키를 누르면 시연이 잠깐 멈춰요. 그동안에도 녹화는
+                  <span class="kbd">Space</span> 키를 누르면 시연이 잠깐 멈춰요. 그동안에도 녹화는
                   계속되니까, 직접 설명을 보태거나, 페이지를 클릭해서 뭔가 보여주거나,
-                  잠깐 숨을 고르세요. <strong>Space</strong>를 다시 누르면 시연이 이어집니다.
+                  잠깐 숨을 고르세요. <span class="kbd">Space</span>를 다시 누르면 시연이 이어집니다.
                   녹화 창에서 <strong>내 목소리도 함께 녹음</strong>을 켜 두면 내가 말한
                   내용이 읽어주는 안내와 함께 영상에 자연스럽게 담겨요.
                 </p>
@@ -655,21 +619,21 @@
                 <ul class="record-bullets" data-en>
                   <li><strong>Just the page</strong> — the editor panel and controls slide out of view while you record, and the page goes fullscreen.</li>
                   <li><strong>Spans multiple pages</strong> — if your tour moves between pages, the recording follows along and lands as one continuous video.</li>
-                  <li><strong>3-second countdown</strong> so you can get ready, with a Cancel button or Space / Esc to back out.</li>
+                  <li><strong>3-second countdown</strong> so you can get ready, with a Cancel button or <span class="kbd">Space</span> / <span class="kbd">Esc</span> to back out.</li>
                   <li><strong>Voice narration included</strong> — the spoken descriptions are captured along with the video.</li>
-                  <li><strong>Pause anytime to chip in</strong> — tap <strong>Space</strong> while recording and the tour holds still. The video keeps rolling, so you can speak up, click around, or just collect your thoughts. <strong>Space</strong> again picks it back up.</li>
+                  <li><strong>Pause anytime to chip in</strong> — tap <span class="kbd">Space</span> while recording and the tour holds still. The video keeps rolling, so you can speak up, click around, or just collect your thoughts. <span class="kbd">Space</span> again picks it back up.</li>
                   <li><strong>Bring your own voice (optional)</strong> — turn on "Also record my microphone" in the recorder window and your voice lands in the video alongside the read-aloud narration.</li>
-                  <li><strong>Stops by itself</strong> when the tour reaches the end. Want to stop sooner? Just press <strong>Esc</strong> anywhere on the page.</li>
+                  <li><strong>Stops by itself</strong> when the tour reaches the end. Want to stop sooner? Just press <span class="kbd">Esc</span> anywhere on the page.</li>
                   <li><strong>You pick where it saves</strong> — the browser's Save dialog opens when the tour ends. Nothing is uploaded; everything stays on your computer.</li>
                 </ul>
                 <ul class="record-bullets" data-ko>
                   <li><strong>페이지만 담깁니다</strong> — 녹화 중에는 편집 패널과 컨트롤이 화면에서 사라지고, 페이지가 전체 화면으로 바뀌어요.</li>
                   <li><strong>여러 페이지도 OK</strong> — 시연이 페이지를 오가도 녹화가 따라가면서 하나의 영상으로 이어집니다.</li>
-                  <li><strong>3 초 카운트다운</strong>으로 마음의 준비를 할 시간이 있고, 취소 버튼이나 Space / Esc 로 언제든 멈출 수 있어요.</li>
+                  <li><strong>3 초 카운트다운</strong>으로 마음의 준비를 할 시간이 있고, 취소 버튼이나 <span class="kbd">Space</span> / <span class="kbd">Esc</span> 로 언제든 멈출 수 있어요.</li>
                   <li><strong>음성 안내까지 함께</strong> — 읽어주는 설명도 영상에 그대로 담깁니다.</li>
-                  <li><strong>언제든 잠깐 멈추고 거들 수 있어요</strong> — 녹화 중에 <strong>Space</strong> 키를 누르면 시연이 멈춥니다. 녹화는 그대로 계속되니까 한마디 보태거나, 페이지를 클릭해서 뭔가 보여주거나, 잠깐 생각을 정리할 수 있어요. <strong>Space</strong>를 다시 누르면 시연이 이어집니다.</li>
+                  <li><strong>언제든 잠깐 멈추고 거들 수 있어요</strong> — 녹화 중에 <span class="kbd">Space</span> 키를 누르면 시연이 멈춥니다. 녹화는 그대로 계속되니까 한마디 보태거나, 페이지를 클릭해서 뭔가 보여주거나, 잠깐 생각을 정리할 수 있어요. <span class="kbd">Space</span>를 다시 누르면 시연이 이어집니다.</li>
                   <li><strong>내 목소리도 함께 (선택)</strong> — 녹화 창에서 "내 목소리도 함께 녹음"을 체크하면 내가 말한 내용이 읽어주는 안내와 함께 영상에 담깁니다.</li>
-                  <li><strong>알아서 멈춥니다</strong> — 시연 마지막에 자동으로 종료. 더 일찍 끝내고 싶으면 페이지 아무 곳에서 <strong>Esc</strong> 키만 누르세요.</li>
+                  <li><strong>알아서 멈춥니다</strong> — 시연 마지막에 자동으로 종료. 더 일찍 끝내고 싶으면 페이지 아무 곳에서 <span class="kbd">Esc</span> 키만 누르세요.</li>
                   <li><strong>저장 위치는 직접 선택</strong> — 시연이 끝나면 브라우저의 "다른 이름으로 저장" 다이얼로그가 뜹니다. 어디로도 업로드되지 않고 컴퓨터 안에만 남습니다.</li>
                 </ul>
               </div>
@@ -1194,12 +1158,12 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
               <ol>
                 <li><a href="#g-quickstart" data-en>Quick start</a><a href="#g-quickstart" data-ko>퀵 스타트</a></li>
                 <li><a href="#g-pick" data-en>Picking elements</a><a href="#g-pick" data-ko>요소 선택</a></li>
-                <li><a href="#g-annotate" data-en>Annotation tools <span class="toc-new">v0.5</span></a><a href="#g-annotate" data-ko>주석 도구 <span class="toc-new">v0.5</span></a></li>
+                <li><a href="#g-annotate" data-en>Annotation tools</a><a href="#g-annotate" data-ko>주석 도구</a></li>
                 <li><a href="#g-steps" data-en>Steps &amp; reorder</a><a href="#g-steps" data-ko>스텝과 재배치</a></li>
-                <li><a href="#g-subs" data-en>Inner flow <span class="toc-new">v0.5</span></a><a href="#g-subs" data-ko>내부 흐름 <span class="toc-new">v0.5</span></a></li>
+                <li><a href="#g-subs" data-en>Inner flow</a><a href="#g-subs" data-ko>내부 흐름</a></li>
                 <li><a href="#g-action" data-en>Action steps</a><a href="#g-action" data-ko>action 스텝</a></li>
-                <li><a href="#g-replay" data-en>Replay &amp; prompter <span class="toc-new">v0.5</span></a><a href="#g-replay" data-ko>재생과 발표자 창 <span class="toc-new">v0.5</span></a></li>
-                <li><a href="#g-record" data-en>Recording <span class="toc-new">v0.6</span></a><a href="#g-record" data-ko>녹화 <span class="toc-new">v0.6</span></a></li>
+                <li><a href="#g-replay" data-en>Replay &amp; prompter</a><a href="#g-replay" data-ko>재생과 발표자 창</a></li>
+                <li><a href="#g-record" data-en>Recording</a><a href="#g-record" data-ko>녹화</a></li>
                 <li><a href="#g-validate" data-en>Check steps still match</a><a href="#g-validate" data-ko>스텝 점검</a></li>
                 <li><a href="#g-io" data-en>Export &amp; import</a><a href="#g-io" data-ko>내보내기·불러오기</a></li>
                 <li><a href="#g-popup" data-en>Previous Manuscripts</a><a href="#g-popup" data-ko>이전 매뉴스크립트</a></li>
@@ -1231,18 +1195,18 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li>Click the Manuscript icon and hit <strong>New Manuscript</strong>.</li>
                   <li>A floating panel appears top-right of the page. The page's theme color and fonts auto-populate the palette.</li>
                   <li>Click the panel title to rename your manuscript (e.g. "Checkout walkthrough").</li>
-                  <li>Click the <strong>picker</strong> on a step card → hover the page → click the target element.</li>
-                  <li>Use the toolbar buttons (<span class="iicon"><svg><use href="#i-text"/></svg></span>, shapes, freedraw) to layer annotations.</li>
-                  <li>Hit <span class="iicon"><svg><use href="#i-play"/></svg></span> to replay. Use <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> <span class="kbd">Esc</span>.</li>
+                  <li>Click the <strong>picker</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-picker"/></svg></span> on a step card → hover the page → click the target element.</li>
+                  <li>Use the toolbar buttons (<span class="iicon"><svg><use href="./assets/sprite.svg#i-text"/></svg></span>, shapes, freedraw) to layer annotations.</li>
+                  <li>Hit <span class="iicon"><svg><use href="./assets/sprite.svg#i-play"/></svg></span> to replay. Use <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> <span class="kbd">Esc</span>.</li>
                 </ol>
                 <ol data-ko>
                   <li>일반 웹 페이지를 엽니다 (<code>chrome://</code>·새 탭 페이지에서는 동작하지 않아요).</li>
                   <li>Manuscript 아이콘을 클릭하고 <strong>새 매뉴스크립트</strong>를 누르세요.</li>
                   <li>페이지 오른쪽 위에 작성 패널이 나타납니다. 페이지의 테마 색과 글꼴이 자동으로 팔레트에 들어와요.</li>
                   <li>패널 제목을 클릭해 이름을 바꿔 보세요 (예: "결제 페이지 가이드").</li>
-                  <li>단계 카드의 <strong>선택 도구</strong>를 누른 뒤 페이지에서 원하는 부분에 마우스를 올리고 클릭하세요.</li>
-                  <li>상단 주석 도구(<span class="iicon"><svg><use href="#i-text"/></svg></span>, 도형, 손그림)로 설명을 덧붙입니다.</li>
-                  <li><span class="iicon"><svg><use href="#i-play"/></svg></span> 로 재생. 단축키 <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> <span class="kbd">Esc</span>.</li>
+                  <li>단계 카드의 <strong>선택 도구</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-picker"/></svg></span> 를 누른 뒤 페이지에서 원하는 부분에 마우스를 올리고 클릭하세요.</li>
+                  <li>상단 주석 도구(<span class="iicon"><svg><use href="./assets/sprite.svg#i-text"/></svg></span>, 도형, 손그림)로 설명을 덧붙입니다.</li>
+                  <li><span class="iicon"><svg><use href="./assets/sprite.svg#i-play"/></svg></span> 로 재생. 단축키 <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> <span class="kbd">Esc</span>.</li>
                 </ol>
                 <figure>
                   <img
@@ -1342,7 +1306,7 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li><strong>Dim color</strong> — same 8 swatches. Default black (<code>#000000</code>). The page outside the spotlight rect tints with this color.</li>
                   <li><strong>Opacity</strong> slider — 0 to 100 %. Default <strong>55 %</strong>.</li>
                   <li><strong>Reset to default</strong> — clears the step's <code>spotlight</code> field. The spotlight falls back to the extension's hardcoded defaults.</li>
-                  <li><strong>×</strong> or click outside — closes the popup. Changes save as you edit; no separate apply step.</li>
+                  <li><span class="iicon"><svg><use href="./assets/sprite.svg#i-close"/></svg></span> or click outside — closes the popup. Changes save as you edit; no separate apply step.</li>
                 </ul>
                 <ul data-ko>
                   <li><strong>Muted / Vibrant 토글</strong> — 주석 편집기와 같은 색 견본 묶음이라서, 테두리 색이 같은 단계의 주석과 자연스럽게 어울립니다.</li>
@@ -1351,7 +1315,7 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li><strong>어두운 배경 색</strong> — 같은 색 견본 8 개. 기본은 검정. 강조된 영역 바깥쪽 페이지가 이 색으로 덮입니다.</li>
                   <li><strong>투명도</strong> 슬라이더 — 0 ~ 100 %. 기본 <strong>55 %</strong>.</li>
                   <li><strong>기본값 복원</strong> — 그 단계의 강조 표시 설정을 비웁니다. 비워두면 기본 스타일로 자동으로 그려져요.</li>
-                  <li><strong>×</strong> 또는 창 바깥 클릭 — 닫기. 변경은 그 자리에서 저장되며 별도의 적용 버튼은 없습니다.</li>
+                  <li><span class="iicon"><svg><use href="./assets/sprite.svg#i-close"/></svg></span> 또는 창 바깥 클릭 — 닫기. 변경은 그 자리에서 저장되며 별도의 적용 버튼은 없습니다.</li>
                 </ul>
 
                 <p class="callout" data-en>
@@ -1430,8 +1394,8 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <figcaption data-en>The property popup — font picker on top, swatch rows for Text / Bg / Border in the middle, Effect dropdown and Alpha slider at the bottom.</figcaption>
                   <figcaption data-ko>속성 창 — 상단 글꼴 선택, 가운데 글자색·배경·테두리 색 견본 줄, 하단 등장 효과 드롭다운과 투명도 슬라이더.</figcaption>
                 </figure>
-                <h3 data-en>Per-step annotation list <span class="new-badge">NEW v0.5.0</span></h3>
-                <h3 data-ko>스텝별 주석 목록 <span class="new-badge">NEW v0.5.0</span></h3>
+                <h3 data-en>Per-step annotation list</h3>
+                <h3 data-ko>스텝별 주석 목록</h3>
                 <p data-en>
                   Every step card now opens an <strong>Annotation tools (N)</strong>
                   section that lists every text box, shape, and drawing on that
@@ -1447,12 +1411,12 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 </p>
                 <ul data-en>
                   <li><strong>Click a row</strong> — opens that annotation's property panel. If the annotation belongs to another step, the panel switches step automatically. If it lives on another page, that page loads and the annotation is selected when it's ready.</li>
-                  <li><strong>Trash icon</strong> — removes the annotation from the step.</li>
+                  <li><strong>Trash icon</strong> <span class="iicon is-trash"><svg><use href="./assets/sprite.svg#i-trash"/></svg></span> — removes the annotation from the step.</li>
                   <li><strong>Header click</strong> — folds the list. The Inner flow section right above folds the same way.</li>
                 </ul>
                 <ul data-ko>
                   <li><strong>항목 클릭</strong> — 해당 주석의 속성 패널이 열립니다. 다른 단계의 주석이면 단계가 함께 전환되고, 다른 페이지의 주석이면 그 페이지를 자동으로 불러와 선택해 줍니다.</li>
-                  <li><strong>휴지통 아이콘</strong> — 단계에서 해당 주석을 삭제합니다.</li>
+                  <li><strong>휴지통 아이콘</strong> <span class="iicon is-trash"><svg><use href="./assets/sprite.svg#i-trash"/></svg></span> — 단계에서 해당 주석을 삭제합니다.</li>
                   <li><strong>머리글 클릭</strong> — 목록을 접습니다. 바로 위의 내부 흐름 영역도 같은 방식으로 접고 펼 수 있어요.</li>
                 </ul>
                 <figure>
@@ -1474,32 +1438,32 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
 
                 <h3 data-en>Resize, rotate, animate</h3>
                 <h3 data-ko>크기 조절·회전·애니메이션</h3>
-                <p data-en>Click an annotation to reveal handles. Corner drag = resize, top <span class="iicon"><svg><use href="#i-rotate"/></svg></span> = rotate, bottom-left <span class="iicon is-trash"><svg><use href="#i-trash"/></svg></span> = delete. Rotation + animation combine, the annotation lands at the chosen angle.</p>
-                <p data-ko>주석을 클릭하면 모서리 손잡이가 나타납니다. 모서리를 드래그하면 크기 조절, 상단의 <span class="iicon"><svg><use href="#i-rotate"/></svg></span> 로 회전, 좌측 아래의 <span class="iicon is-trash"><svg><use href="#i-trash"/></svg></span> 로 삭제. 회전과 등장 효과가 결합되어 최종 각도로 자연스럽게 안착합니다.</p>
+                <p data-en>Click an annotation to reveal handles. Corner drag = resize, top <span class="iicon"><svg><use href="./assets/sprite.svg#i-rotate"/></svg></span> = rotate, bottom-left <span class="iicon is-trash"><svg><use href="./assets/sprite.svg#i-trash"/></svg></span> = delete. Rotation + animation combine, the annotation lands at the chosen angle.</p>
+                <p data-ko>주석을 클릭하면 모서리 손잡이가 나타납니다. 모서리를 드래그하면 크기 조절, 상단의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-rotate"/></svg></span> 로 회전, 좌측 아래의 <span class="iicon is-trash"><svg><use href="./assets/sprite.svg#i-trash"/></svg></span> 로 삭제. 회전과 등장 효과가 결합되어 최종 각도로 자연스럽게 안착합니다.</p>
               </section>
 
               <section id="g-steps">
                 <h2 data-en>4. Steps &amp; reorder</h2>
                 <h2 data-ko>4. 스텝과 재배치</h2>
                 <ul data-en>
-                  <li><strong>Insert between</strong> — small <span class="iicon"><svg><use href="#i-plus"/></svg></span> between cards.</li>
-                  <li><strong>Append</strong> — large <span class="iicon"><svg><use href="#i-plus"/></svg></span> at the bottom.</li>
+                  <li><strong>Insert between</strong> — small <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span> between cards.</li>
+                  <li><strong>Append</strong> — large <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span> at the bottom.</li>
                   <li><strong>Reorder</strong> — drag a step card to move it.</li>
                   <li><strong>Spotlight a step</strong> — click the card. The page auto-scrolls to the picked element and shows the spotlight.</li>
                   <li><strong>Title &amp; description</strong> — both editable directly on the card. Description doubles as the presenter note and is read aloud during replay.</li>
-                  <li><strong>Timer chip</strong> — click the seconds value on the top-right to set auto-advance.</li>
-                  <li><strong>Action toggle</strong> — pause icon on the top-right switches the step between auto-advance and wait-for-user-click.</li>
-                  <li><strong>Inner flow &amp; Annotation tools</strong> <span class="new-badge">NEW v0.5.0</span> — two collapsible sections at the bottom of the card. Click a header to fold or unfold; see §3 (Annotation tools) and §5 (Inner flow) for details.</li>
+                  <li><strong>Timer chip</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-timer"/></svg></span> — click the seconds value on the top-right to set auto-advance.</li>
+                  <li><strong>Action toggle</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> — the icon on the top-right switches the step between auto-advance and wait-for-user-click.</li>
+                  <li><strong>Inner flow &amp; Annotation tools</strong> — two collapsible sections at the bottom of the card. Click a header to fold or unfold; see §3 (Annotation tools) and §5 (Inner flow) for details.</li>
                 </ul>
                 <ul data-ko>
-                  <li><strong>스텝 사이 삽입</strong> — 카드 사이 작은 <span class="iicon"><svg><use href="#i-plus"/></svg></span>.</li>
-                  <li><strong>끝에 추가</strong> — 하단 큰 <span class="iicon"><svg><use href="#i-plus"/></svg></span>.</li>
+                  <li><strong>스텝 사이 삽입</strong> — 카드 사이 작은 <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span>.</li>
+                  <li><strong>끝에 추가</strong> — 하단 큰 <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span>.</li>
                   <li><strong>순서 변경</strong> — 스텝 카드를 드래그.</li>
                   <li><strong>스텝 spotlight</strong> — 카드 클릭. 페이지가 해당 요소로 자동 스크롤되고 spotlight 표시.</li>
                   <li><strong>제목 · 설명</strong> — 카드에서 직접 편집 가능. 설명은 발표자 노트로 쓰이고 재생 중 음성으로 읽힙니다.</li>
-                  <li><strong>타이머 chip</strong> — 카드 우상단 초 단위 값을 클릭해 자동 진행 시간 설정.</li>
-                  <li><strong>action 토글</strong> — 우상단 일시정지 아이콘으로 자동 진행과 클릭 대기를 전환.</li>
-                  <li><strong>내부 흐름 · 주석 도구</strong> <span class="new-badge">NEW v0.5.0</span> — 카드 하단의 두 영역. 머리글 클릭으로 접고 펼 수 있습니다. 자세한 동작은 §3 (주석 도구) 와 §5 (내부 흐름) 참고.</li>
+                  <li><strong>타이머 chip</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-timer"/></svg></span> — 카드 우상단 초 단위 값을 클릭해 자동 진행 시간 설정.</li>
+                  <li><strong>action 토글</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> — 우상단 아이콘으로 자동 진행과 클릭 대기를 전환.</li>
+                  <li><strong>내부 흐름 · 주석 도구</strong> — 카드 하단의 두 영역. 머리글 클릭으로 접고 펼 수 있습니다. 자세한 동작은 §3 (주석 도구) 와 §5 (내부 흐름) 참고.</li>
                 </ul>
                 <figure>
                   <img
@@ -1520,8 +1484,8 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
               </section>
 
               <section id="g-subs">
-                <h2 data-en>5. Inner flow <span class="new-badge">renamed v0.5.0</span></h2>
-                <h2 data-ko>5. 내부 흐름 <span class="new-badge">renamed v0.5.0</span></h2>
+                <h2 data-en>5. Inner flow</h2>
+                <h2 data-ko>5. 내부 흐름</h2>
                 <p data-en>
                   A single step can spotlight a <strong>row of related items</strong>
                   in sequence while the same description plays — toolbar buttons,
@@ -1536,14 +1500,6 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   대표 요소이고, 추가 요소는 단계 카드 아래 <strong>내부 흐름</strong>
                   영역에 줄지어 추가되어 재생 시 부드러운 전환으로 하나씩
                   강조됩니다. 단계의 설명이 읽히는 동안 움직여요.
-                </p>
-                <p class="callout" data-en>
-                  <strong>Naming note (v0.5.0)</strong> — what used to be called
-                  "Sub-elements" is now <strong>Inner flow</strong>.
-                </p>
-                <p class="callout" data-ko>
-                  <strong>용어 변경 (v0.5.0)</strong> — 예전의 "보조 요소" 영역이
-                  <strong>내부 흐름</strong> 으로 바뀌었습니다.
                 </p>
 
                 <h3 data-en>Adding sub-elements</h3>
@@ -1649,27 +1605,27 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                     data-ko
                     onerror="this.style.display='none'"
                   />
-                  <figcaption data-en>Selected sub shows the ‹ › chevrons at its bottom corners. Hover the buttons or press ← / → to shift the sub by 0.1 s.</figcaption>
-                  <figcaption data-ko>선택된 내부 요소의 양쪽 아래 모서리에 ‹ › 화살표 버튼이 나타납니다. 버튼을 누르거나 ← / → 키로 0.1 초씩 이동.</figcaption>
+                  <figcaption data-en>Selected sub shows the ‹ › chevrons at its bottom corners. Hover the buttons or press <span class="kbd">←</span> / <span class="kbd">→</span> to shift the sub by 0.1 s.</figcaption>
+                  <figcaption data-ko>선택된 내부 요소의 양쪽 아래 모서리에 ‹ › 화살표 버튼이 나타납니다. 버튼을 누르거나 <span class="kbd">←</span> / <span class="kbd">→</span> 키로 0.1 초씩 이동.</figcaption>
                 </figure>
 
                 <h3 data-en>Multi-select &amp; deletion</h3>
                 <h3 data-ko>다중 선택과 삭제</h3>
                 <ul data-en>
                   <li><strong>Click</strong> a sub — select just that one and move the spotlight to that element.</li>
-                  <li><strong>Ctrl / Cmd + click</strong> — add or remove this sub from the current selection.</li>
-                  <li><strong>Shift + click</strong> — select the range from the last clicked sub to this one.</li>
-                  <li><strong>Esc</strong> or click outside the sub track — clear the selection.</li>
+                  <li><strong><span class="kbd">Ctrl</span> / <span class="kbd">Cmd</span> + click</strong> — add or remove this sub from the current selection.</li>
+                  <li><strong><span class="kbd">Shift</span> + click</strong> — select the range from the last clicked sub to this one.</li>
+                  <li><strong><span class="kbd">Esc</span></strong> or click outside the sub track — clear the selection.</li>
                   <li><strong>Click the primary thumbnail</strong> (badge 1) — selects the primary instead of a sub and moves the spotlight back to it.</li>
-                  <li><strong>Delete / Backspace</strong> while subs are selected — removes them all. The remaining gaps share out the freed time so the step's total stays the same. If you're typing into a step name, description, or the panel title, the key is left alone so your typing isn't interrupted.</li>
+                  <li><strong><span class="kbd">Delete</span> / <span class="kbd">Backspace</span></strong> while subs are selected — removes them all. The remaining gaps share out the freed time so the step's total stays the same. If you're typing into a step name, description, or the panel title, the key is left alone so your typing isn't interrupted.</li>
                 </ul>
                 <ul data-ko>
                   <li><strong>클릭</strong> — 내부 요소 하나만 선택하고 강조 표시가 그 요소로 이동합니다.</li>
-                  <li><strong>Ctrl / Cmd + 클릭</strong> — 클릭한 요소를 현재 선택에 더하거나 빼기.</li>
-                  <li><strong>Shift + 클릭</strong> — 마지막으로 클릭한 요소부터 이번 요소까지 범위 선택.</li>
-                  <li><strong>Esc</strong> 또는 줄 바깥을 클릭 — 선택 해제.</li>
+                  <li><strong><span class="kbd">Ctrl</span> / <span class="kbd">Cmd</span> + 클릭</strong> — 클릭한 요소를 현재 선택에 더하거나 빼기.</li>
+                  <li><strong><span class="kbd">Shift</span> + 클릭</strong> — 마지막으로 클릭한 요소부터 이번 요소까지 범위 선택.</li>
+                  <li><strong><span class="kbd">Esc</span></strong> 또는 줄 바깥을 클릭 — 선택 해제.</li>
                   <li><strong>대표 썸네일(1번 배지) 클릭</strong> — 내부 요소 대신 대표 요소가 선택되고 강조 표시가 그쪽으로 돌아갑니다.</li>
-                  <li><strong>Delete / Backspace</strong> — 선택된 내부 요소가 모두 삭제됩니다. 남은 요소들이 비워진 시간을 나눠 가져 단계 전체 시간은 그대로 유지돼요. 단계 이름·설명·패널 제목에 글을 입력 중일 때는 이 키가 그대로 입력에 쓰여 작성에 방해되지 않습니다.</li>
+                  <li><strong><span class="kbd">Delete</span> / <span class="kbd">Backspace</span></strong> — 선택된 내부 요소가 모두 삭제됩니다. 남은 요소들이 비워진 시간을 나눠 가져 단계 전체 시간은 그대로 유지돼요. 단계 이름·설명·패널 제목에 글을 입력 중일 때는 이 키가 그대로 입력에 쓰여 작성에 방해되지 않습니다.</li>
                 </ul>
 
                 <h3 data-en>Reorder</h3>
@@ -1726,14 +1682,14 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 <h2 data-en>6. Action steps</h2>
                 <h2 data-ko>6. action 스텝</h2>
                 <p data-en>
-                  Turn a step into an action by clicking the pause icon on the
+                  Turn a step into an action by clicking the pause icon <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> on the
                   card. During replay, an <strong>"Click or type in this area"</strong>
                   bubble appears on the target element and auto-advance pauses
                   until the user interacts. If the click navigates to a new URL,
                   Manuscript resumes the manuscript on the new page automatically.
                 </p>
                 <p data-ko>
-                  카드의 일시정지 아이콘을 클릭하면 그 스텝이 action 스텝으로 바뀝니다.
+                  카드의 일시정지 아이콘 <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> 을 클릭하면 그 스텝이 action 스텝으로 바뀝니다.
                   재생 중 대상 요소에 <strong>"이 영역을 클릭하거나 입력하세요"</strong>
                   버블이 뜨고 자동 진행이 멈춥니다. 사용자가 클릭해서 다른 URL로 이동해도
                   새 페이지에서 시연이 자동 재개됩니다.
@@ -1760,14 +1716,14 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 <h2 data-en>7. Replay &amp; prompter</h2>
                 <h2 data-ko>7. 재생과 프롬프터</h2>
                 <p data-en>
-                  Hit <span class="iicon"><svg><use href="#i-play"/></svg></span> in the panel footer. A translucent
+                  Hit <span class="iicon"><svg><use href="./assets/sprite.svg#i-play"/></svg></span> in the panel footer. A translucent
                   control bar appears at the bottom — it gets a touch darker when
                   you hover over it, and it remembers where you dragged it, even
                   after the page navigates. The progress strip floats just above
                   the control bar.
                 </p>
                 <p data-ko>
-                  패널 하단의 <span class="iicon"><svg><use href="#i-play"/></svg></span> 로 재생을 시작합니다. 반투명 컨트롤
+                  패널 하단의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-play"/></svg></span> 로 재생을 시작합니다. 반투명 컨트롤
                   바가 하단에 나타나고, 마우스를 올리면 살짝 진해집니다. 드래그로
                   위치를 옮기면 페이지가 이동해도 그 위치 그대로 유지돼요. 진행
                   표시줄은 컨트롤 바 바로 위에 떠 있습니다.
@@ -1786,8 +1742,8 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 </ul>
                 <h3 data-en>Detached prompter</h3>
                 <h3 data-ko>발표자 노트 분리</h3>
-                <p data-en>The <span class="iicon"><svg><use href="#i-prompter"/></svg></span> prompter button in the panel's footer opens a separate browser window with a 3-column layout — step list on the left, the current step in the middle, the next one on the right. Same keyboard shortcuts as the panel, so you can drive the tour from a second screen.</p>
-                <p data-ko>패널 하단의 <span class="iicon"><svg><use href="#i-prompter"/></svg></span> 프롬프터 버튼을 누르면 별도 브라우저 창이 열립니다. 왼쪽에는 스텝 목록, 가운데에는 현재 스텝, 오른쪽에는 다음 스텝이 보이는 3 열 구조예요. 패널과 같은 단축키를 쓰니 두 번째 모니터에서 편하게 진행할 수 있습니다.</p>
+                <p data-en>The <span class="iicon"><svg><use href="./assets/sprite.svg#i-prompter"/></svg></span> prompter button in the panel's footer opens a separate browser window with a 3-column layout — step list on the left, the current step in the middle, the next one on the right. Same keyboard shortcuts as the panel, so you can drive the tour from a second screen.</p>
+                <p data-ko>패널 하단의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-prompter"/></svg></span> 프롬프터 버튼을 누르면 별도 브라우저 창이 열립니다. 왼쪽에는 스텝 목록, 가운데에는 현재 스텝, 오른쪽에는 다음 스텝이 보이는 3 열 구조예요. 패널과 같은 단축키를 쓰니 두 번째 모니터에서 편하게 진행할 수 있습니다.</p>
                 <figure>
                   <img
                     src="./assets/screenshots/flow-06-prompter-en.png"
@@ -1809,8 +1765,8 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 <p data-en>Toggle the speaker icon on the control bar (or in the prompter window's footer). Step descriptions are read out loud by the browser's built-in voice. Pick a voice in the panel's gear settings. Auto-advance waits for the narration to finish before moving on.</p>
                 <p data-ko>컨트롤 바(또는 프롬프터 창 하단)의 스피커 아이콘으로 켜고 끕니다. 스텝 설명을 브라우저 내장 음성으로 읽어 주고, 사용할 목소리는 패널의 기어(설정) 메뉴에서 고를 수 있어요. 자동 진행은 음성이 끝날 때까지 기다린 다음 다음 스텝으로 넘어갑니다.</p>
 
-                <h3 data-en>Matching pages with a query or hash <span class="new-badge">NEW v0.5.1</span></h3>
-                <h3 data-ko>쿼리·해시가 있는 페이지 알아보기 <span class="new-badge">NEW v0.5.1</span></h3>
+                <h3 data-en>Matching pages with a query or hash</h3>
+                <h3 data-ko>쿼리·해시가 있는 페이지 알아보기</h3>
                 <p data-en>
                   When you play a manuscript, Manuscript checks that you're on
                   the right page by its web address. Normally it looks only at
@@ -1833,7 +1789,7 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   the same main address while the screen is completely
                   different, so playback could start on the wrong view or stop
                   moving between steps. The fix: open the
-                  <span class="iicon"><svg><use href="#i-gear"/></svg></span>
+                  <span class="iicon"><svg><use href="./assets/sprite.svg#i-gear"/></svg></span>
                   gear settings in the panel footer and turn on
                   <strong>Match full URL (query &amp; hash)</strong>. Manuscript
                   then treats those addresses as different pages, so the
@@ -1846,7 +1802,7 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   주소처럼요. 이런 사이트는 단계마다 주소 본체는 같은데 화면은
                   전혀 다를 수 있어서, 재생이 엉뚱한 화면에서 시작하거나 단계
                   사이를 못 넘어갈 수 있어요. 이럴 땐 패널 하단의
-                  <span class="iicon"><svg><use href="#i-gear"/></svg></span>
+                  <span class="iicon"><svg><use href="./assets/sprite.svg#i-gear"/></svg></span>
                   기어(설정) 메뉴를 열고 <strong>전체 URL 일치 (쿼리·해시)</strong>
                   를 켜세요. 그러면 Manuscript 가 그 주소들을 서로 다른 페이지로
                   보고, 페이지가 다르다는 경고와 단계 사이 자동 이동이 제대로
@@ -1869,8 +1825,8 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <figcaption data-ko>패널 하단의 기어(설정) — "전체 URL 일치 (쿼리·해시)" 가 내레이션 음성 선택 아래에 있어요. 기본은 꺼짐이고, 쿼리·해시로 화면이 바뀌는 사이트에서만 켜면 됩니다.</figcaption>
                 </figure>
 
-                <h3 data-en>Edit a step from the prompter <span class="new-badge">NEW v0.5.0</span></h3>
-                <h3 data-ko>발표자 창에서 단계 편집 <span class="new-badge">NEW v0.5.0</span></h3>
+                <h3 data-en>Edit a step from the prompter</h3>
+                <h3 data-ko>발표자 창에서 단계 편집</h3>
                 <p data-en>
                   While the prompter is <strong>paused</strong>, the current
                   step card in the middle column doubles as a light editor.
@@ -1887,15 +1843,15 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   다시 시작됩니다.
                 </p>
                 <ul data-en>
-                  <li><strong>Title and description</strong> — click the text and type. Tab moves between fields, click away to save.</li>
-                  <li><strong>Action toggle</strong> — the small badge next to the timer switches the step between auto-advance and wait-for-click.</li>
-                  <li><strong>Step timer</strong> — click the ⏱ 9.5s badge and type a new number. The number is pre-selected so you can replace it in one keystroke.</li>
+                  <li><strong>Title and description</strong> — click the text and type. <span class="kbd">Tab</span> moves between fields, click away to save.</li>
+                  <li><strong>Action toggle</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> — the small badge next to the timer switches the step between auto-advance and wait-for-click.</li>
+                  <li><strong>Step timer</strong> — click the <span class="iicon"><svg><use href="./assets/sprite.svg#i-timer"/></svg></span> 9.5s badge and type a new number. The number is pre-selected so you can replace it in one keystroke.</li>
                   <li><strong>Each inner element's screen time</strong> — if the step walks through inner-flow elements, they stack vertically under the main thumbnail with each duration underneath. Click one to select it, then <span class="kbd">←</span> / <span class="kbd">→</span> nudges its time by 0.1 seconds. The step's total length stays the same. Press <span class="kbd">Esc</span> to clear the selection.</li>
                 </ul>
                 <ul data-ko>
-                  <li><strong>제목과 설명</strong> — 글자를 클릭하고 바로 입력. Tab 으로 다음 칸 이동, 다른 곳을 클릭하면 저장.</li>
-                  <li><strong>액션 토글</strong> — 타이머 옆 작은 배지로 자동 진행 ↔ 클릭 대기를 전환합니다.</li>
-                  <li><strong>단계 타이머</strong> — ⏱ 9.5s 배지를 클릭하고 새 숫자를 입력하세요. 들어가면 숫자가 선택돼 있어 그대로 새 값을 입력하면 됩니다.</li>
+                  <li><strong>제목과 설명</strong> — 글자를 클릭하고 바로 입력. <span class="kbd">Tab</span> 으로 다음 칸 이동, 다른 곳을 클릭하면 저장.</li>
+                  <li><strong>액션 토글</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> — 타이머 옆 작은 배지로 자동 진행 ↔ 클릭 대기를 전환합니다.</li>
+                  <li><strong>단계 타이머</strong> — <span class="iicon"><svg><use href="./assets/sprite.svg#i-timer"/></svg></span> 9.5s 배지를 클릭하고 새 숫자를 입력하세요. 들어가면 숫자가 선택돼 있어 그대로 새 값을 입력하면 됩니다.</li>
                   <li><strong>각 내부 요소가 화면에 머무는 시간</strong> — 단계가 여러 요소를 순서대로 보여주는 경우, 발표자 창에 대표 썸네일 아래로 요소들이 세로로 쌓이고 각 요소 아래에 머무는 시간이 표시됩니다. 한 요소를 클릭해 선택한 뒤 <span class="kbd">←</span> / <span class="kbd">→</span> 키로 0.1 초씩 조절하세요. 단계 전체 시간은 그대로 유지됩니다. <span class="kbd">Esc</span> 키로 선택을 해제할 수 있어요.</li>
                 </ul>
                 <figure>
@@ -1911,8 +1867,8 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                     data-ko
                     onerror="this.style.display='none'"
                   />
-                  <figcaption data-en>Paused prompter as a light editor — title, description, action badge, timer (number-only), and per-element screen time all editable in place. Select an inner element with a click, then ← / → nudges its time ±0.1 seconds.</figcaption>
-                  <figcaption data-ko>일시정지 상태의 발표자 창이 가벼운 편집기로 — 제목·설명·액션 배지·타이머 (숫자만) 와 내부 요소별 머무는 시간을 그 자리에서 수정. 내부 요소를 클릭해 선택하면 ← / → 키로 ±0.1 초씩 조절.</figcaption>
+                  <figcaption data-en>Paused prompter as a light editor — title, description, action badge, timer (number-only), and per-element screen time all editable in place. Select an inner element with a click, then <span class="kbd">←</span> / <span class="kbd">→</span> nudges its time ±0.1 seconds.</figcaption>
+                  <figcaption data-ko>일시정지 상태의 발표자 창이 가벼운 편집기로 — 제목·설명·액션 배지·타이머 (숫자만) 와 내부 요소별 머무는 시간을 그 자리에서 수정. 내부 요소를 클릭해 선택하면 <span class="kbd">←</span> / <span class="kbd">→</span> 키로 ±0.1 초씩 조절.</figcaption>
                 </figure>
                 <p class="callout" data-en>
                   <strong>Paused only.</strong> The editor opens while the
@@ -1927,10 +1883,10 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
               </section>
 
               <section id="g-record">
-                <h2 data-en>8. Recording <span class="new-badge">updated v0.6.0</span></h2>
-                <h2 data-ko>8. 녹화 <span class="new-badge">updated v0.6.0</span></h2>
+                <h2 data-en>8. Recording</h2>
+                <h2 data-ko>8. 녹화</h2>
                 <p data-en>
-                  The red <span class="iicon is-record"><svg><use href="#i-record"/></svg></span>
+                  The red <span class="iicon is-record"><svg><use href="./assets/sprite.svg#i-record"/></svg></span>
                   button in the panel footer turns your tour into a video file. A separate
                   recorder window opens to run it — it plays the whole tour by itself, keeps
                   every Manuscript control off the page, and captures the voice narration
@@ -1941,7 +1897,7 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 </p>
                 <p data-ko>
                   패널 아래쪽의 빨간
-                  <span class="iicon is-record"><svg><use href="#i-record"/></svg></span>
+                  <span class="iicon is-record"><svg><use href="./assets/sprite.svg#i-record"/></svg></span>
                   버튼이 만들어 둔 시연을 동영상으로 만들어 줍니다. 녹화를 진행하는 별도의
                   녹화 창이 열려요 — 시연을 스스로 끝까지 재생하면서, Manuscript 도구는 페이지에
                   내보내지 않고, 화면에 보이는 것과 음성 안내를 함께 담습니다. 시연이 여러
@@ -1962,7 +1918,7 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 <h3 data-en>How to record</h3>
                 <h3 data-ko>녹화 방법</h3>
                 <ol data-en>
-                  <li>Click the red <span class="iicon is-record"><svg><use href="#i-record"/></svg></span> in the panel footer.</li>
+                  <li>Click the red <span class="iicon is-record"><svg><use href="./assets/sprite.svg#i-record"/></svg></span> in the panel footer.</li>
                   <li>A small recorder window opens — it runs the recording and shows your script (the current and next step) as it plays. This window itself is never in the video. Pick the <strong>video quality</strong> — <strong>Standard</strong> suits most tours; choose <strong>High quality</strong> for crisper text (the file gets larger). Want your voice in there too? Turn on <strong>Also record my microphone</strong>, then click <strong>Start recording</strong>.</li>
                   <li>The browser asks what to share. Pick a <strong>Window</strong> — your browser window, not a single tab — tick <strong>Also share system audio</strong>, then <strong>Share</strong>. That's what carries the voice narration into the video; skip it and the recording still runs, just silent.</li>
                   <li>Your page jumps to fullscreen and a 3-2-1 countdown gives you a moment to get ready, then recording begins. The panel and control bar are already out of the frame.</li>
@@ -1970,7 +1926,7 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li>The browser's save dialog opens with a filename like <code>manuscript-recording-YYYYMMDD-HHMM.webm</code>.</li>
                 </ol>
                 <ol data-ko>
-                  <li>패널 하단의 빨간 <span class="iicon is-record"><svg><use href="#i-record"/></svg></span> 버튼을 클릭합니다.</li>
+                  <li>패널 하단의 빨간 <span class="iicon is-record"><svg><use href="./assets/sprite.svg#i-record"/></svg></span> 버튼을 클릭합니다.</li>
                   <li>작은 녹화 창이 열립니다 — 녹화를 진행하고, 재생되는 대로 대본(현재·다음 단계)을 보여줘요. 이 창 자체는 영상에 들어가지 않습니다. <strong>영상 화질</strong>을 고르세요 — 대부분 <strong>일반 화질</strong>로 충분하고, 글자를 더 또렷하게 담고 싶으면 <strong>고화질</strong>을 고르면 됩니다(파일이 커져요). 내 목소리도 함께 담고 싶으면 <strong>내 목소리도 함께 녹음</strong>을 켜고 <strong>녹화 시작</strong>을 누르세요.</li>
                   <li>브라우저가 무엇을 공유할지 물어봅니다. 탭 하나가 아니라 <strong>창(Window)</strong> — 내 브라우저 창 — 을 고르고 <strong>시스템 오디오 공유</strong>를 체크한 뒤 <strong>공유</strong>를 누르세요. 음성 안내가 여기서 영상에 함께 담깁니다. 건너뛰면 녹화는 되지만 소리는 빠져요.</li>
                   <li>페이지가 전체 화면으로 바뀌고 3·2·1 카운트다운으로 잠깐 준비할 틈을 준 뒤 녹화가 시작됩니다. 패널과 컨트롤 바는 이미 화면 밖으로 빠져 있어요.</li>
@@ -1978,8 +1934,8 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <li><code>manuscript-recording-YYYYMMDD-HHMM.webm</code> 형태의 파일명으로 브라우저 저장 다이얼로그가 열립니다.</li>
                 </ol>
 
-                <h3 data-en>Multi-page tours record in one take <span class="new-badge">NEW v0.6.0</span></h3>
-                <h3 data-ko>여러 페이지 시연도 한 번에 <span class="new-badge">NEW v0.6.0</span></h3>
+                <h3 data-en>Multi-page tours record in one take</h3>
+                <h3 data-ko>여러 페이지 시연도 한 번에</h3>
                 <p data-en>
                   If your tour walks across several pages, the recording follows along
                   through every page change and stitches it all into a single video — no
@@ -2078,20 +2034,20 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 <h3 data-en>How to run</h3>
                 <h3 data-ko>실행 방법</h3>
                 <ol data-en>
-                  <li>Click the <strong>✓</strong> icon in the panel footer.</li>
+                  <li>Click the <span class="iicon"><svg><use href="./assets/sprite.svg#i-check"/></svg></span> icon in the panel footer.</li>
                   <li>A modal opens with every step listed in order, waiting to be checked.</li>
                   <li>Hit <strong>검증 시작</strong>. Steps on the current page light up one by one as Manuscript finds each spot.</li>
                   <li>If the scenario has steps on other pages, the modal shows a <em>Moving to next page…</em> banner, navigates there, and picks the modal back up automatically on the new page.</li>
                   <li>After the last page the modal shows <strong>검증 완료</strong> (Validation complete) and the panel takes you back to the scenario's first page so you're back where you started.</li>
-                  <li><strong>Esc</strong> or the <strong>×</strong> in the corner closes the modal at any time.</li>
+                  <li><span class="kbd">Esc</span> or the <span class="iicon"><svg><use href="./assets/sprite.svg#i-close"/></svg></span> in the corner closes the modal at any time.</li>
                 </ol>
                 <ol data-ko>
-                  <li>패널 하단의 <strong>✓</strong> 아이콘을 클릭합니다.</li>
+                  <li>패널 하단의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-check"/></svg></span> 아이콘을 클릭합니다.</li>
                   <li>모든 스텝이 순서대로 나열된, 아직 점검 전 상태의 모달이 열립니다.</li>
                   <li><strong>검증 시작</strong> 을 누르면, 현재 페이지의 스텝들이 Manuscript 가 자리를 찾는 순서대로 색이 채워집니다.</li>
                   <li>다른 페이지에 있는 스텝이 있으면 <em>다음 페이지로 이동 중…</em> 배너가 뜨고 자동으로 이동, 이동한 페이지에서 점검이 자연스럽게 이어집니다.</li>
                   <li>마지막 페이지가 끝나면 <strong>검증 완료</strong> 상태가 되고, 패널이 시연 1번 페이지로 자동 복귀합니다.</li>
-                  <li><strong>Esc</strong> 또는 모서리 <strong>×</strong> 로 언제든 모달을 닫을 수 있습니다.</li>
+                  <li><span class="kbd">Esc</span> 또는 모서리 <span class="iicon"><svg><use href="./assets/sprite.svg#i-close"/></svg></span> 로 언제든 모달을 닫을 수 있습니다.</li>
                 </ol>
 
                 <figure>
@@ -2240,76 +2196,6 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                   <figcaption data-ko>팝업의 JSON 가져오기 버튼 — <em>+ 새 매뉴스크립트</em> 바로 아래. 선택한 파일이 라이브러리에 추가되고 패널이 열리며 시나리오가 자동 로드됩니다.</figcaption>
                 </figure>
 
-                <h3 data-en>File version compatibility</h3>
-                <h3 data-ko>파일 버전 호환표</h3>
-                <p data-en>
-                  Each manuscript file is stamped with a version number. When
-                  you open an older file, Manuscript upgrades it on the fly to
-                  match the current version — the file on disk stays untouched
-                  until you save again. The table below shows which extension
-                  versions can read which file versions.
-                </p>
-                <p data-ko>
-                  각 매뉴스크립트 파일에는 버전 번호가 함께 적혀 있습니다. 예전
-                  파일을 열면 Manuscript 가 현재 버전에 맞게 자동으로 변환해
-                  주고, 다시 저장하기 전까지는 디스크의 원본은 그대로 남아 있어요.
-                  아래 표는 어떤 확장 버전이 어떤 파일 버전을 읽을 수 있는지
-                  정리한 것입니다.
-                </p>
-                <table class="schema-table">
-                  <thead>
-                    <tr>
-                      <th data-en>File version</th><th data-ko>파일 버전</th>
-                      <th data-en>Written by</th><th data-ko>저장한 버전</th>
-                      <th data-en>Readable by</th><th data-ko>읽을 수 있는 버전</th>
-                      <th data-en>What changed</th><th data-ko>변환 내용</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><code>0.1.0</code></td>
-                      <td data-en>v0.1.0 – v0.1.4</td>
-                      <td data-ko>v0.1.0 – v0.1.4</td>
-                      <td data-en>All releases (auto-migrated)</td>
-                      <td data-ko>전체 (자동 변환)</td>
-                      <td data-en>0.1.0 → 0.1.1 adds <code>url</code>, <code>name</code>, <code>description</code>, <code>thumbnailDataUrl</code>, <code>waitForNavigation</code> with safe defaults.</td>
-                      <td data-ko>0.1.0 → 0.1.1 변환 시 <code>url</code>, <code>name</code>, <code>description</code>, <code>thumbnailDataUrl</code>, <code>waitForNavigation</code> 가 안전 기본값으로 추가됩니다.</td>
-                    </tr>
-                    <tr>
-                      <td><code>0.1.1</code></td>
-                      <td data-en>v0.1.5 – v0.3.x</td>
-                      <td data-ko>v0.1.5 – v0.3.x</td>
-                      <td data-en>v0.1.5 onwards</td>
-                      <td data-ko>v0.1.5 이상</td>
-                      <td data-en>0.1.1 → 0.1.2 is a version bump only; no field additions or removals on the migration boundary itself.</td>
-                      <td data-ko>0.1.1 → 0.1.2 는 버전 번호만 올라가는 마이그레이션 — 필드 추가/삭제 없음.</td>
-                    </tr>
-                    <tr>
-                      <td><code>0.1.2</code> <em data-en>(current)</em><em data-ko>(현재)</em></td>
-                      <td data-en>v0.4.0 onwards</td>
-                      <td data-ko>v0.4.0 이상</td>
-                      <td data-en>v0.4.0 onwards</td>
-                      <td data-ko>v0.4.0 이상</td>
-                      <td data-en>None — this is the current version. Older files automatically get a "no sub-elements" default. v0.4's validation colors are kept in memory only and are not saved into the file.</td>
-                      <td data-ko>없음 — 현재 버전입니다. 이전 파일은 자동으로 "서브 요소 없음" 기본값을 받습니다. v0.4 의 검증 색 정보는 메모리에만 보관되고 파일에는 저장되지 않습니다.</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <p class="schema-note" data-en>
-                  <strong>Going forward:</strong> a future file version (like
-                  <code>0.2.0</code>) <em>won't</em> open in older releases —
-                  if Manuscript meets a version it doesn't recognize, it
-                  refuses the import rather than quietly throwing away parts
-                  of the file. If you receive manuscripts from someone on a
-                  newer Manuscript, make sure your own extension is up to date.
-                </p>
-                <p class="schema-note" data-ko>
-                  <strong>앞으로의 호환성:</strong> 미래에 나올 파일 버전(예
-                  <code>0.2.0</code>)은 그보다 옛 릴리스에서 <em>열리지
-                  않습니다</em> — 모르는 버전을 만나면, 파일의 일부 정보가 조용히
-                  사라지는 대신 가져오기 자체를 거부합니다. 더 최신 Manuscript 로
-                  만든 매뉴스크립트를 받는다면, 본인 확장도 함께 업데이트해 주세요.
-                </p>
               </section>
 
               <section id="g-popup">
