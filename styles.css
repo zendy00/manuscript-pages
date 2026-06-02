@@ -1537,6 +1537,44 @@ body[data-palette="studio-dark"] .callout-warn {
   .ver-chip-sep { display: none; }
 }
 
+/* ───── Version + changelog chip (persistent, desktop) ─────
+   Mirrors the floating toast/tour aesthetic but always visible. The
+   version auto-fills from store-version.json via [data-store-version]
+   (same as the install-section badges; shows "—" in local dev). */
+.verchip {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--r-pill);
+  box-shadow: var(--shadow-md);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--c-text-mute);
+  text-decoration: none;
+  opacity: 0.92;
+  transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+.verchip:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+  text-decoration: none;
+}
+.verchip-v { color: var(--c-text); font-variant-numeric: tabular-nums; }
+.verchip-sep { color: var(--c-text-mute); opacity: 0.55; }
+.verchip-cta { color: var(--c-primary); }
+@media (max-width: 640px) {
+  .verchip { display: none; }
+}
+
 /* ───── Changelog page ───── */
 .changelog-hero {
   padding: 72px 0 32px;

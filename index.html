@@ -98,8 +98,8 @@
           "applicationSubCategory": "DeveloperApplication",
           "operatingSystem": "Windows, macOS, Linux, ChromeOS",
           "browserRequirements": "Chromium-based browsers (Chrome, Edge) 88 or newer",
-          "softwareVersion": "0.7.1",
-          "releaseNotes": "v0.7.1 — Bug fix. A manuscript that moves between pages no longer jumps back to its first step mid-replay; cross-page playback now resumes from where it left off.",
+          "softwareVersion": "0.8.0",
+          "releaseNotes": "v0.8.0 — Undo and redo for everything you edit in the panel, a format painter that copies one annotation's whole style onto others (this step or every step, plus the spotlight ring), and copy-paste that places a pasted annotation where it belongs and selects it for editing.",
           "offers": {
             "@type": "Offer",
             "price": "0",
@@ -236,7 +236,7 @@
           <a href="#how" data-en>How it works</a><a href="#how" data-ko>동작 방식</a>
           <a href="#record" data-en>Record</a><a href="#record" data-ko>녹화</a>
           <a href="#agent" data-en>AI agent</a><a href="#agent" data-ko>AI 작성</a>
-          <a href="#remote" data-en><span class="new-badge nav-new">NEW</span>Remote Library</a><a href="#remote" data-ko><span class="new-badge nav-new">NEW</span>원격저장소</a>
+          <a href="#remote" data-en>Remote Library</a><a href="#remote" data-ko>원격저장소</a>
           <a href="#install" data-en>Install</a><a href="#install" data-ko>설치</a>
           <a href="#guide" data-en>Guide</a><a href="#guide" data-ko>사용설명서</a>
           <a href="#bridge" data-en>Bridge</a><a href="#bridge" data-ko>브리지</a>
@@ -724,8 +724,8 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
       <!-- ───── Remote library (v0.7.0+) ───── -->
       <section id="remote" class="remote-spotlight">
         <div class="container">
-          <p class="eyebrow" data-en>★ Shared library <span class="new-badge">NEW v0.7.0</span></p>
-          <p class="eyebrow" data-ko>★ 공유 라이브러리 <span class="new-badge">NEW v0.7.0</span></p>
+          <p class="eyebrow" data-en>★ Shared library</p>
+          <p class="eyebrow" data-ko>★ 공유 라이브러리</p>
 
           <h2 class="section-title" data-en>
             A team's tours, from <em>their</em> repo.
@@ -1440,6 +1440,54 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
                 <h3 data-ko>크기 조절·회전·애니메이션</h3>
                 <p data-en>Click an annotation to reveal handles. Corner drag = resize, top <span class="iicon"><svg><use href="./assets/sprite.svg#i-rotate"/></svg></span> = rotate, bottom-left <span class="iicon is-trash"><svg><use href="./assets/sprite.svg#i-trash"/></svg></span> = delete. Rotation + animation combine, the annotation lands at the chosen angle.</p>
                 <p data-ko>주석을 클릭하면 모서리 손잡이가 나타납니다. 모서리를 드래그하면 크기 조절, 상단의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-rotate"/></svg></span> 로 회전, 좌측 아래의 <span class="iicon is-trash"><svg><use href="./assets/sprite.svg#i-trash"/></svg></span> 로 삭제. 회전과 등장 효과가 결합되어 최종 각도로 자연스럽게 안착합니다.</p>
+
+                <h3 data-en>Undo &amp; redo <span class="new-badge">NEW v0.8.0</span></h3>
+                <h3 data-ko>되돌리기·다시 실행 <span class="new-badge">NEW v0.8.0</span></h3>
+                <p data-en>Any edit you make in the panel — a color, a move, a delete, applying formatting — can be stepped back. Press <span class="kbd">Ctrl</span><span class="kbd">Z</span> to undo and <span class="kbd">Ctrl</span><span class="kbd">Shift</span><span class="kbd">Z</span> to redo, or use the <strong>↶ ↷</strong> buttons next to the theme toggle in the panel header. Moving between steps doesn't count as an edit. If you undo while you're on a different step, Manuscript jumps back to the step where the change happened so you see it revert.</p>
+                <p data-ko>작성 패널에서 한 편집 — 색, 이동, 삭제, 서식 적용 — 은 한 단계씩 되돌릴 수 있어요. <span class="kbd">Ctrl</span><span class="kbd">Z</span> 로 되돌리기, <span class="kbd">Ctrl</span><span class="kbd">Shift</span><span class="kbd">Z</span> 로 다시 실행, 또는 패널 머리글의 테마 버튼 옆 <strong>↶ ↷</strong> 버튼을 쓰세요. 단계 사이를 오가는 건 편집으로 치지 않습니다. 다른 단계에 있을 때 되돌리면, 변경이 일어난 단계로 먼저 이동해 되돌려지는 모습을 보여줘요.</p>
+                <figure>
+                  <img
+                    src="./assets/screenshots/undo-redo-en.png"
+                    alt="Panel header close-up — the undo (↶) and redo (↷) buttons sit just left of the theme toggle."
+                    data-en
+                    onerror="this.style.display='none'"
+                  />
+                  <img
+                    src="./assets/screenshots/undo-redo-ko.png"
+                    alt="패널 머리글 근접 — 되돌리기(↶)·다시 실행(↷) 버튼이 테마 버튼 바로 왼쪽에 있습니다."
+                    data-ko
+                    onerror="this.style.display='none'"
+                  />
+                  <figcaption data-en>The ↶ ↷ buttons sit in the panel header, just left of the theme toggle — or press Ctrl+Z / Ctrl+Shift+Z.</figcaption>
+                  <figcaption data-ko>↶ ↷ 버튼은 패널 머리글의 테마 버튼 바로 왼쪽에 있어요 — 또는 Ctrl+Z / Ctrl+Shift+Z 를 누르세요.</figcaption>
+                </figure>
+
+                <h3 data-en>Copy formatting <span class="new-badge">NEW v0.8.0</span></h3>
+                <h3 data-ko>서식 복사 <span class="new-badge">NEW v0.8.0</span></h3>
+                <p data-en>Spent time styling one annotation and want the rest to match? Open its property popup and click the <strong>brush</strong> button to the left of the Muted / Vibrant toggle. A small menu drops down: <strong>This step only</strong> copies the style onto the same kind of annotation on this step; <strong>All steps</strong> does it across the whole manuscript. Position, size, and wording stay as they are — only the look is copied. The spotlight has the same brush button to match every step's highlight at once.</p>
+                <p data-ko>주석 하나를 공들여 꾸몄고 나머지도 똑같이 맞추고 싶다면, 그 주석의 속성 창을 열고 Muted / Vibrant 토글 왼쪽의 <strong>붓</strong> 버튼을 누르세요. 작은 메뉴가 펼쳐집니다 — <strong>이 스텝만</strong> 은 이 스텝의 같은 종류 주석에, <strong>전체 스텝</strong> 은 매뉴스크립트 전체에 스타일을 입힙니다. 위치·크기·문구는 그대로 두고 모양만 복사돼요. 강조 표시에도 같은 붓 버튼이 있어 모든 단계의 강조를 한 번에 맞출 수 있습니다.</p>
+                <figure>
+                  <img
+                    src="./assets/screenshots/format-painter-en.png"
+                    alt="Annotation property popup with the brush menu open, showing This step only and All steps."
+                    data-en
+                    onerror="this.style.display='none'"
+                  />
+                  <img
+                    src="./assets/screenshots/format-painter-ko.png"
+                    alt="주석 속성 창에서 붓 메뉴가 열려 이 스텝만·전체 스텝이 보이는 모습."
+                    data-ko
+                    onerror="this.style.display='none'"
+                  />
+                  <figcaption data-en>Click the brush in the property popup, then pick This step only or All steps to copy the look onto matching annotations.</figcaption>
+                  <figcaption data-ko>속성 창의 붓을 누르고 이 스텝만 또는 전체 스텝을 고르면, 같은 종류의 주석에 모양이 그대로 입혀집니다.</figcaption>
+                </figure>
+
+                <h3 data-en>Copy &amp; paste annotations <span class="new-badge">NEW v0.8.0</span></h3>
+                <h3 data-ko>주석 복사·붙여넣기 <span class="new-badge">NEW v0.8.0</span></h3>
+                <p data-en>Select an annotation and press <span class="kbd">Ctrl</span><span class="kbd">C</span>, then <span class="kbd">Ctrl</span><span class="kbd">V</span> to paste a copy. Paste into the <strong>same step</strong> and each copy steps a little down and to the right so it doesn't sit on top of the original. Paste into <strong>another step</strong> and it lands at the same spot on the screen. The pasted copy is selected right away, so its property popup is open and ready to edit.</p>
+                <p data-ko>주석을 고르고 <span class="kbd">Ctrl</span><span class="kbd">C</span>, 이어서 <span class="kbd">Ctrl</span><span class="kbd">V</span> 로 복제합니다. <strong>같은 스텝</strong> 에 붙이면 원본 위에 겹치지 않도록 조금씩 우하단으로 어긋나 놓이고, <strong>다른 스텝</strong> 에 붙이면 화면의 같은 위치에 놓여요. 붙인 주석은 곧바로 선택돼 속성 창이 열린 채라 바로 편집할 수 있습니다.</p>
+
               </section>
 
               <section id="g-steps">
@@ -2535,8 +2583,8 @@ manuscript.configure({
           <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.7.1 · © 2026</span>
-          <span data-ko>Manuscript v0.7.1 · © 2026</span>
+          <span data-en>Manuscript v0.8.0 · © 2026</span>
+          <span data-ko>Manuscript v0.8.0 · © 2026</span>
         </div>
       </div>
     </footer>
@@ -2575,6 +2623,17 @@ manuscript.configure({
         aria-label="Dismiss"
       >×</button>
     </div>
+
+    <!-- Persistent version + changelog chip — desktop only (see styles.css
+         .verchip). The version auto-fills from store-version.json like the
+         install-section [data-store-version] badges (shows "—" in local dev,
+         the real Web Store version once deployed). -->
+    <a id="mn-verchip" class="verchip" href="./changelog.html">
+      <span class="verchip-v" data-store-version>v…</span>
+      <span class="verchip-sep" aria-hidden="true">·</span>
+      <span class="verchip-cta" data-en>Changelog →</span>
+      <span class="verchip-cta" data-ko>변경사항 →</span>
+    </a>
 
     <script src="./manuscript-bridge.0.1.3.js"></script>
     <script src="./i18n.js"></script>

@@ -122,12 +122,48 @@
       <section class="changelog">
         <div class="container">
 
+          <!-- ───── v0.8.0 ───── -->
+          <article id="v0-8-0" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2>v0.8.0</h2>
+              <span class="changelog-tag changelog-tag-current" data-en>Current</span>
+              <span class="changelog-tag changelog-tag-current" data-ko>현재</span>
+              <time datetime="2026-06-02">2026-06-02</time>
+            </header>
+            <p class="changelog-summary" data-en>
+              Undo and redo land. Every edit you make in the panel steps
+              back with Ctrl+Z and forward with Ctrl+Shift+Z, with matching
+              ↶ ↷ buttons in the panel header. Alongside it, a format
+              painter copies one annotation's whole style onto others —
+              this step or every step — and copy-paste now drops a pasted
+              annotation right where it belongs and selects it for editing.
+            </p>
+            <p class="changelog-summary" data-ko>
+              되돌리기와 다시 실행이 들어왔어요. 작성 패널에서 한 편집은
+              Ctrl+Z 로 한 단계씩 되돌리고 Ctrl+Shift+Z 로 다시 실행하며,
+              패널 머리글의 ↶ ↷ 버튼으로도 누를 수 있습니다. 함께 들어온
+              서식 복사는 주석 하나의 스타일을 다른 주석에 그대로 입혀 주고
+              — 이 스텝만 또는 전체 스텝 — 복사·붙여넣기도 붙인 주석이
+              제자리에 놓이고 바로 선택돼 편집할 수 있게 다듬었어요.
+            </p>
+            <h3 data-en>New</h3>
+            <h3 data-ko>신기능</h3>
+            <ul data-en>
+              <li><strong>Undo &amp; redo</strong> — Ctrl+Z / Ctrl+Shift+Z (or the ↶ ↷ buttons next to the theme toggle) step through your editing history. Switching steps doesn't count as an edit, and if you undo from a different step, Manuscript jumps back to where the change happened so you watch it revert.</li>
+              <li><strong>Copy formatting</strong> — the brush button next to Muted / Vibrant copies the selected annotation's full style onto the other annotations of the same kind. Pick This step only or All steps. The spotlight has the same button to match every step's highlight at once.</li>
+              <li><strong>Copy &amp; paste annotations</strong> — Ctrl+C / Ctrl+V duplicates an annotation. Paste into the same step and each copy steps a little down-right so they don't stack; paste into another step and it lands at the same on-screen spot. The pasted copy is selected right away, ready to edit.</li>
+            </ul>
+            <ul data-ko>
+              <li><strong>되돌리기·다시 실행</strong> — Ctrl+Z / Ctrl+Shift+Z (또는 테마 버튼 옆 ↶ ↷ 버튼)로 편집 기록을 오갑니다. 단계 이동은 편집으로 치지 않고, 다른 단계에서 되돌리면 변경이 일어난 단계로 먼저 이동해 되돌려지는 모습을 보여줘요.</li>
+              <li><strong>서식 복사</strong> — Muted / Vibrant 옆 붓 버튼이 고른 주석의 스타일을 같은 종류의 다른 주석에 그대로 입힙니다. 이 스텝만 또는 전체 스텝 중에서 고르세요. 강조 표시에도 같은 버튼이 있어 모든 단계의 강조를 한 번에 맞출 수 있어요.</li>
+              <li><strong>주석 복사·붙여넣기</strong> — Ctrl+C / Ctrl+V 로 주석을 복제합니다. 같은 스텝에 붙이면 겹치지 않게 조금씩 우하단으로 어긋나 놓이고, 다른 스텝에 붙이면 화면의 같은 위치에 놓여요. 붙인 주석은 곧바로 선택돼 바로 편집할 수 있습니다.</li>
+            </ul>
+          </article>
+
           <!-- ───── v0.7.1 ───── -->
           <article id="v0-7-1" class="changelog-entry">
             <header class="changelog-entry-head">
               <h2>v0.7.1</h2>
-              <span class="changelog-tag changelog-tag-current" data-en>Current</span>
-              <span class="changelog-tag changelog-tag-current" data-ko>현재</span>
               <time datetime="2026-05-29">2026-05-29</time>
             </header>
             <p class="changelog-summary" data-en>
@@ -719,8 +755,8 @@
           <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.7.1 · © 2026</span>
-          <span data-ko>Manuscript v0.7.1 · © 2026</span>
+          <span data-en>Manuscript v0.8.0 · © 2026</span>
+          <span data-ko>Manuscript v0.8.0 · © 2026</span>
         </div>
       </div>
     </footer>
