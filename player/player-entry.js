@@ -58,7 +58,7 @@ function le() {
 function Bs() {
   return Ur;
 }
-function z() {
+function F() {
   return jr;
 }
 function nt() {
@@ -68,16 +68,16 @@ function qs() {
   return Gr;
 }
 const sn = "mn:player:state";
-function Fs(e) {
+function zs(e) {
   return e !== null && typeof e == "object" && typeof e.scenarioId == "string" && typeof e.stepIndex == "number";
 }
-const zs = {
+const Fs = {
   async getActiveReplay() {
     const e = sessionStorage.getItem(sn);
     if (!e) return null;
     try {
       const t = JSON.parse(e);
-      return Fs(t) ? t : null;
+      return zs(t) ? t : null;
     } catch {
       return null;
     }
@@ -151,7 +151,7 @@ const Hs = {
 };
 function Gs(e) {
   Yr({
-    storage: zs,
+    storage: Fs,
     prefs: Hs,
     assetUrl: Ws(e == null ? void 0 : e.assetBaseUrl),
     prompter: Us,
@@ -175,10 +175,10 @@ function A(e, t) {
 function Xs(e) {
   return [];
 }
-const Ks = { message: "Manuscript", description: "Extension name shown in the browser extensions page and in store listings." }, Zs = { message: "DOM-aware browser extension for authoring versioned web demos and manuals", description: "Short pitch shown under the name in the browser extensions page and in store listings." }, Js = { message: "Cancel" }, Qs = { message: "Delete" }, ea = { message: "Overwrite" }, ta = { message: "Close" }, na = { message: "OK" }, ra = { message: 'Delete the scenario "$NAME$"?', placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, oa = { message: "Untitled" }, sa = { message: "Got it" }, aa = { message: "Start a new walkthrough" }, ia = { message: "New Manuscript" }, ca = { message: "Need help?" }, la = { message: "Open a web page, then press New Manuscript." }, ua = { message: "Open a JSON file" }, da = { message: "Couldn't read this JSON file. Pick a valid Manuscript export." }, pa = { message: 'A scenario with this id already exists: "$NAME$". Overwrite it?', placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, ha = { message: "Previous Manuscripts" }, fa = { message: "Resume" }, ma = { message: "$N$ steps", placeholders: { n: { content: "$1", example: "3" } } }, ga = { message: "Delete $NAME$", placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, ba = { message: "↩ Inline" }, _a = { message: "Back to inline popup" }, ya = { message: "No active tab found." }, va = { message: "This page is not supported (chrome://, edge://, new tab, file:// etc.). Open a regular web page and try again." }, xa = { message: "The extension could not connect to this page. Refresh the page (F5) and try again." }, wa = { message: "Unknown error occurred. Check the console." }, ka = { message: "Language" }, Sa = { message: "Manuscript authoring panel" }, $a = { message: "Close panel" }, Aa = { message: "Toggle dark mode" }, Ma = { message: "Untitled walkthrough" }, Ea = { message: "Annotation tools" }, Ta = { message: "Text" }, La = { message: "Shape" }, Ca = { message: "Freedraw" }, Pa = { message: "Replay" }, Ia = { message: "Record screen" }, Oa = { message: "Replay walkthrough" }, Ra = { message: "Open presenter prompter" }, Na = { message: "Export JSON" }, Da = { message: "Export" }, Ba = { message: "With thumbnails · full size" }, qa = { message: "Export without thumbnails" }, Fa = { message: "Lighter file · -lite" }, za = { message: "Undo (Ctrl+Z)" }, Ha = { message: "Redo (Ctrl+Shift+Z)" }, Wa = { message: "Settings" }, Ua = { message: "Settings" }, ja = { message: "Narration voice" }, Va = { message: "Auto (Google preferred)" }, Ga = { message: "Match full URL (query & hash)" }, Ya = { message: "On by default URL matching ignores ?query and #hash. Turn this on for sites that change the page via query or hash (e.g. ?tab=, #/reports) so step navigation and the wrong-page warning work." }, Xa = { message: "Close settings" }, Ka = { message: "Local" }, Za = { message: "Remote Library" }, Ja = { message: "Remote library — coming soon." }, Qa = { message: "Connect a public GitHub repo to load shared manuscripts." }, ei = { message: "+ Add a GitHub source" }, ti = { message: "Add source" }, ni = { message: "Refresh all sources" }, ri = { message: "Remove source" }, oi = { message: "github.com/owner/repo  or  owner/repo/path" }, si = { message: "Add" }, ai = { message: "Invalid URL. Expected github.com/owner/repo or owner/repo." }, ii = { message: "Enter a GitHub URL or owner/repo." }, ci = { message: "Click ↻ refresh to load this source." }, li = { message: "No manuscripts in this folder yet." }, ui = { message: "This folder is empty." }, di = { message: "Back to parent folder" }, pi = { message: "Collapse source" }, hi = { message: "Expand source" }, fi = { message: "Loading" }, mi = { message: "steps" }, gi = { message: "Edits won't be saved" }, bi = { message: "Save to local" }, _i = { message: "External page" }, yi = { message: "Saved to local" }, vi = { message: "Save failed" }, xi = { message: "Copy formatting" }, wi = { message: "This step only" }, ki = { message: "All steps" }, Si = { message: "Before you record" }, $i = { message: "The browser shows two share dialogs. The first captures this tab; the second adds your TTS narration via system audio. Follow the numbered cues in each dialog." }, Ai = { message: "1. Required — allow video capture" }, Mi = { message: "First share dialog — when the current tab appears, click Allow." }, Ei = { message: "When the dialog below shows your current tab, click <strong>Allow</strong>." }, Ti = { message: "2. Optional — allow TTS audio capture" }, Li = { message: "Second share dialog — select a browser window and tick Also share system audio." }, Ci = { message: "<ol><li>Select the <strong>Window</strong> tab at the top.</li><li>Pick a browser window.</li><li>Tick <strong>Also share system audio</strong> — required to capture the TTS voice.</li><li>Click <strong>Share</strong>.</li></ol><p>The video from this dialog isn't used. <strong>If you cancel this dialog the recording still runs, but the TTS voice will be silent in the file.</strong></p>" }, Pi = { message: "Manuscript recorder" }, Ii = { message: "This window is not recorded — it just controls the capture." }, Oi = { message: "Click Start recording — the browser asks which surface to share. Pick your demo window and turn on system audio so the narration is captured." }, Ri = { message: "Allow capture for video + TTS audio" }, Ni = { message: "<ol><li>Select the <strong>Window</strong> tab at the top.</li><li>Choose the browser window running your demo.</li><li>Tick <strong>Share system audio</strong> — required to record the TTS narration.</li><li>Click <strong>Share</strong>.</li></ol>" }, Di = { message: "Start recording" }, Bi = { message: "Stop & save" }, qi = { message: "While recording — Space: pause / resume the demo (recording keeps going) · Esc: stop & save" }, Fi = { message: "Ready." }, zi = { message: "Recording" }, Hi = { message: "⏸ Paused — recording continues" }, Wi = { message: "Scenario playing" }, Ui = { message: "Scenario paused" }, ji = { message: "Saved. You can close this window." }, Vi = { message: `⚠ The narration won't be in the video. Share a Window (not a tab) and turn on "Share system audio". Click Start recording to try again.` }, Gi = { message: "Video quality" }, Yi = { message: "Standard" }, Xi = { message: "5 Mbps · 1080p" }, Ki = { message: "High quality" }, Zi = { message: "25 Mbps · 1080p" }, Ji = { message: "Keep the panel and controls visible (tutorial mode)" }, Qi = { message: "Useful when you're recording a how-to that shows Manuscript's own UI. The default uncluttered recording is best for end-user walkthroughs." }, ec = { message: "Also record my microphone" }, tc = { message: "Adds your voice to the recording so you can narrate live or add extra commentary while the scenario is paused. The browser will ask permission once." }, nc = { message: "While recording — <kbd>Space</kbd> pauses / resumes the scenario (recording keeps going) · <kbd>Esc</kbd> stops and saves" }, rc = { message: "Cancel" }, oc = { message: "Start recording" }, sc = { message: "Recording" }, ac = { message: "Click to resume the scenario" }, ic = { message: "Microphone permission denied — recording continues without your voice." }, cc = { message: "Step name" }, lc = { message: "Step description" }, uc = { message: "Pick element for step $N$", placeholders: { n: { content: "$1", example: "1" } } }, dc = { message: "Pick element with wand" }, pc = { message: "Action — pause replay on this step" }, hc = { message: "Delete step" }, fc = { message: "Auto-advance seconds" }, mc = { message: "Annotation tools" }, gc = { message: "Delete annotation" }, bc = { message: "Inner flow" }, _c = { message: "Sub-elements must be picked on the same page as the primary." }, yc = { message: "Add another element to this step" }, vc = { message: "Pull earlier (0.1s)" }, xc = { message: "Push later (0.1s)" }, wc = { message: "Stable attribute match — selector is healthy" }, kc = { message: "Layer 2 fallback — original attribute not found, matched by text + parent" }, Sc = { message: "Layer 3 fallback — only the visual heuristic still matches; re-pick is recommended" }, $c = { message: "Element not found on this page — re-pick required" }, Ac = { message: "Validate scenario" }, Mc = { message: "Scenario health check" }, Ec = { message: "Standalone player may stop here — the next step is a different origin." }, Tc = { message: "From here on, narration won't autoplay on pages the tour advances to on its own — the browser blocks sound on a page opened without a click. The viewer clicks the page to play its narration. Pages the viewer advances by clicking keep sound. (Affects both the standalone player and the extension.)" }, Lc = { message: "$OK$ healthy · $FALLBACK$ fallback · $BROKEN$ broken · $SKIPPED$ skipped (other pages)", placeholders: { ok: { content: "$1", example: "8" }, fallback: { content: "$2", example: "2" }, broken: { content: "$3", example: "1" }, skipped: { content: "$4", example: "3" } } }, Cc = { message: "$OK$ healthy · $FALLBACK$ fallback · $BROKEN$ broken · $PENDING$ pending", placeholders: { ok: { content: "$1", example: "3" }, fallback: { content: "$2", example: "1" }, broken: { content: "$3", example: "1" }, pending: { content: "$4", example: "5" } } }, Pc = { message: "Start" }, Ic = { message: "Validating…" }, Oc = { message: "Validation complete" }, Rc = { message: "Checking this page · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/" } } }, Nc = { message: "Moving to next page · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/checkout" } } }, Dc = { message: "Pending" }, Bc = { message: "healthy" }, qc = { message: "fallback" }, Fc = { message: "broken" }, zc = { message: "pending" }, Hc = { message: "Go to step" }, Wc = { message: "Re-pick element" }, Uc = { message: "Healthy" }, jc = { message: "Layer 2 fallback" }, Vc = { message: "Layer 3 fallback" }, Gc = { message: "Not found" }, Yc = { message: "Other page" }, Xc = { message: "No element picked" }, Kc = { message: "All resolvable steps on this page check out. " }, Zc = { message: "Close" }, Jc = { message: "Go to $URL$", placeholders: { url: { content: "$1", example: "https://example.com" } } }, Qc = { message: "Insert step here" }, el = { message: "Add step" }, tl = { message: "Step Name" }, nl = { message: "Step counter" }, rl = { message: "Previous (←)" }, ol = { message: "Pause/Play (Space)" }, sl = { message: "Next (→)" }, al = { message: "Finish (→)" }, il = { message: "Exit (Esc)" }, cl = { message: "Open presenter prompter" }, ll = { message: "Presenter prompter" }, ul = { message: "Move controls (drag)" }, dl = { message: "Drag to move" }, pl = { message: "Toggle vertical/horizontal" }, hl = { message: "Toggle narration" }, fl = { message: "Narration (TTS)" }, ml = { message: "Click anywhere to enable sound" }, gl = { message: "Click the demo page to enable sound" }, bl = { message: "Click the highlighted target to continue" }, _l = { message: "Skip" }, yl = { message: "Couldn't find the target" }, vl = { message: "The element this step relies on isn't on the page anymore. Skip this step or stop replay." }, xl = { message: "Skip" }, wl = { message: "Stop replay" }, kl = { message: "Different page" }, Sl = { message: "This walkthrough was recorded on the page below. Open it now?" }, $l = { message: "Navigate" }, Al = { message: "Force replay here" }, Ml = { message: "Cancel" }, El = { message: "Now" }, Tl = { message: "Next" }, Ll = { message: "Steps" }, Cl = { message: "Step $N$", placeholders: { n: { content: "$1", example: "3" } } }, Pl = { message: "Waiting…" }, Il = { message: "Playing" }, Ol = { message: "Paused" }, Rl = { message: "Action step" }, Nl = { message: "Previous" }, Dl = { message: "Pause/Play" }, Bl = { message: "Next" }, ql = { message: "Toggle narration" }, Fl = { message: "Narration (TTS)" }, zl = { message: "Manuscript · Prompter" }, Hl = { message: "Thumbnails need host access. Click the Manuscript icon and press Start again to grant the permission." }, Wl = { message: "This element matches multiple targets — pick something more specific." }, Ul = { message: "Exported ✓" }, jl = { message: "Export failed" }, Vl = { message: "No steps" }, Gl = { message: "This tour can't continue on this page." }, Yl = {
+const Ks = { message: "Manuscript", description: "Extension name shown in the browser extensions page and in store listings." }, Js = { message: "DOM-aware browser extension for authoring versioned web demos and manuals", description: "Short pitch shown under the name in the browser extensions page and in store listings." }, Zs = { message: "Cancel" }, Qs = { message: "Delete" }, ea = { message: "Overwrite" }, ta = { message: "Close" }, na = { message: "OK" }, ra = { message: 'Delete the scenario "$NAME$"?', placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, oa = { message: "Untitled" }, sa = { message: "Got it" }, aa = { message: "Start a new walkthrough" }, ia = { message: "New Manuscript" }, ca = { message: "Need help?" }, la = { message: "Open a web page, then press New Manuscript." }, ua = { message: "Open a JSON file" }, da = { message: "Couldn't read this JSON file. Pick a valid Manuscript export." }, pa = { message: 'A scenario with this id already exists: "$NAME$". Overwrite it?', placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, ha = { message: "Previous Manuscripts" }, fa = { message: "Resume" }, ma = { message: "$N$ steps", placeholders: { n: { content: "$1", example: "3" } } }, ga = { message: "Delete $NAME$", placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, ba = { message: "↩ Inline" }, _a = { message: "Back to inline popup" }, ya = { message: "No active tab found." }, va = { message: "This page is not supported (chrome://, edge://, new tab, file:// etc.). Open a regular web page and try again." }, xa = { message: "The extension could not connect to this page. Refresh the page (F5) and try again." }, wa = { message: "Unknown error occurred. Check the console." }, ka = { message: "Language" }, Sa = { message: "Manuscript authoring panel" }, $a = { message: "Close panel" }, Aa = { message: "Toggle dark mode" }, Ma = { message: "Untitled walkthrough" }, Ea = { message: "Annotation tools" }, Ta = { message: "Text" }, La = { message: "Shape" }, Ca = { message: "Freedraw" }, Pa = { message: "Replay" }, Ia = { message: "Record screen" }, Oa = { message: "Replay walkthrough" }, Ra = { message: "Open presenter prompter" }, Na = { message: "Export JSON" }, Da = { message: "Export" }, Ba = { message: "With thumbnails · full size" }, qa = { message: "Export without thumbnails" }, za = { message: "Lighter file · -lite" }, Fa = { message: "Undo (Ctrl+Z)" }, Ha = { message: "Redo (Ctrl+Shift+Z)" }, Wa = { message: "Settings" }, Ua = { message: "Settings" }, ja = { message: "Narration voice" }, Va = { message: "Auto (Google preferred)" }, Ga = { message: "Match full URL (query & hash)" }, Ya = { message: "On by default URL matching ignores ?query and #hash. Turn this on for sites that change the page via query or hash (e.g. ?tab=, #/reports) so step navigation and the wrong-page warning work." }, Xa = { message: "Close settings" }, Ka = { message: "Local" }, Ja = { message: "Remote Library" }, Za = { message: "Remote library — coming soon." }, Qa = { message: "Connect a public GitHub repo to load shared manuscripts." }, ei = { message: "+ Add a GitHub source" }, ti = { message: "Add source" }, ni = { message: "Refresh all sources" }, ri = { message: "Remove source" }, oi = { message: "github.com/owner/repo  or  owner/repo/path" }, si = { message: "Add" }, ai = { message: "Invalid URL. Expected github.com/owner/repo or owner/repo." }, ii = { message: "Enter a GitHub URL or owner/repo." }, ci = { message: "Click ↻ refresh to load this source." }, li = { message: "No manuscripts in this folder yet." }, ui = { message: "This folder is empty." }, di = { message: "Back to parent folder" }, pi = { message: "Collapse source" }, hi = { message: "Expand source" }, fi = { message: "Loading" }, mi = { message: "steps" }, gi = { message: "Edits won't be saved" }, bi = { message: "Save to local" }, _i = { message: "External page" }, yi = { message: "Saved to local" }, vi = { message: "Save failed" }, xi = { message: "Copy formatting" }, wi = { message: "This step only" }, ki = { message: "All steps" }, Si = { message: "Before you record" }, $i = { message: "The browser shows two share dialogs. The first captures this tab; the second adds your TTS narration via system audio. Follow the numbered cues in each dialog." }, Ai = { message: "1. Required — allow video capture" }, Mi = { message: "First share dialog — when the current tab appears, click Allow." }, Ei = { message: "When the dialog below shows your current tab, click <strong>Allow</strong>." }, Ti = { message: "2. Optional — allow TTS audio capture" }, Li = { message: "Second share dialog — select a browser window and tick Also share system audio." }, Ci = { message: "<ol><li>Select the <strong>Window</strong> tab at the top.</li><li>Pick a browser window.</li><li>Tick <strong>Also share system audio</strong> — required to capture the TTS voice.</li><li>Click <strong>Share</strong>.</li></ol><p>The video from this dialog isn't used. <strong>If you cancel this dialog the recording still runs, but the TTS voice will be silent in the file.</strong></p>" }, Pi = { message: "Manuscript recorder" }, Ii = { message: "This window is not recorded — it just controls the capture." }, Oi = { message: "Click Start recording — the browser asks which surface to share. Pick your demo window and turn on system audio so the narration is captured." }, Ri = { message: "Allow capture for video + TTS audio" }, Ni = { message: "<ol><li>Select the <strong>Window</strong> tab at the top.</li><li>Choose the browser window running your demo.</li><li>Tick <strong>Share system audio</strong> — required to record the TTS narration.</li><li>Click <strong>Share</strong>.</li></ol>" }, Di = { message: "Start recording" }, Bi = { message: "Stop & save" }, qi = { message: "While recording — Space: pause / resume the demo (recording keeps going) · Esc: stop & save" }, zi = { message: "Ready." }, Fi = { message: "Recording" }, Hi = { message: "⏸ Paused — recording continues" }, Wi = { message: "Scenario playing" }, Ui = { message: "Scenario paused" }, ji = { message: "Saved. You can close this window." }, Vi = { message: `⚠ The narration won't be in the video. Share a Window (not a tab) and turn on "Share system audio". Click Start recording to try again.` }, Gi = { message: "Video quality" }, Yi = { message: "Standard" }, Xi = { message: "5 Mbps · 1080p" }, Ki = { message: "High quality" }, Ji = { message: "25 Mbps · 1080p" }, Zi = { message: "Keep the panel and controls visible (tutorial mode)" }, Qi = { message: "Useful when you're recording a how-to that shows Manuscript's own UI. The default uncluttered recording is best for end-user walkthroughs." }, ec = { message: "Also record my microphone" }, tc = { message: "Adds your voice to the recording so you can narrate live or add extra commentary while the scenario is paused. The browser will ask permission once." }, nc = { message: "While recording — <kbd>Space</kbd> pauses / resumes the scenario (recording keeps going) · <kbd>Esc</kbd> stops and saves" }, rc = { message: "Cancel" }, oc = { message: "Start recording" }, sc = { message: "Recording" }, ac = { message: "Click to resume the scenario" }, ic = { message: "Microphone permission denied — recording continues without your voice." }, cc = { message: "Step name" }, lc = { message: "Step description" }, uc = { message: "Pick element for step $N$", placeholders: { n: { content: "$1", example: "1" } } }, dc = { message: "Pick element with wand" }, pc = { message: "Action — pause replay on this step" }, hc = { message: "Delete step" }, fc = { message: "Auto-advance seconds" }, mc = { message: "Annotation tools" }, gc = { message: "Delete annotation" }, bc = { message: "Inner flow" }, _c = { message: "Sub-elements must be picked on the same page as the primary." }, yc = { message: "Add another element to this step" }, vc = { message: "Pull earlier (0.1s)" }, xc = { message: "Push later (0.1s)" }, wc = { message: "Stable attribute match — selector is healthy" }, kc = { message: "Layer 2 fallback — original attribute not found, matched by text + parent" }, Sc = { message: "Layer 3 fallback — only the visual heuristic still matches; re-pick is recommended" }, $c = { message: "Element not found on this page — re-pick required" }, Ac = { message: "Validate scenario" }, Mc = { message: "Scenario health check" }, Ec = { message: "Standalone player may stop here — the next step is a different origin." }, Tc = { message: "From here on, narration won't autoplay on pages the tour advances to on its own — the browser blocks sound on a page opened without a click. The viewer clicks the page to play its narration. Pages the viewer advances by clicking keep sound. (Affects both the standalone player and the extension.)" }, Lc = { message: "$OK$ healthy · $FALLBACK$ fallback · $BROKEN$ broken · $SKIPPED$ skipped (other pages)", placeholders: { ok: { content: "$1", example: "8" }, fallback: { content: "$2", example: "2" }, broken: { content: "$3", example: "1" }, skipped: { content: "$4", example: "3" } } }, Cc = { message: "$OK$ healthy · $FALLBACK$ fallback · $BROKEN$ broken · $PENDING$ pending", placeholders: { ok: { content: "$1", example: "3" }, fallback: { content: "$2", example: "1" }, broken: { content: "$3", example: "1" }, pending: { content: "$4", example: "5" } } }, Pc = { message: "Start" }, Ic = { message: "Validating…" }, Oc = { message: "Validation complete" }, Rc = { message: "Checking this page · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/" } } }, Nc = { message: "Moving to next page · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/checkout" } } }, Dc = { message: "Pending" }, Bc = { message: "healthy" }, qc = { message: "fallback" }, zc = { message: "broken" }, Fc = { message: "pending" }, Hc = { message: "Go to step" }, Wc = { message: "Re-pick element" }, Uc = { message: "Healthy" }, jc = { message: "Layer 2 fallback" }, Vc = { message: "Layer 3 fallback" }, Gc = { message: "Not found" }, Yc = { message: "Other page" }, Xc = { message: "No element picked" }, Kc = { message: "All resolvable steps on this page check out. " }, Jc = { message: "Close" }, Zc = { message: "Go to $URL$", placeholders: { url: { content: "$1", example: "https://example.com" } } }, Qc = { message: "Insert step here" }, el = { message: "Add step" }, tl = { message: "Step Name" }, nl = { message: "Step counter" }, rl = { message: "Previous (←)" }, ol = { message: "Pause/Play (Space)" }, sl = { message: "Next (→)" }, al = { message: "Finish (→)" }, il = { message: "Exit (Esc)" }, cl = { message: "Open presenter prompter" }, ll = { message: "Presenter prompter" }, ul = { message: "Move controls (drag)" }, dl = { message: "Drag to move" }, pl = { message: "Toggle vertical/horizontal" }, hl = { message: "Toggle narration" }, fl = { message: "Narration (TTS)" }, ml = { message: "Click anywhere to enable sound" }, gl = { message: "Click the demo page to enable sound" }, bl = { message: "Click the highlighted target to continue" }, _l = { message: "Skip" }, yl = { message: "Couldn't find the target" }, vl = { message: "The element this step relies on isn't on the page anymore. Skip this step or stop replay." }, xl = { message: "Skip" }, wl = { message: "Stop replay" }, kl = { message: "Different page" }, Sl = { message: "This walkthrough was recorded on the page below. Open it now?" }, $l = { message: "Navigate" }, Al = { message: "Force replay here" }, Ml = { message: "Cancel" }, El = { message: "Now" }, Tl = { message: "Next" }, Ll = { message: "Steps" }, Cl = { message: "Step $N$", placeholders: { n: { content: "$1", example: "3" } } }, Pl = { message: "Waiting…" }, Il = { message: "Playing" }, Ol = { message: "Paused" }, Rl = { message: "Action step" }, Nl = { message: "Previous" }, Dl = { message: "Pause/Play" }, Bl = { message: "Next" }, ql = { message: "Toggle narration" }, zl = { message: "Narration (TTS)" }, Fl = { message: "Manuscript · Prompter" }, Hl = { message: "Thumbnails need host access. Click the Manuscript icon and press Start again to grant the permission." }, Wl = { message: "This element matches multiple targets — pick something more specific." }, Ul = { message: "Exported ✓" }, jl = { message: "Export failed" }, Vl = { message: "No steps" }, Gl = { message: "This tour can't continue on this page." }, Yl = {
   extension_name: Ks,
-  extension_description: Zs,
-  common_cancel: Js,
+  extension_description: Js,
+  common_cancel: Zs,
   common_delete: Qs,
   common_overwrite: ea,
   common_close: ta,
@@ -220,8 +220,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   panel_export_menu_full: Da,
   panel_export_menu_full_meta: Ba,
   panel_export_menu_lite: qa,
-  panel_export_menu_lite_meta: Fa,
-  panel_undo_aria: za,
+  panel_export_menu_lite_meta: za,
+  panel_undo_aria: Fa,
   panel_redo_aria: Ha,
   panel_settings_aria: Wa,
   panel_settings_title: Ua,
@@ -231,8 +231,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   panel_settings_strict_url_help: Ya,
   panel_settings_close_aria: Xa,
   popup_tabs_local: Ka,
-  popup_tabs_remote: Za,
-  popup_remote_coming_soon: Ja,
+  popup_tabs_remote: Ja,
+  popup_remote_coming_soon: Za,
   popup_remote_empty_copy: Qa,
   popup_remote_add_cta: ei,
   popup_remote_add_cta_aria: ti,
@@ -274,8 +274,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   recorder_start: Di,
   recorder_stop: Bi,
   recorder_hint: qi,
-  recorder_status_ready: Fi,
-  recorder_status_recording: zi,
+  recorder_status_ready: zi,
+  recorder_status_recording: Fi,
   recorder_status_paused: Hi,
   recorder_scenario_playing: Wi,
   recorder_scenario_paused: Ui,
@@ -285,8 +285,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   recorder_quality_standard: Yi,
   recorder_quality_standard_spec: Xi,
   recorder_quality_high: Ki,
-  recorder_quality_high_spec: Zi,
-  recording_guide_keep_ui_label: Ji,
+  recorder_quality_high_spec: Ji,
+  recording_guide_keep_ui_label: Zi,
   recording_guide_keep_ui_hint: Qi,
   recording_guide_mic_label: ec,
   recording_guide_mic_hint: tc,
@@ -328,8 +328,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   validate_status_pending: Dc,
   validate_label_ok: Bc,
   validate_label_fallback: qc,
-  validate_label_broken: Fc,
-  validate_label_pending: zc,
+  validate_label_broken: zc,
+  validate_label_pending: Fc,
   validate_row_go: Hc,
   validate_row_repick: Wc,
   validate_status_green: Uc,
@@ -339,8 +339,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   validate_status_skipped: Yc,
   validate_status_no_element: Xc,
   validate_no_issues: Kc,
-  validate_close: Zc,
-  step_link_aria: Jc,
+  validate_close: Jc,
+  step_link_aria: Zc,
   step_insert_aria: Qc,
   step_add_aria: el,
   step_empty_name: tl,
@@ -382,19 +382,19 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   prompter_pause_aria: Dl,
   prompter_next_aria: Bl,
   prompter_tts_aria: ql,
-  prompter_tts_title: Fl,
-  prompter_title: zl,
+  prompter_tts_title: zl,
+  prompter_title: Fl,
   permission_thumbnail_needs_host: Hl,
   toast_ambiguous_selector: Wl,
   toast_export_success: Ul,
   toast_export_failed: jl,
   toast_no_steps: Vl,
   player_handoff_unavailable: Gl
-}, Xl = { message: "Manuscript", description: "Extension name shown in the browser extensions page and in store listings." }, Kl = { message: "DOM 인식 기반으로 깨지지 않는 웹 시연·매뉴얼을 저작·재생하는 브라우저 확장 프로그램", description: "Short pitch shown under the name in the browser extensions page and in store listings." }, Zl = { message: "취소" }, Jl = { message: "삭제" }, Ql = { message: "덮어쓰기" }, eu = { message: "닫기" }, tu = { message: "확인" }, nu = { message: '"$NAME$" 시나리오를 삭제하시겠습니까?', placeholders: { name: { content: "$1", example: "결제 안내" } } }, ru = { message: "제목 없음" }, ou = { message: "확인" }, su = { message: "새 시연 시작" }, au = { message: "새 매뉴스크립트" }, iu = { message: "도움말" }, cu = { message: "웹 페이지를 연 후 새 매뉴스크립트 버튼을 누르세요." }, lu = { message: "JSON 파일 가져오기" }, uu = { message: "JSON 파일을 읽을 수 없습니다. 매뉴스크립트에서 내보낸 파일인지 확인해 주세요." }, du = { message: '같은 id의 "$NAME$" 시나리오가 이미 있습니다. 덮어쓸까요?', placeholders: { name: { content: "$1", example: "결제 안내" } } }, pu = { message: "이전 매뉴스크립트" }, hu = { message: "이어하기" }, fu = { message: "$N$개 단계", placeholders: { n: { content: "$1", example: "3" } } }, mu = { message: "$NAME$ 삭제", placeholders: { name: { content: "$1", example: "결제 안내" } } }, gu = { message: "↩ 인라인" }, bu = { message: "인라인 팝업으로 돌아가기" }, _u = { message: "활성 탭을 찾을 수 없습니다." }, yu = { message: "이 페이지는 지원하지 않습니다 (chrome://, edge://, 새 탭, file:// 등). 일반 웹 페이지에서 다시 시도해 주세요." }, vu = { message: "이 페이지에 연결할 수 없습니다. F5로 페이지를 새로고침한 뒤 다시 시도하세요." }, xu = { message: "알 수 없는 오류가 발생했습니다. 콘솔을 확인하세요." }, wu = { message: "언어" }, ku = { message: "매뉴스크립트 작성 패널" }, Su = { message: "패널 닫기" }, $u = { message: "다크 모드 전환" }, Au = { message: "제목 없는 시연" }, Mu = { message: "주석 도구" }, Eu = { message: "텍스트" }, Tu = { message: "도형" }, Lu = { message: "자유 그리기" }, Cu = { message: "재생" }, Pu = { message: "화면 녹화" }, Iu = { message: "시연 재생" }, Ou = { message: "발표자 프롬프터 열기" }, Ru = { message: "JSON 내보내기" }, Nu = { message: "전체 내보내기" }, Du = { message: "썸네일 포함 · 원본 크기" }, Bu = { message: "썸네일 없이 내보내기" }, qu = { message: "용량 ↓ · 가벼운 -lite 파일" }, Fu = { message: "되돌리기 (Ctrl+Z)" }, zu = { message: "다시 실행 (Ctrl+Shift+Z)" }, Hu = { message: "설정" }, Wu = { message: "설정" }, Uu = { message: "내레이션 음성" }, ju = { message: "자동 (Google 우선)" }, Vu = { message: "전체 URL 일치 (쿼리·해시)" }, Gu = { message: "기본 URL 일치는 ?쿼리와 #해시를 무시합니다. 쿼리나 해시로 화면이 바뀌는 사이트(예: ?tab=, #/reports)라면 이 옵션을 켜야 단계 이동과 페이지 불일치 경고가 제대로 동작합니다." }, Yu = { message: "설정 닫기" }, Xu = { message: "내 라이브러리" }, Ku = { message: "원격저장소" }, Zu = { message: "원격저장소 라이브러리 — 곧 제공됩니다." }, Ju = { message: "GitHub 공개 리포를 연결해서 공유 시나리오를 불러오세요." }, Qu = { message: "+ GitHub 소스 추가" }, ed = { message: "소스 추가" }, td = { message: "전체 새로고침" }, nd = { message: "소스 제거" }, rd = { message: "github.com/owner/repo 또는 owner/repo/path" }, od = { message: "추가" }, sd = { message: "URL 형식이 올바르지 않습니다. github.com/owner/repo 또는 owner/repo 형식으로 입력해주세요." }, ad = { message: "GitHub URL 또는 owner/repo를 입력해주세요." }, id = { message: "↻ 새로고침을 눌러 이 소스의 시나리오를 불러오세요." }, cd = { message: "이 폴더에는 아직 시나리오가 없습니다." }, ld = { message: "비어있는 폴더입니다." }, ud = { message: "상위 폴더로" }, dd = { message: "접기" }, pd = { message: "펼치기" }, hd = { message: "불러오는 중" }, fd = { message: "단계" }, md = { message: "편집은 저장되지 않습니다" }, gd = { message: "내 라이브러리에 저장" }, bd = { message: "외부 페이지" }, _d = { message: "라이브러리에 저장했습니다" }, yd = { message: "저장에 실패했습니다" }, vd = { message: "서식 복사" }, xd = { message: "이 스텝만" }, wd = { message: "전체 스텝" }, kd = { message: "녹화 시작 전" }, Sd = { message: "브라우저가 share dialog 를 두 번 띄웁니다. 첫 번째는 이 탭을 캡처하고, 두 번째는 시스템 오디오로 TTS 음성을 추가합니다. 각 다이얼로그의 번호 순서대로 진행하세요." }, $d = { message: "1. 영상 녹화를 위한 필수 허용" }, Ad = { message: "첫 번째 share dialog — 현재 탭이 나타나면 허용을 클릭하세요." }, Md = { message: "아래 다이얼로그에 현재 탭이 나타나면 <strong>허용</strong>을 클릭합니다." }, Ed = { message: "2. TTS 녹음을 위한 옵션 허용" }, Td = { message: "두 번째 share dialog — 브라우저 창 선택 + 시스템 오디오 공유 체크." }, Ld = { message: "<ol><li>상단의 <strong>Window(윈도우)</strong> 탭을 선택합니다.</li><li>브라우저 창을 선택합니다.</li><li><strong>시스템 오디오 공유</strong>를 체크합니다 — TTS 음성 녹음 필수.</li><li><strong>공유</strong>를 클릭합니다.</li></ol><p>두 번째 다이얼로그의 영상은 사용되지 않습니다. <strong>이 다이얼로그를 취소해도 녹화는 진행되지만 TTS 음성은 녹음되지 않습니다.</strong></p>" }, Cd = { message: "Manuscript 녹화기" }, Pd = { message: "이 창은 녹화되지 않습니다 — 녹화를 제어하는 창입니다." }, Id = { message: "녹화 시작을 누르면 브라우저가 공유할 화면을 묻습니다. 데모 창을 고르고 시스템 오디오를 켜야 내레이션이 녹음됩니다." }, Od = { message: "영상 + TTS 음성 녹화 허용" }, Rd = { message: "<ol><li>상단의 <strong>창</strong> 탭을 선택합니다.</li><li>데모가 열린 브라우저 창을 고릅니다.</li><li><strong>시스템 오디오 공유</strong>를 체크합니다 — TTS 내레이션 녹음에 필요.</li><li><strong>공유</strong>를 누릅니다.</li></ol>" }, Nd = { message: "녹화 시작" }, Dd = { message: "정지 후 저장" }, Bd = { message: "녹화 중 — Space: 데모 일시정지 / 재개 (녹화는 계속) · Esc: 정지 후 저장" }, qd = { message: "준비됨." }, Fd = { message: "녹화 중" }, zd = { message: "⏸ 일시정지 — 녹화는 계속됩니다" }, Hd = { message: "시나리오 재생 중" }, Wd = { message: "시나리오 일시정지 중" }, Ud = { message: "저장됨. 이 창을 닫아도 됩니다." }, jd = { message: "⚠ 내레이션이 영상에 들어가지 않습니다. 탭이 아니라 '창'을 공유하고 '시스템 오디오 공유'를 켜세요. '녹화 시작'을 다시 눌러 주세요." }, Vd = { message: "영상 화질" }, Gd = { message: "일반 화질" }, Yd = { message: "5 Mbps · 1080p" }, Xd = { message: "고화질" }, Kd = { message: "25 Mbps · 1080p" }, Zd = { message: "패널·컨트롤을 영상에 함께 노출 (튜토리얼 모드)" }, Jd = { message: "Manuscript UI를 직접 보여주는 how-to 녹화에 사용합니다. 일반 워크스루는 기본(자동 숨김)이 더 깔끔합니다." }, Qd = { message: "내 마이크도 함께 녹음" }, ep = { message: "시나리오 일시중지 중에 직접 설명을 더하거나 라이브 보이스 오버를 추가할 수 있도록 마이크 음성을 함께 녹음합니다. 브라우저가 한 번 권한을 요청합니다." }, tp = { message: "녹화 중 — <kbd>Space</kbd> 시나리오 일시중지 / 재개 (녹화는 계속) · <kbd>Esc</kbd> 종료 후 저장" }, np = { message: "취소" }, rp = { message: "녹화 시작" }, op = { message: "녹화 중" }, sp = { message: "클릭하여 시나리오 재개" }, ap = { message: "마이크 권한 거부 — 보이스 없이 녹화를 계속합니다." }, ip = { message: "단계 이름" }, cp = { message: "단계 설명" }, lp = { message: "단계 $N$의 요소 선택", placeholders: { n: { content: "$1", example: "1" } } }, up = { message: "요소 선택" }, dp = { message: "액션 — 이 단계에서 재생을 멈춤" }, pp = { message: "단계 삭제" }, hp = { message: "자동 진행 시간(초)" }, fp = { message: "주석 도구" }, mp = { message: "주석 삭제" }, gp = { message: "내부 흐름" }, bp = { message: "보조 element 는 대표 element 와 같은 페이지에서만 추가할 수 있습니다." }, _p = { message: "이 스텝에 element 추가" }, yp = { message: "0.1초 앞당기기" }, vp = { message: "0.1초 늦추기" }, xp = { message: "기본 selector 정상" }, wp = { message: "Layer 2 fallback — 원본 속성 못 찾음, 텍스트+부모 구조로 매칭" }, kp = { message: "Layer 3 fallback — 시각 휴리스틱만 남음, 재픽 권장" }, Sp = { message: "이 페이지에서 element 못 찾음 — 재픽 필요" }, $p = { message: "시연 검증" }, Ap = { message: "시연 상태 검증" }, Mp = { message: "여기서 standalone player 재생이 멈출 수 있어요 — 다음 단계가 다른 출처(cross-origin)입니다." }, Ep = { message: "여기서부터, 투어가 자동으로 넘어가는 페이지에서는 내레이션이 자동 재생되지 않아요 — 브라우저가 클릭 없이 열린 페이지의 소리를 막기 때문입니다. 보는 사람이 페이지를 클릭하면 그 페이지의 음성이 재생됩니다. 직접 클릭해서 넘긴 페이지는 소리가 이어져요. (standalone player·확장 모두 해당)" }, Tp = { message: "정상 $OK$ · fallback $FALLBACK$ · 깨짐 $BROKEN$ · 다른 페이지 $SKIPPED$", placeholders: { ok: { content: "$1", example: "8" }, fallback: { content: "$2", example: "2" }, broken: { content: "$3", example: "1" }, skipped: { content: "$4", example: "3" } } }, Lp = { message: "정상 $OK$ · fallback $FALLBACK$ · 깨짐 $BROKEN$ · 대기 $PENDING$", placeholders: { ok: { content: "$1", example: "3" }, fallback: { content: "$2", example: "1" }, broken: { content: "$3", example: "1" }, pending: { content: "$4", example: "5" } } }, Cp = { message: "검증 시작" }, Pp = { message: "검증 중…" }, Ip = { message: "검증 완료" }, Op = { message: "이 페이지 검증 중 · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/" } } }, Rp = { message: "다음 페이지로 이동 중 · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/checkout" } } }, Np = { message: "대기" }, Dp = { message: "정상" }, Bp = { message: "fallback" }, qp = { message: "깨짐" }, Fp = { message: "대기" }, zp = { message: "이 스텝 보기" }, Hp = { message: "재픽" }, Wp = { message: "정상" }, Up = { message: "Layer 2 fallback" }, jp = { message: "Layer 3 fallback" }, Vp = { message: "못 찾음" }, Gp = { message: "다른 페이지" }, Yp = { message: "element 미픽" }, Xp = { message: "이 페이지의 step 들은 모두 정상입니다." }, Kp = { message: "닫기" }, Zp = { message: "$URL$로 이동", placeholders: { url: { content: "$1", example: "https://example.com" } } }, Jp = { message: "여기에 단계 삽입" }, Qp = { message: "단계 추가" }, eh = { message: "단계 이름" }, th = { message: "단계 카운터" }, nh = { message: "이전 (←)" }, rh = { message: "일시정지/재생 (Space)" }, oh = { message: "다음 (→)" }, sh = { message: "완료 (→)" }, ah = { message: "종료 (Esc)" }, ih = { message: "발표자 프롬프터 열기" }, ch = { message: "발표자 프롬프터" }, lh = { message: "컨트롤 이동 (드래그)" }, uh = { message: "드래그로 이동" }, dh = { message: "세로/가로 전환" }, ph = { message: "내레이션 켜기/끄기" }, hh = { message: "내레이션 (TTS)" }, fh = { message: "소리를 위해 아무 곳이나 클릭하세요" }, mh = { message: "소리를 위해 재생 화면을 클릭하세요" }, gh = { message: "강조된 대상을 클릭하면 계속 진행됩니다" }, bh = { message: "건너뛰기" }, _h = { message: "대상을 찾을 수 없습니다" }, yh = { message: "이 단계가 가리키는 요소가 페이지에 더 이상 없습니다. 건너뛰거나 재생을 멈출 수 있습니다." }, vh = { message: "건너뛰기" }, xh = { message: "재생 멈추기" }, wh = { message: "다른 페이지" }, kh = { message: "이 시연은 아래 페이지에서 녹화되었습니다. 그곳으로 이동할까요?" }, Sh = { message: "이동" }, $h = { message: "여기서 강제 재생" }, Ah = { message: "취소" }, Mh = { message: "현재" }, Eh = { message: "다음" }, Th = { message: "단계" }, Lh = { message: "단계 $N$", placeholders: { n: { content: "$1", example: "3" } } }, Ch = { message: "대기 중…" }, Ph = { message: "재생 중" }, Ih = { message: "일시정지" }, Oh = { message: "액션 단계" }, Rh = { message: "이전" }, Nh = { message: "일시정지/재생" }, Dh = { message: "다음" }, Bh = { message: "내레이션 켜기/끄기" }, qh = { message: "내레이션 (TTS)" }, Fh = { message: "매뉴스크립트 · 프롬프터" }, zh = { message: "썸네일에 호스트 접근 권한이 필요합니다. 매뉴스크립트 아이콘을 클릭하여 시작을 다시 누르면 권한을 부여할 수 있습니다." }, Hh = { message: "이 요소가 여러 대상과 일치합니다 — 더 구체적인 요소를 선택해 주세요." }, Wh = { message: "내보냄 ✓" }, Uh = { message: "내보내기에 실패했습니다" }, jh = { message: "단계가 없습니다" }, Vh = { message: "이 투어는 여기서 계속할 수 없습니다." }, Gh = {
+}, Xl = { message: "Manuscript", description: "Extension name shown in the browser extensions page and in store listings." }, Kl = { message: "DOM 인식 기반으로 깨지지 않는 웹 시연·매뉴얼을 저작·재생하는 브라우저 확장 프로그램", description: "Short pitch shown under the name in the browser extensions page and in store listings." }, Jl = { message: "취소" }, Zl = { message: "삭제" }, Ql = { message: "덮어쓰기" }, eu = { message: "닫기" }, tu = { message: "확인" }, nu = { message: '"$NAME$" 시나리오를 삭제하시겠습니까?', placeholders: { name: { content: "$1", example: "결제 안내" } } }, ru = { message: "제목 없음" }, ou = { message: "확인" }, su = { message: "새 시연 시작" }, au = { message: "새 매뉴스크립트" }, iu = { message: "도움말" }, cu = { message: "웹 페이지를 연 후 새 매뉴스크립트 버튼을 누르세요." }, lu = { message: "JSON 파일 가져오기" }, uu = { message: "JSON 파일을 읽을 수 없습니다. 매뉴스크립트에서 내보낸 파일인지 확인해 주세요." }, du = { message: '같은 id의 "$NAME$" 시나리오가 이미 있습니다. 덮어쓸까요?', placeholders: { name: { content: "$1", example: "결제 안내" } } }, pu = { message: "이전 매뉴스크립트" }, hu = { message: "이어하기" }, fu = { message: "$N$개 단계", placeholders: { n: { content: "$1", example: "3" } } }, mu = { message: "$NAME$ 삭제", placeholders: { name: { content: "$1", example: "결제 안내" } } }, gu = { message: "↩ 인라인" }, bu = { message: "인라인 팝업으로 돌아가기" }, _u = { message: "활성 탭을 찾을 수 없습니다." }, yu = { message: "이 페이지는 지원하지 않습니다 (chrome://, edge://, 새 탭, file:// 등). 일반 웹 페이지에서 다시 시도해 주세요." }, vu = { message: "이 페이지에 연결할 수 없습니다. F5로 페이지를 새로고침한 뒤 다시 시도하세요." }, xu = { message: "알 수 없는 오류가 발생했습니다. 콘솔을 확인하세요." }, wu = { message: "언어" }, ku = { message: "매뉴스크립트 작성 패널" }, Su = { message: "패널 닫기" }, $u = { message: "다크 모드 전환" }, Au = { message: "제목 없는 시연" }, Mu = { message: "주석 도구" }, Eu = { message: "텍스트" }, Tu = { message: "도형" }, Lu = { message: "자유 그리기" }, Cu = { message: "재생" }, Pu = { message: "화면 녹화" }, Iu = { message: "시연 재생" }, Ou = { message: "발표자 프롬프터 열기" }, Ru = { message: "JSON 내보내기" }, Nu = { message: "전체 내보내기" }, Du = { message: "썸네일 포함 · 원본 크기" }, Bu = { message: "썸네일 없이 내보내기" }, qu = { message: "용량 ↓ · 가벼운 -lite 파일" }, zu = { message: "되돌리기 (Ctrl+Z)" }, Fu = { message: "다시 실행 (Ctrl+Shift+Z)" }, Hu = { message: "설정" }, Wu = { message: "설정" }, Uu = { message: "내레이션 음성" }, ju = { message: "자동 (Google 우선)" }, Vu = { message: "전체 URL 일치 (쿼리·해시)" }, Gu = { message: "기본 URL 일치는 ?쿼리와 #해시를 무시합니다. 쿼리나 해시로 화면이 바뀌는 사이트(예: ?tab=, #/reports)라면 이 옵션을 켜야 단계 이동과 페이지 불일치 경고가 제대로 동작합니다." }, Yu = { message: "설정 닫기" }, Xu = { message: "내 라이브러리" }, Ku = { message: "원격저장소" }, Ju = { message: "원격저장소 라이브러리 — 곧 제공됩니다." }, Zu = { message: "GitHub 공개 리포를 연결해서 공유 시나리오를 불러오세요." }, Qu = { message: "+ GitHub 소스 추가" }, ed = { message: "소스 추가" }, td = { message: "전체 새로고침" }, nd = { message: "소스 제거" }, rd = { message: "github.com/owner/repo 또는 owner/repo/path" }, od = { message: "추가" }, sd = { message: "URL 형식이 올바르지 않습니다. github.com/owner/repo 또는 owner/repo 형식으로 입력해주세요." }, ad = { message: "GitHub URL 또는 owner/repo를 입력해주세요." }, id = { message: "↻ 새로고침을 눌러 이 소스의 시나리오를 불러오세요." }, cd = { message: "이 폴더에는 아직 시나리오가 없습니다." }, ld = { message: "비어있는 폴더입니다." }, ud = { message: "상위 폴더로" }, dd = { message: "접기" }, pd = { message: "펼치기" }, hd = { message: "불러오는 중" }, fd = { message: "단계" }, md = { message: "편집은 저장되지 않습니다" }, gd = { message: "내 라이브러리에 저장" }, bd = { message: "외부 페이지" }, _d = { message: "라이브러리에 저장했습니다" }, yd = { message: "저장에 실패했습니다" }, vd = { message: "서식 복사" }, xd = { message: "이 스텝만" }, wd = { message: "전체 스텝" }, kd = { message: "녹화 시작 전" }, Sd = { message: "브라우저가 share dialog 를 두 번 띄웁니다. 첫 번째는 이 탭을 캡처하고, 두 번째는 시스템 오디오로 TTS 음성을 추가합니다. 각 다이얼로그의 번호 순서대로 진행하세요." }, $d = { message: "1. 영상 녹화를 위한 필수 허용" }, Ad = { message: "첫 번째 share dialog — 현재 탭이 나타나면 허용을 클릭하세요." }, Md = { message: "아래 다이얼로그에 현재 탭이 나타나면 <strong>허용</strong>을 클릭합니다." }, Ed = { message: "2. TTS 녹음을 위한 옵션 허용" }, Td = { message: "두 번째 share dialog — 브라우저 창 선택 + 시스템 오디오 공유 체크." }, Ld = { message: "<ol><li>상단의 <strong>Window(윈도우)</strong> 탭을 선택합니다.</li><li>브라우저 창을 선택합니다.</li><li><strong>시스템 오디오 공유</strong>를 체크합니다 — TTS 음성 녹음 필수.</li><li><strong>공유</strong>를 클릭합니다.</li></ol><p>두 번째 다이얼로그의 영상은 사용되지 않습니다. <strong>이 다이얼로그를 취소해도 녹화는 진행되지만 TTS 음성은 녹음되지 않습니다.</strong></p>" }, Cd = { message: "Manuscript 녹화기" }, Pd = { message: "이 창은 녹화되지 않습니다 — 녹화를 제어하는 창입니다." }, Id = { message: "녹화 시작을 누르면 브라우저가 공유할 화면을 묻습니다. 데모 창을 고르고 시스템 오디오를 켜야 내레이션이 녹음됩니다." }, Od = { message: "영상 + TTS 음성 녹화 허용" }, Rd = { message: "<ol><li>상단의 <strong>창</strong> 탭을 선택합니다.</li><li>데모가 열린 브라우저 창을 고릅니다.</li><li><strong>시스템 오디오 공유</strong>를 체크합니다 — TTS 내레이션 녹음에 필요.</li><li><strong>공유</strong>를 누릅니다.</li></ol>" }, Nd = { message: "녹화 시작" }, Dd = { message: "정지 후 저장" }, Bd = { message: "녹화 중 — Space: 데모 일시정지 / 재개 (녹화는 계속) · Esc: 정지 후 저장" }, qd = { message: "준비됨." }, zd = { message: "녹화 중" }, Fd = { message: "⏸ 일시정지 — 녹화는 계속됩니다" }, Hd = { message: "시나리오 재생 중" }, Wd = { message: "시나리오 일시정지 중" }, Ud = { message: "저장됨. 이 창을 닫아도 됩니다." }, jd = { message: "⚠ 내레이션이 영상에 들어가지 않습니다. 탭이 아니라 '창'을 공유하고 '시스템 오디오 공유'를 켜세요. '녹화 시작'을 다시 눌러 주세요." }, Vd = { message: "영상 화질" }, Gd = { message: "일반 화질" }, Yd = { message: "5 Mbps · 1080p" }, Xd = { message: "고화질" }, Kd = { message: "25 Mbps · 1080p" }, Jd = { message: "패널·컨트롤을 영상에 함께 노출 (튜토리얼 모드)" }, Zd = { message: "Manuscript UI를 직접 보여주는 how-to 녹화에 사용합니다. 일반 워크스루는 기본(자동 숨김)이 더 깔끔합니다." }, Qd = { message: "내 마이크도 함께 녹음" }, ep = { message: "시나리오 일시중지 중에 직접 설명을 더하거나 라이브 보이스 오버를 추가할 수 있도록 마이크 음성을 함께 녹음합니다. 브라우저가 한 번 권한을 요청합니다." }, tp = { message: "녹화 중 — <kbd>Space</kbd> 시나리오 일시중지 / 재개 (녹화는 계속) · <kbd>Esc</kbd> 종료 후 저장" }, np = { message: "취소" }, rp = { message: "녹화 시작" }, op = { message: "녹화 중" }, sp = { message: "클릭하여 시나리오 재개" }, ap = { message: "마이크 권한 거부 — 보이스 없이 녹화를 계속합니다." }, ip = { message: "단계 이름" }, cp = { message: "단계 설명" }, lp = { message: "단계 $N$의 요소 선택", placeholders: { n: { content: "$1", example: "1" } } }, up = { message: "요소 선택" }, dp = { message: "액션 — 이 단계에서 재생을 멈춤" }, pp = { message: "단계 삭제" }, hp = { message: "자동 진행 시간(초)" }, fp = { message: "주석 도구" }, mp = { message: "주석 삭제" }, gp = { message: "내부 흐름" }, bp = { message: "보조 element 는 대표 element 와 같은 페이지에서만 추가할 수 있습니다." }, _p = { message: "이 스텝에 element 추가" }, yp = { message: "0.1초 앞당기기" }, vp = { message: "0.1초 늦추기" }, xp = { message: "기본 selector 정상" }, wp = { message: "Layer 2 fallback — 원본 속성 못 찾음, 텍스트+부모 구조로 매칭" }, kp = { message: "Layer 3 fallback — 시각 휴리스틱만 남음, 재픽 권장" }, Sp = { message: "이 페이지에서 element 못 찾음 — 재픽 필요" }, $p = { message: "시연 검증" }, Ap = { message: "시연 상태 검증" }, Mp = { message: "여기서 standalone player 재생이 멈출 수 있어요 — 다음 단계가 다른 출처(cross-origin)입니다." }, Ep = { message: "여기서부터, 투어가 자동으로 넘어가는 페이지에서는 내레이션이 자동 재생되지 않아요 — 브라우저가 클릭 없이 열린 페이지의 소리를 막기 때문입니다. 보는 사람이 페이지를 클릭하면 그 페이지의 음성이 재생됩니다. 직접 클릭해서 넘긴 페이지는 소리가 이어져요. (standalone player·확장 모두 해당)" }, Tp = { message: "정상 $OK$ · fallback $FALLBACK$ · 깨짐 $BROKEN$ · 다른 페이지 $SKIPPED$", placeholders: { ok: { content: "$1", example: "8" }, fallback: { content: "$2", example: "2" }, broken: { content: "$3", example: "1" }, skipped: { content: "$4", example: "3" } } }, Lp = { message: "정상 $OK$ · fallback $FALLBACK$ · 깨짐 $BROKEN$ · 대기 $PENDING$", placeholders: { ok: { content: "$1", example: "3" }, fallback: { content: "$2", example: "1" }, broken: { content: "$3", example: "1" }, pending: { content: "$4", example: "5" } } }, Cp = { message: "검증 시작" }, Pp = { message: "검증 중…" }, Ip = { message: "검증 완료" }, Op = { message: "이 페이지 검증 중 · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/" } } }, Rp = { message: "다음 페이지로 이동 중 · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/checkout" } } }, Np = { message: "대기" }, Dp = { message: "정상" }, Bp = { message: "fallback" }, qp = { message: "깨짐" }, zp = { message: "대기" }, Fp = { message: "이 스텝 보기" }, Hp = { message: "재픽" }, Wp = { message: "정상" }, Up = { message: "Layer 2 fallback" }, jp = { message: "Layer 3 fallback" }, Vp = { message: "못 찾음" }, Gp = { message: "다른 페이지" }, Yp = { message: "element 미픽" }, Xp = { message: "이 페이지의 step 들은 모두 정상입니다." }, Kp = { message: "닫기" }, Jp = { message: "$URL$로 이동", placeholders: { url: { content: "$1", example: "https://example.com" } } }, Zp = { message: "여기에 단계 삽입" }, Qp = { message: "단계 추가" }, eh = { message: "단계 이름" }, th = { message: "단계 카운터" }, nh = { message: "이전 (←)" }, rh = { message: "일시정지/재생 (Space)" }, oh = { message: "다음 (→)" }, sh = { message: "완료 (→)" }, ah = { message: "종료 (Esc)" }, ih = { message: "발표자 프롬프터 열기" }, ch = { message: "발표자 프롬프터" }, lh = { message: "컨트롤 이동 (드래그)" }, uh = { message: "드래그로 이동" }, dh = { message: "세로/가로 전환" }, ph = { message: "내레이션 켜기/끄기" }, hh = { message: "내레이션 (TTS)" }, fh = { message: "소리를 위해 아무 곳이나 클릭하세요" }, mh = { message: "소리를 위해 재생 화면을 클릭하세요" }, gh = { message: "강조된 대상을 클릭하면 계속 진행됩니다" }, bh = { message: "건너뛰기" }, _h = { message: "대상을 찾을 수 없습니다" }, yh = { message: "이 단계가 가리키는 요소가 페이지에 더 이상 없습니다. 건너뛰거나 재생을 멈출 수 있습니다." }, vh = { message: "건너뛰기" }, xh = { message: "재생 멈추기" }, wh = { message: "다른 페이지" }, kh = { message: "이 시연은 아래 페이지에서 녹화되었습니다. 그곳으로 이동할까요?" }, Sh = { message: "이동" }, $h = { message: "여기서 강제 재생" }, Ah = { message: "취소" }, Mh = { message: "현재" }, Eh = { message: "다음" }, Th = { message: "단계" }, Lh = { message: "단계 $N$", placeholders: { n: { content: "$1", example: "3" } } }, Ch = { message: "대기 중…" }, Ph = { message: "재생 중" }, Ih = { message: "일시정지" }, Oh = { message: "액션 단계" }, Rh = { message: "이전" }, Nh = { message: "일시정지/재생" }, Dh = { message: "다음" }, Bh = { message: "내레이션 켜기/끄기" }, qh = { message: "내레이션 (TTS)" }, zh = { message: "매뉴스크립트 · 프롬프터" }, Fh = { message: "썸네일에 호스트 접근 권한이 필요합니다. 매뉴스크립트 아이콘을 클릭하여 시작을 다시 누르면 권한을 부여할 수 있습니다." }, Hh = { message: "이 요소가 여러 대상과 일치합니다 — 더 구체적인 요소를 선택해 주세요." }, Wh = { message: "내보냄 ✓" }, Uh = { message: "내보내기에 실패했습니다" }, jh = { message: "단계가 없습니다" }, Vh = { message: "이 투어는 여기서 계속할 수 없습니다." }, Gh = {
   extension_name: Xl,
   extension_description: Kl,
-  common_cancel: Zl,
-  common_delete: Jl,
+  common_cancel: Jl,
+  common_delete: Zl,
   common_overwrite: Ql,
   common_close: eu,
   common_ok: tu,
@@ -436,8 +436,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   panel_export_menu_full_meta: Du,
   panel_export_menu_lite: Bu,
   panel_export_menu_lite_meta: qu,
-  panel_undo_aria: Fu,
-  panel_redo_aria: zu,
+  panel_undo_aria: zu,
+  panel_redo_aria: Fu,
   panel_settings_aria: Hu,
   panel_settings_title: Wu,
   panel_settings_voice_label: Uu,
@@ -447,8 +447,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   panel_settings_close_aria: Yu,
   popup_tabs_local: Xu,
   popup_tabs_remote: Ku,
-  popup_remote_coming_soon: Zu,
-  popup_remote_empty_copy: Ju,
+  popup_remote_coming_soon: Ju,
+  popup_remote_empty_copy: Zu,
   popup_remote_add_cta: Qu,
   popup_remote_add_cta_aria: ed,
   popup_remote_refresh_all_aria: td,
@@ -490,8 +490,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   recorder_stop: Dd,
   recorder_hint: Bd,
   recorder_status_ready: qd,
-  recorder_status_recording: Fd,
-  recorder_status_paused: zd,
+  recorder_status_recording: zd,
+  recorder_status_paused: Fd,
   recorder_scenario_playing: Hd,
   recorder_scenario_paused: Wd,
   recorder_status_saved: Ud,
@@ -501,8 +501,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   recorder_quality_standard_spec: Yd,
   recorder_quality_high: Xd,
   recorder_quality_high_spec: Kd,
-  recording_guide_keep_ui_label: Zd,
-  recording_guide_keep_ui_hint: Jd,
+  recording_guide_keep_ui_label: Jd,
+  recording_guide_keep_ui_hint: Zd,
   recording_guide_mic_label: Qd,
   recording_guide_mic_hint: ep,
   recording_guide_keys_info_html: tp,
@@ -544,8 +544,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   validate_label_ok: Dp,
   validate_label_fallback: Bp,
   validate_label_broken: qp,
-  validate_label_pending: Fp,
-  validate_row_go: zp,
+  validate_label_pending: zp,
+  validate_row_go: Fp,
   validate_row_repick: Hp,
   validate_status_green: Wp,
   validate_status_yellow: Up,
@@ -555,8 +555,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   validate_status_no_element: Yp,
   validate_no_issues: Xp,
   validate_close: Kp,
-  step_link_aria: Zp,
-  step_insert_aria: Jp,
+  step_link_aria: Jp,
+  step_insert_aria: Zp,
   step_add_aria: Qp,
   step_empty_name: eh,
   replay_counter_aria: th,
@@ -598,8 +598,8 @@ const Ks = { message: "Manuscript", description: "Extension name shown in the br
   prompter_next_aria: Dh,
   prompter_tts_aria: Bh,
   prompter_tts_title: qh,
-  prompter_title: Fh,
-  permission_thumbnail_needs_host: zh,
+  prompter_title: zh,
+  permission_thumbnail_needs_host: Fh,
   toast_ambiguous_selector: Hh,
   toast_export_success: Wh,
   toast_export_failed: Uh,
@@ -624,7 +624,7 @@ function Kh() {
   const n = (navigator.language || "en").split("-")[0] === "ko" ? Gh : Yl, r = Xh(n);
   Ys(r);
 }
-const _n = "manuscript:scenario-changed", Zh = 500, x = {
+const _n = "manuscript:scenario-changed", Jh = 500, x = {
   scenario: null,
   currentStepIndex: 0,
   saveTimer: null,
@@ -646,13 +646,13 @@ function he() {
 function at(e) {
   return document.addEventListener(_n, e), () => document.removeEventListener(_n, e);
 }
-function Z() {
-  document.dispatchEvent(new CustomEvent(_n)), Jh();
+function J() {
+  document.dispatchEvent(new CustomEvent(_n)), Zh();
 }
 function fe() {
   x.scenario && (x.scenario.updatedAt = (/* @__PURE__ */ new Date()).toISOString());
 }
-function Jh() {
+function Zh() {
   if (!x.scenario) return;
   if (x.ephemeral) {
     nt().setEphemeralScenario(x.scenario, x.ephemeralSource).catch((t) => {
@@ -666,7 +666,7 @@ function Jh() {
     x.saveTimer = null, nt().saveScenario(e).catch((t) => {
       console.error("[manuscript] save failed", t);
     });
-  }, Zh);
+  }, Jh);
 }
 function Kr() {
   if (x.ephemeral) {
@@ -679,7 +679,7 @@ function Kr() {
     console.error("[manuscript] flush save failed", e);
   }));
 }
-const Zr = "0.1.2";
+const Jr = "0.1.2";
 function Qh(e) {
   const t = ef(e) ?? e;
   return t.length > 14 ? `${t.slice(0, 13)}…` : t;
@@ -695,7 +695,7 @@ function tf(e) {
 }
 const nf = 50;
 let se = [], Pe = -1, De = null, Rt = !1;
-function Jr(e) {
+function Zr(e) {
   return typeof structuredClone == "function" ? structuredClone(e) : JSON.parse(JSON.stringify(e));
 }
 function Qr() {
@@ -707,7 +707,7 @@ function rf() {
   const e = D();
   if (!e) return;
   const t = se[Pe];
-  Pe >= 0 && t && JSON.stringify(t.scenario) === JSON.stringify(e) || (se.length = Pe + 1, se.push({ scenario: Jr(e), stepId: Qr() }), se.length > nf && se.shift(), Pe = se.length - 1);
+  Pe >= 0 && t && JSON.stringify(t.scenario) === JSON.stringify(e) || (se.length = Pe + 1, se.push({ scenario: Zr(e), stepId: Qr() }), se.length > nf && se.shift(), Pe = se.length - 1);
 }
 function eo() {
   De = null, Rt = !1;
@@ -716,7 +716,7 @@ function eo() {
     se = [], Pe = -1;
     return;
   }
-  se = [{ scenario: Jr(e), stepId: Qr() }], Pe = 0;
+  se = [{ scenario: Zr(e), stepId: Qr() }], Pe = 0;
 }
 function Nt(e) {
   De !== null && De !== e && it(), De = e, Rt = !1;
@@ -725,11 +725,11 @@ function it() {
   De !== null && (De = null, Rt && (Rt = !1, rf()));
 }
 function of(e, t) {
-  Kr(), x.scenario = e, x.currentStepIndex = 0, Xr(), Z(), eo();
+  Kr(), x.scenario = e, x.currentStepIndex = 0, Xr(), J(), eo();
 }
 function sf() {
   const e = x.ephemeral;
-  Kr(), x.scenario = null, x.currentStepIndex = 0, Xr(), e && nt().clearEphemeralScenario(), Z(), eo();
+  Kr(), x.scenario = null, x.currentStepIndex = 0, Xr(), e && nt().clearEphemeralScenario(), J(), eo();
 }
 function Lb(e) {
   const t = he();
@@ -737,10 +737,10 @@ function Lb(e) {
   const r = { ...t.spotlight ?? {}, ...e };
   for (const o of Object.keys(r))
     r[o] === void 0 && delete r[o];
-  Object.keys(r).length === 0 ? delete t.spotlight : t.spotlight = r, fe(), Z();
+  Object.keys(r).length === 0 ? delete t.spotlight : t.spotlight = r, fe(), J();
 }
 function Yt(e) {
-  x.scenario && (e < 0 || e >= x.scenario.steps.length || e !== x.currentStepIndex && (x.currentStepIndex = e, Z()));
+  x.scenario && (e < 0 || e >= x.scenario.steps.length || e !== x.currentStepIndex && (x.currentStepIndex = e, J()));
 }
 function Cb(e) {
   if (!x.scenario) return;
@@ -750,17 +750,17 @@ function Cb(e) {
   const n = Object.keys(t).length === 0;
   for (const r of x.scenario.steps)
     n ? delete r.spotlight : r.spotlight = { ...t };
-  fe(), Z();
+  fe(), J();
 }
 function to(e) {
   const t = he();
-  !t || !x.scenario || (t.annotations = t.annotations.filter((n) => n.id !== e), fe(), Z());
+  !t || !x.scenario || (t.annotations = t.annotations.filter((n) => n.id !== e), fe(), J());
 }
 function T(e, t) {
   const n = he();
   !n || !x.scenario || (n.annotations = n.annotations.map(
     (r) => r.id === e ? { ...r, ...t } : r
-  ), fe(), Z());
+  ), fe(), J());
 }
 function no() {
   var e;
@@ -773,7 +773,7 @@ function af(e, t) {
   const n = he();
   !n || !x.scenario || (n.annotations = n.annotations.map(
     (r) => r.kind === e ? { ...r, ...t } : r
-  ), fe(), Z());
+  ), fe(), J());
 }
 function cf(e, t) {
   if (x.scenario) {
@@ -781,7 +781,7 @@ function cf(e, t) {
       n.annotations = n.annotations.map(
         (r) => r.kind === e ? { ...r, ...t } : r
       );
-    fe(), Z();
+    fe(), J();
   }
 }
 function lf(e, t) {
@@ -792,7 +792,7 @@ function lf(e, t) {
   o.includes(n) || (x.scenario.customColors = {
     ...r,
     [e]: [...o, n]
-  }, fe(), Z());
+  }, fe(), J());
 }
 function uf(e, t) {
   if (!x.scenario || !x.scenario.customColors) return;
@@ -800,7 +800,7 @@ function uf(e, t) {
   !n || !n.includes(t) || (x.scenario.customColors = {
     ...x.scenario.customColors,
     [e]: n.filter((r) => r !== t)
-  }, fe(), Z());
+  }, fe(), J());
 }
 const yn = "manuscript:mode-changed";
 let $t = "idle";
@@ -988,12 +988,12 @@ const ao = 5e3, df = 3e3, H = {
    */
   recPrevWindowState: "manuscript.recPrevWindowState"
 }, te = 2147483e3, oe = "http://www.w3.org/2000/svg", ir = "manuscript-spotlight-mask", pf = "oklch(0.42 0.09 250)", hf = 3, ff = "rgb(0, 0, 0)", mf = 0.55, Ke = 14;
-let ke = null, W = null, F = null, q = null, I = null, ne = null, Ze = 0, vn = [], Ie = null;
+let ke = null, W = null, z = null, q = null, I = null, ne = null, Je = 0, vn = [], Ie = null;
 function io(e) {
-  Ze++, ke = e, W || yf(), wn(), He(), co(e), Ie || (Ie = at(wn));
+  Je++, ke = e, W || yf(), wn(), He(), co(e), Ie || (Ie = at(wn));
 }
 function xn() {
-  Ze++, ke = null, lo(), Ie == null || Ie(), Ie = null, W && (W.remove(), W = null, F = null, q = null, I = null, ne = null);
+  Je++, ke = null, lo(), Ie == null || Ie(), Ie = null, W && (W.remove(), W = null, z = null, q = null, I = null, ne = null);
 }
 function gf(e, t = {}) {
   var a;
@@ -1003,13 +1003,13 @@ function gf(e, t = {}) {
     return;
   }
   const r = bf();
-  Ze++;
-  const o = Ze;
+  Je++;
+  const o = Je;
   ke = e, wn(), co(e);
   const s = performance.now();
   function i(c) {
     var d;
-    if (o !== Ze) return;
+    if (o !== Je) return;
     const l = Math.min(1, (c - s) / n), u = _f(l), h = uo(e);
     po({
       x: gt(r.x, h.x, u),
@@ -1021,8 +1021,8 @@ function gf(e, t = {}) {
   requestAnimationFrame(i);
 }
 function bf() {
-  if (!F) return { x: 0, y: 0, width: 0, height: 0 };
-  const e = 4, t = Number(F.getAttribute("x") ?? 0) + e, n = Number(F.getAttribute("y") ?? 0) + e, r = Number(F.getAttribute("width") ?? 0) - e * 2, o = Number(F.getAttribute("height") ?? 0) - e * 2;
+  if (!z) return { x: 0, y: 0, width: 0, height: 0 };
+  const e = 4, t = Number(z.getAttribute("x") ?? 0) + e, n = Number(z.getAttribute("y") ?? 0) + e, r = Number(z.getAttribute("width") ?? 0) - e * 2, o = Number(z.getAttribute("height") ?? 0) - e * 2;
   return { x: t, y: n, width: r, height: o };
 }
 function gt(e, t, n) {
@@ -1064,7 +1064,7 @@ function yf() {
   const e = document.createElementNS(oe, "defs"), t = document.createElementNS(oe, "mask");
   t.setAttribute("id", ir);
   const n = document.createElementNS(oe, "rect");
-  n.setAttribute("width", "100%"), n.setAttribute("height", "100%"), n.setAttribute("fill", "white"), t.appendChild(n), F = document.createElementNS(oe, "rect"), F.setAttribute("fill", "black"), F.setAttribute("rx", "4"), F.setAttribute("ry", "4"), t.appendChild(F), e.appendChild(t), W.appendChild(e), ne = document.createElementNS(oe, "rect"), ne.setAttribute("width", "100%"), ne.setAttribute("height", "100%"), ne.setAttribute("mask", `url(#${ir})`), W.appendChild(ne), q = document.createElementNS(oe, "rect"), q.setAttribute("fill", "none"), q.setAttribute("rx", "4"), q.setAttribute("ry", "4"), q.style.pointerEvents = "none", W.appendChild(q), I = document.createElementNS(oe, "rect"), I.setAttribute("fill", "none"), I.setAttribute("stroke", "transparent"), I.setAttribute("stroke-width", String(Ke)), I.setAttribute("rx", "4"), I.setAttribute("ry", "4"), I.setAttribute("pointer-events", "stroke"), I.style.cursor = "pointer", I.addEventListener("click", vf), W.appendChild(I), document.body.appendChild(W);
+  n.setAttribute("width", "100%"), n.setAttribute("height", "100%"), n.setAttribute("fill", "white"), t.appendChild(n), z = document.createElementNS(oe, "rect"), z.setAttribute("fill", "black"), z.setAttribute("rx", "4"), z.setAttribute("ry", "4"), t.appendChild(z), e.appendChild(t), W.appendChild(e), ne = document.createElementNS(oe, "rect"), ne.setAttribute("width", "100%"), ne.setAttribute("height", "100%"), ne.setAttribute("mask", `url(#${ir})`), W.appendChild(ne), q = document.createElementNS(oe, "rect"), q.setAttribute("fill", "none"), q.setAttribute("rx", "4"), q.setAttribute("ry", "4"), q.style.pointerEvents = "none", W.appendChild(q), I = document.createElementNS(oe, "rect"), I.setAttribute("fill", "none"), I.setAttribute("stroke", "transparent"), I.setAttribute("stroke-width", String(Ke)), I.setAttribute("rx", "4"), I.setAttribute("ry", "4"), I.setAttribute("pointer-events", "stroke"), I.style.cursor = "pointer", I.addEventListener("click", vf), W.appendChild(I), document.body.appendChild(W);
 }
 function wn() {
   var s;
@@ -1090,9 +1090,9 @@ function uo(e) {
   };
 }
 function po(e) {
-  if (!F || !q || !I) return;
+  if (!z || !q || !I) return;
   const t = 4, n = e.x - t, r = e.y - t, o = e.width + t * 2, s = e.height + t * 2;
-  F.setAttribute("x", String(n)), F.setAttribute("y", String(r)), F.setAttribute("width", String(o)), F.setAttribute("height", String(s));
+  z.setAttribute("x", String(n)), z.setAttribute("y", String(r)), z.setAttribute("width", String(o)), z.setAttribute("height", String(s));
   const i = Math.max(0, Number(q.getAttribute("stroke-width") ?? 0)), a = n - i / 2, c = r - i / 2, l = o + i, u = s + i;
   q.setAttribute("x", String(a)), q.setAttribute("y", String(c)), q.setAttribute("width", String(l)), q.setAttribute("height", String(u));
   const h = a - Ke / 2, d = c - Ke / 2, p = l + Ke, f = u + Ke;
@@ -1180,7 +1180,7 @@ function ct(e, t) {
   let s = 1;
   return t.roughness >= 1 && (((n = t.randomizer) === null || n === void 0 ? void 0 : n.next()) || Math.random()) > 0.7 && (s = o), kf(e, o, r, s || 1);
 }
-class zn {
+class Fn {
   constructor(t) {
     this.helper = t;
   }
@@ -1201,7 +1201,7 @@ function Xt(e) {
   const t = e[0], n = e[1];
   return Math.sqrt(Math.pow(t[0] - n[0], 2) + Math.pow(t[1] - n[1], 2));
 }
-let Sf = class extends zn {
+let Sf = class extends Fn {
   fillPolygons(t, n) {
     let r = n.hachureGap;
     r < 0 && (r = 4 * n.strokeWidth), r = Math.max(r, 0.1);
@@ -1210,7 +1210,7 @@ let Sf = class extends zn {
     return { type: "fillSketch", ops: this.renderLines(i, n) };
   }
 };
-class $f extends zn {
+class $f extends Fn {
   fillPolygons(t, n) {
     const r = this._fillPolygons(t, n), o = Object.assign({}, n, { hachureAngle: n.hachureAngle + 90 }), s = this._fillPolygons(t, o);
     return r.ops = r.ops.concat(s.ops), r;
@@ -1609,7 +1609,7 @@ function Le(e, t) {
         j[o] || (j[o] = new Ef(r));
         break;
       default:
-        o = "hachure", j[o] || (j[o] = new zn(r));
+        o = "hachure", j[o] || (j[o] = new Fn(r));
     }
     return j[o];
   })(t, Cf).fillPolygons(e, t);
@@ -1772,7 +1772,7 @@ function dn(e, t = 0.15, n) {
   return n && n > 0 ? qt(r, 0, r.length, n) : r;
 }
 const V = "none";
-class Ft {
+class zt {
   constructor(t) {
     this.defaultOptions = { maxRandomnessOffset: 2, roughness: 1, bowing: 1, stroke: "#000", strokeWidth: 1, curveTightness: 0, curveFitting: 0.95, curveStepCount: 9, fillStyle: "hachure", fillWeight: -1, hachureAngle: -41, hachureGap: -1, dashOffset: -1, dashGap: -1, zigzagOffset: -1, seed: 0, disableMultiStroke: !1, disableMultiStrokeFill: !1, preserveVertices: !1, fillShapeRoughnessGain: 0.8 }, this.config = t || {}, this.config.options && (this.defaultOptions = this._o(this.config.options));
   }
@@ -1943,7 +1943,7 @@ class Ft {
 }
 class Nf {
   constructor(t, n) {
-    this.canvas = t, this.ctx = this.canvas.getContext("2d"), this.gen = new Ft(n);
+    this.canvas = t, this.ctx = this.canvas.getContext("2d"), this.gen = new zt(n);
   }
   draw(t) {
     const n = t.sets || [], r = t.options || this.getDefaultOptions(), o = this.ctx, s = t.options.fixedDecimalPlaceDigits;
@@ -2028,7 +2028,7 @@ class Nf {
 const yt = "http://www.w3.org/2000/svg";
 class Df {
   constructor(t, n) {
-    this.svg = t, this.gen = new Ft(n);
+    this.svg = t, this.gen = new zt(n);
   }
   draw(t) {
     const n = t.sets || [], r = t.options || this.getDefaultOptions(), o = this.svg.ownerDocument || window.document, s = o.createElementNS(yt, "g"), i = t.options.fixedDecimalPlaceDigits;
@@ -2100,7 +2100,7 @@ class Df {
     return this.draw(r);
   }
 }
-var Bf = { canvas: (e, t) => new Nf(e, t), svg: (e, t) => new Df(e, t), generator: (e) => new Ft(e), newSeed: () => Ft.newSeed() };
+var Bf = { canvas: (e, t) => new Nf(e, t), svg: (e, t) => new Df(e, t), generator: (e) => new zt(e), newSeed: () => zt.newSeed() };
 const gr = "data-wp-animations";
 function qf() {
   if (document.head.querySelector(`[${gr}]`)) return;
@@ -2149,7 +2149,7 @@ function rt(e, t, n) {
   };
   e.addEventListener("animationend", s), e.addEventListener("animationcancel", s);
 }
-const zt = "http://www.w3.org/2000/svg", yo = "data-annotation-text", br = "data-annotation-arrow", vo = "data-annotation-shape", _r = "data-annotation-freedraw", M = {
+const Ft = "http://www.w3.org/2000/svg", yo = "data-annotation-text", br = "data-annotation-arrow", vo = "data-annotation-shape", _r = "data-annotation-freedraw", M = {
   host: null,
   svg: null,
   roughSvg: null,
@@ -2160,7 +2160,7 @@ function Wn(e) {
   var t;
   return ((t = e.closest) == null ? void 0 : t.call(e, '[data-manuscript="ui"]')) !== null;
 }
-function Ff(e, t) {
+function zf(e, t) {
   try {
     const n = Array.from(t.querySelectorAll(e.cssSelector)), r = [];
     for (const o of n)
@@ -2171,7 +2171,7 @@ function Ff(e, t) {
     return null;
   }
 }
-function zf(e, t) {
+function Ff(e, t) {
   return !e || !e.text ? null : (e.parentSelector ? Array.from(t.querySelectorAll(`${e.parentSelector} ${e.tagName}`)) : Array.from(t.querySelectorAll(e.tagName))).find(
     (r) => !Wn(r) && (r.textContent ?? "").trim().includes(e.text)
   ) ?? null;
@@ -2197,9 +2197,9 @@ function xo(e) {
 function An(e) {
   const t = wo(e.framePath);
   if (!t) return null;
-  const n = Ff(e.layer1, t);
+  const n = zf(e.layer1, t);
   if (n) return { el: n, layer: 1 };
-  const r = zf(e.layer2, t);
+  const r = Ff(e.layer2, t);
   if (r) return { el: r, layer: 2 };
   const o = Hf(e.layer3, t);
   return o ? { el: o, layer: 3 } : null;
@@ -2219,7 +2219,7 @@ function wo(e) {
     return null;
   }
 }
-function J() {
+function Z() {
   const e = he();
   if (!e || !e.selectors) return null;
   try {
@@ -2239,7 +2239,7 @@ function Uf(e, t) {
   const n = e.fromAnchorOffset && t ? { x: t.left + e.fromAnchorOffset.x, y: t.top + e.fromAnchorOffset.y } : e.from, r = e.toAnchorOffset && t ? { x: t.left + e.toAnchorOffset.x, y: t.top + e.toAnchorOffset.y } : e.to;
   return { from: n, to: r };
 }
-function Zt(e, t) {
+function Jt(e, t) {
   return e.pointsAnchorOffset && t && e.pointsAnchorOffset.length === e.points.length ? e.pointsAnchorOffset.map((n) => ({
     x: t.left + n.x,
     y: t.top + n.y
@@ -2589,27 +2589,27 @@ const Eo = "studio", Kf = [
 function To(e) {
   return typeof e == "string" && Kf.includes(e);
 }
-function Zf(e) {
+function Jf(e) {
   return e.endsWith("-dark");
 }
-let Je = null;
+let Ze = null;
 const Mn = /* @__PURE__ */ new Set();
 let vr = !1;
-async function Jf() {
-  if (Je) return Je;
+async function Zf() {
+  if (Ze) return Ze;
   try {
-    const e = await z().get(H.palette);
+    const e = await F().get(H.palette);
     if (To(e))
-      return Je = e, e;
+      return Ze = e, e;
   } catch {
   }
   return Eo;
 }
 function Qf() {
-  return Je ?? Eo;
+  return Ze ?? Eo;
 }
 function em(e) {
-  Mn.add(new WeakRef(e)), e.setAttribute("data-palette", Qf()), Jf().then((t) => {
+  Mn.add(new WeakRef(e)), e.setAttribute("data-palette", Qf()), Zf().then((t) => {
     e.isConnected && e.setAttribute("data-palette", t);
   }), tm();
 }
@@ -2617,8 +2617,8 @@ function tm() {
   if (!vr) {
     vr = !0;
     try {
-      z().subscribe([H.palette], (e, t) => {
-        To(t) && (Je = t, nm(t));
+      F().subscribe([H.palette], (e, t) => {
+        To(t) && (Ze = t, nm(t));
       });
     } catch {
     }
@@ -2633,7 +2633,7 @@ function nm(e) {
 function rm(e, t) {
   var r;
   const n = (r = e.shadowRoot) == null ? void 0 : r.querySelector('[data-region="palette-toggle"]');
-  n && n.setAttribute("aria-pressed", Zf(t) ? "true" : "false");
+  n && n.setAttribute("aria-pressed", Jf(t) ? "true" : "false");
 }
 const om = 140, sm = 140;
 function am() {
@@ -3072,7 +3072,7 @@ const $ = {
 }, C = "http://www.w3.org/2000/svg";
 function Do(e) {
   if (!e.bounds) return e;
-  const t = J();
+  const t = Z();
   return t ? {
     ...e,
     boundsAnchorOffset: {
@@ -3083,7 +3083,7 @@ function Do(e) {
 }
 function wm(e) {
   if (!e.points) return e;
-  const t = J();
+  const t = Z();
   return t ? {
     ...e,
     pointsAnchorOffset: e.points.map((n) => ({
@@ -3103,13 +3103,13 @@ function $m(e, t) {
   e.stopPropagation(), e.preventDefault();
   const n = E($.activeId);
   if (!n || n.kind !== "shape") return;
-  const r = Kt(n, J());
+  const r = Kt(n, Z());
   $.dragState = {
     kind: "resize",
     handle: t,
     startMouse: { x: e.clientX, y: e.clientY },
     startBounds: { ...n.bounds, x: r.x, y: r.y }
-  }, Jt();
+  }, Zt();
 }
 function Am(e) {
   if (!$.activeId) return;
@@ -3122,7 +3122,7 @@ function Am(e) {
     center: { x: n, y: r },
     startMouseAngle: o,
     startRotation: t.rotate ?? 0
-  }, Jt();
+  }, Zt();
 }
 function Bo(e, t) {
   if (!$.activeId) return;
@@ -3135,23 +3135,23 @@ function Bo(e, t) {
     center: r,
     startMouseAngle: o,
     startRotation: s
-  }, Jt();
+  }, Zt();
 }
 function Mm(e, t) {
   if (!$.activeId) return;
   e.stopPropagation(), e.preventDefault();
   const n = E($.activeId);
   if (!n || n.kind !== "freedraw") return;
-  const r = Zt(n, J()), o = No(r);
+  const r = Jt(n, Z()), o = No(r);
   !o || o.width === 0 || o.height === 0 || ($.dragState = {
     kind: "freedraw-resize",
     handle: t,
     startMouse: { x: e.clientX, y: e.clientY },
     startBounds: { ...o },
     startPoints: r.map((s) => ({ ...s }))
-  }, Jt());
+  }, Zt());
 }
-function Jt() {
+function Zt() {
   Nt("handle-drag"), document.addEventListener("mousemove", Un, !0), document.addEventListener("mouseup", jn, !0);
 }
 function Un(e) {
@@ -3197,7 +3197,7 @@ function qo(e) {
       const i = e.shiftKey ? 10 : 1, a = e.key === "ArrowLeft" ? -i : e.key === "ArrowRight" ? i : 0, c = e.key === "ArrowUp" ? -i : e.key === "ArrowDown" ? i : 0;
       if (a !== 0 || c !== 0) {
         e.preventDefault();
-        const l = Kt(s, J());
+        const l = Kt(s, Z());
         T(
           t,
           Do({ bounds: { ...s.bounds, x: l.x + a, y: l.y + c } })
@@ -3206,11 +3206,11 @@ function qo(e) {
     }
   }
 }
-function Fo(e, t, n, r, o) {
+function zo(e, t, n, r, o) {
   const s = document.createElementNS(C, "rect");
   return s.setAttribute("x", String(e - vt / 2)), s.setAttribute("y", String(t - vt / 2)), s.setAttribute("width", String(vt)), s.setAttribute("height", String(vt)), s.setAttribute("fill", "oklch(1 0 0)"), s.setAttribute("stroke", "oklch(0.48 0.085 245)"), s.setAttribute("stroke-width", "2"), s.style.cursor = r, s.style.pointerEvents = "auto", s.setAttribute("pointer-events", "all"), s.addEventListener("mousedown", (i) => o(i, n)), s;
 }
-function zo(e, t, n) {
+function Fo(e, t, n) {
   const r = document.createElementNS(C, "g"), o = t - 18, s = t - Oo, i = 12, a = document.createElementNS(C, "line");
   a.setAttribute("x1", String(e)), a.setAttribute("y1", String(t)), a.setAttribute("x2", String(e)), a.setAttribute("y2", String(o)), a.setAttribute("stroke", "oklch(0.48 0.085 245)"), a.setAttribute("stroke-width", "1"), a.setAttribute("stroke-dasharray", "2 3"), a.style.pointerEvents = "none", r.appendChild(a);
   const c = document.createElementNS(C, "circle");
@@ -3276,11 +3276,11 @@ function Qt() {
   Tm(e, r);
 }
 function Tm(e, t) {
-  const n = Kt(t, J()), r = { ...t.bounds, x: n.x, y: n.y }, o = t.rotate ?? 0, s = r.x + r.width / 2, i = r.y + r.height / 2, a = document.createElementNS(C, "g");
+  const n = Kt(t, Z()), r = { ...t.bounds, x: n.x, y: n.y }, o = t.rotate ?? 0, s = r.x + r.width / 2, i = r.y + r.height / 2, a = document.createElementNS(C, "g");
   o && a.setAttribute("transform", `rotate(${o} ${s} ${i})`), a.appendChild(Gn(r));
   for (const c of Ro) {
     const { x: l, y: u } = c.offset(r);
-    a.appendChild(Fo(l, u, c.name, c.cursor, $m));
+    a.appendChild(zo(l, u, c.name, c.cursor, $m));
   }
   a.appendChild(Lm(r)), e.appendChild(a), e.appendChild(Vn(r, Yn));
 }
@@ -3301,19 +3301,19 @@ function Cm(e, t) {
   const n = xm(t.id);
   if (!n) return;
   const r = Ho(n), o = r.x + r.width / 2, s = r.y + r.height / 2;
-  e.appendChild(Gn(r)), e.appendChild(zo(o, r.y, (i) => Bo(i, () => ({ x: o, y: s })))), e.appendChild(Vn(r, Yn));
+  e.appendChild(Gn(r)), e.appendChild(Fo(o, r.y, (i) => Bo(i, () => ({ x: o, y: s })))), e.appendChild(Vn(r, Yn));
 }
 function Pm(e, t) {
-  const n = Zt(t, J()), r = No(n);
+  const n = Jt(t, Z()), r = No(n);
   if (!r) return;
   const o = Ho(r), s = o.x + o.width / 2, i = o.y + o.height / 2;
   e.appendChild(Gn(o));
   for (const a of Ro) {
     if (a.name !== "nw" && a.name !== "ne" && a.name !== "sw" && a.name !== "se") continue;
     const { x: c, y: l } = a.offset(o);
-    e.appendChild(Fo(c, l, a.name, a.cursor, Mm));
+    e.appendChild(zo(c, l, a.name, a.cursor, Mm));
   }
-  e.appendChild(zo(s, o.y, (a) => Bo(a, () => ({ x: s, y: i })))), e.appendChild(Vn(o, Yn));
+  e.appendChild(Fo(s, o.y, (a) => Bo(a, () => ({ x: s, y: i })))), e.appendChild(Vn(o, Yn));
 }
 function Ho(e) {
   return {
@@ -3408,12 +3408,12 @@ function Bm(e) {
       };
   }
 }
-const qm = 400, Fm = 0;
-function zm(e) {
+const qm = 400, zm = 0;
+function Fm(e) {
   return {
     kind: e,
     durationMs: qm,
-    delayMs: Fm
+    delayMs: zm
   };
 }
 function Hm(e) {
@@ -3504,7 +3504,7 @@ function Km() {
   const t = E(e);
   !t || t.kind !== "text" || T(e, { style: { ...t.style, bold: !t.style.bold } });
 }
-function Zm() {
+function Jm() {
   const e = S.activeId;
   if (!e) return;
   const t = E(e);
@@ -3512,10 +3512,10 @@ function Zm() {
     style: { ...t.style, italic: t.style.italic !== !0 }
   });
 }
-function Jm(e) {
+function Zm(e) {
   const t = S.activeId;
   t && T(t, {
-    entryAnimation: e === "none" ? void 0 : zm(e)
+    entryAnimation: e === "none" ? void 0 : Fm(e)
   });
 }
 function Qm(e) {
@@ -3708,7 +3708,7 @@ function dg(e) {
     return;
   }
   if (t.closest('[data-region="bold"]')) return Km();
-  if (t.closest('[data-region="italic"]')) return Zm();
+  if (t.closest('[data-region="italic"]')) return Jm();
   if (t.closest('[data-region="effect-play"]')) {
     S.activeId && Im(S.activeId);
     return;
@@ -3729,7 +3729,7 @@ function dg(e) {
 }
 function pg(e) {
   const t = e.target;
-  t instanceof HTMLElement && (t.dataset.region === "font" ? Ym(t.value) : t.dataset.region === "effect" ? Jm(t.value) : t.dataset.region === "width" && We && (We = !1, it()));
+  t instanceof HTMLElement && (t.dataset.region === "font" ? Ym(t.value) : t.dataset.region === "effect" ? Zm(t.value) : t.dataset.region === "width" && We && (We = !1, it()));
 }
 function hg(e) {
   const t = e.target;
@@ -4216,25 +4216,25 @@ function Tg() {
     </div>
   `;
 }
-function Zn(e, t, n) {
+function Jn(e, t, n) {
   E(e) && (S.activeId = e, S.activeKind = n, S.activeAnchorSelector = bg(n, e), S.host || Ig(), Kn(), Ko(t), _g(n, e), document.dispatchEvent(
     new CustomEvent("manuscript:annotation-selected", { detail: { id: e } })
   ));
 }
-function Zo() {
+function Jo() {
   var e;
   S.host && ((e = S.unsubscribeScenario) == null || e.call(S), S.unsubscribeScenario = null, Ae(), En(), S.host.remove(), S.host = null, S.shadow = null, S.activeId = null, S.activeKind = null, S.activeAnchorSelector = null, document.dispatchEvent(
     new CustomEvent("manuscript:annotation-selected", { detail: { id: null } })
   ));
 }
 function Lg(e, t) {
-  Zn(e, t, "text");
+  Jn(e, t, "text");
 }
 function Cg(e, t) {
-  Zn(e, t, "shape");
+  Jn(e, t, "shape");
 }
 function Pg(e, t) {
-  Zn(e, t, "freedraw");
+  Jn(e, t, "freedraw");
 }
 function Ig() {
   const { host: e, shadow: t } = Ve();
@@ -4242,13 +4242,13 @@ function Ig() {
     "position: fixed",
     `z-index: ${te + 5}`,
     "pointer-events: auto"
-  ].join("; "), t.innerHTML = wg(), S.host = e, S.shadow = t, document.body.appendChild(e), ug(Zo), S.unsubscribeScenario = at(Og);
+  ].join("; "), t.innerHTML = wg(), S.host = e, S.shadow = t, document.body.appendChild(e), ug(Jo), S.unsubscribeScenario = at(Og);
 }
 function Og() {
   const { activeId: e, host: t, activeAnchorSelector: n } = S;
   if (!e || !t) return;
   if (!E(e)) {
-    Zo();
+    Jo();
     return;
   }
   if (Kn(), n) {
@@ -4263,16 +4263,16 @@ const v = {
 function dt() {
   return v.state !== null;
 }
-function Jn() {
+function Zn() {
   var e;
   return ((e = v.state) == null ? void 0 : e.standalone) === !0;
 }
 function Rg(e, t) {
   const { svg: n } = M;
   if (!n) return;
-  const r = Zt(e, t), o = Ng(e, r), s = r.map((c) => `${c.x},${c.y}`).join(" "), i = document.createElementNS(zt, "polyline");
-  if (i.setAttribute("points", s), i.setAttribute("fill", "none"), i.setAttribute("stroke", e.stroke), i.setAttribute("stroke-width", String(e.strokeWidth)), i.setAttribute("stroke-linecap", "round"), i.setAttribute("stroke-linejoin", "round"), i.setAttribute(_r, e.id), e.strokeOpacity !== void 0 && e.strokeOpacity < 1 && i.setAttribute("stroke-opacity", String(Math.max(0, Math.min(1, e.strokeOpacity)))), o && i.setAttribute("transform", o), i.style.pointerEvents = "none", rt(i, e.entryAnimation, e.rotate ?? 0), n.appendChild(i), Jn()) return;
-  const a = document.createElementNS(zt, "polyline");
+  const r = Jt(e, t), o = Ng(e, r), s = r.map((c) => `${c.x},${c.y}`).join(" "), i = document.createElementNS(Ft, "polyline");
+  if (i.setAttribute("points", s), i.setAttribute("fill", "none"), i.setAttribute("stroke", e.stroke), i.setAttribute("stroke-width", String(e.strokeWidth)), i.setAttribute("stroke-linecap", "round"), i.setAttribute("stroke-linejoin", "round"), i.setAttribute(_r, e.id), e.strokeOpacity !== void 0 && e.strokeOpacity < 1 && i.setAttribute("stroke-opacity", String(Math.max(0, Math.min(1, e.strokeOpacity)))), o && i.setAttribute("transform", o), i.style.pointerEvents = "none", rt(i, e.entryAnimation, e.rotate ?? 0), n.appendChild(i), Zn()) return;
+  const a = document.createElementNS(Ft, "polyline");
   a.setAttribute(_r, e.id), a.setAttribute("points", s), a.setAttribute("fill", "none"), a.setAttribute("stroke", "transparent"), a.setAttribute("stroke-width", String(Math.max(12, e.strokeWidth + 10))), a.setAttribute("stroke-linecap", "round"), a.setAttribute("stroke-linejoin", "round"), a.setAttribute("pointer-events", "stroke"), o && a.setAttribute("transform", o), a.style.cursor = "pointer", a.addEventListener("mousedown", (c) => {
     c.button === 0 && (c.stopPropagation(), c.preventDefault(), Dg(e.id, c, a));
   }), n.appendChild(a);
@@ -4289,7 +4289,7 @@ function Ng(e, t) {
 function Dg(e, t, n) {
   const r = E(e);
   if (!r || r.kind !== "freedraw") return;
-  const o = { x: t.clientX, y: t.clientY }, s = J(), i = Zt(r, s).map((u) => ({ ...u }));
+  const o = { x: t.clientX, y: t.clientY }, s = Z(), i = Jt(r, s).map((u) => ({ ...u }));
   let a = !1;
   const c = (u) => {
     const h = u.clientX - o.x, d = u.clientY - o.y;
@@ -4318,7 +4318,7 @@ function Bg(e, t) {
       n = qg(t);
       break;
     case "ellipse":
-      n = Fg(t);
+      n = zg(t);
       break;
     case "triangle":
       n = wt(Wg(t), t);
@@ -4333,7 +4333,7 @@ function Bg(e, t) {
       n = Hg(Vg(t), t);
       break;
     case "line":
-      n = zg(t);
+      n = Fg(t);
       break;
     case "block-arrow":
       n = wt(Gg(t), t);
@@ -4349,11 +4349,11 @@ function qg(e) {
   const t = document.createElementNS(pt, "rect");
   return t.setAttribute("x", String(e.x)), t.setAttribute("y", String(e.y)), t.setAttribute("width", String(e.width)), t.setAttribute("height", String(e.height)), en(t, e), t;
 }
-function Fg(e) {
+function zg(e) {
   const t = document.createElementNS(pt, "ellipse");
   return t.setAttribute("cx", String(e.x + e.width / 2)), t.setAttribute("cy", String(e.y + e.height / 2)), t.setAttribute("rx", String(Math.max(0, e.width / 2))), t.setAttribute("ry", String(Math.max(0, e.height / 2))), en(t, e), t;
 }
-function zg(e) {
+function Fg(e) {
   const t = document.createElementNS(pt, "line");
   return t.setAttribute("x1", String(e.x)), t.setAttribute("y1", String(e.y)), t.setAttribute("x2", String(e.x + e.width)), t.setAttribute("y2", String(e.y + e.height)), t.setAttribute("stroke", e.stroke || "#000000"), t.setAttribute("stroke-width", String(e.strokeWidth)), t.setAttribute("stroke-linecap", "round"), t.setAttribute("fill", "none"), t;
 }
@@ -4428,10 +4428,10 @@ function Yg(e, t) {
     fillOpacity: e.fillOpacity,
     rotate: e.rotate
   });
-  o && (o.setAttribute(vo, e.id), o.style.pointerEvents = "none", rt(o, e.entryAnimation, e.rotate ?? 0), n.appendChild(o), Jn() || n.appendChild(Xg(e, r)));
+  o && (o.setAttribute(vo, e.id), o.style.pointerEvents = "none", rt(o, e.entryAnimation, e.rotate ?? 0), n.appendChild(o), Zn() || n.appendChild(Xg(e, r)));
 }
 function Xg(e, t) {
-  const n = document.createElementNS(zt, "rect");
+  const n = document.createElementNS(Ft, "rect");
   if (n.setAttribute(vo, e.id), n.setAttribute("x", String(t.x)), n.setAttribute("y", String(t.y)), n.setAttribute("width", String(Math.max(0, e.bounds.width))), n.setAttribute("height", String(Math.max(0, e.bounds.height))), n.setAttribute("fill", "rgba(0, 0, 0, 0.001)"), n.setAttribute("stroke", "none"), n.setAttribute("pointer-events", "all"), n.style.pointerEvents = "all", n.style.cursor = "pointer", e.rotate) {
     const r = t.x + e.bounds.width / 2, o = t.y + e.bounds.height / 2;
     n.setAttribute("transform", `rotate(${e.rotate} ${r} ${o})`);
@@ -4443,7 +4443,7 @@ function Kg(e, t, n) {
   t.stopPropagation(), t.preventDefault();
   const r = { x: t.clientX, y: t.clientY }, o = E(e);
   if (!o || o.kind !== "shape") return;
-  const s = J(), i = o.boundsAnchorOffset && s ? {
+  const s = Z(), i = o.boundsAnchorOffset && s ? {
     x: s.left + o.boundsAnchorOffset.x,
     y: s.top + o.boundsAnchorOffset.y
   } : { x: o.bounds.x, y: o.bounds.y }, a = { ...o.bounds, x: i.x, y: i.y };
@@ -4467,12 +4467,12 @@ function Kg(e, t, n) {
   };
   document.addEventListener("mousemove", l, !0), document.addEventListener("mouseup", u, !0);
 }
-function Zg(e, t) {
+function Jg(e, t) {
   const { host: n } = M;
   if (!n) return;
   const r = document.createElement("div");
   r.setAttribute(yo, e.id), r.setAttribute("data-manuscript", "ui"), r.dataset.annotationId = e.id;
-  const o = e.style.italic === !0, s = e.style.backgroundColor ?? "#ffffff", i = e.style.backgroundOpacity ?? 0.96, a = s === "transparent" ? "transparent" : Jg(s, i), c = e.rotate ?? 0, l = e.style.borderColor ?? "#000000", u = l === "transparent" ? "none" : `2px solid ${l}`, h = Wf(e, t), d = Jn();
+  const o = e.style.italic === !0, s = e.style.backgroundColor ?? "#ffffff", i = e.style.backgroundOpacity ?? 0.96, a = s === "transparent" ? "transparent" : Zg(s, i), c = e.rotate ?? 0, l = e.style.borderColor ?? "#000000", u = l === "transparent" ? "none" : `2px solid ${l}`, h = Wf(e, t), d = Zn();
   r.style.cssText = [
     "position: absolute",
     `left: ${h.x}px`,
@@ -4497,7 +4497,7 @@ function Zg(e, t) {
     "transform-origin: center center"
   ].join("; "), r.textContent = e.text, d || Qg(r, e.id), rt(r, e.entryAnimation, e.rotate ?? 0), n.appendChild(r);
 }
-function Jg(e, t) {
+function Zg(e, t) {
   const n = Math.max(0, Math.min(1, t)), r = e.trim();
   if (r.startsWith("#")) {
     let o = 0, s = 0, i = 0;
@@ -4518,7 +4518,7 @@ function Qg(e, t) {
     Math.abs(l) + Math.abs(u) > 2 && (a = !0), e.style.left = `${s + l}px`, e.style.top = `${i + u}px`;
   }), document.addEventListener("mouseup", () => {
     if (!n || (n = !1, !a)) return;
-    const c = parseFloat(e.style.left), l = parseFloat(e.style.top), u = J(), h = u ? {
+    const c = parseFloat(e.style.left), l = parseFloat(e.style.top), u = Z(), h = u ? {
       position: { x: c, y: l },
       anchorOffset: { x: c - u.left, y: l - u.top }
     } : { position: { x: c, y: l }, anchorOffset: void 0 };
@@ -4539,7 +4539,7 @@ function e0(e) {
   const n = window.getSelection();
   n && (n.removeAllRanges(), n.addRange(t));
 }
-function Jo() {
+function Zo() {
   if (M.host) return;
   qf();
   const e = document.createElement("div");
@@ -4552,7 +4552,7 @@ function Jo() {
     "pointer-events: none",
     `z-index: ${te + 3}`
   ].join("; ");
-  const t = document.createElementNS(zt, "svg");
+  const t = document.createElementNS(Ft, "svg");
   t.setAttribute("width", "100%"), t.setAttribute("height", "100%"), t.style.cssText = [
     "position: absolute",
     "top: 0",
@@ -4585,7 +4585,7 @@ function Et() {
   const { host: e, svg: t } = M;
   if (!e || !t) return;
   for (e.querySelectorAll(`[${yo}]`).forEach((o) => o.remove()); t.firstChild; ) t.removeChild(t.firstChild);
-  const n = J();
+  const n = Z();
   if (xe) {
     let o = null;
     try {
@@ -4597,7 +4597,7 @@ function Et() {
   }
   const r = no();
   for (const o of r)
-    o.kind === "text" ? Zg(o, n) : o.kind === "arrow" ? jf(o, n) : o.kind === "shape" ? Yg(o, n) : o.kind === "freedraw" && Rg(o, n);
+    o.kind === "text" ? Jg(o, n) : o.kind === "arrow" ? jf(o, n) : o.kind === "shape" ? Yg(o, n) : o.kind === "freedraw" && Rg(o, n);
 }
 function o0() {
   const e = he();
@@ -4656,14 +4656,14 @@ function a0() {
 }
 async function ts() {
   try {
-    return await z().get(H.replayControlsOrientation) === "vertical" ? "vertical" : "horizontal";
+    return await F().get(H.replayControlsOrientation) === "vertical" ? "vertical" : "horizontal";
   } catch {
     return "horizontal";
   }
 }
 async function i0(e) {
   try {
-    await z().set(H.replayControlsOrientation, e);
+    await F().set(H.replayControlsOrientation, e);
   } catch (t) {
     console.warn("[manuscript] save orientation failed", t);
   }
@@ -4673,7 +4673,7 @@ function c0() {
 }
 async function ns() {
   try {
-    const e = await z().get(H.replayControlsPosition);
+    const e = await F().get(H.replayControlsPosition);
     return e && typeof e == "object" && typeof e.left == "number" && typeof e.top == "number" ? e : null;
   } catch {
     return null;
@@ -4681,7 +4681,7 @@ async function ns() {
 }
 async function Ar(e) {
   try {
-    await z().set(H.replayControlsPosition, e);
+    await F().set(H.replayControlsPosition, e);
   } catch {
   }
 }
@@ -5190,7 +5190,7 @@ function qe(e) {
   if (Nn !== e) {
     Nn = e;
     for (const t of [...Dn]) t(e);
-    z().set(H.ttsBlocked, e).catch(() => {
+    F().set(H.ttsBlocked, e).catch(() => {
     });
   }
 }
@@ -5254,20 +5254,20 @@ function k0(e, t) {
 }
 async function Qn() {
   try {
-    return await z().get(H.ttsEnabled) === !0;
+    return await F().get(H.ttsEnabled) === !0;
   } catch {
     return !1;
   }
 }
 async function us(e) {
   try {
-    await z().set(H.ttsEnabled, !!e);
+    await F().set(H.ttsEnabled, !!e);
   } catch {
   }
 }
 async function ds() {
   try {
-    const e = await z().get(H.ttsVoiceName);
+    const e = await F().get(H.ttsVoiceName);
     return typeof e == "string" && e.length > 0 ? e : null;
   } catch {
     return null;
@@ -5275,17 +5275,17 @@ async function ds() {
 }
 async function S0(e) {
   try {
-    e === null ? await z().remove(H.ttsVoiceName) : await z().set(H.ttsVoiceName, e);
+    e === null ? await F().remove(H.ttsVoiceName) : await F().set(H.ttsVoiceName, e);
   } catch {
   }
 }
 function $0(e) {
-  return z().subscribe([H.ttsEnabled], (t, n) => {
+  return F().subscribe([H.ttsEnabled], (t, n) => {
     e(n === !0);
   });
 }
 function A0(e) {
-  return z().subscribe([H.ttsVoiceName], (t, n) => {
+  return F().subscribe([H.ttsVoiceName], (t, n) => {
     e(typeof n == "string" && n.length > 0 ? n : null);
   });
 }
@@ -5330,11 +5330,9 @@ function ps(e = 1500) {
 }
 function E0(e) {
   const t = (navigator.language || "").toLowerCase().split("-")[0];
-  if (!t) return null;
-  const n = e.filter(
+  return t ? e.filter(
     (r) => r.lang.toLowerCase().split("-")[0] === t
-  );
-  return n.find((r) => r.name.startsWith("Google")) ?? n[0] ?? null;
+  ).find((r) => r.name.startsWith("Google")) ?? null : null;
 }
 function It() {
   return we;
@@ -5408,8 +5406,8 @@ function fs() {
   o && (o.hidden = !n);
 }
 function P0({ height: e = 16, color: t, title: n } = {}) {
-  const r = Math.round(e * 0.7), o = t ?? "currentColor", s = n ? `<title>${I0(n)}</title>` : "";
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 20" width="${r}" height="${e}" fill="${o}" aria-hidden="${n ? "false" : "true"}" focusable="false">${s}<g fill-rule="evenodd"><path d="M 7 0.5 L 12.5 5 L 12.5 9.5 L 10 14 L 4 14 L 1.5 9.5 L 1.5 5 Z M 6.5 1.2 L 6.5 7.2 L 7.5 7.2 L 7.5 1.2 Z M 8.1 8.5 A 1.1 1.1 0 1 1 5.9 8.5 A 1.1 1.1 0 1 1 8.1 8.5 Z"/><rect x="3.5" y="15.5" width="7" height="2.8"/></g></svg>`;
+  const r = Math.round(e * 568 / 891), o = t ?? "currentColor", s = n ? `<title>${I0(n)}</title>` : "";
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 568 891" width="${r}" height="${e}" fill="${o}" fill-rule="evenodd" aria-hidden="${n ? "false" : "true"}" focusable="false">${s}<g transform="translate(0, 891) scale(0.1, -0.1)"><path d="M2515 8703 c-17 -2 -36 -13 -43 -23 -19 -31 -550 -1005 -1217 -2235 -334 -616 -646 -1190 -693 -1275 -218 -397 -362 -672 -362 -690 0 -10 30 -103 66 -207 36 -103 83 -240 104 -303 21 -63 77 -227 124 -365 106 -302 284 -825 338 -990 22 -66 46 -133 53 -150 7 -16 50 -140 95 -275 46 -135 96 -282 112 -328 l30 -82 1718 0 1719 0 21 58 c12 31 60 169 106 306 47 137 95 276 108 310 13 34 41 117 64 186 39 121 192 567 246 720 42 116 355 1029 372 1083 l15 49 -742 1361 c-408 749 -808 1484 -889 1632 -163 300 -526 968 -605 1115 -57 104 -61 107 -158 109 l-58 1 2 -1841 c2 -1989 -2 -1852 52 -1881 55 -28 136 -103 174 -160 234 -346 -9 -799 -427 -798 -147 0 -260 48 -365 154 -119 119 -169 265 -147 421 22 152 99 270 237 364 l70 47 3 1847 2 1847 -47 -2 c-27 0 -62 -3 -78 -5z"/><path d="M1140 775 l0 -585 1705 0 1705 0 0 585 0 585 -1705 0 -1705 0 0 -585z"/></g></svg>`;
 }
 function I0(e) {
   return e.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -5575,7 +5573,7 @@ function ht() {
   e == null || e(), ie.remove(), ie = null;
 }
 let ce = null;
-function F0(e) {
+function z0(e) {
   Ut();
   const { host: t, shadow: n } = Ve();
   ce = t, ce.style.cssText = [
@@ -5632,7 +5630,7 @@ function Ut() {
 let ye = null;
 function ms(e) {
   ft();
-  const t = e.getBoundingClientRect(), n = z0(e), r = t.left + n.x, o = t.top + n.y, s = t.bottom + n.y, i = 36, a = 8, c = o - a - i < 8, l = c ? Math.min(window.innerHeight - 8 - i, s + a) : Math.max(8, o - a - i), u = Math.max(8, Math.min(r, window.innerWidth - 200)), h = c ? "up" : "down", { host: d, shadow: p } = Ve();
+  const t = e.getBoundingClientRect(), n = F0(e), r = t.left + n.x, o = t.top + n.y, s = t.bottom + n.y, i = 36, a = 8, c = o - a - i < 8, l = c ? Math.min(window.innerHeight - 8 - i, s + a) : Math.max(8, o - a - i), u = Math.max(8, Math.min(r, window.innerWidth - 200)), h = c ? "up" : "down", { host: d, shadow: p } = Ve();
   ye = d, ye.style.cssText = [
     "position: fixed",
     `top: ${l}px`,
@@ -5686,7 +5684,7 @@ function ms(e) {
 function ft() {
   ye == null || ye.remove(), ye = null;
 }
-function z0(e) {
+function F0(e) {
   var t;
   try {
     const n = (t = e.ownerDocument) == null ? void 0 : t.defaultView;
@@ -5699,9 +5697,9 @@ function z0(e) {
     return { x: 0, y: 0 };
   }
 }
-let Fe = null;
+let ze = null;
 function H0(e) {
-  Fe || (Fe = (t) => {
+  ze || (ze = (t) => {
     if (v.state)
       switch (t.key) {
         case "ArrowRight":
@@ -5718,10 +5716,10 @@ function H0(e) {
           t.preventDefault(), e.onExit();
           break;
       }
-  }, document.addEventListener("keydown", Fe, !0));
+  }, document.addEventListener("keydown", ze, !0));
 }
 function W0() {
-  Fe && (document.removeEventListener("keydown", Fe, !0), Fe = null);
+  ze && (document.removeEventListener("keydown", ze, !0), ze = null);
 }
 function gs(e, t, n = !1) {
   try {
@@ -5761,7 +5759,7 @@ async function j0(e, t) {
 }
 function V0(e) {
   return new Promise((t) => {
-    F0({
+    z0({
       savedUrl: e,
       onNavigate: () => t("navigate"),
       onForce: () => {
@@ -5947,7 +5945,7 @@ async function tn(e) {
     if (l.length > 0) {
       if (t.paused) return;
       const u = new AbortController();
-      (i = t.subSequenceAbort) == null || i.abort(), t.subSequenceAbort = u, Z0(c, r, l, u, e).finally(() => {
+      (i = t.subSequenceAbort) == null || i.abort(), t.subSequenceAbort = u, J0(c, r, l, u, e).finally(() => {
         var h;
         ((h = v.state) == null ? void 0 : h.subSequenceAbort) === u && (v.state.subSequenceAbort = null);
       });
@@ -5968,7 +5966,7 @@ async function tn(e) {
     ((a = v.state) == null ? void 0 : a.pendingWait) === s && (v.state.pendingWait = null);
   }
 }
-async function Z0(e, t, n, r, o) {
+async function J0(e, t, n, r, o) {
   var p;
   const s = t.subDwellsMs ?? [], i = s[0] ?? 0;
   let a = e;
@@ -6117,15 +6115,15 @@ async function nr(e = 0, t = {}) {
   }, oo("replay"), O0({
     onPrev: qn,
     onNext: jt,
-    onTogglePause: Fn,
+    onTogglePause: zn,
     onExit: Vt,
     onStepSelect: (o) => void ws(o),
     onTogglePrompter: () => void X0(),
-    onToggleTts: () => void J0()
+    onToggleTts: () => void Z0()
   }), le().isPrompterOpen() && Bn(!0), H0({
     onNext: () => void jt(),
     onPrev: () => void qn(),
-    onTogglePause: Fn,
+    onTogglePause: zn,
     onExit: () => void Vt()
   }), v.unsubscribeStep = at(Me);
   const r = Math.min(Math.max(0, e), n.steps.length - 1);
@@ -6154,11 +6152,11 @@ async function jt() {
 async function qn() {
   await on(B() - 1);
 }
-async function J0() {
+async function Z0() {
   const e = !await Qn();
   await us(e), e || er(), Me();
 }
-function Fn() {
+function zn() {
   const { state: e } = v;
   if (!e) return;
   if (e.atEnd && e.paused) {
@@ -6209,7 +6207,7 @@ function Dr(e, t = {}) {
     s = eb(s), s = Br(s);
   else if (o === "0.1.1")
     s = Br(s);
-  else if (o !== Zr)
+  else if (o !== Jr)
     throw new kt(`Unsupported schemaVersion: ${o}`);
   if (!Array.isArray(s.steps))
     throw new kt("Missing or invalid steps array");
@@ -6231,7 +6229,7 @@ function eb(e) {
   };
 }
 function Br(e) {
-  return { ...e, schemaVersion: Zr };
+  return { ...e, schemaVersion: Jr };
 }
 function ks(e) {
   return typeof e == "object" && e !== null && !Array.isArray(e);
@@ -6315,11 +6313,11 @@ function lb() {
   const t = e.attachShadow({ mode: "open" });
   t.innerHTML = `<div style="font:13px/1.4 -apple-system,system-ui,sans-serif;background:#1a2438;color:#fff;padding:10px 14px;border-radius:10px;box-shadow:0 8px 24px rgb(0 0 0 / 0.2);max-width:280px;">${A("player.handoff.unavailable")}</div>`, document.documentElement.appendChild(e), setTimeout(() => e.remove(), 6e3);
 }
-const $s = (e) => `mn:player:scenario:${e}`, _e = "mn:player:state", ze = "mn:player:armed";
+const $s = (e) => `mn:player:scenario:${e}`, _e = "mn:player:state", Fe = "mn:player:armed";
 let As = "/", Ms = () => {
 };
 const qr = /* @__PURE__ */ new Set();
-function Fr(e) {
+function zr(e) {
   if (!e) return null;
   try {
     return new URL(e).origin;
@@ -6333,7 +6331,7 @@ function ub(e) {
     for (let n = 0; n < e.steps.length - 1; n++) {
       const r = e.steps[n];
       if (!(r != null && r.waitForNavigation)) continue;
-      const o = Fr(r.pickedAtUrl), s = Fr((t = e.steps[n + 1]) == null ? void 0 : t.pickedAtUrl);
+      const o = zr(r.pickedAtUrl), s = zr((t = e.steps[n + 1]) == null ? void 0 : t.pickedAtUrl);
       if (o && s && o !== s) {
         qr.add(e.id), console.warn(
           `[manuscript-player] Step ${n + 1} "${r.name}" uses waitForNavigation, but the next step is on a different origin (${o} → ${s}). The player can't attach its resume state to a site-driven cross-origin navigation, so the tour won't resume there. Model cross-origin hops as a player-driven step instead. See player.html#player-crossorigin`
@@ -6343,9 +6341,9 @@ function ub(e) {
     }
 }
 const ve = {};
-let zr = !1;
+let Fr = !1;
 async function Es() {
-  zr || (zr = !0, typeof ve.enabled == "boolean" && await us(ve.enabled), ve.voice && await S0(ve.voice)), await v0();
+  Fr || (Fr = !0, typeof ve.enabled == "boolean" && await us(ve.enabled), ve.voice && await S0(ve.voice)), await v0();
 }
 function db(e) {
   e.scenarioUrlBase && (As = e.scenarioUrlBase), e.prefetch && (Ms = e.prefetch), typeof e.tts == "boolean" && (ve.enabled = e.tts), e.ttsVoice && (ve.voice = e.ttsVoice);
@@ -6371,7 +6369,7 @@ async function rr(e) {
 async function hb(e) {
   ve.enabled && w0(), await Es();
   const t = (e == null ? void 0 : e.startIndex) ?? 0, n = (e == null ? void 0 : e.paused) ?? !1;
-  Qo() || Jo();
+  Qo() || Zo();
   const r = D();
   if (!r)
     throw new Error("no scenario loaded");
@@ -6381,10 +6379,10 @@ async function hb(e) {
     paused: n,
     startedAt: Date.now()
   };
-  sessionStorage.setItem(_e, JSON.stringify(o)), sessionStorage.removeItem(ze), await nr(t, { paused: n, standalone: !0 });
+  sessionStorage.setItem(_e, JSON.stringify(o)), sessionStorage.removeItem(Fe), await nr(t, { paused: n, standalone: !0 });
 }
 function fb() {
-  dt() && Fn();
+  dt() && zn();
 }
 async function mb() {
   dt() && await jt();
@@ -6396,7 +6394,7 @@ async function bb(e) {
   dt() && await ws(e);
 }
 async function _b() {
-  dt() && await Vt(), sessionStorage.removeItem(_e), sessionStorage.removeItem(ze);
+  dt() && await Vt(), sessionStorage.removeItem(_e), sessionStorage.removeItem(Fe);
 }
 function yb(e) {
   return so(({ prev: n, next: r }) => {
@@ -6414,11 +6412,11 @@ function vb() {
 }
 async function Ts() {
   if (vb()) {
-    sessionStorage.removeItem(_e), sessionStorage.removeItem(ze);
+    sessionStorage.removeItem(_e), sessionStorage.removeItem(Fe);
     return;
   }
-  if (sessionStorage.getItem(ze) !== "1") return;
-  sessionStorage.removeItem(ze);
+  if (sessionStorage.getItem(Fe) !== "1") return;
+  sessionStorage.removeItem(Fe);
   const e = sessionStorage.getItem(_e);
   if (!e)
     return;
@@ -6453,16 +6451,16 @@ async function xb() {
     await Es();
     const e = rb(location.search);
     if (e) {
-      sb(), e.orient && await z().set(
+      sb(), e.orient && await F().set(
         H.replayControlsOrientation,
         e.orient === "v" ? "vertical" : "horizontal"
-      ), e.pos && await z().set(H.replayControlsPosition, e.pos);
+      ), e.pos && await F().set(H.replayControlsPosition, e.pos);
       try {
         const n = await (await fetch(`${As}${e.id}.json`)).json();
         await rr(n);
         const r = D();
         if (!r || e.stepIndex < 0 || e.stepIndex >= r.steps.length) return;
-        Qo() || Jo(), await nr(e.stepIndex, { paused: e.paused, standalone: !0 });
+        Qo() || Zo(), await nr(e.stepIndex, { paused: e.paused, standalone: !0 });
         return;
       } catch {
       }
@@ -6547,7 +6545,7 @@ if (!Tb) {
       degrade: lb,
       currentOrigin: () => location.origin,
       persistState: (t) => {
-        je().setActiveReplay({ ...t, startedAt: Date.now() }), sessionStorage.setItem(ze, "1");
+        je().setActiveReplay({ ...t, startedAt: Date.now() }), sessionStorage.setItem(Fe, "1");
       },
       // Carry the pill's orientation + dragged position across a cross-origin
       // hop so B doesn't reset it (extension does this for free via global
