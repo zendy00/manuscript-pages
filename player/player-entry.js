@@ -1,4 +1,4 @@
-const _s = {
+const Ps = {
   async getActiveReplay() {
     return null;
   },
@@ -6,7 +6,7 @@ const _s = {
   },
   async clearActiveReplay() {
   }
-}, ys = {
+}, Is = {
   isPrompterOpen: () => !1,
   async openPrompter() {
   },
@@ -14,9 +14,9 @@ const _s = {
   },
   async updatePrompter() {
   }
-}, vs = {
+}, Os = {
   isRecordingArmed: () => !1
-}, xs = {
+}, Rs = {
   async get() {
   },
   async set() {
@@ -27,7 +27,7 @@ const _s = {
     return () => {
     };
   }
-}, ws = {
+}, Ns = {
   async saveScenario() {
   },
   async setEphemeralScenario() {
@@ -40,60 +40,60 @@ const _s = {
   async getEphemeralEnvelope() {
     return null;
   }
-}, ks = {
+}, Ds = {
   async tryHandoff() {
     return !1;
   }
 };
-let Ir = _s, Or = ys, Rr = vs, Nr = xs, Dr = ws, Br = ks;
-function qr(e) {
-  e.storage && (Ir = e.storage), e.prompter && (Or = e.prompter), e.recording && (Rr = e.recording), e.prefs && (Nr = e.prefs), e.assetUrl && e.assetUrl, e.scenarioStorage && (Dr = e.scenarioStorage), e.handoff && (Br = e.handoff);
+let Hr = Ps, Wr = Is, Ur = Os, jr = Rs, Vr = Ns, Gr = Ds;
+function Yr(e) {
+  e.storage && (Hr = e.storage), e.prompter && (Wr = e.prompter), e.recording && (Ur = e.recording), e.prefs && (jr = e.prefs), e.assetUrl && e.assetUrl, e.scenarioStorage && (Vr = e.scenarioStorage), e.handoff && (Gr = e.handoff);
 }
-function We() {
-  return Ir;
+function je() {
+  return Hr;
 }
-function ce() {
-  return Or;
+function le() {
+  return Wr;
 }
-function Ss() {
-  return Rr;
+function Bs() {
+  return Ur;
 }
-function W() {
-  return Nr;
+function z() {
+  return jr;
 }
-function Je() {
-  return Dr;
+function nt() {
+  return Vr;
 }
-function $s() {
-  return Br;
+function qs() {
+  return Gr;
 }
-const tn = "mn:player:state";
-function As(e) {
+const sn = "mn:player:state";
+function Fs(e) {
   return e !== null && typeof e == "object" && typeof e.scenarioId == "string" && typeof e.stepIndex == "number";
 }
-const Ms = {
+const zs = {
   async getActiveReplay() {
-    const e = sessionStorage.getItem(tn);
+    const e = sessionStorage.getItem(sn);
     if (!e) return null;
     try {
       const t = JSON.parse(e);
-      return As(t) ? t : null;
+      return Fs(t) ? t : null;
     } catch {
       return null;
     }
   },
   async setActiveReplay(e) {
-    sessionStorage.setItem(tn, JSON.stringify(e));
+    sessionStorage.setItem(sn, JSON.stringify(e));
   },
   async clearActiveReplay() {
-    sessionStorage.removeItem(tn);
+    sessionStorage.removeItem(sn);
   }
-}, wt = /* @__PURE__ */ new Map();
-function er(e, t) {
-  const n = wt.get(e);
+}, St = /* @__PURE__ */ new Map();
+function ar(e, t) {
+  const n = St.get(e);
   if (n) for (const r of [...n]) r(e, t);
 }
-const Es = {
+const Hs = {
   async get(e) {
     const t = sessionStorage.getItem(`pref:${e}`);
     if (t)
@@ -104,26 +104,26 @@ const Es = {
       }
   },
   async set(e, t) {
-    sessionStorage.setItem(`pref:${e}`, JSON.stringify(t)), er(e, t);
+    sessionStorage.setItem(`pref:${e}`, JSON.stringify(t)), ar(e, t);
   },
   async remove(e) {
-    sessionStorage.removeItem(`pref:${e}`), er(e, void 0);
+    sessionStorage.removeItem(`pref:${e}`), ar(e, void 0);
   },
   subscribe(e, t) {
     for (const n of e) {
-      let r = wt.get(n);
-      r || (r = /* @__PURE__ */ new Set(), wt.set(n, r)), r.add(t);
+      let r = St.get(n);
+      r || (r = /* @__PURE__ */ new Set(), St.set(n, r)), r.add(t);
     }
     return () => {
       var n;
-      for (const r of e) (n = wt.get(r)) == null || n.delete(t);
+      for (const r of e) (n = St.get(r)) == null || n.delete(t);
     };
   }
-}, Ls = (e) => ({
+}, Ws = (e) => ({
   resolveUrl(t) {
     return e ? new URL(t, e).href : t;
   }
-}), Ts = {
+}), Us = {
   isSupported: () => !1,
   // no detached chrome window in the player → hide the button
   isPrompterOpen: () => !1,
@@ -133,9 +133,9 @@ const Es = {
   },
   async updatePrompter() {
   }
-}, Cs = {
+}, js = {
   isRecordingArmed: () => !1
-}, Ps = {
+}, Vs = {
   async saveScenario() {
   },
   async setEphemeralScenario() {
@@ -149,464 +149,464 @@ const Es = {
     return null;
   }
 };
-function Is(e) {
-  qr({
-    storage: Ms,
-    prefs: Es,
-    assetUrl: Ls(e == null ? void 0 : e.assetBaseUrl),
-    prompter: Ts,
-    recording: Cs,
-    scenarioStorage: Ps
+function Gs(e) {
+  Yr({
+    storage: zs,
+    prefs: Hs,
+    assetUrl: Ws(e == null ? void 0 : e.assetBaseUrl),
+    prompter: Us,
+    recording: js,
+    scenarioStorage: Vs
   });
 }
-let fn = null;
-function Os(e) {
-  fn = e;
+let bn = null;
+function Ys(e) {
+  bn = e;
 }
 function A(e, t) {
-  const n = e.replace(/[.-]/g, "_"), r = Rs();
+  const n = e.replace(/[.-]/g, "_"), r = Xs();
   let o = "";
   try {
     o = chrome.i18n.getMessage(n, r);
   } catch {
   }
-  return o === "" && fn && (o = fn(n, r)), o === "" ? e : o;
+  return o === "" && bn && (o = bn(n, r)), o === "" ? e : o;
 }
-function Rs(e) {
+function Xs(e) {
   return [];
 }
-const Ns = { message: "Manuscript", description: "Extension name shown in the browser extensions page and in store listings." }, Ds = { message: "DOM-aware browser extension for authoring versioned web demos and manuals", description: "Short pitch shown under the name in the browser extensions page and in store listings." }, Bs = { message: "Cancel" }, qs = { message: "Delete" }, Fs = { message: "Overwrite" }, zs = { message: "Close" }, Hs = { message: "OK" }, Ws = { message: 'Delete the scenario "$NAME$"?', placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, Us = { message: "Untitled" }, js = { message: "Got it" }, Vs = { message: "Start a new walkthrough" }, Gs = { message: "New Manuscript" }, Ys = { message: "Need help?" }, Xs = { message: "Open a web page, then press New Manuscript." }, Ks = { message: "Open a JSON file" }, Zs = { message: "Couldn't read this JSON file. Pick a valid Manuscript export." }, Js = { message: 'A scenario with this id already exists: "$NAME$". Overwrite it?', placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, Qs = { message: "Previous Manuscripts" }, ea = { message: "Resume" }, ta = { message: "$N$ steps", placeholders: { n: { content: "$1", example: "3" } } }, na = { message: "Delete $NAME$", placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, ra = { message: "↩ Inline" }, oa = { message: "Back to inline popup" }, sa = { message: "No active tab found." }, aa = { message: "This page is not supported (chrome://, edge://, new tab, file:// etc.). Open a regular web page and try again." }, ia = { message: "The extension could not connect to this page. Refresh the page (F5) and try again." }, ca = { message: "Unknown error occurred. Check the console." }, la = { message: "Language" }, ua = { message: "Manuscript authoring panel" }, da = { message: "Close panel" }, pa = { message: "Toggle dark mode" }, ha = { message: "Untitled walkthrough" }, fa = { message: "Annotation tools" }, ma = { message: "Text" }, ga = { message: "Shape" }, ba = { message: "Freedraw" }, _a = { message: "Replay" }, ya = { message: "Record screen" }, va = { message: "Replay walkthrough" }, xa = { message: "Open presenter prompter" }, wa = { message: "Export JSON" }, ka = { message: "Export" }, Sa = { message: "With thumbnails · full size" }, $a = { message: "Export without thumbnails" }, Aa = { message: "Lighter file · -lite" }, Ma = { message: "Undo (Ctrl+Z)" }, Ea = { message: "Redo (Ctrl+Shift+Z)" }, La = { message: "Settings" }, Ta = { message: "Settings" }, Ca = { message: "Narration voice" }, Pa = { message: "Auto (Google preferred)" }, Ia = { message: "Match full URL (query & hash)" }, Oa = { message: "On by default URL matching ignores ?query and #hash. Turn this on for sites that change the page via query or hash (e.g. ?tab=, #/reports) so step navigation and the wrong-page warning work." }, Ra = { message: "Close settings" }, Na = { message: "Local" }, Da = { message: "Remote Library" }, Ba = { message: "Remote library — coming soon." }, qa = { message: "Connect a public GitHub repo to load shared manuscripts." }, Fa = { message: "+ Add a GitHub source" }, za = { message: "Add source" }, Ha = { message: "Refresh all sources" }, Wa = { message: "Remove source" }, Ua = { message: "github.com/owner/repo  or  owner/repo/path" }, ja = { message: "Add" }, Va = { message: "Invalid URL. Expected github.com/owner/repo or owner/repo." }, Ga = { message: "Enter a GitHub URL or owner/repo." }, Ya = { message: "Click ↻ refresh to load this source." }, Xa = { message: "No manuscripts in this folder yet." }, Ka = { message: "This folder is empty." }, Za = { message: "Back to parent folder" }, Ja = { message: "Collapse source" }, Qa = { message: "Expand source" }, ei = { message: "Loading" }, ti = { message: "steps" }, ni = { message: "Edits won't be saved" }, ri = { message: "Save to local" }, oi = { message: "External page" }, si = { message: "Saved to local" }, ai = { message: "Save failed" }, ii = { message: "Copy formatting" }, ci = { message: "This step only" }, li = { message: "All steps" }, ui = { message: "Before you record" }, di = { message: "The browser shows two share dialogs. The first captures this tab; the second adds your TTS narration via system audio. Follow the numbered cues in each dialog." }, pi = { message: "1. Required — allow video capture" }, hi = { message: "First share dialog — when the current tab appears, click Allow." }, fi = { message: "When the dialog below shows your current tab, click <strong>Allow</strong>." }, mi = { message: "2. Optional — allow TTS audio capture" }, gi = { message: "Second share dialog — select a browser window and tick Also share system audio." }, bi = { message: "<ol><li>Select the <strong>Window</strong> tab at the top.</li><li>Pick a browser window.</li><li>Tick <strong>Also share system audio</strong> — required to capture the TTS voice.</li><li>Click <strong>Share</strong>.</li></ol><p>The video from this dialog isn't used. <strong>If you cancel this dialog the recording still runs, but the TTS voice will be silent in the file.</strong></p>" }, _i = { message: "Manuscript recorder" }, yi = { message: "This window is not recorded — it just controls the capture." }, vi = { message: "Click Start recording — the browser asks which surface to share. Pick your demo window and turn on system audio so the narration is captured." }, xi = { message: "Allow capture for video + TTS audio" }, wi = { message: "<ol><li>Select the <strong>Window</strong> tab at the top.</li><li>Choose the browser window running your demo.</li><li>Tick <strong>Share system audio</strong> — required to record the TTS narration.</li><li>Click <strong>Share</strong>.</li></ol>" }, ki = { message: "Start recording" }, Si = { message: "Stop & save" }, $i = { message: "While recording — Space: pause / resume the demo (recording keeps going) · Esc: stop & save" }, Ai = { message: "Ready." }, Mi = { message: "Recording" }, Ei = { message: "⏸ Paused — recording continues" }, Li = { message: "Scenario playing" }, Ti = { message: "Scenario paused" }, Ci = { message: "Saved. You can close this window." }, Pi = { message: `⚠ The narration won't be in the video. Share a Window (not a tab) and turn on "Share system audio". Click Start recording to try again.` }, Ii = { message: "Video quality" }, Oi = { message: "Standard" }, Ri = { message: "5 Mbps · 1080p" }, Ni = { message: "High quality" }, Di = { message: "25 Mbps · 1080p" }, Bi = { message: "Keep the panel and controls visible (tutorial mode)" }, qi = { message: "Useful when you're recording a how-to that shows Manuscript's own UI. The default uncluttered recording is best for end-user walkthroughs." }, Fi = { message: "Also record my microphone" }, zi = { message: "Adds your voice to the recording so you can narrate live or add extra commentary while the scenario is paused. The browser will ask permission once." }, Hi = { message: "While recording — <kbd>Space</kbd> pauses / resumes the scenario (recording keeps going) · <kbd>Esc</kbd> stops and saves" }, Wi = { message: "Cancel" }, Ui = { message: "Start recording" }, ji = { message: "Recording" }, Vi = { message: "Click to resume the scenario" }, Gi = { message: "Microphone permission denied — recording continues without your voice." }, Yi = { message: "Step name" }, Xi = { message: "Step description" }, Ki = { message: "Pick element for step $N$", placeholders: { n: { content: "$1", example: "1" } } }, Zi = { message: "Pick element with wand" }, Ji = { message: "Action — pause replay on this step" }, Qi = { message: "Delete step" }, ec = { message: "Auto-advance seconds" }, tc = { message: "Annotation tools" }, nc = { message: "Delete annotation" }, rc = { message: "Inner flow" }, oc = { message: "Sub-elements must be picked on the same page as the primary." }, sc = { message: "Add another element to this step" }, ac = { message: "Pull earlier (0.1s)" }, ic = { message: "Push later (0.1s)" }, cc = { message: "Stable attribute match — selector is healthy" }, lc = { message: "Layer 2 fallback — original attribute not found, matched by text + parent" }, uc = { message: "Layer 3 fallback — only the visual heuristic still matches; re-pick is recommended" }, dc = { message: "Element not found on this page — re-pick required" }, pc = { message: "Validate scenario" }, hc = { message: "Scenario health check" }, fc = { message: "Standalone player may stop here — the next step is a different origin." }, mc = { message: "From here on, narration won't autoplay on pages the tour advances to on its own — the browser blocks sound on a page opened without a click. The viewer clicks the page to play its narration. Pages the viewer advances by clicking keep sound. (Affects both the standalone player and the extension.)" }, gc = { message: "$OK$ healthy · $FALLBACK$ fallback · $BROKEN$ broken · $SKIPPED$ skipped (other pages)", placeholders: { ok: { content: "$1", example: "8" }, fallback: { content: "$2", example: "2" }, broken: { content: "$3", example: "1" }, skipped: { content: "$4", example: "3" } } }, bc = { message: "$OK$ healthy · $FALLBACK$ fallback · $BROKEN$ broken · $PENDING$ pending", placeholders: { ok: { content: "$1", example: "3" }, fallback: { content: "$2", example: "1" }, broken: { content: "$3", example: "1" }, pending: { content: "$4", example: "5" } } }, _c = { message: "Start" }, yc = { message: "Validating…" }, vc = { message: "Validation complete" }, xc = { message: "Checking this page · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/" } } }, wc = { message: "Moving to next page · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/checkout" } } }, kc = { message: "Pending" }, Sc = { message: "healthy" }, $c = { message: "fallback" }, Ac = { message: "broken" }, Mc = { message: "pending" }, Ec = { message: "Go to step" }, Lc = { message: "Re-pick element" }, Tc = { message: "Healthy" }, Cc = { message: "Layer 2 fallback" }, Pc = { message: "Layer 3 fallback" }, Ic = { message: "Not found" }, Oc = { message: "Other page" }, Rc = { message: "No element picked" }, Nc = { message: "All resolvable steps on this page check out. " }, Dc = { message: "Close" }, Bc = { message: "Go to $URL$", placeholders: { url: { content: "$1", example: "https://example.com" } } }, qc = { message: "Insert step here" }, Fc = { message: "Add step" }, zc = { message: "Step Name" }, Hc = { message: "Step counter" }, Wc = { message: "Previous (←)" }, Uc = { message: "Pause/Play (Space)" }, jc = { message: "Next (→)" }, Vc = { message: "Finish (→)" }, Gc = { message: "Exit (Esc)" }, Yc = { message: "Open presenter prompter" }, Xc = { message: "Presenter prompter" }, Kc = { message: "Move controls (drag)" }, Zc = { message: "Drag to move" }, Jc = { message: "Toggle vertical/horizontal" }, Qc = { message: "Toggle narration" }, el = { message: "Narration (TTS)" }, tl = { message: "Click anywhere to enable sound" }, nl = { message: "Click the demo page to enable sound" }, rl = { message: "Click the highlighted target to continue" }, ol = { message: "Skip" }, sl = { message: "Couldn't find the target" }, al = { message: "The element this step relies on isn't on the page anymore. Skip this step or stop replay." }, il = { message: "Skip" }, cl = { message: "Stop replay" }, ll = { message: "Different page" }, ul = { message: "This walkthrough was recorded on the page below. Open it now?" }, dl = { message: "Navigate" }, pl = { message: "Force replay here" }, hl = { message: "Cancel" }, fl = { message: "Now" }, ml = { message: "Next" }, gl = { message: "Steps" }, bl = { message: "Step $N$", placeholders: { n: { content: "$1", example: "3" } } }, _l = { message: "Waiting…" }, yl = { message: "Playing" }, vl = { message: "Paused" }, xl = { message: "Action step" }, wl = { message: "Previous" }, kl = { message: "Pause/Play" }, Sl = { message: "Next" }, $l = { message: "Toggle narration" }, Al = { message: "Narration (TTS)" }, Ml = { message: "Manuscript · Prompter" }, El = { message: "Thumbnails need host access. Click the Manuscript icon and press Start again to grant the permission." }, Ll = { message: "This element matches multiple targets — pick something more specific." }, Tl = { message: "Exported ✓" }, Cl = { message: "Export failed" }, Pl = { message: "No steps" }, Il = { message: "This tour can't continue on this page." }, Ol = {
-  extension_name: Ns,
-  extension_description: Ds,
-  common_cancel: Bs,
-  common_delete: qs,
-  common_overwrite: Fs,
-  common_close: zs,
-  common_ok: Hs,
-  common_delete_confirm: Ws,
-  common_untitled: Us,
-  common_got_it: js,
-  popup_title_start: Vs,
-  popup_cta_new: Gs,
-  popup_cta_help: Ys,
-  popup_cta_help_text: Xs,
-  popup_cta_import: Ks,
-  popup_import_failed: Zs,
-  popup_import_overwrite_confirm: Js,
-  popup_list_heading: Qs,
-  popup_list_resume_tag: ea,
-  popup_list_steps: ta,
-  popup_list_delete_aria: na,
-  popup_detach_detached: ra,
-  popup_detach_inline_title: oa,
-  popup_error_no_tab: sa,
-  popup_error_bad_url: aa,
-  popup_error_inject: ia,
-  popup_error_unknown: ca,
-  popup_language_label: la,
-  panel_aria_region: ua,
-  panel_close_aria: da,
-  panel_palette_toggle_aria: pa,
-  panel_title_placeholder: ha,
-  panel_tool_label: fa,
-  panel_tool_text: ma,
-  panel_tool_shape: ga,
-  panel_tool_freedraw: ba,
-  panel_replay_aria: _a,
-  panel_record_aria: ya,
-  panel_replay_title: va,
-  panel_prompter_aria: xa,
-  panel_export_aria: wa,
-  panel_export_menu_full: ka,
-  panel_export_menu_full_meta: Sa,
-  panel_export_menu_lite: $a,
-  panel_export_menu_lite_meta: Aa,
-  panel_undo_aria: Ma,
-  panel_redo_aria: Ea,
-  panel_settings_aria: La,
-  panel_settings_title: Ta,
-  panel_settings_voice_label: Ca,
-  panel_settings_voice_auto: Pa,
-  panel_settings_strict_url_label: Ia,
-  panel_settings_strict_url_help: Oa,
-  panel_settings_close_aria: Ra,
-  popup_tabs_local: Na,
-  popup_tabs_remote: Da,
-  popup_remote_coming_soon: Ba,
-  popup_remote_empty_copy: qa,
-  popup_remote_add_cta: Fa,
-  popup_remote_add_cta_aria: za,
-  popup_remote_refresh_all_aria: Ha,
-  popup_remote_remove_aria: Wa,
-  popup_remote_add_placeholder: Ua,
-  popup_remote_add_submit: ja,
-  popup_remote_add_error_invalid: Va,
-  popup_remote_add_error_empty: Ga,
-  popup_remote_source_never_refreshed: Ya,
-  popup_remote_source_empty: Xa,
-  popup_remote_folder_empty: Ka,
-  popup_remote_back_aria: Za,
-  popup_remote_collapse_aria: Ja,
-  popup_remote_expand_aria: Qa,
-  popup_remote_progress: ei,
-  popup_remote_steps_suffix: ti,
-  panel_ephemeral_warning: ni,
-  panel_ephemeral_import: ri,
-  panel_ephemeral_bridge_fallback: oi,
-  panel_ephemeral_saved: si,
-  panel_ephemeral_save_failed: ai,
-  copy_formatting: ii,
-  apply_this_step: ci,
-  apply_all_steps: li,
-  recording_guide_title: ui,
-  recording_guide_subtitle: di,
-  recording_guide_step1_title: pi,
-  recording_guide_step1_alt: hi,
-  recording_guide_step1_desc_html: fi,
-  recording_guide_step2_title: mi,
-  recording_guide_step2_alt: gi,
-  recording_guide_step2_desc_html: bi,
-  recorder_title: _i,
-  recorder_not_recorded: yi,
-  recorder_instruction: vi,
-  recorder_share_title: xi,
-  recorder_share_steps_html: wi,
-  recorder_start: ki,
-  recorder_stop: Si,
-  recorder_hint: $i,
-  recorder_status_ready: Ai,
-  recorder_status_recording: Mi,
-  recorder_status_paused: Ei,
-  recorder_scenario_playing: Li,
-  recorder_scenario_paused: Ti,
-  recorder_status_saved: Ci,
-  recorder_warn_no_tts: Pi,
-  recorder_quality_label: Ii,
-  recorder_quality_standard: Oi,
-  recorder_quality_standard_spec: Ri,
-  recorder_quality_high: Ni,
-  recorder_quality_high_spec: Di,
-  recording_guide_keep_ui_label: Bi,
-  recording_guide_keep_ui_hint: qi,
-  recording_guide_mic_label: Fi,
-  recording_guide_mic_hint: zi,
-  recording_guide_keys_info_html: Hi,
-  recording_guide_cancel: Wi,
-  recording_guide_start: Ui,
-  recording_paused_label: ji,
-  recording_paused_aria: Vi,
-  recording_mic_failed: Gi,
-  step_name_placeholder: Yi,
-  step_desc_placeholder: Xi,
-  step_wand_aria: Ki,
-  step_wand_title: Zi,
-  step_action_aria: Ji,
-  step_delete_aria: Qi,
-  step_timer_aria: ec,
-  step_annotations_title: tc,
-  step_annotation_delete_aria: nc,
-  step_subs_title: rc,
-  sub_same_url_required: oc,
-  sub_add_aria: sc,
-  sub_shift_left: ac,
-  sub_shift_right: ic,
-  health_layer1: cc,
-  health_layer2: lc,
-  health_layer3: uc,
-  health_broken: dc,
-  panel_validate_aria: pc,
-  validate_modal_title: hc,
-  validate_player_cross_origin_warn: fc,
-  validate_tts_autoplay_warn: mc,
-  validate_summary: gc,
-  validate_summary_running: bc,
-  validate_start: _c,
-  validate_in_progress: yc,
-  validate_complete: vc,
-  validate_checking: xc,
-  validate_navigating_to: wc,
-  validate_status_pending: kc,
-  validate_label_ok: Sc,
-  validate_label_fallback: $c,
-  validate_label_broken: Ac,
-  validate_label_pending: Mc,
-  validate_row_go: Ec,
-  validate_row_repick: Lc,
-  validate_status_green: Tc,
-  validate_status_yellow: Cc,
-  validate_status_orange: Pc,
-  validate_status_red: Ic,
-  validate_status_skipped: Oc,
-  validate_status_no_element: Rc,
-  validate_no_issues: Nc,
-  validate_close: Dc,
-  step_link_aria: Bc,
-  step_insert_aria: qc,
-  step_add_aria: Fc,
-  step_empty_name: zc,
-  replay_counter_aria: Hc,
-  replay_prev_aria: Wc,
-  replay_pause_aria: Uc,
-  replay_next_aria: jc,
-  replay_finish_aria: Vc,
-  replay_exit_aria: Gc,
-  replay_prompter_aria: Yc,
-  replay_prompter_title: Xc,
-  replay_move_aria: Kc,
-  replay_move_title: Zc,
-  replay_orient_aria: Jc,
-  replay_tts_aria: Qc,
-  replay_tts_title: el,
-  replay_tts_blocked_hint: tl,
-  prompter_tts_blocked_hint: nl,
-  replay_action_prompt: rl,
-  replay_action_skip: ol,
-  replay_notfound_title: sl,
-  replay_notfound_body: al,
-  replay_notfound_skip: il,
-  replay_notfound_stop: cl,
-  replay_url_mismatch_title: ll,
-  replay_url_mismatch_body: ul,
-  replay_url_mismatch_navigate: dl,
-  replay_url_mismatch_force: pl,
-  replay_url_mismatch_cancel: hl,
-  prompter_now: fl,
-  prompter_next: ml,
-  prompter_steps: gl,
-  prompter_step_no: bl,
-  prompter_waiting: _l,
-  prompter_playing: yl,
-  prompter_paused: vl,
-  prompter_action_step: xl,
-  prompter_prev_aria: wl,
-  prompter_pause_aria: kl,
-  prompter_next_aria: Sl,
-  prompter_tts_aria: $l,
-  prompter_tts_title: Al,
-  prompter_title: Ml,
-  permission_thumbnail_needs_host: El,
-  toast_ambiguous_selector: Ll,
-  toast_export_success: Tl,
-  toast_export_failed: Cl,
-  toast_no_steps: Pl,
-  player_handoff_unavailable: Il
-}, Rl = { message: "Manuscript", description: "Extension name shown in the browser extensions page and in store listings." }, Nl = { message: "DOM 인식 기반으로 깨지지 않는 웹 시연·매뉴얼을 저작·재생하는 브라우저 확장 프로그램", description: "Short pitch shown under the name in the browser extensions page and in store listings." }, Dl = { message: "취소" }, Bl = { message: "삭제" }, ql = { message: "덮어쓰기" }, Fl = { message: "닫기" }, zl = { message: "확인" }, Hl = { message: '"$NAME$" 시나리오를 삭제하시겠습니까?', placeholders: { name: { content: "$1", example: "결제 안내" } } }, Wl = { message: "제목 없음" }, Ul = { message: "확인" }, jl = { message: "새 시연 시작" }, Vl = { message: "새 매뉴스크립트" }, Gl = { message: "도움말" }, Yl = { message: "웹 페이지를 연 후 새 매뉴스크립트 버튼을 누르세요." }, Xl = { message: "JSON 파일 가져오기" }, Kl = { message: "JSON 파일을 읽을 수 없습니다. 매뉴스크립트에서 내보낸 파일인지 확인해 주세요." }, Zl = { message: '같은 id의 "$NAME$" 시나리오가 이미 있습니다. 덮어쓸까요?', placeholders: { name: { content: "$1", example: "결제 안내" } } }, Jl = { message: "이전 매뉴스크립트" }, Ql = { message: "이어하기" }, eu = { message: "$N$개 단계", placeholders: { n: { content: "$1", example: "3" } } }, tu = { message: "$NAME$ 삭제", placeholders: { name: { content: "$1", example: "결제 안내" } } }, nu = { message: "↩ 인라인" }, ru = { message: "인라인 팝업으로 돌아가기" }, ou = { message: "활성 탭을 찾을 수 없습니다." }, su = { message: "이 페이지는 지원하지 않습니다 (chrome://, edge://, 새 탭, file:// 등). 일반 웹 페이지에서 다시 시도해 주세요." }, au = { message: "이 페이지에 연결할 수 없습니다. F5로 페이지를 새로고침한 뒤 다시 시도하세요." }, iu = { message: "알 수 없는 오류가 발생했습니다. 콘솔을 확인하세요." }, cu = { message: "언어" }, lu = { message: "매뉴스크립트 작성 패널" }, uu = { message: "패널 닫기" }, du = { message: "다크 모드 전환" }, pu = { message: "제목 없는 시연" }, hu = { message: "주석 도구" }, fu = { message: "텍스트" }, mu = { message: "도형" }, gu = { message: "자유 그리기" }, bu = { message: "재생" }, _u = { message: "화면 녹화" }, yu = { message: "시연 재생" }, vu = { message: "발표자 프롬프터 열기" }, xu = { message: "JSON 내보내기" }, wu = { message: "전체 내보내기" }, ku = { message: "썸네일 포함 · 원본 크기" }, Su = { message: "썸네일 없이 내보내기" }, $u = { message: "용량 ↓ · 가벼운 -lite 파일" }, Au = { message: "되돌리기 (Ctrl+Z)" }, Mu = { message: "다시 실행 (Ctrl+Shift+Z)" }, Eu = { message: "설정" }, Lu = { message: "설정" }, Tu = { message: "내레이션 음성" }, Cu = { message: "자동 (Google 우선)" }, Pu = { message: "전체 URL 일치 (쿼리·해시)" }, Iu = { message: "기본 URL 일치는 ?쿼리와 #해시를 무시합니다. 쿼리나 해시로 화면이 바뀌는 사이트(예: ?tab=, #/reports)라면 이 옵션을 켜야 단계 이동과 페이지 불일치 경고가 제대로 동작합니다." }, Ou = { message: "설정 닫기" }, Ru = { message: "내 라이브러리" }, Nu = { message: "원격저장소" }, Du = { message: "원격저장소 라이브러리 — 곧 제공됩니다." }, Bu = { message: "GitHub 공개 리포를 연결해서 공유 시나리오를 불러오세요." }, qu = { message: "+ GitHub 소스 추가" }, Fu = { message: "소스 추가" }, zu = { message: "전체 새로고침" }, Hu = { message: "소스 제거" }, Wu = { message: "github.com/owner/repo 또는 owner/repo/path" }, Uu = { message: "추가" }, ju = { message: "URL 형식이 올바르지 않습니다. github.com/owner/repo 또는 owner/repo 형식으로 입력해주세요." }, Vu = { message: "GitHub URL 또는 owner/repo를 입력해주세요." }, Gu = { message: "↻ 새로고침을 눌러 이 소스의 시나리오를 불러오세요." }, Yu = { message: "이 폴더에는 아직 시나리오가 없습니다." }, Xu = { message: "비어있는 폴더입니다." }, Ku = { message: "상위 폴더로" }, Zu = { message: "접기" }, Ju = { message: "펼치기" }, Qu = { message: "불러오는 중" }, ed = { message: "단계" }, td = { message: "편집은 저장되지 않습니다" }, nd = { message: "내 라이브러리에 저장" }, rd = { message: "외부 페이지" }, od = { message: "라이브러리에 저장했습니다" }, sd = { message: "저장에 실패했습니다" }, ad = { message: "서식 복사" }, id = { message: "이 스텝만" }, cd = { message: "전체 스텝" }, ld = { message: "녹화 시작 전" }, ud = { message: "브라우저가 share dialog 를 두 번 띄웁니다. 첫 번째는 이 탭을 캡처하고, 두 번째는 시스템 오디오로 TTS 음성을 추가합니다. 각 다이얼로그의 번호 순서대로 진행하세요." }, dd = { message: "1. 영상 녹화를 위한 필수 허용" }, pd = { message: "첫 번째 share dialog — 현재 탭이 나타나면 허용을 클릭하세요." }, hd = { message: "아래 다이얼로그에 현재 탭이 나타나면 <strong>허용</strong>을 클릭합니다." }, fd = { message: "2. TTS 녹음을 위한 옵션 허용" }, md = { message: "두 번째 share dialog — 브라우저 창 선택 + 시스템 오디오 공유 체크." }, gd = { message: "<ol><li>상단의 <strong>Window(윈도우)</strong> 탭을 선택합니다.</li><li>브라우저 창을 선택합니다.</li><li><strong>시스템 오디오 공유</strong>를 체크합니다 — TTS 음성 녹음 필수.</li><li><strong>공유</strong>를 클릭합니다.</li></ol><p>두 번째 다이얼로그의 영상은 사용되지 않습니다. <strong>이 다이얼로그를 취소해도 녹화는 진행되지만 TTS 음성은 녹음되지 않습니다.</strong></p>" }, bd = { message: "Manuscript 녹화기" }, _d = { message: "이 창은 녹화되지 않습니다 — 녹화를 제어하는 창입니다." }, yd = { message: "녹화 시작을 누르면 브라우저가 공유할 화면을 묻습니다. 데모 창을 고르고 시스템 오디오를 켜야 내레이션이 녹음됩니다." }, vd = { message: "영상 + TTS 음성 녹화 허용" }, xd = { message: "<ol><li>상단의 <strong>창</strong> 탭을 선택합니다.</li><li>데모가 열린 브라우저 창을 고릅니다.</li><li><strong>시스템 오디오 공유</strong>를 체크합니다 — TTS 내레이션 녹음에 필요.</li><li><strong>공유</strong>를 누릅니다.</li></ol>" }, wd = { message: "녹화 시작" }, kd = { message: "정지 후 저장" }, Sd = { message: "녹화 중 — Space: 데모 일시정지 / 재개 (녹화는 계속) · Esc: 정지 후 저장" }, $d = { message: "준비됨." }, Ad = { message: "녹화 중" }, Md = { message: "⏸ 일시정지 — 녹화는 계속됩니다" }, Ed = { message: "시나리오 재생 중" }, Ld = { message: "시나리오 일시정지 중" }, Td = { message: "저장됨. 이 창을 닫아도 됩니다." }, Cd = { message: "⚠ 내레이션이 영상에 들어가지 않습니다. 탭이 아니라 '창'을 공유하고 '시스템 오디오 공유'를 켜세요. '녹화 시작'을 다시 눌러 주세요." }, Pd = { message: "영상 화질" }, Id = { message: "일반 화질" }, Od = { message: "5 Mbps · 1080p" }, Rd = { message: "고화질" }, Nd = { message: "25 Mbps · 1080p" }, Dd = { message: "패널·컨트롤을 영상에 함께 노출 (튜토리얼 모드)" }, Bd = { message: "Manuscript UI를 직접 보여주는 how-to 녹화에 사용합니다. 일반 워크스루는 기본(자동 숨김)이 더 깔끔합니다." }, qd = { message: "내 마이크도 함께 녹음" }, Fd = { message: "시나리오 일시중지 중에 직접 설명을 더하거나 라이브 보이스 오버를 추가할 수 있도록 마이크 음성을 함께 녹음합니다. 브라우저가 한 번 권한을 요청합니다." }, zd = { message: "녹화 중 — <kbd>Space</kbd> 시나리오 일시중지 / 재개 (녹화는 계속) · <kbd>Esc</kbd> 종료 후 저장" }, Hd = { message: "취소" }, Wd = { message: "녹화 시작" }, Ud = { message: "녹화 중" }, jd = { message: "클릭하여 시나리오 재개" }, Vd = { message: "마이크 권한 거부 — 보이스 없이 녹화를 계속합니다." }, Gd = { message: "단계 이름" }, Yd = { message: "단계 설명" }, Xd = { message: "단계 $N$의 요소 선택", placeholders: { n: { content: "$1", example: "1" } } }, Kd = { message: "요소 선택" }, Zd = { message: "액션 — 이 단계에서 재생을 멈춤" }, Jd = { message: "단계 삭제" }, Qd = { message: "자동 진행 시간(초)" }, ep = { message: "주석 도구" }, tp = { message: "주석 삭제" }, np = { message: "내부 흐름" }, rp = { message: "보조 element 는 대표 element 와 같은 페이지에서만 추가할 수 있습니다." }, op = { message: "이 스텝에 element 추가" }, sp = { message: "0.1초 앞당기기" }, ap = { message: "0.1초 늦추기" }, ip = { message: "기본 selector 정상" }, cp = { message: "Layer 2 fallback — 원본 속성 못 찾음, 텍스트+부모 구조로 매칭" }, lp = { message: "Layer 3 fallback — 시각 휴리스틱만 남음, 재픽 권장" }, up = { message: "이 페이지에서 element 못 찾음 — 재픽 필요" }, dp = { message: "시연 검증" }, pp = { message: "시연 상태 검증" }, hp = { message: "여기서 standalone player 재생이 멈출 수 있어요 — 다음 단계가 다른 출처(cross-origin)입니다." }, fp = { message: "여기서부터, 투어가 자동으로 넘어가는 페이지에서는 내레이션이 자동 재생되지 않아요 — 브라우저가 클릭 없이 열린 페이지의 소리를 막기 때문입니다. 보는 사람이 페이지를 클릭하면 그 페이지의 음성이 재생됩니다. 직접 클릭해서 넘긴 페이지는 소리가 이어져요. (standalone player·확장 모두 해당)" }, mp = { message: "정상 $OK$ · fallback $FALLBACK$ · 깨짐 $BROKEN$ · 다른 페이지 $SKIPPED$", placeholders: { ok: { content: "$1", example: "8" }, fallback: { content: "$2", example: "2" }, broken: { content: "$3", example: "1" }, skipped: { content: "$4", example: "3" } } }, gp = { message: "정상 $OK$ · fallback $FALLBACK$ · 깨짐 $BROKEN$ · 대기 $PENDING$", placeholders: { ok: { content: "$1", example: "3" }, fallback: { content: "$2", example: "1" }, broken: { content: "$3", example: "1" }, pending: { content: "$4", example: "5" } } }, bp = { message: "검증 시작" }, _p = { message: "검증 중…" }, yp = { message: "검증 완료" }, vp = { message: "이 페이지 검증 중 · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/" } } }, xp = { message: "다음 페이지로 이동 중 · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/checkout" } } }, wp = { message: "대기" }, kp = { message: "정상" }, Sp = { message: "fallback" }, $p = { message: "깨짐" }, Ap = { message: "대기" }, Mp = { message: "이 스텝 보기" }, Ep = { message: "재픽" }, Lp = { message: "정상" }, Tp = { message: "Layer 2 fallback" }, Cp = { message: "Layer 3 fallback" }, Pp = { message: "못 찾음" }, Ip = { message: "다른 페이지" }, Op = { message: "element 미픽" }, Rp = { message: "이 페이지의 step 들은 모두 정상입니다." }, Np = { message: "닫기" }, Dp = { message: "$URL$로 이동", placeholders: { url: { content: "$1", example: "https://example.com" } } }, Bp = { message: "여기에 단계 삽입" }, qp = { message: "단계 추가" }, Fp = { message: "단계 이름" }, zp = { message: "단계 카운터" }, Hp = { message: "이전 (←)" }, Wp = { message: "일시정지/재생 (Space)" }, Up = { message: "다음 (→)" }, jp = { message: "완료 (→)" }, Vp = { message: "종료 (Esc)" }, Gp = { message: "발표자 프롬프터 열기" }, Yp = { message: "발표자 프롬프터" }, Xp = { message: "컨트롤 이동 (드래그)" }, Kp = { message: "드래그로 이동" }, Zp = { message: "세로/가로 전환" }, Jp = { message: "내레이션 켜기/끄기" }, Qp = { message: "내레이션 (TTS)" }, eh = { message: "소리를 위해 아무 곳이나 클릭하세요" }, th = { message: "소리를 위해 재생 화면을 클릭하세요" }, nh = { message: "강조된 대상을 클릭하면 계속 진행됩니다" }, rh = { message: "건너뛰기" }, oh = { message: "대상을 찾을 수 없습니다" }, sh = { message: "이 단계가 가리키는 요소가 페이지에 더 이상 없습니다. 건너뛰거나 재생을 멈출 수 있습니다." }, ah = { message: "건너뛰기" }, ih = { message: "재생 멈추기" }, ch = { message: "다른 페이지" }, lh = { message: "이 시연은 아래 페이지에서 녹화되었습니다. 그곳으로 이동할까요?" }, uh = { message: "이동" }, dh = { message: "여기서 강제 재생" }, ph = { message: "취소" }, hh = { message: "현재" }, fh = { message: "다음" }, mh = { message: "단계" }, gh = { message: "단계 $N$", placeholders: { n: { content: "$1", example: "3" } } }, bh = { message: "대기 중…" }, _h = { message: "재생 중" }, yh = { message: "일시정지" }, vh = { message: "액션 단계" }, xh = { message: "이전" }, wh = { message: "일시정지/재생" }, kh = { message: "다음" }, Sh = { message: "내레이션 켜기/끄기" }, $h = { message: "내레이션 (TTS)" }, Ah = { message: "매뉴스크립트 · 프롬프터" }, Mh = { message: "썸네일에 호스트 접근 권한이 필요합니다. 매뉴스크립트 아이콘을 클릭하여 시작을 다시 누르면 권한을 부여할 수 있습니다." }, Eh = { message: "이 요소가 여러 대상과 일치합니다 — 더 구체적인 요소를 선택해 주세요." }, Lh = { message: "내보냄 ✓" }, Th = { message: "내보내기에 실패했습니다" }, Ch = { message: "단계가 없습니다" }, Ph = { message: "이 투어는 여기서 계속할 수 없습니다." }, Ih = {
-  extension_name: Rl,
-  extension_description: Nl,
-  common_cancel: Dl,
-  common_delete: Bl,
-  common_overwrite: ql,
-  common_close: Fl,
-  common_ok: zl,
-  common_delete_confirm: Hl,
-  common_untitled: Wl,
-  common_got_it: Ul,
-  popup_title_start: jl,
-  popup_cta_new: Vl,
-  popup_cta_help: Gl,
-  popup_cta_help_text: Yl,
-  popup_cta_import: Xl,
-  popup_import_failed: Kl,
-  popup_import_overwrite_confirm: Zl,
-  popup_list_heading: Jl,
-  popup_list_resume_tag: Ql,
-  popup_list_steps: eu,
-  popup_list_delete_aria: tu,
-  popup_detach_detached: nu,
-  popup_detach_inline_title: ru,
-  popup_error_no_tab: ou,
-  popup_error_bad_url: su,
-  popup_error_inject: au,
-  popup_error_unknown: iu,
-  popup_language_label: cu,
-  panel_aria_region: lu,
-  panel_close_aria: uu,
-  panel_palette_toggle_aria: du,
-  panel_title_placeholder: pu,
-  panel_tool_label: hu,
-  panel_tool_text: fu,
-  panel_tool_shape: mu,
-  panel_tool_freedraw: gu,
-  panel_replay_aria: bu,
-  panel_record_aria: _u,
-  panel_replay_title: yu,
-  panel_prompter_aria: vu,
-  panel_export_aria: xu,
-  panel_export_menu_full: wu,
-  panel_export_menu_full_meta: ku,
-  panel_export_menu_lite: Su,
-  panel_export_menu_lite_meta: $u,
-  panel_undo_aria: Au,
-  panel_redo_aria: Mu,
-  panel_settings_aria: Eu,
-  panel_settings_title: Lu,
-  panel_settings_voice_label: Tu,
-  panel_settings_voice_auto: Cu,
-  panel_settings_strict_url_label: Pu,
-  panel_settings_strict_url_help: Iu,
-  panel_settings_close_aria: Ou,
-  popup_tabs_local: Ru,
-  popup_tabs_remote: Nu,
-  popup_remote_coming_soon: Du,
-  popup_remote_empty_copy: Bu,
-  popup_remote_add_cta: qu,
-  popup_remote_add_cta_aria: Fu,
-  popup_remote_refresh_all_aria: zu,
-  popup_remote_remove_aria: Hu,
-  popup_remote_add_placeholder: Wu,
-  popup_remote_add_submit: Uu,
-  popup_remote_add_error_invalid: ju,
-  popup_remote_add_error_empty: Vu,
-  popup_remote_source_never_refreshed: Gu,
-  popup_remote_source_empty: Yu,
-  popup_remote_folder_empty: Xu,
-  popup_remote_back_aria: Ku,
-  popup_remote_collapse_aria: Zu,
-  popup_remote_expand_aria: Ju,
-  popup_remote_progress: Qu,
-  popup_remote_steps_suffix: ed,
-  panel_ephemeral_warning: td,
-  panel_ephemeral_import: nd,
-  panel_ephemeral_bridge_fallback: rd,
-  panel_ephemeral_saved: od,
-  panel_ephemeral_save_failed: sd,
-  copy_formatting: ad,
-  apply_this_step: id,
-  apply_all_steps: cd,
-  recording_guide_title: ld,
-  recording_guide_subtitle: ud,
-  recording_guide_step1_title: dd,
-  recording_guide_step1_alt: pd,
-  recording_guide_step1_desc_html: hd,
-  recording_guide_step2_title: fd,
-  recording_guide_step2_alt: md,
-  recording_guide_step2_desc_html: gd,
-  recorder_title: bd,
-  recorder_not_recorded: _d,
-  recorder_instruction: yd,
-  recorder_share_title: vd,
-  recorder_share_steps_html: xd,
-  recorder_start: wd,
-  recorder_stop: kd,
-  recorder_hint: Sd,
-  recorder_status_ready: $d,
-  recorder_status_recording: Ad,
-  recorder_status_paused: Md,
-  recorder_scenario_playing: Ed,
-  recorder_scenario_paused: Ld,
-  recorder_status_saved: Td,
-  recorder_warn_no_tts: Cd,
-  recorder_quality_label: Pd,
-  recorder_quality_standard: Id,
-  recorder_quality_standard_spec: Od,
-  recorder_quality_high: Rd,
-  recorder_quality_high_spec: Nd,
-  recording_guide_keep_ui_label: Dd,
-  recording_guide_keep_ui_hint: Bd,
-  recording_guide_mic_label: qd,
-  recording_guide_mic_hint: Fd,
-  recording_guide_keys_info_html: zd,
-  recording_guide_cancel: Hd,
-  recording_guide_start: Wd,
-  recording_paused_label: Ud,
-  recording_paused_aria: jd,
-  recording_mic_failed: Vd,
-  step_name_placeholder: Gd,
-  step_desc_placeholder: Yd,
-  step_wand_aria: Xd,
-  step_wand_title: Kd,
-  step_action_aria: Zd,
-  step_delete_aria: Jd,
-  step_timer_aria: Qd,
-  step_annotations_title: ep,
-  step_annotation_delete_aria: tp,
-  step_subs_title: np,
-  sub_same_url_required: rp,
-  sub_add_aria: op,
-  sub_shift_left: sp,
-  sub_shift_right: ap,
-  health_layer1: ip,
-  health_layer2: cp,
-  health_layer3: lp,
-  health_broken: up,
-  panel_validate_aria: dp,
-  validate_modal_title: pp,
-  validate_player_cross_origin_warn: hp,
-  validate_tts_autoplay_warn: fp,
-  validate_summary: mp,
-  validate_summary_running: gp,
-  validate_start: bp,
-  validate_in_progress: _p,
-  validate_complete: yp,
-  validate_checking: vp,
-  validate_navigating_to: xp,
-  validate_status_pending: wp,
-  validate_label_ok: kp,
-  validate_label_fallback: Sp,
-  validate_label_broken: $p,
-  validate_label_pending: Ap,
-  validate_row_go: Mp,
-  validate_row_repick: Ep,
-  validate_status_green: Lp,
-  validate_status_yellow: Tp,
-  validate_status_orange: Cp,
-  validate_status_red: Pp,
-  validate_status_skipped: Ip,
-  validate_status_no_element: Op,
-  validate_no_issues: Rp,
-  validate_close: Np,
-  step_link_aria: Dp,
-  step_insert_aria: Bp,
-  step_add_aria: qp,
-  step_empty_name: Fp,
-  replay_counter_aria: zp,
-  replay_prev_aria: Hp,
-  replay_pause_aria: Wp,
-  replay_next_aria: Up,
-  replay_finish_aria: jp,
-  replay_exit_aria: Vp,
-  replay_prompter_aria: Gp,
-  replay_prompter_title: Yp,
-  replay_move_aria: Xp,
-  replay_move_title: Kp,
-  replay_orient_aria: Zp,
-  replay_tts_aria: Jp,
-  replay_tts_title: Qp,
-  replay_tts_blocked_hint: eh,
-  prompter_tts_blocked_hint: th,
-  replay_action_prompt: nh,
-  replay_action_skip: rh,
-  replay_notfound_title: oh,
-  replay_notfound_body: sh,
-  replay_notfound_skip: ah,
-  replay_notfound_stop: ih,
-  replay_url_mismatch_title: ch,
-  replay_url_mismatch_body: lh,
-  replay_url_mismatch_navigate: uh,
-  replay_url_mismatch_force: dh,
-  replay_url_mismatch_cancel: ph,
-  prompter_now: hh,
-  prompter_next: fh,
-  prompter_steps: mh,
-  prompter_step_no: gh,
-  prompter_waiting: bh,
-  prompter_playing: _h,
-  prompter_paused: yh,
-  prompter_action_step: vh,
-  prompter_prev_aria: xh,
-  prompter_pause_aria: wh,
-  prompter_next_aria: kh,
-  prompter_tts_aria: Sh,
-  prompter_tts_title: $h,
-  prompter_title: Ah,
-  permission_thumbnail_needs_host: Mh,
-  toast_ambiguous_selector: Eh,
-  toast_export_success: Lh,
-  toast_export_failed: Th,
-  toast_no_steps: Ch,
-  player_handoff_unavailable: Ph
+const Ks = { message: "Manuscript", description: "Extension name shown in the browser extensions page and in store listings." }, Zs = { message: "DOM-aware browser extension for authoring versioned web demos and manuals", description: "Short pitch shown under the name in the browser extensions page and in store listings." }, Js = { message: "Cancel" }, Qs = { message: "Delete" }, ea = { message: "Overwrite" }, ta = { message: "Close" }, na = { message: "OK" }, ra = { message: 'Delete the scenario "$NAME$"?', placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, oa = { message: "Untitled" }, sa = { message: "Got it" }, aa = { message: "Start a new walkthrough" }, ia = { message: "New Manuscript" }, ca = { message: "Need help?" }, la = { message: "Open a web page, then press New Manuscript." }, ua = { message: "Open a JSON file" }, da = { message: "Couldn't read this JSON file. Pick a valid Manuscript export." }, pa = { message: 'A scenario with this id already exists: "$NAME$". Overwrite it?', placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, ha = { message: "Previous Manuscripts" }, fa = { message: "Resume" }, ma = { message: "$N$ steps", placeholders: { n: { content: "$1", example: "3" } } }, ga = { message: "Delete $NAME$", placeholders: { name: { content: "$1", example: "Checkout walkthrough" } } }, ba = { message: "↩ Inline" }, _a = { message: "Back to inline popup" }, ya = { message: "No active tab found." }, va = { message: "This page is not supported (chrome://, edge://, new tab, file:// etc.). Open a regular web page and try again." }, xa = { message: "The extension could not connect to this page. Refresh the page (F5) and try again." }, wa = { message: "Unknown error occurred. Check the console." }, ka = { message: "Language" }, Sa = { message: "Manuscript authoring panel" }, $a = { message: "Close panel" }, Aa = { message: "Toggle dark mode" }, Ma = { message: "Untitled walkthrough" }, Ea = { message: "Annotation tools" }, Ta = { message: "Text" }, La = { message: "Shape" }, Ca = { message: "Freedraw" }, Pa = { message: "Replay" }, Ia = { message: "Record screen" }, Oa = { message: "Replay walkthrough" }, Ra = { message: "Open presenter prompter" }, Na = { message: "Export JSON" }, Da = { message: "Export" }, Ba = { message: "With thumbnails · full size" }, qa = { message: "Export without thumbnails" }, Fa = { message: "Lighter file · -lite" }, za = { message: "Undo (Ctrl+Z)" }, Ha = { message: "Redo (Ctrl+Shift+Z)" }, Wa = { message: "Settings" }, Ua = { message: "Settings" }, ja = { message: "Narration voice" }, Va = { message: "Auto (Google preferred)" }, Ga = { message: "Match full URL (query & hash)" }, Ya = { message: "On by default URL matching ignores ?query and #hash. Turn this on for sites that change the page via query or hash (e.g. ?tab=, #/reports) so step navigation and the wrong-page warning work." }, Xa = { message: "Close settings" }, Ka = { message: "Local" }, Za = { message: "Remote Library" }, Ja = { message: "Remote library — coming soon." }, Qa = { message: "Connect a public GitHub repo to load shared manuscripts." }, ei = { message: "+ Add a GitHub source" }, ti = { message: "Add source" }, ni = { message: "Refresh all sources" }, ri = { message: "Remove source" }, oi = { message: "github.com/owner/repo  or  owner/repo/path" }, si = { message: "Add" }, ai = { message: "Invalid URL. Expected github.com/owner/repo or owner/repo." }, ii = { message: "Enter a GitHub URL or owner/repo." }, ci = { message: "Click ↻ refresh to load this source." }, li = { message: "No manuscripts in this folder yet." }, ui = { message: "This folder is empty." }, di = { message: "Back to parent folder" }, pi = { message: "Collapse source" }, hi = { message: "Expand source" }, fi = { message: "Loading" }, mi = { message: "steps" }, gi = { message: "Edits won't be saved" }, bi = { message: "Save to local" }, _i = { message: "External page" }, yi = { message: "Saved to local" }, vi = { message: "Save failed" }, xi = { message: "Copy formatting" }, wi = { message: "This step only" }, ki = { message: "All steps" }, Si = { message: "Before you record" }, $i = { message: "The browser shows two share dialogs. The first captures this tab; the second adds your TTS narration via system audio. Follow the numbered cues in each dialog." }, Ai = { message: "1. Required — allow video capture" }, Mi = { message: "First share dialog — when the current tab appears, click Allow." }, Ei = { message: "When the dialog below shows your current tab, click <strong>Allow</strong>." }, Ti = { message: "2. Optional — allow TTS audio capture" }, Li = { message: "Second share dialog — select a browser window and tick Also share system audio." }, Ci = { message: "<ol><li>Select the <strong>Window</strong> tab at the top.</li><li>Pick a browser window.</li><li>Tick <strong>Also share system audio</strong> — required to capture the TTS voice.</li><li>Click <strong>Share</strong>.</li></ol><p>The video from this dialog isn't used. <strong>If you cancel this dialog the recording still runs, but the TTS voice will be silent in the file.</strong></p>" }, Pi = { message: "Manuscript recorder" }, Ii = { message: "This window is not recorded — it just controls the capture." }, Oi = { message: "Click Start recording — the browser asks which surface to share. Pick your demo window and turn on system audio so the narration is captured." }, Ri = { message: "Allow capture for video + TTS audio" }, Ni = { message: "<ol><li>Select the <strong>Window</strong> tab at the top.</li><li>Choose the browser window running your demo.</li><li>Tick <strong>Share system audio</strong> — required to record the TTS narration.</li><li>Click <strong>Share</strong>.</li></ol>" }, Di = { message: "Start recording" }, Bi = { message: "Stop & save" }, qi = { message: "While recording — Space: pause / resume the demo (recording keeps going) · Esc: stop & save" }, Fi = { message: "Ready." }, zi = { message: "Recording" }, Hi = { message: "⏸ Paused — recording continues" }, Wi = { message: "Scenario playing" }, Ui = { message: "Scenario paused" }, ji = { message: "Saved. You can close this window." }, Vi = { message: `⚠ The narration won't be in the video. Share a Window (not a tab) and turn on "Share system audio". Click Start recording to try again.` }, Gi = { message: "Video quality" }, Yi = { message: "Standard" }, Xi = { message: "5 Mbps · 1080p" }, Ki = { message: "High quality" }, Zi = { message: "25 Mbps · 1080p" }, Ji = { message: "Keep the panel and controls visible (tutorial mode)" }, Qi = { message: "Useful when you're recording a how-to that shows Manuscript's own UI. The default uncluttered recording is best for end-user walkthroughs." }, ec = { message: "Also record my microphone" }, tc = { message: "Adds your voice to the recording so you can narrate live or add extra commentary while the scenario is paused. The browser will ask permission once." }, nc = { message: "While recording — <kbd>Space</kbd> pauses / resumes the scenario (recording keeps going) · <kbd>Esc</kbd> stops and saves" }, rc = { message: "Cancel" }, oc = { message: "Start recording" }, sc = { message: "Recording" }, ac = { message: "Click to resume the scenario" }, ic = { message: "Microphone permission denied — recording continues without your voice." }, cc = { message: "Step name" }, lc = { message: "Step description" }, uc = { message: "Pick element for step $N$", placeholders: { n: { content: "$1", example: "1" } } }, dc = { message: "Pick element with wand" }, pc = { message: "Action — pause replay on this step" }, hc = { message: "Delete step" }, fc = { message: "Auto-advance seconds" }, mc = { message: "Annotation tools" }, gc = { message: "Delete annotation" }, bc = { message: "Inner flow" }, _c = { message: "Sub-elements must be picked on the same page as the primary." }, yc = { message: "Add another element to this step" }, vc = { message: "Pull earlier (0.1s)" }, xc = { message: "Push later (0.1s)" }, wc = { message: "Stable attribute match — selector is healthy" }, kc = { message: "Layer 2 fallback — original attribute not found, matched by text + parent" }, Sc = { message: "Layer 3 fallback — only the visual heuristic still matches; re-pick is recommended" }, $c = { message: "Element not found on this page — re-pick required" }, Ac = { message: "Validate scenario" }, Mc = { message: "Scenario health check" }, Ec = { message: "Standalone player may stop here — the next step is a different origin." }, Tc = { message: "From here on, narration won't autoplay on pages the tour advances to on its own — the browser blocks sound on a page opened without a click. The viewer clicks the page to play its narration. Pages the viewer advances by clicking keep sound. (Affects both the standalone player and the extension.)" }, Lc = { message: "$OK$ healthy · $FALLBACK$ fallback · $BROKEN$ broken · $SKIPPED$ skipped (other pages)", placeholders: { ok: { content: "$1", example: "8" }, fallback: { content: "$2", example: "2" }, broken: { content: "$3", example: "1" }, skipped: { content: "$4", example: "3" } } }, Cc = { message: "$OK$ healthy · $FALLBACK$ fallback · $BROKEN$ broken · $PENDING$ pending", placeholders: { ok: { content: "$1", example: "3" }, fallback: { content: "$2", example: "1" }, broken: { content: "$3", example: "1" }, pending: { content: "$4", example: "5" } } }, Pc = { message: "Start" }, Ic = { message: "Validating…" }, Oc = { message: "Validation complete" }, Rc = { message: "Checking this page · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/" } } }, Nc = { message: "Moving to next page · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/checkout" } } }, Dc = { message: "Pending" }, Bc = { message: "healthy" }, qc = { message: "fallback" }, Fc = { message: "broken" }, zc = { message: "pending" }, Hc = { message: "Go to step" }, Wc = { message: "Re-pick element" }, Uc = { message: "Healthy" }, jc = { message: "Layer 2 fallback" }, Vc = { message: "Layer 3 fallback" }, Gc = { message: "Not found" }, Yc = { message: "Other page" }, Xc = { message: "No element picked" }, Kc = { message: "All resolvable steps on this page check out. " }, Zc = { message: "Close" }, Jc = { message: "Go to $URL$", placeholders: { url: { content: "$1", example: "https://example.com" } } }, Qc = { message: "Insert step here" }, el = { message: "Add step" }, tl = { message: "Step Name" }, nl = { message: "Step counter" }, rl = { message: "Previous (←)" }, ol = { message: "Pause/Play (Space)" }, sl = { message: "Next (→)" }, al = { message: "Finish (→)" }, il = { message: "Exit (Esc)" }, cl = { message: "Open presenter prompter" }, ll = { message: "Presenter prompter" }, ul = { message: "Move controls (drag)" }, dl = { message: "Drag to move" }, pl = { message: "Toggle vertical/horizontal" }, hl = { message: "Toggle narration" }, fl = { message: "Narration (TTS)" }, ml = { message: "Click anywhere to enable sound" }, gl = { message: "Click the demo page to enable sound" }, bl = { message: "Click the highlighted target to continue" }, _l = { message: "Skip" }, yl = { message: "Couldn't find the target" }, vl = { message: "The element this step relies on isn't on the page anymore. Skip this step or stop replay." }, xl = { message: "Skip" }, wl = { message: "Stop replay" }, kl = { message: "Different page" }, Sl = { message: "This walkthrough was recorded on the page below. Open it now?" }, $l = { message: "Navigate" }, Al = { message: "Force replay here" }, Ml = { message: "Cancel" }, El = { message: "Now" }, Tl = { message: "Next" }, Ll = { message: "Steps" }, Cl = { message: "Step $N$", placeholders: { n: { content: "$1", example: "3" } } }, Pl = { message: "Waiting…" }, Il = { message: "Playing" }, Ol = { message: "Paused" }, Rl = { message: "Action step" }, Nl = { message: "Previous" }, Dl = { message: "Pause/Play" }, Bl = { message: "Next" }, ql = { message: "Toggle narration" }, Fl = { message: "Narration (TTS)" }, zl = { message: "Manuscript · Prompter" }, Hl = { message: "Thumbnails need host access. Click the Manuscript icon and press Start again to grant the permission." }, Wl = { message: "This element matches multiple targets — pick something more specific." }, Ul = { message: "Exported ✓" }, jl = { message: "Export failed" }, Vl = { message: "No steps" }, Gl = { message: "This tour can't continue on this page." }, Yl = {
+  extension_name: Ks,
+  extension_description: Zs,
+  common_cancel: Js,
+  common_delete: Qs,
+  common_overwrite: ea,
+  common_close: ta,
+  common_ok: na,
+  common_delete_confirm: ra,
+  common_untitled: oa,
+  common_got_it: sa,
+  popup_title_start: aa,
+  popup_cta_new: ia,
+  popup_cta_help: ca,
+  popup_cta_help_text: la,
+  popup_cta_import: ua,
+  popup_import_failed: da,
+  popup_import_overwrite_confirm: pa,
+  popup_list_heading: ha,
+  popup_list_resume_tag: fa,
+  popup_list_steps: ma,
+  popup_list_delete_aria: ga,
+  popup_detach_detached: ba,
+  popup_detach_inline_title: _a,
+  popup_error_no_tab: ya,
+  popup_error_bad_url: va,
+  popup_error_inject: xa,
+  popup_error_unknown: wa,
+  popup_language_label: ka,
+  panel_aria_region: Sa,
+  panel_close_aria: $a,
+  panel_palette_toggle_aria: Aa,
+  panel_title_placeholder: Ma,
+  panel_tool_label: Ea,
+  panel_tool_text: Ta,
+  panel_tool_shape: La,
+  panel_tool_freedraw: Ca,
+  panel_replay_aria: Pa,
+  panel_record_aria: Ia,
+  panel_replay_title: Oa,
+  panel_prompter_aria: Ra,
+  panel_export_aria: Na,
+  panel_export_menu_full: Da,
+  panel_export_menu_full_meta: Ba,
+  panel_export_menu_lite: qa,
+  panel_export_menu_lite_meta: Fa,
+  panel_undo_aria: za,
+  panel_redo_aria: Ha,
+  panel_settings_aria: Wa,
+  panel_settings_title: Ua,
+  panel_settings_voice_label: ja,
+  panel_settings_voice_auto: Va,
+  panel_settings_strict_url_label: Ga,
+  panel_settings_strict_url_help: Ya,
+  panel_settings_close_aria: Xa,
+  popup_tabs_local: Ka,
+  popup_tabs_remote: Za,
+  popup_remote_coming_soon: Ja,
+  popup_remote_empty_copy: Qa,
+  popup_remote_add_cta: ei,
+  popup_remote_add_cta_aria: ti,
+  popup_remote_refresh_all_aria: ni,
+  popup_remote_remove_aria: ri,
+  popup_remote_add_placeholder: oi,
+  popup_remote_add_submit: si,
+  popup_remote_add_error_invalid: ai,
+  popup_remote_add_error_empty: ii,
+  popup_remote_source_never_refreshed: ci,
+  popup_remote_source_empty: li,
+  popup_remote_folder_empty: ui,
+  popup_remote_back_aria: di,
+  popup_remote_collapse_aria: pi,
+  popup_remote_expand_aria: hi,
+  popup_remote_progress: fi,
+  popup_remote_steps_suffix: mi,
+  panel_ephemeral_warning: gi,
+  panel_ephemeral_import: bi,
+  panel_ephemeral_bridge_fallback: _i,
+  panel_ephemeral_saved: yi,
+  panel_ephemeral_save_failed: vi,
+  copy_formatting: xi,
+  apply_this_step: wi,
+  apply_all_steps: ki,
+  recording_guide_title: Si,
+  recording_guide_subtitle: $i,
+  recording_guide_step1_title: Ai,
+  recording_guide_step1_alt: Mi,
+  recording_guide_step1_desc_html: Ei,
+  recording_guide_step2_title: Ti,
+  recording_guide_step2_alt: Li,
+  recording_guide_step2_desc_html: Ci,
+  recorder_title: Pi,
+  recorder_not_recorded: Ii,
+  recorder_instruction: Oi,
+  recorder_share_title: Ri,
+  recorder_share_steps_html: Ni,
+  recorder_start: Di,
+  recorder_stop: Bi,
+  recorder_hint: qi,
+  recorder_status_ready: Fi,
+  recorder_status_recording: zi,
+  recorder_status_paused: Hi,
+  recorder_scenario_playing: Wi,
+  recorder_scenario_paused: Ui,
+  recorder_status_saved: ji,
+  recorder_warn_no_tts: Vi,
+  recorder_quality_label: Gi,
+  recorder_quality_standard: Yi,
+  recorder_quality_standard_spec: Xi,
+  recorder_quality_high: Ki,
+  recorder_quality_high_spec: Zi,
+  recording_guide_keep_ui_label: Ji,
+  recording_guide_keep_ui_hint: Qi,
+  recording_guide_mic_label: ec,
+  recording_guide_mic_hint: tc,
+  recording_guide_keys_info_html: nc,
+  recording_guide_cancel: rc,
+  recording_guide_start: oc,
+  recording_paused_label: sc,
+  recording_paused_aria: ac,
+  recording_mic_failed: ic,
+  step_name_placeholder: cc,
+  step_desc_placeholder: lc,
+  step_wand_aria: uc,
+  step_wand_title: dc,
+  step_action_aria: pc,
+  step_delete_aria: hc,
+  step_timer_aria: fc,
+  step_annotations_title: mc,
+  step_annotation_delete_aria: gc,
+  step_subs_title: bc,
+  sub_same_url_required: _c,
+  sub_add_aria: yc,
+  sub_shift_left: vc,
+  sub_shift_right: xc,
+  health_layer1: wc,
+  health_layer2: kc,
+  health_layer3: Sc,
+  health_broken: $c,
+  panel_validate_aria: Ac,
+  validate_modal_title: Mc,
+  validate_player_cross_origin_warn: Ec,
+  validate_tts_autoplay_warn: Tc,
+  validate_summary: Lc,
+  validate_summary_running: Cc,
+  validate_start: Pc,
+  validate_in_progress: Ic,
+  validate_complete: Oc,
+  validate_checking: Rc,
+  validate_navigating_to: Nc,
+  validate_status_pending: Dc,
+  validate_label_ok: Bc,
+  validate_label_fallback: qc,
+  validate_label_broken: Fc,
+  validate_label_pending: zc,
+  validate_row_go: Hc,
+  validate_row_repick: Wc,
+  validate_status_green: Uc,
+  validate_status_yellow: jc,
+  validate_status_orange: Vc,
+  validate_status_red: Gc,
+  validate_status_skipped: Yc,
+  validate_status_no_element: Xc,
+  validate_no_issues: Kc,
+  validate_close: Zc,
+  step_link_aria: Jc,
+  step_insert_aria: Qc,
+  step_add_aria: el,
+  step_empty_name: tl,
+  replay_counter_aria: nl,
+  replay_prev_aria: rl,
+  replay_pause_aria: ol,
+  replay_next_aria: sl,
+  replay_finish_aria: al,
+  replay_exit_aria: il,
+  replay_prompter_aria: cl,
+  replay_prompter_title: ll,
+  replay_move_aria: ul,
+  replay_move_title: dl,
+  replay_orient_aria: pl,
+  replay_tts_aria: hl,
+  replay_tts_title: fl,
+  replay_tts_blocked_hint: ml,
+  prompter_tts_blocked_hint: gl,
+  replay_action_prompt: bl,
+  replay_action_skip: _l,
+  replay_notfound_title: yl,
+  replay_notfound_body: vl,
+  replay_notfound_skip: xl,
+  replay_notfound_stop: wl,
+  replay_url_mismatch_title: kl,
+  replay_url_mismatch_body: Sl,
+  replay_url_mismatch_navigate: $l,
+  replay_url_mismatch_force: Al,
+  replay_url_mismatch_cancel: Ml,
+  prompter_now: El,
+  prompter_next: Tl,
+  prompter_steps: Ll,
+  prompter_step_no: Cl,
+  prompter_waiting: Pl,
+  prompter_playing: Il,
+  prompter_paused: Ol,
+  prompter_action_step: Rl,
+  prompter_prev_aria: Nl,
+  prompter_pause_aria: Dl,
+  prompter_next_aria: Bl,
+  prompter_tts_aria: ql,
+  prompter_tts_title: Fl,
+  prompter_title: zl,
+  permission_thumbnail_needs_host: Hl,
+  toast_ambiguous_selector: Wl,
+  toast_export_success: Ul,
+  toast_export_failed: jl,
+  toast_no_steps: Vl,
+  player_handoff_unavailable: Gl
+}, Xl = { message: "Manuscript", description: "Extension name shown in the browser extensions page and in store listings." }, Kl = { message: "DOM 인식 기반으로 깨지지 않는 웹 시연·매뉴얼을 저작·재생하는 브라우저 확장 프로그램", description: "Short pitch shown under the name in the browser extensions page and in store listings." }, Zl = { message: "취소" }, Jl = { message: "삭제" }, Ql = { message: "덮어쓰기" }, eu = { message: "닫기" }, tu = { message: "확인" }, nu = { message: '"$NAME$" 시나리오를 삭제하시겠습니까?', placeholders: { name: { content: "$1", example: "결제 안내" } } }, ru = { message: "제목 없음" }, ou = { message: "확인" }, su = { message: "새 시연 시작" }, au = { message: "새 매뉴스크립트" }, iu = { message: "도움말" }, cu = { message: "웹 페이지를 연 후 새 매뉴스크립트 버튼을 누르세요." }, lu = { message: "JSON 파일 가져오기" }, uu = { message: "JSON 파일을 읽을 수 없습니다. 매뉴스크립트에서 내보낸 파일인지 확인해 주세요." }, du = { message: '같은 id의 "$NAME$" 시나리오가 이미 있습니다. 덮어쓸까요?', placeholders: { name: { content: "$1", example: "결제 안내" } } }, pu = { message: "이전 매뉴스크립트" }, hu = { message: "이어하기" }, fu = { message: "$N$개 단계", placeholders: { n: { content: "$1", example: "3" } } }, mu = { message: "$NAME$ 삭제", placeholders: { name: { content: "$1", example: "결제 안내" } } }, gu = { message: "↩ 인라인" }, bu = { message: "인라인 팝업으로 돌아가기" }, _u = { message: "활성 탭을 찾을 수 없습니다." }, yu = { message: "이 페이지는 지원하지 않습니다 (chrome://, edge://, 새 탭, file:// 등). 일반 웹 페이지에서 다시 시도해 주세요." }, vu = { message: "이 페이지에 연결할 수 없습니다. F5로 페이지를 새로고침한 뒤 다시 시도하세요." }, xu = { message: "알 수 없는 오류가 발생했습니다. 콘솔을 확인하세요." }, wu = { message: "언어" }, ku = { message: "매뉴스크립트 작성 패널" }, Su = { message: "패널 닫기" }, $u = { message: "다크 모드 전환" }, Au = { message: "제목 없는 시연" }, Mu = { message: "주석 도구" }, Eu = { message: "텍스트" }, Tu = { message: "도형" }, Lu = { message: "자유 그리기" }, Cu = { message: "재생" }, Pu = { message: "화면 녹화" }, Iu = { message: "시연 재생" }, Ou = { message: "발표자 프롬프터 열기" }, Ru = { message: "JSON 내보내기" }, Nu = { message: "전체 내보내기" }, Du = { message: "썸네일 포함 · 원본 크기" }, Bu = { message: "썸네일 없이 내보내기" }, qu = { message: "용량 ↓ · 가벼운 -lite 파일" }, Fu = { message: "되돌리기 (Ctrl+Z)" }, zu = { message: "다시 실행 (Ctrl+Shift+Z)" }, Hu = { message: "설정" }, Wu = { message: "설정" }, Uu = { message: "내레이션 음성" }, ju = { message: "자동 (Google 우선)" }, Vu = { message: "전체 URL 일치 (쿼리·해시)" }, Gu = { message: "기본 URL 일치는 ?쿼리와 #해시를 무시합니다. 쿼리나 해시로 화면이 바뀌는 사이트(예: ?tab=, #/reports)라면 이 옵션을 켜야 단계 이동과 페이지 불일치 경고가 제대로 동작합니다." }, Yu = { message: "설정 닫기" }, Xu = { message: "내 라이브러리" }, Ku = { message: "원격저장소" }, Zu = { message: "원격저장소 라이브러리 — 곧 제공됩니다." }, Ju = { message: "GitHub 공개 리포를 연결해서 공유 시나리오를 불러오세요." }, Qu = { message: "+ GitHub 소스 추가" }, ed = { message: "소스 추가" }, td = { message: "전체 새로고침" }, nd = { message: "소스 제거" }, rd = { message: "github.com/owner/repo 또는 owner/repo/path" }, od = { message: "추가" }, sd = { message: "URL 형식이 올바르지 않습니다. github.com/owner/repo 또는 owner/repo 형식으로 입력해주세요." }, ad = { message: "GitHub URL 또는 owner/repo를 입력해주세요." }, id = { message: "↻ 새로고침을 눌러 이 소스의 시나리오를 불러오세요." }, cd = { message: "이 폴더에는 아직 시나리오가 없습니다." }, ld = { message: "비어있는 폴더입니다." }, ud = { message: "상위 폴더로" }, dd = { message: "접기" }, pd = { message: "펼치기" }, hd = { message: "불러오는 중" }, fd = { message: "단계" }, md = { message: "편집은 저장되지 않습니다" }, gd = { message: "내 라이브러리에 저장" }, bd = { message: "외부 페이지" }, _d = { message: "라이브러리에 저장했습니다" }, yd = { message: "저장에 실패했습니다" }, vd = { message: "서식 복사" }, xd = { message: "이 스텝만" }, wd = { message: "전체 스텝" }, kd = { message: "녹화 시작 전" }, Sd = { message: "브라우저가 share dialog 를 두 번 띄웁니다. 첫 번째는 이 탭을 캡처하고, 두 번째는 시스템 오디오로 TTS 음성을 추가합니다. 각 다이얼로그의 번호 순서대로 진행하세요." }, $d = { message: "1. 영상 녹화를 위한 필수 허용" }, Ad = { message: "첫 번째 share dialog — 현재 탭이 나타나면 허용을 클릭하세요." }, Md = { message: "아래 다이얼로그에 현재 탭이 나타나면 <strong>허용</strong>을 클릭합니다." }, Ed = { message: "2. TTS 녹음을 위한 옵션 허용" }, Td = { message: "두 번째 share dialog — 브라우저 창 선택 + 시스템 오디오 공유 체크." }, Ld = { message: "<ol><li>상단의 <strong>Window(윈도우)</strong> 탭을 선택합니다.</li><li>브라우저 창을 선택합니다.</li><li><strong>시스템 오디오 공유</strong>를 체크합니다 — TTS 음성 녹음 필수.</li><li><strong>공유</strong>를 클릭합니다.</li></ol><p>두 번째 다이얼로그의 영상은 사용되지 않습니다. <strong>이 다이얼로그를 취소해도 녹화는 진행되지만 TTS 음성은 녹음되지 않습니다.</strong></p>" }, Cd = { message: "Manuscript 녹화기" }, Pd = { message: "이 창은 녹화되지 않습니다 — 녹화를 제어하는 창입니다." }, Id = { message: "녹화 시작을 누르면 브라우저가 공유할 화면을 묻습니다. 데모 창을 고르고 시스템 오디오를 켜야 내레이션이 녹음됩니다." }, Od = { message: "영상 + TTS 음성 녹화 허용" }, Rd = { message: "<ol><li>상단의 <strong>창</strong> 탭을 선택합니다.</li><li>데모가 열린 브라우저 창을 고릅니다.</li><li><strong>시스템 오디오 공유</strong>를 체크합니다 — TTS 내레이션 녹음에 필요.</li><li><strong>공유</strong>를 누릅니다.</li></ol>" }, Nd = { message: "녹화 시작" }, Dd = { message: "정지 후 저장" }, Bd = { message: "녹화 중 — Space: 데모 일시정지 / 재개 (녹화는 계속) · Esc: 정지 후 저장" }, qd = { message: "준비됨." }, Fd = { message: "녹화 중" }, zd = { message: "⏸ 일시정지 — 녹화는 계속됩니다" }, Hd = { message: "시나리오 재생 중" }, Wd = { message: "시나리오 일시정지 중" }, Ud = { message: "저장됨. 이 창을 닫아도 됩니다." }, jd = { message: "⚠ 내레이션이 영상에 들어가지 않습니다. 탭이 아니라 '창'을 공유하고 '시스템 오디오 공유'를 켜세요. '녹화 시작'을 다시 눌러 주세요." }, Vd = { message: "영상 화질" }, Gd = { message: "일반 화질" }, Yd = { message: "5 Mbps · 1080p" }, Xd = { message: "고화질" }, Kd = { message: "25 Mbps · 1080p" }, Zd = { message: "패널·컨트롤을 영상에 함께 노출 (튜토리얼 모드)" }, Jd = { message: "Manuscript UI를 직접 보여주는 how-to 녹화에 사용합니다. 일반 워크스루는 기본(자동 숨김)이 더 깔끔합니다." }, Qd = { message: "내 마이크도 함께 녹음" }, ep = { message: "시나리오 일시중지 중에 직접 설명을 더하거나 라이브 보이스 오버를 추가할 수 있도록 마이크 음성을 함께 녹음합니다. 브라우저가 한 번 권한을 요청합니다." }, tp = { message: "녹화 중 — <kbd>Space</kbd> 시나리오 일시중지 / 재개 (녹화는 계속) · <kbd>Esc</kbd> 종료 후 저장" }, np = { message: "취소" }, rp = { message: "녹화 시작" }, op = { message: "녹화 중" }, sp = { message: "클릭하여 시나리오 재개" }, ap = { message: "마이크 권한 거부 — 보이스 없이 녹화를 계속합니다." }, ip = { message: "단계 이름" }, cp = { message: "단계 설명" }, lp = { message: "단계 $N$의 요소 선택", placeholders: { n: { content: "$1", example: "1" } } }, up = { message: "요소 선택" }, dp = { message: "액션 — 이 단계에서 재생을 멈춤" }, pp = { message: "단계 삭제" }, hp = { message: "자동 진행 시간(초)" }, fp = { message: "주석 도구" }, mp = { message: "주석 삭제" }, gp = { message: "내부 흐름" }, bp = { message: "보조 element 는 대표 element 와 같은 페이지에서만 추가할 수 있습니다." }, _p = { message: "이 스텝에 element 추가" }, yp = { message: "0.1초 앞당기기" }, vp = { message: "0.1초 늦추기" }, xp = { message: "기본 selector 정상" }, wp = { message: "Layer 2 fallback — 원본 속성 못 찾음, 텍스트+부모 구조로 매칭" }, kp = { message: "Layer 3 fallback — 시각 휴리스틱만 남음, 재픽 권장" }, Sp = { message: "이 페이지에서 element 못 찾음 — 재픽 필요" }, $p = { message: "시연 검증" }, Ap = { message: "시연 상태 검증" }, Mp = { message: "여기서 standalone player 재생이 멈출 수 있어요 — 다음 단계가 다른 출처(cross-origin)입니다." }, Ep = { message: "여기서부터, 투어가 자동으로 넘어가는 페이지에서는 내레이션이 자동 재생되지 않아요 — 브라우저가 클릭 없이 열린 페이지의 소리를 막기 때문입니다. 보는 사람이 페이지를 클릭하면 그 페이지의 음성이 재생됩니다. 직접 클릭해서 넘긴 페이지는 소리가 이어져요. (standalone player·확장 모두 해당)" }, Tp = { message: "정상 $OK$ · fallback $FALLBACK$ · 깨짐 $BROKEN$ · 다른 페이지 $SKIPPED$", placeholders: { ok: { content: "$1", example: "8" }, fallback: { content: "$2", example: "2" }, broken: { content: "$3", example: "1" }, skipped: { content: "$4", example: "3" } } }, Lp = { message: "정상 $OK$ · fallback $FALLBACK$ · 깨짐 $BROKEN$ · 대기 $PENDING$", placeholders: { ok: { content: "$1", example: "3" }, fallback: { content: "$2", example: "1" }, broken: { content: "$3", example: "1" }, pending: { content: "$4", example: "5" } } }, Cp = { message: "검증 시작" }, Pp = { message: "검증 중…" }, Ip = { message: "검증 완료" }, Op = { message: "이 페이지 검증 중 · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/" } } }, Rp = { message: "다음 페이지로 이동 중 · $URL$", placeholders: { url: { content: "$1", example: "https://example.com/checkout" } } }, Np = { message: "대기" }, Dp = { message: "정상" }, Bp = { message: "fallback" }, qp = { message: "깨짐" }, Fp = { message: "대기" }, zp = { message: "이 스텝 보기" }, Hp = { message: "재픽" }, Wp = { message: "정상" }, Up = { message: "Layer 2 fallback" }, jp = { message: "Layer 3 fallback" }, Vp = { message: "못 찾음" }, Gp = { message: "다른 페이지" }, Yp = { message: "element 미픽" }, Xp = { message: "이 페이지의 step 들은 모두 정상입니다." }, Kp = { message: "닫기" }, Zp = { message: "$URL$로 이동", placeholders: { url: { content: "$1", example: "https://example.com" } } }, Jp = { message: "여기에 단계 삽입" }, Qp = { message: "단계 추가" }, eh = { message: "단계 이름" }, th = { message: "단계 카운터" }, nh = { message: "이전 (←)" }, rh = { message: "일시정지/재생 (Space)" }, oh = { message: "다음 (→)" }, sh = { message: "완료 (→)" }, ah = { message: "종료 (Esc)" }, ih = { message: "발표자 프롬프터 열기" }, ch = { message: "발표자 프롬프터" }, lh = { message: "컨트롤 이동 (드래그)" }, uh = { message: "드래그로 이동" }, dh = { message: "세로/가로 전환" }, ph = { message: "내레이션 켜기/끄기" }, hh = { message: "내레이션 (TTS)" }, fh = { message: "소리를 위해 아무 곳이나 클릭하세요" }, mh = { message: "소리를 위해 재생 화면을 클릭하세요" }, gh = { message: "강조된 대상을 클릭하면 계속 진행됩니다" }, bh = { message: "건너뛰기" }, _h = { message: "대상을 찾을 수 없습니다" }, yh = { message: "이 단계가 가리키는 요소가 페이지에 더 이상 없습니다. 건너뛰거나 재생을 멈출 수 있습니다." }, vh = { message: "건너뛰기" }, xh = { message: "재생 멈추기" }, wh = { message: "다른 페이지" }, kh = { message: "이 시연은 아래 페이지에서 녹화되었습니다. 그곳으로 이동할까요?" }, Sh = { message: "이동" }, $h = { message: "여기서 강제 재생" }, Ah = { message: "취소" }, Mh = { message: "현재" }, Eh = { message: "다음" }, Th = { message: "단계" }, Lh = { message: "단계 $N$", placeholders: { n: { content: "$1", example: "3" } } }, Ch = { message: "대기 중…" }, Ph = { message: "재생 중" }, Ih = { message: "일시정지" }, Oh = { message: "액션 단계" }, Rh = { message: "이전" }, Nh = { message: "일시정지/재생" }, Dh = { message: "다음" }, Bh = { message: "내레이션 켜기/끄기" }, qh = { message: "내레이션 (TTS)" }, Fh = { message: "매뉴스크립트 · 프롬프터" }, zh = { message: "썸네일에 호스트 접근 권한이 필요합니다. 매뉴스크립트 아이콘을 클릭하여 시작을 다시 누르면 권한을 부여할 수 있습니다." }, Hh = { message: "이 요소가 여러 대상과 일치합니다 — 더 구체적인 요소를 선택해 주세요." }, Wh = { message: "내보냄 ✓" }, Uh = { message: "내보내기에 실패했습니다" }, jh = { message: "단계가 없습니다" }, Vh = { message: "이 투어는 여기서 계속할 수 없습니다." }, Gh = {
+  extension_name: Xl,
+  extension_description: Kl,
+  common_cancel: Zl,
+  common_delete: Jl,
+  common_overwrite: Ql,
+  common_close: eu,
+  common_ok: tu,
+  common_delete_confirm: nu,
+  common_untitled: ru,
+  common_got_it: ou,
+  popup_title_start: su,
+  popup_cta_new: au,
+  popup_cta_help: iu,
+  popup_cta_help_text: cu,
+  popup_cta_import: lu,
+  popup_import_failed: uu,
+  popup_import_overwrite_confirm: du,
+  popup_list_heading: pu,
+  popup_list_resume_tag: hu,
+  popup_list_steps: fu,
+  popup_list_delete_aria: mu,
+  popup_detach_detached: gu,
+  popup_detach_inline_title: bu,
+  popup_error_no_tab: _u,
+  popup_error_bad_url: yu,
+  popup_error_inject: vu,
+  popup_error_unknown: xu,
+  popup_language_label: wu,
+  panel_aria_region: ku,
+  panel_close_aria: Su,
+  panel_palette_toggle_aria: $u,
+  panel_title_placeholder: Au,
+  panel_tool_label: Mu,
+  panel_tool_text: Eu,
+  panel_tool_shape: Tu,
+  panel_tool_freedraw: Lu,
+  panel_replay_aria: Cu,
+  panel_record_aria: Pu,
+  panel_replay_title: Iu,
+  panel_prompter_aria: Ou,
+  panel_export_aria: Ru,
+  panel_export_menu_full: Nu,
+  panel_export_menu_full_meta: Du,
+  panel_export_menu_lite: Bu,
+  panel_export_menu_lite_meta: qu,
+  panel_undo_aria: Fu,
+  panel_redo_aria: zu,
+  panel_settings_aria: Hu,
+  panel_settings_title: Wu,
+  panel_settings_voice_label: Uu,
+  panel_settings_voice_auto: ju,
+  panel_settings_strict_url_label: Vu,
+  panel_settings_strict_url_help: Gu,
+  panel_settings_close_aria: Yu,
+  popup_tabs_local: Xu,
+  popup_tabs_remote: Ku,
+  popup_remote_coming_soon: Zu,
+  popup_remote_empty_copy: Ju,
+  popup_remote_add_cta: Qu,
+  popup_remote_add_cta_aria: ed,
+  popup_remote_refresh_all_aria: td,
+  popup_remote_remove_aria: nd,
+  popup_remote_add_placeholder: rd,
+  popup_remote_add_submit: od,
+  popup_remote_add_error_invalid: sd,
+  popup_remote_add_error_empty: ad,
+  popup_remote_source_never_refreshed: id,
+  popup_remote_source_empty: cd,
+  popup_remote_folder_empty: ld,
+  popup_remote_back_aria: ud,
+  popup_remote_collapse_aria: dd,
+  popup_remote_expand_aria: pd,
+  popup_remote_progress: hd,
+  popup_remote_steps_suffix: fd,
+  panel_ephemeral_warning: md,
+  panel_ephemeral_import: gd,
+  panel_ephemeral_bridge_fallback: bd,
+  panel_ephemeral_saved: _d,
+  panel_ephemeral_save_failed: yd,
+  copy_formatting: vd,
+  apply_this_step: xd,
+  apply_all_steps: wd,
+  recording_guide_title: kd,
+  recording_guide_subtitle: Sd,
+  recording_guide_step1_title: $d,
+  recording_guide_step1_alt: Ad,
+  recording_guide_step1_desc_html: Md,
+  recording_guide_step2_title: Ed,
+  recording_guide_step2_alt: Td,
+  recording_guide_step2_desc_html: Ld,
+  recorder_title: Cd,
+  recorder_not_recorded: Pd,
+  recorder_instruction: Id,
+  recorder_share_title: Od,
+  recorder_share_steps_html: Rd,
+  recorder_start: Nd,
+  recorder_stop: Dd,
+  recorder_hint: Bd,
+  recorder_status_ready: qd,
+  recorder_status_recording: Fd,
+  recorder_status_paused: zd,
+  recorder_scenario_playing: Hd,
+  recorder_scenario_paused: Wd,
+  recorder_status_saved: Ud,
+  recorder_warn_no_tts: jd,
+  recorder_quality_label: Vd,
+  recorder_quality_standard: Gd,
+  recorder_quality_standard_spec: Yd,
+  recorder_quality_high: Xd,
+  recorder_quality_high_spec: Kd,
+  recording_guide_keep_ui_label: Zd,
+  recording_guide_keep_ui_hint: Jd,
+  recording_guide_mic_label: Qd,
+  recording_guide_mic_hint: ep,
+  recording_guide_keys_info_html: tp,
+  recording_guide_cancel: np,
+  recording_guide_start: rp,
+  recording_paused_label: op,
+  recording_paused_aria: sp,
+  recording_mic_failed: ap,
+  step_name_placeholder: ip,
+  step_desc_placeholder: cp,
+  step_wand_aria: lp,
+  step_wand_title: up,
+  step_action_aria: dp,
+  step_delete_aria: pp,
+  step_timer_aria: hp,
+  step_annotations_title: fp,
+  step_annotation_delete_aria: mp,
+  step_subs_title: gp,
+  sub_same_url_required: bp,
+  sub_add_aria: _p,
+  sub_shift_left: yp,
+  sub_shift_right: vp,
+  health_layer1: xp,
+  health_layer2: wp,
+  health_layer3: kp,
+  health_broken: Sp,
+  panel_validate_aria: $p,
+  validate_modal_title: Ap,
+  validate_player_cross_origin_warn: Mp,
+  validate_tts_autoplay_warn: Ep,
+  validate_summary: Tp,
+  validate_summary_running: Lp,
+  validate_start: Cp,
+  validate_in_progress: Pp,
+  validate_complete: Ip,
+  validate_checking: Op,
+  validate_navigating_to: Rp,
+  validate_status_pending: Np,
+  validate_label_ok: Dp,
+  validate_label_fallback: Bp,
+  validate_label_broken: qp,
+  validate_label_pending: Fp,
+  validate_row_go: zp,
+  validate_row_repick: Hp,
+  validate_status_green: Wp,
+  validate_status_yellow: Up,
+  validate_status_orange: jp,
+  validate_status_red: Vp,
+  validate_status_skipped: Gp,
+  validate_status_no_element: Yp,
+  validate_no_issues: Xp,
+  validate_close: Kp,
+  step_link_aria: Zp,
+  step_insert_aria: Jp,
+  step_add_aria: Qp,
+  step_empty_name: eh,
+  replay_counter_aria: th,
+  replay_prev_aria: nh,
+  replay_pause_aria: rh,
+  replay_next_aria: oh,
+  replay_finish_aria: sh,
+  replay_exit_aria: ah,
+  replay_prompter_aria: ih,
+  replay_prompter_title: ch,
+  replay_move_aria: lh,
+  replay_move_title: uh,
+  replay_orient_aria: dh,
+  replay_tts_aria: ph,
+  replay_tts_title: hh,
+  replay_tts_blocked_hint: fh,
+  prompter_tts_blocked_hint: mh,
+  replay_action_prompt: gh,
+  replay_action_skip: bh,
+  replay_notfound_title: _h,
+  replay_notfound_body: yh,
+  replay_notfound_skip: vh,
+  replay_notfound_stop: xh,
+  replay_url_mismatch_title: wh,
+  replay_url_mismatch_body: kh,
+  replay_url_mismatch_navigate: Sh,
+  replay_url_mismatch_force: $h,
+  replay_url_mismatch_cancel: Ah,
+  prompter_now: Mh,
+  prompter_next: Eh,
+  prompter_steps: Th,
+  prompter_step_no: Lh,
+  prompter_waiting: Ch,
+  prompter_playing: Ph,
+  prompter_paused: Ih,
+  prompter_action_step: Oh,
+  prompter_prev_aria: Rh,
+  prompter_pause_aria: Nh,
+  prompter_next_aria: Dh,
+  prompter_tts_aria: Bh,
+  prompter_tts_title: qh,
+  prompter_title: Fh,
+  permission_thumbnail_needs_host: zh,
+  toast_ambiguous_selector: Hh,
+  toast_export_success: Wh,
+  toast_export_failed: Uh,
+  toast_no_steps: jh,
+  player_handoff_unavailable: Vh
 };
-function Oh(e, t) {
+function Yh(e, t) {
   let n = e;
   for (let r = 0; r < t.length; r++) {
     const o = `$${r + 1}`;
@@ -614,24 +614,24 @@ function Oh(e, t) {
   }
   return n;
 }
-function Rh(e) {
+function Xh(e) {
   return (t, n) => {
     const r = e[t];
-    return r ? Oh(r.message, n) : "";
+    return r ? Yh(r.message, n) : "";
   };
 }
-function Nh() {
-  const n = (navigator.language || "en").split("-")[0] === "ko" ? Ih : Ol, r = Rh(n);
-  Os(r);
+function Kh() {
+  const n = (navigator.language || "en").split("-")[0] === "ko" ? Gh : Yl, r = Xh(n);
+  Ys(r);
 }
-const mn = "manuscript:scenario-changed", Dh = 500, x = {
+const _n = "manuscript:scenario-changed", Zh = 500, x = {
   scenario: null,
   currentStepIndex: 0,
   saveTimer: null,
   ephemeral: !1,
   ephemeralSource: null
 };
-function Fr() {
+function Xr() {
   x.ephemeral = !1, x.ephemeralSource = null;
 }
 function D() {
@@ -640,22 +640,22 @@ function D() {
 function B() {
   return x.currentStepIndex;
 }
-function pe() {
+function he() {
   return x.scenario ? x.scenario.steps[x.currentStepIndex] ?? null : null;
 }
-function ot(e) {
-  return document.addEventListener(mn, e), () => document.removeEventListener(mn, e);
+function at(e) {
+  return document.addEventListener(_n, e), () => document.removeEventListener(_n, e);
 }
 function Z() {
-  document.dispatchEvent(new CustomEvent(mn)), Bh();
+  document.dispatchEvent(new CustomEvent(_n)), Jh();
 }
-function he() {
+function fe() {
   x.scenario && (x.scenario.updatedAt = (/* @__PURE__ */ new Date()).toISOString());
 }
-function Bh() {
+function Jh() {
   if (!x.scenario) return;
   if (x.ephemeral) {
-    Je().setEphemeralScenario(x.scenario, x.ephemeralSource).catch((t) => {
+    nt().setEphemeralScenario(x.scenario, x.ephemeralSource).catch((t) => {
       console.error("[manuscript] ephemeral save failed", t);
     });
     return;
@@ -663,86 +663,86 @@ function Bh() {
   x.saveTimer !== null && window.clearTimeout(x.saveTimer);
   const e = x.scenario;
   x.saveTimer = window.setTimeout(() => {
-    x.saveTimer = null, Je().saveScenario(e).catch((t) => {
+    x.saveTimer = null, nt().saveScenario(e).catch((t) => {
       console.error("[manuscript] save failed", t);
     });
-  }, Dh);
+  }, Zh);
 }
-function zr() {
+function Kr() {
   if (x.ephemeral) {
-    x.scenario && Je().setEphemeralScenario(x.scenario, x.ephemeralSource).catch((e) => {
+    x.scenario && nt().setEphemeralScenario(x.scenario, x.ephemeralSource).catch((e) => {
       console.error("[manuscript] ephemeral flush save failed", e);
     });
     return;
   }
-  x.saveTimer !== null && (window.clearTimeout(x.saveTimer), x.saveTimer = null, x.scenario && Je().saveScenario(x.scenario).catch((e) => {
+  x.saveTimer !== null && (window.clearTimeout(x.saveTimer), x.saveTimer = null, x.scenario && nt().saveScenario(x.scenario).catch((e) => {
     console.error("[manuscript] flush save failed", e);
   }));
 }
-const Hr = "0.1.2";
-function qh(e) {
-  const t = Fh(e) ?? e;
+const Zr = "0.1.2";
+function Qh(e) {
+  const t = ef(e) ?? e;
   return t.length > 14 ? `${t.slice(0, 13)}…` : t;
 }
-function Fh(e) {
-  return zh(e);
+function ef(e) {
+  return tf(e);
 }
-function zh(e) {
+function tf(e) {
   const t = e.split(",")[0];
   if (!t) return null;
   const n = t.trim();
   return n && (n.startsWith('"') && n.endsWith('"') || n.startsWith("'") && n.endsWith("'") ? n.slice(1, -1) : n).trim() || null;
 }
-const Hh = 50;
-let se = [], Te = -1, Ne = null, Ct = !1;
-function Wr(e) {
+const nf = 50;
+let se = [], Pe = -1, De = null, Rt = !1;
+function Jr(e) {
   return typeof structuredClone == "function" ? structuredClone(e) : JSON.parse(JSON.stringify(e));
 }
-function Ur() {
+function Qr() {
   var t;
   const e = D();
   return e ? ((t = e.steps[B()]) == null ? void 0 : t.id) ?? null : null;
 }
-function Wh() {
+function rf() {
   const e = D();
   if (!e) return;
-  const t = se[Te];
-  Te >= 0 && t && JSON.stringify(t.scenario) === JSON.stringify(e) || (se.length = Te + 1, se.push({ scenario: Wr(e), stepId: Ur() }), se.length > Hh && se.shift(), Te = se.length - 1);
+  const t = se[Pe];
+  Pe >= 0 && t && JSON.stringify(t.scenario) === JSON.stringify(e) || (se.length = Pe + 1, se.push({ scenario: Jr(e), stepId: Qr() }), se.length > nf && se.shift(), Pe = se.length - 1);
 }
-function jr() {
-  Ne = null, Ct = !1;
+function eo() {
+  De = null, Rt = !1;
   const e = D();
   if (!e) {
-    se = [], Te = -1;
+    se = [], Pe = -1;
     return;
   }
-  se = [{ scenario: Wr(e), stepId: Ur() }], Te = 0;
+  se = [{ scenario: Jr(e), stepId: Qr() }], Pe = 0;
 }
-function Pt(e) {
-  Ne !== null && Ne !== e && st(), Ne = e, Ct = !1;
+function Nt(e) {
+  De !== null && De !== e && it(), De = e, Rt = !1;
 }
-function st() {
-  Ne !== null && (Ne = null, Ct && (Ct = !1, Wh()));
+function it() {
+  De !== null && (De = null, Rt && (Rt = !1, rf()));
 }
-function Uh(e, t) {
-  zr(), x.scenario = e, x.currentStepIndex = 0, Fr(), Z(), jr();
+function of(e, t) {
+  Kr(), x.scenario = e, x.currentStepIndex = 0, Xr(), Z(), eo();
 }
-function jh() {
+function sf() {
   const e = x.ephemeral;
-  zr(), x.scenario = null, x.currentStepIndex = 0, Fr(), e && Je().clearEphemeralScenario(), Z(), jr();
+  Kr(), x.scenario = null, x.currentStepIndex = 0, Xr(), e && nt().clearEphemeralScenario(), Z(), eo();
 }
-function fb(e) {
-  const t = pe();
+function Lb(e) {
+  const t = he();
   if (!t || !x.scenario) return;
   const r = { ...t.spotlight ?? {}, ...e };
   for (const o of Object.keys(r))
     r[o] === void 0 && delete r[o];
-  Object.keys(r).length === 0 ? delete t.spotlight : t.spotlight = r, he(), Z();
+  Object.keys(r).length === 0 ? delete t.spotlight : t.spotlight = r, fe(), Z();
 }
-function Wt(e) {
+function Yt(e) {
   x.scenario && (e < 0 || e >= x.scenario.steps.length || e !== x.currentStepIndex && (x.currentStepIndex = e, Z()));
 }
-function mb(e) {
+function Cb(e) {
   if (!x.scenario) return;
   const t = { ...e };
   for (const r of Object.keys(t))
@@ -750,41 +750,41 @@ function mb(e) {
   const n = Object.keys(t).length === 0;
   for (const r of x.scenario.steps)
     n ? delete r.spotlight : r.spotlight = { ...t };
-  he(), Z();
+  fe(), Z();
 }
-function Vr(e) {
-  const t = pe();
-  !t || !x.scenario || (t.annotations = t.annotations.filter((n) => n.id !== e), he(), Z());
+function to(e) {
+  const t = he();
+  !t || !x.scenario || (t.annotations = t.annotations.filter((n) => n.id !== e), fe(), Z());
 }
-function L(e, t) {
-  const n = pe();
+function T(e, t) {
+  const n = he();
   !n || !x.scenario || (n.annotations = n.annotations.map(
     (r) => r.id === e ? { ...r, ...t } : r
-  ), he(), Z());
+  ), fe(), Z());
 }
-function Gr() {
+function no() {
   var e;
-  return ((e = pe()) == null ? void 0 : e.annotations) ?? [];
+  return ((e = he()) == null ? void 0 : e.annotations) ?? [];
 }
 function E(e) {
-  return Gr().find((t) => t.id === e);
+  return no().find((t) => t.id === e);
 }
-function Vh(e, t) {
-  const n = pe();
+function af(e, t) {
+  const n = he();
   !n || !x.scenario || (n.annotations = n.annotations.map(
     (r) => r.kind === e ? { ...r, ...t } : r
-  ), he(), Z());
+  ), fe(), Z());
 }
-function Gh(e, t) {
+function cf(e, t) {
   if (x.scenario) {
     for (const n of x.scenario.steps)
       n.annotations = n.annotations.map(
         (r) => r.kind === e ? { ...r, ...t } : r
       );
-    he(), Z();
+    fe(), Z();
   }
 }
-function Yh(e, t) {
+function lf(e, t) {
   if (!x.scenario) return;
   const n = t.trim();
   if (!n) return;
@@ -792,35 +792,35 @@ function Yh(e, t) {
   o.includes(n) || (x.scenario.customColors = {
     ...r,
     [e]: [...o, n]
-  }, he(), Z());
+  }, fe(), Z());
 }
-function Xh(e, t) {
+function uf(e, t) {
   if (!x.scenario || !x.scenario.customColors) return;
   const n = x.scenario.customColors[e];
   !n || !n.includes(t) || (x.scenario.customColors = {
     ...x.scenario.customColors,
     [e]: n.filter((r) => r !== t)
-  }, he(), Z());
+  }, fe(), Z());
 }
-const gn = "manuscript:mode-changed";
-let kt = "idle";
-function Yr() {
-  return kt;
+const yn = "manuscript:mode-changed";
+let $t = "idle";
+function ro() {
+  return $t;
 }
-function Xr(e) {
-  if (e === kt) return;
-  const t = kt;
-  kt = e, document.dispatchEvent(
-    new CustomEvent(gn, {
+function oo(e) {
+  if (e === $t) return;
+  const t = $t;
+  $t = e, document.dispatchEvent(
+    new CustomEvent(yn, {
       detail: { prev: t, next: e }
     })
   );
 }
-function Kr(e) {
+function so(e) {
   const t = (n) => e(n.detail);
-  return document.addEventListener(gn, t), () => document.removeEventListener(gn, t);
+  return document.addEventListener(yn, t), () => document.removeEventListener(yn, t);
 }
-const Zr = 5e3, U = {
+const ao = 5e3, df = 3e3, H = {
   scenarios: "manuscript.scenarios",
   lastEdited: "manuscript.lastEdited",
   settings: "manuscript.settings",
@@ -987,53 +987,53 @@ const Zr = 5e3, U = {
    * Set by recording-lifecycle.enterDemoFullscreen, cleared on exit.
    */
   recPrevWindowState: "manuscript.recPrevWindowState"
-}, te = 2147483e3, oe = "http://www.w3.org/2000/svg", tr = "manuscript-spotlight-mask", Kh = "oklch(0.42 0.09 250)", Zh = 3, Jh = "rgb(0, 0, 0)", Qh = 0.55, Ge = 14;
-let xe = null, z = null, F = null, q = null, I = null, ne = null, Ye = 0, bn = [], Ce = null;
-function Jr(e) {
-  Ye++, xe = e, z || rf(), yn(), ze(), Qr(e), Ce || (Ce = ot(yn));
+}, te = 2147483e3, oe = "http://www.w3.org/2000/svg", ir = "manuscript-spotlight-mask", pf = "oklch(0.42 0.09 250)", hf = 3, ff = "rgb(0, 0, 0)", mf = 0.55, Ke = 14;
+let ke = null, W = null, F = null, q = null, I = null, ne = null, Ze = 0, vn = [], Ie = null;
+function io(e) {
+  Ze++, ke = e, W || yf(), wn(), He(), co(e), Ie || (Ie = at(wn));
 }
-function _n() {
-  Ye++, xe = null, eo(), Ce == null || Ce(), Ce = null, z && (z.remove(), z = null, F = null, q = null, I = null, ne = null);
+function xn() {
+  Ze++, ke = null, lo(), Ie == null || Ie(), Ie = null, W && (W.remove(), W = null, F = null, q = null, I = null, ne = null);
 }
-function ef(e, t = {}) {
+function gf(e, t = {}) {
   var a;
   const n = t.durationMs ?? 300;
-  if (!xe || !z || n <= 0) {
-    Jr(e), (a = t.onDone) == null || a.call(t);
+  if (!ke || !W || n <= 0) {
+    io(e), (a = t.onDone) == null || a.call(t);
     return;
   }
-  const r = tf();
-  Ye++;
-  const o = Ye;
-  xe = e, yn(), Qr(e);
+  const r = bf();
+  Ze++;
+  const o = Ze;
+  ke = e, wn(), co(e);
   const s = performance.now();
   function i(c) {
     var d;
-    if (o !== Ye) return;
-    const l = Math.min(1, (c - s) / n), u = nf(l), h = to(e);
-    no({
-      x: ft(r.x, h.x, u),
-      y: ft(r.y, h.y, u),
-      width: ft(r.width, h.width, u),
-      height: ft(r.height, h.height, u)
-    }), l < 1 ? requestAnimationFrame(i) : (ze(), (d = t.onDone) == null || d.call(t));
+    if (o !== Ze) return;
+    const l = Math.min(1, (c - s) / n), u = _f(l), h = uo(e);
+    po({
+      x: gt(r.x, h.x, u),
+      y: gt(r.y, h.y, u),
+      width: gt(r.width, h.width, u),
+      height: gt(r.height, h.height, u)
+    }), l < 1 ? requestAnimationFrame(i) : (He(), (d = t.onDone) == null || d.call(t));
   }
   requestAnimationFrame(i);
 }
-function tf() {
+function bf() {
   if (!F) return { x: 0, y: 0, width: 0, height: 0 };
   const e = 4, t = Number(F.getAttribute("x") ?? 0) + e, n = Number(F.getAttribute("y") ?? 0) + e, r = Number(F.getAttribute("width") ?? 0) - e * 2, o = Number(F.getAttribute("height") ?? 0) - e * 2;
   return { x: t, y: n, width: r, height: o };
 }
-function ft(e, t, n) {
+function gt(e, t, n) {
   return e + (t - e) * n;
 }
-function nf(e) {
+function _f(e) {
   return e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2;
 }
-function Qr(e) {
+function co(e) {
   var n;
-  eo();
+  lo();
   const t = [window];
   try {
     const r = (n = e.ownerDocument) == null ? void 0 : n.defaultView;
@@ -1041,17 +1041,17 @@ function Qr(e) {
   } catch {
   }
   for (const r of t) {
-    const o = ze;
-    r.addEventListener("scroll", o, !0), bn.push({ target: r, remove: () => r.removeEventListener("scroll", o, !0) });
+    const o = He;
+    r.addEventListener("scroll", o, !0), vn.push({ target: r, remove: () => r.removeEventListener("scroll", o, !0) });
   }
-  window.addEventListener("resize", ze);
+  window.addEventListener("resize", He);
 }
-function eo() {
-  for (const e of bn) e.remove();
-  bn = [], window.removeEventListener("resize", ze);
+function lo() {
+  for (const e of vn) e.remove();
+  vn = [], window.removeEventListener("resize", He);
 }
-function rf() {
-  z = document.createElementNS(oe, "svg"), z.setAttribute("data-manuscript", "ui"), z.style.cssText = [
+function yf() {
+  W = document.createElementNS(oe, "svg"), W.setAttribute("data-manuscript", "ui"), W.style.cssText = [
     "position: fixed",
     "top: 0",
     "left: 0",
@@ -1060,28 +1060,28 @@ function rf() {
     // svg 전체는 클릭 통과 — ringRect만 pointer-events: stroke 로 활성화.
     "pointer-events: none",
     `z-index: ${te}`
-  ].join("; "), z.setAttribute("width", "100%"), z.setAttribute("height", "100%");
+  ].join("; "), W.setAttribute("width", "100%"), W.setAttribute("height", "100%");
   const e = document.createElementNS(oe, "defs"), t = document.createElementNS(oe, "mask");
-  t.setAttribute("id", tr);
+  t.setAttribute("id", ir);
   const n = document.createElementNS(oe, "rect");
-  n.setAttribute("width", "100%"), n.setAttribute("height", "100%"), n.setAttribute("fill", "white"), t.appendChild(n), F = document.createElementNS(oe, "rect"), F.setAttribute("fill", "black"), F.setAttribute("rx", "4"), F.setAttribute("ry", "4"), t.appendChild(F), e.appendChild(t), z.appendChild(e), ne = document.createElementNS(oe, "rect"), ne.setAttribute("width", "100%"), ne.setAttribute("height", "100%"), ne.setAttribute("mask", `url(#${tr})`), z.appendChild(ne), q = document.createElementNS(oe, "rect"), q.setAttribute("fill", "none"), q.setAttribute("rx", "4"), q.setAttribute("ry", "4"), q.style.pointerEvents = "none", z.appendChild(q), I = document.createElementNS(oe, "rect"), I.setAttribute("fill", "none"), I.setAttribute("stroke", "transparent"), I.setAttribute("stroke-width", String(Ge)), I.setAttribute("rx", "4"), I.setAttribute("ry", "4"), I.setAttribute("pointer-events", "stroke"), I.style.cursor = "pointer", I.addEventListener("click", of), z.appendChild(I), document.body.appendChild(z);
+  n.setAttribute("width", "100%"), n.setAttribute("height", "100%"), n.setAttribute("fill", "white"), t.appendChild(n), F = document.createElementNS(oe, "rect"), F.setAttribute("fill", "black"), F.setAttribute("rx", "4"), F.setAttribute("ry", "4"), t.appendChild(F), e.appendChild(t), W.appendChild(e), ne = document.createElementNS(oe, "rect"), ne.setAttribute("width", "100%"), ne.setAttribute("height", "100%"), ne.setAttribute("mask", `url(#${ir})`), W.appendChild(ne), q = document.createElementNS(oe, "rect"), q.setAttribute("fill", "none"), q.setAttribute("rx", "4"), q.setAttribute("ry", "4"), q.style.pointerEvents = "none", W.appendChild(q), I = document.createElementNS(oe, "rect"), I.setAttribute("fill", "none"), I.setAttribute("stroke", "transparent"), I.setAttribute("stroke-width", String(Ke)), I.setAttribute("rx", "4"), I.setAttribute("ry", "4"), I.setAttribute("pointer-events", "stroke"), I.style.cursor = "pointer", I.addEventListener("click", vf), W.appendChild(I), document.body.appendChild(W);
 }
-function yn() {
+function wn() {
   var s;
   if (!q || !ne) return;
-  const e = ((s = pe()) == null ? void 0 : s.spotlight) ?? {}, t = e.stroke ?? Kh, n = e.strokeWidth ?? Zh, r = e.dimColor ?? Jh, o = e.dimOpacity ?? Qh;
-  q.setAttribute("stroke", t), q.setAttribute("stroke-width", String(n)), ne.setAttribute("fill", r), ne.setAttribute("fill-opacity", String(Math.max(0, Math.min(1, o)))), ze();
+  const e = ((s = he()) == null ? void 0 : s.spotlight) ?? {}, t = e.stroke ?? pf, n = e.strokeWidth ?? hf, r = e.dimColor ?? ff, o = e.dimOpacity ?? mf;
+  q.setAttribute("stroke", t), q.setAttribute("stroke-width", String(n)), ne.setAttribute("fill", r), ne.setAttribute("fill-opacity", String(Math.max(0, Math.min(1, o)))), He();
 }
-function of(e) {
-  Yr() !== "replay" && (!xe || !I || (e.stopPropagation(), e.preventDefault(), import("./spotlight-editor.js").then((t) => {
+function vf(e) {
+  ro() !== "replay" && (!ke || !I || (e.stopPropagation(), e.preventDefault(), import("./spotlight-editor.js").then((t) => {
     I && t.openSpotlightEditor(I);
   })));
 }
-function ze() {
-  xe && no(to(xe));
+function He() {
+  ke && po(uo(ke));
 }
-function to(e) {
-  const t = e.getBoundingClientRect(), n = sf(e);
+function uo(e) {
+  const t = e.getBoundingClientRect(), n = xf(e);
   return {
     x: t.left + n.x,
     y: t.top + n.y,
@@ -1089,16 +1089,16 @@ function to(e) {
     height: t.height
   };
 }
-function no(e) {
+function po(e) {
   if (!F || !q || !I) return;
   const t = 4, n = e.x - t, r = e.y - t, o = e.width + t * 2, s = e.height + t * 2;
   F.setAttribute("x", String(n)), F.setAttribute("y", String(r)), F.setAttribute("width", String(o)), F.setAttribute("height", String(s));
   const i = Math.max(0, Number(q.getAttribute("stroke-width") ?? 0)), a = n - i / 2, c = r - i / 2, l = o + i, u = s + i;
   q.setAttribute("x", String(a)), q.setAttribute("y", String(c)), q.setAttribute("width", String(l)), q.setAttribute("height", String(u));
-  const h = a - Ge / 2, d = c - Ge / 2, p = l + Ge, f = u + Ge;
+  const h = a - Ke / 2, d = c - Ke / 2, p = l + Ke, f = u + Ke;
   I.setAttribute("x", String(h)), I.setAttribute("y", String(d)), I.setAttribute("width", String(p)), I.setAttribute("height", String(f));
 }
-function sf(e) {
+function xf(e) {
   try {
     const t = e.ownerDocument, n = t == null ? void 0 : t.defaultView;
     if (!n || n === window) return { x: 0, y: 0 };
@@ -1110,7 +1110,7 @@ function sf(e) {
     return { x: 0, y: 0 };
   }
 }
-function nn(e, t, n) {
+function an(e, t, n) {
   if (e && e.length) {
     const [r, o] = t, s = Math.PI / 180 * n, i = Math.cos(s), a = Math.sin(s);
     for (const c of e) {
@@ -1119,17 +1119,17 @@ function nn(e, t, n) {
     }
   }
 }
-function af(e, t) {
+function wf(e, t) {
   return e[0] === t[0] && e[1] === t[1];
 }
-function cf(e, t, n, r = 1) {
+function kf(e, t, n, r = 1) {
   const o = n, s = Math.max(t, 0.1), i = e[0] && e[0][0] && typeof e[0][0] == "number" ? [e] : e, a = [0, 0];
-  if (o) for (const l of i) nn(l, a, o);
+  if (o) for (const l of i) an(l, a, o);
   const c = (function(l, u, h) {
     const d = [];
     for (const b of l) {
       const k = [...b];
-      af(k[0], k[k.length - 1]) || k.push([k[0][0], k[0][1]]), k.length > 2 && d.push(k);
+      wf(k[0], k[k.length - 1]) || k.push([k[0][0], k[0][1]]), k.length > 2 && d.push(k);
     }
     const p = [];
     u = Math.max(u, 0.1);
@@ -1137,8 +1137,8 @@ function cf(e, t, n, r = 1) {
     for (const b of d) for (let k = 0; k < b.length - 1; k++) {
       const R = b[k], P = b[k + 1];
       if (R[1] !== P[1]) {
-        const T = Math.min(R[1], P[1]);
-        f.push({ ymin: T, ymax: Math.max(R[1], P[1]), x: T === R[1] ? R[0] : P[0], islope: (P[0] - R[0]) / (P[1] - R[1]) });
+        const L = Math.min(R[1], P[1]);
+        f.push({ ymin: L, ymax: Math.max(R[1], P[1]), x: L === R[1] ? R[0] : P[0], islope: (P[0] - R[0]) / (P[1] - R[1]) });
       }
     }
     if (f.sort(((b, k) => b.ymin < k.ymin ? -1 : b.ymin > k.ymin ? 1 : b.x < k.x ? -1 : b.x > k.x ? 1 : b.ymax === k.ymax ? 0 : (b.ymax - k.ymax) / Math.abs(b.ymax - k.ymax))), !f.length) return p;
@@ -1164,23 +1164,23 @@ function cf(e, t, n, r = 1) {
     return p;
   })(i, s, r);
   if (o) {
-    for (const l of i) nn(l, a, -o);
+    for (const l of i) an(l, a, -o);
     (function(l, u, h) {
       const d = [];
-      l.forEach(((p) => d.push(...p))), nn(d, u, h);
+      l.forEach(((p) => d.push(...p))), an(d, u, h);
     })(c, a, -o);
   }
   return c;
 }
-function at(e, t) {
+function ct(e, t) {
   var n;
   const r = t.hachureAngle + 90;
   let o = t.hachureGap;
   o < 0 && (o = 4 * t.strokeWidth), o = Math.round(Math.max(o, 0.1));
   let s = 1;
-  return t.roughness >= 1 && (((n = t.randomizer) === null || n === void 0 ? void 0 : n.next()) || Math.random()) > 0.7 && (s = o), cf(e, o, r, s || 1);
+  return t.roughness >= 1 && (((n = t.randomizer) === null || n === void 0 ? void 0 : n.next()) || Math.random()) > 0.7 && (s = o), kf(e, o, r, s || 1);
 }
-class Rn {
+class zn {
   constructor(t) {
     this.helper = t;
   }
@@ -1188,7 +1188,7 @@ class Rn {
     return this._fillPolygons(t, n);
   }
   _fillPolygons(t, n) {
-    const r = at(t, n);
+    const r = ct(t, n);
     return { type: "fillSketch", ops: this.renderLines(r, n) };
   }
   renderLines(t, n) {
@@ -1197,31 +1197,31 @@ class Rn {
     return r;
   }
 }
-function Ut(e) {
+function Xt(e) {
   const t = e[0], n = e[1];
   return Math.sqrt(Math.pow(t[0] - n[0], 2) + Math.pow(t[1] - n[1], 2));
 }
-let lf = class extends Rn {
+let Sf = class extends zn {
   fillPolygons(t, n) {
     let r = n.hachureGap;
     r < 0 && (r = 4 * n.strokeWidth), r = Math.max(r, 0.1);
-    const o = at(t, Object.assign({}, n, { hachureGap: r })), s = Math.PI / 180 * n.hachureAngle, i = [], a = 0.5 * r * Math.cos(s), c = 0.5 * r * Math.sin(s);
-    for (const [l, u] of o) Ut([l, u]) && i.push([[l[0] - a, l[1] + c], [...u]], [[l[0] + a, l[1] - c], [...u]]);
+    const o = ct(t, Object.assign({}, n, { hachureGap: r })), s = Math.PI / 180 * n.hachureAngle, i = [], a = 0.5 * r * Math.cos(s), c = 0.5 * r * Math.sin(s);
+    for (const [l, u] of o) Xt([l, u]) && i.push([[l[0] - a, l[1] + c], [...u]], [[l[0] + a, l[1] - c], [...u]]);
     return { type: "fillSketch", ops: this.renderLines(i, n) };
   }
 };
-class uf extends Rn {
+class $f extends zn {
   fillPolygons(t, n) {
     const r = this._fillPolygons(t, n), o = Object.assign({}, n, { hachureAngle: n.hachureAngle + 90 }), s = this._fillPolygons(t, o);
     return r.ops = r.ops.concat(s.ops), r;
   }
 }
-class df {
+class Af {
   constructor(t) {
     this.helper = t;
   }
   fillPolygons(t, n) {
-    const r = at(t, n = Object.assign({}, n, { hachureAngle: 0 }));
+    const r = ct(t, n = Object.assign({}, n, { hachureAngle: 0 }));
     return this.dotsOnLines(r, n);
   }
   dotsOnLines(t, n) {
@@ -1232,7 +1232,7 @@ class df {
     s < 0 && (s = n.strokeWidth / 2);
     const i = o / 4;
     for (const a of t) {
-      const c = Ut(a), l = c / o, u = Math.ceil(l) - 1, h = c - u * o, d = (a[0][0] + a[1][0]) / 2 - o / 4, p = Math.min(a[0][1], a[1][1]);
+      const c = Xt(a), l = c / o, u = Math.ceil(l) - 1, h = c - u * o, d = (a[0][0] + a[1][0]) / 2 - o / 4, p = Math.min(a[0][1], a[1][1]);
       for (let f = 0; f < u; f++) {
         const m = p + h + f * o, g = d - i + 2 * Math.random() * i, _ = m - i + 2 * Math.random() * i, b = this.helper.ellipse(g, _, s, s, n);
         r.push(...b.ops);
@@ -1241,18 +1241,18 @@ class df {
     return { type: "fillSketch", ops: r };
   }
 }
-class pf {
+class Mf {
   constructor(t) {
     this.helper = t;
   }
   fillPolygons(t, n) {
-    const r = at(t, n);
+    const r = ct(t, n);
     return { type: "fillSketch", ops: this.dashedLine(r, n) };
   }
   dashedLine(t, n) {
     const r = n.dashOffset < 0 ? n.hachureGap < 0 ? 4 * n.strokeWidth : n.hachureGap : n.dashOffset, o = n.dashGap < 0 ? n.hachureGap < 0 ? 4 * n.strokeWidth : n.hachureGap : n.dashGap, s = [];
     return t.forEach(((i) => {
-      const a = Ut(i), c = Math.floor(a / (r + o)), l = (a + o - c * (r + o)) / 2;
+      const a = Xt(i), c = Math.floor(a / (r + o)), l = (a + o - c * (r + o)) / 2;
       let u = i[0], h = i[1];
       u[0] > h[0] && (u = i[1], h = i[0]);
       const d = Math.atan((h[1] - u[1]) / (h[0] - u[0]));
@@ -1263,18 +1263,18 @@ class pf {
     })), s;
   }
 }
-class hf {
+class Ef {
   constructor(t) {
     this.helper = t;
   }
   fillPolygons(t, n) {
-    const r = n.hachureGap < 0 ? 4 * n.strokeWidth : n.hachureGap, o = n.zigzagOffset < 0 ? r : n.zigzagOffset, s = at(t, n = Object.assign({}, n, { hachureGap: r + o }));
+    const r = n.hachureGap < 0 ? 4 * n.strokeWidth : n.hachureGap, o = n.zigzagOffset < 0 ? r : n.zigzagOffset, s = ct(t, n = Object.assign({}, n, { hachureGap: r + o }));
     return { type: "fillSketch", ops: this.zigzagLines(s, o, n) };
   }
   zigzagLines(t, n, r) {
     const o = [];
     return t.forEach(((s) => {
-      const i = Ut(s), a = Math.round(i / (2 * n));
+      const i = Xt(s), a = Math.round(i / (2 * n));
       let c = s[0], l = s[1];
       c[0] > l[0] && (c = s[1], l = s[0]);
       const u = Math.atan((l[1] - c[1]) / (l[0] - c[0]));
@@ -1286,7 +1286,7 @@ class hf {
   }
 }
 const j = {};
-class ff {
+class Tf {
   constructor(t) {
     this.seed = t;
   }
@@ -1294,36 +1294,36 @@ class ff {
     return this.seed ? (2 ** 31 - 1 & (this.seed = Math.imul(48271, this.seed))) / 2 ** 31 : Math.random();
   }
 }
-const mf = 0, rn = 1, nr = 2, mt = { A: 7, a: 7, C: 6, c: 6, H: 1, h: 1, L: 2, l: 2, M: 2, m: 2, Q: 4, q: 4, S: 4, s: 4, T: 2, t: 2, V: 1, v: 1, Z: 0, z: 0 };
-function on(e, t) {
+const Lf = 0, cn = 1, cr = 2, bt = { A: 7, a: 7, C: 6, c: 6, H: 1, h: 1, L: 2, l: 2, M: 2, m: 2, Q: 4, q: 4, S: 4, s: 4, T: 2, t: 2, V: 1, v: 1, Z: 0, z: 0 };
+function ln(e, t) {
   return e.type === t;
 }
-function Nn(e) {
+function Hn(e) {
   const t = [], n = (function(i) {
     const a = new Array();
     for (; i !== ""; ) if (i.match(/^([ \t\r\n,]+)/)) i = i.substr(RegExp.$1.length);
-    else if (i.match(/^([aAcChHlLmMqQsStTvVzZ])/)) a[a.length] = { type: mf, text: RegExp.$1 }, i = i.substr(RegExp.$1.length);
+    else if (i.match(/^([aAcChHlLmMqQsStTvVzZ])/)) a[a.length] = { type: Lf, text: RegExp.$1 }, i = i.substr(RegExp.$1.length);
     else {
       if (!i.match(/^(([-+]?[0-9]+(\.[0-9]*)?|[-+]?\.[0-9]+)([eE][-+]?[0-9]+)?)/)) return [];
-      a[a.length] = { type: rn, text: `${parseFloat(RegExp.$1)}` }, i = i.substr(RegExp.$1.length);
+      a[a.length] = { type: cn, text: `${parseFloat(RegExp.$1)}` }, i = i.substr(RegExp.$1.length);
     }
-    return a[a.length] = { type: nr, text: "" }, a;
+    return a[a.length] = { type: cr, text: "" }, a;
   })(e);
   let r = "BOD", o = 0, s = n[o];
-  for (; !on(s, nr); ) {
+  for (; !ln(s, cr); ) {
     let i = 0;
     const a = [];
     if (r === "BOD") {
-      if (s.text !== "M" && s.text !== "m") return Nn("M0,0" + e);
-      o++, i = mt[s.text], r = s.text;
-    } else on(s, rn) ? i = mt[r] : (o++, i = mt[s.text], r = s.text);
+      if (s.text !== "M" && s.text !== "m") return Hn("M0,0" + e);
+      o++, i = bt[s.text], r = s.text;
+    } else ln(s, cn) ? i = bt[r] : (o++, i = bt[s.text], r = s.text);
     if (!(o + i < n.length)) throw new Error("Path data ended short");
     for (let c = o; c < o + i; c++) {
       const l = n[c];
-      if (!on(l, rn)) throw new Error("Param not a number: " + r + "," + l.text);
+      if (!ln(l, cn)) throw new Error("Param not a number: " + r + "," + l.text);
       a[a.length] = +l.text;
     }
-    if (typeof mt[r] != "number") throw new Error("Bad segment: " + r);
+    if (typeof bt[r] != "number") throw new Error("Bad segment: " + r);
     {
       const c = { key: r, data: a };
       t.push(c), o += i, s = n[o], r === "M" && (r = "L"), r === "m" && (r = "l");
@@ -1331,7 +1331,7 @@ function Nn(e) {
   }
   return t;
 }
-function ro(e) {
+function ho(e) {
   let t = 0, n = 0, r = 0, o = 0;
   const s = [];
   for (const { key: i, data: a } of e) switch (i) {
@@ -1401,7 +1401,7 @@ function ro(e) {
   }
   return s;
 }
-function oo(e) {
+function fo(e) {
   const t = [];
   let n = "", r = 0, o = 0, s = 0, i = 0, a = 0, c = 0;
   for (const { key: l, data: u } of e) {
@@ -1441,7 +1441,7 @@ function oo(e) {
       }
       case "A": {
         const h = Math.abs(u[0]), d = Math.abs(u[1]), p = u[2], f = u[3], m = u[4], g = u[5], _ = u[6];
-        h === 0 || d === 0 ? (t.push({ key: "C", data: [r, o, g, _, g, _] }), r = g, o = _) : (r !== g || o !== _) && (so(r, o, g, _, h, d, p, f, m).forEach((function(b) {
+        h === 0 || d === 0 ? (t.push({ key: "C", data: [r, o, g, _, g, _] }), r = g, o = _) : (r !== g || o !== _) && (mo(r, o, g, _, h, d, p, f, m).forEach((function(b) {
           t.push({ key: "C", data: b });
         })), r = g, o = _);
         break;
@@ -1453,74 +1453,74 @@ function oo(e) {
   }
   return t;
 }
-function je(e, t, n) {
+function Ye(e, t, n) {
   return [e * Math.cos(n) - t * Math.sin(n), e * Math.sin(n) + t * Math.cos(n)];
 }
-function so(e, t, n, r, o, s, i, a, c, l) {
+function mo(e, t, n, r, o, s, i, a, c, l) {
   const u = (h = i, Math.PI * h / 180);
   var h;
   let d = [], p = 0, f = 0, m = 0, g = 0;
   if (l) [p, f, m, g] = l;
   else {
-    [e, t] = je(e, t, -u), [n, r] = je(n, r, -u);
+    [e, t] = Ye(e, t, -u), [n, r] = Ye(n, r, -u);
     const Y = (e - n) / 2, N = (t - r) / 2;
     let ee = Y * Y / (o * o) + N * N / (s * s);
     ee > 1 && (ee = Math.sqrt(ee), o *= ee, s *= ee);
-    const Ae = o * o, Me = s * s, gs = Ae * Me - Ae * N * N - Me * Y * Y, bs = Ae * N * N + Me * Y * Y, Qn = (a === c ? -1 : 1) * Math.sqrt(Math.abs(gs / bs));
-    m = Qn * o * N / s + (e + n) / 2, g = Qn * -s * Y / o + (t + r) / 2, p = Math.asin(parseFloat(((t - g) / s).toFixed(9))), f = Math.asin(parseFloat(((r - g) / s).toFixed(9))), e < m && (p = Math.PI - p), n < m && (f = Math.PI - f), p < 0 && (p = 2 * Math.PI + p), f < 0 && (f = 2 * Math.PI + f), c && p > f && (p -= 2 * Math.PI), !c && f > p && (f -= 2 * Math.PI);
+    const Ee = o * o, Te = s * s, Ls = Ee * Te - Ee * N * N - Te * Y * Y, Cs = Ee * N * N + Te * Y * Y, sr = (a === c ? -1 : 1) * Math.sqrt(Math.abs(Ls / Cs));
+    m = sr * o * N / s + (e + n) / 2, g = sr * -s * Y / o + (t + r) / 2, p = Math.asin(parseFloat(((t - g) / s).toFixed(9))), f = Math.asin(parseFloat(((r - g) / s).toFixed(9))), e < m && (p = Math.PI - p), n < m && (f = Math.PI - f), p < 0 && (p = 2 * Math.PI + p), f < 0 && (f = 2 * Math.PI + f), c && p > f && (p -= 2 * Math.PI), !c && f > p && (f -= 2 * Math.PI);
   }
   let _ = f - p;
   if (Math.abs(_) > 120 * Math.PI / 180) {
     const Y = f, N = n, ee = r;
-    f = c && f > p ? p + 120 * Math.PI / 180 * 1 : p + 120 * Math.PI / 180 * -1, d = so(n = m + o * Math.cos(f), r = g + s * Math.sin(f), N, ee, o, s, i, 0, c, [f, Y, m, g]);
+    f = c && f > p ? p + 120 * Math.PI / 180 * 1 : p + 120 * Math.PI / 180 * -1, d = mo(n = m + o * Math.cos(f), r = g + s * Math.sin(f), N, ee, o, s, i, 0, c, [f, Y, m, g]);
   }
   _ = f - p;
-  const b = Math.cos(p), k = Math.sin(p), R = Math.cos(f), P = Math.sin(f), T = Math.tan(_ / 4), G = 4 / 3 * o * T, Q = 4 / 3 * s * T, ht = [e, t], X = [e + G * k, t - Q * b], fe = [n + G * P, r - Q * R], Jn = [n, r];
-  if (X[0] = 2 * ht[0] - X[0], X[1] = 2 * ht[1] - X[1], l) return [X, fe, Jn].concat(d);
+  const b = Math.cos(p), k = Math.sin(p), R = Math.cos(f), P = Math.sin(f), L = Math.tan(_ / 4), G = 4 / 3 * o * L, Q = 4 / 3 * s * L, mt = [e, t], X = [e + G * k, t - Q * b], me = [n + G * P, r - Q * R], or = [n, r];
+  if (X[0] = 2 * mt[0] - X[0], X[1] = 2 * mt[1] - X[1], l) return [X, me, or].concat(d);
   {
-    d = [X, fe, Jn].concat(d);
+    d = [X, me, or].concat(d);
     const Y = [];
     for (let N = 0; N < d.length; N += 3) {
-      const ee = je(d[N][0], d[N][1], u), Ae = je(d[N + 1][0], d[N + 1][1], u), Me = je(d[N + 2][0], d[N + 2][1], u);
-      Y.push([ee[0], ee[1], Ae[0], Ae[1], Me[0], Me[1]]);
+      const ee = Ye(d[N][0], d[N][1], u), Ee = Ye(d[N + 1][0], d[N + 1][1], u), Te = Ye(d[N + 2][0], d[N + 2][1], u);
+      Y.push([ee[0], ee[1], Ee[0], Ee[1], Te[0], Te[1]]);
     }
     return Y;
   }
 }
-const gf = { randOffset: function(e, t) {
+const Cf = { randOffset: function(e, t) {
   return w(e, t);
 }, randOffsetWithRange: function(e, t, n) {
-  return It(e, t, n);
+  return Dt(e, t, n);
 }, ellipse: function(e, t, n, r, o) {
-  const s = io(n, r, o);
-  return vn(e, t, o, s).opset;
+  const s = bo(n, r, o);
+  return kn(e, t, o, s).opset;
 }, doubleLineOps: function(e, t, n, r, o) {
-  return de(e, t, n, r, o, !0);
+  return pe(e, t, n, r, o, !0);
 } };
-function ao(e, t, n, r, o) {
-  return { type: "path", ops: de(e, t, n, r, o) };
+function go(e, t, n, r, o) {
+  return { type: "path", ops: pe(e, t, n, r, o) };
 }
-function St(e, t, n) {
+function At(e, t, n) {
   const r = (e || []).length;
   if (r > 2) {
     const o = [];
-    for (let s = 0; s < r - 1; s++) o.push(...de(e[s][0], e[s][1], e[s + 1][0], e[s + 1][1], n));
-    return t && o.push(...de(e[r - 1][0], e[r - 1][1], e[0][0], e[0][1], n)), { type: "path", ops: o };
+    for (let s = 0; s < r - 1; s++) o.push(...pe(e[s][0], e[s][1], e[s + 1][0], e[s + 1][1], n));
+    return t && o.push(...pe(e[r - 1][0], e[r - 1][1], e[0][0], e[0][1], n)), { type: "path", ops: o };
   }
-  return r === 2 ? ao(e[0][0], e[0][1], e[1][0], e[1][1], n) : { type: "path", ops: [] };
+  return r === 2 ? go(e[0][0], e[0][1], e[1][0], e[1][1], n) : { type: "path", ops: [] };
 }
-function bf(e, t, n, r, o) {
+function Pf(e, t, n, r, o) {
   return (function(s, i) {
-    return St(s, !0, i);
+    return At(s, !0, i);
   })([[e, t], [e + n, t], [e + n, t + r], [e, t + r]], o);
 }
-function rr(e, t) {
+function lr(e, t) {
   if (e.length) {
-    const n = typeof e[0][0] == "number" ? [e] : e, r = gt(n[0], 1 * (1 + 0.2 * t.roughness), t), o = t.disableMultiStroke ? [] : gt(n[0], 1.5 * (1 + 0.22 * t.roughness), ar(t));
+    const n = typeof e[0][0] == "number" ? [e] : e, r = _t(n[0], 1 * (1 + 0.2 * t.roughness), t), o = t.disableMultiStroke ? [] : _t(n[0], 1.5 * (1 + 0.22 * t.roughness), pr(t));
     for (let s = 1; s < n.length; s++) {
       const i = n[s];
       if (i.length) {
-        const a = gt(i, 1 * (1 + 0.2 * t.roughness), t), c = t.disableMultiStroke ? [] : gt(i, 1.5 * (1 + 0.22 * t.roughness), ar(t));
+        const a = _t(i, 1 * (1 + 0.2 * t.roughness), t), c = t.disableMultiStroke ? [] : _t(i, 1.5 * (1 + 0.22 * t.roughness), pr(t));
         for (const l of a) l.op !== "move" && r.push(l);
         for (const l of c) l.op !== "move" && o.push(l);
       }
@@ -1529,56 +1529,56 @@ function rr(e, t) {
   }
   return { type: "path", ops: [] };
 }
-function io(e, t, n) {
+function bo(e, t, n) {
   const r = Math.sqrt(2 * Math.PI * Math.sqrt((Math.pow(e / 2, 2) + Math.pow(t / 2, 2)) / 2)), o = Math.ceil(Math.max(n.curveStepCount, n.curveStepCount / Math.sqrt(200) * r)), s = 2 * Math.PI / o;
   let i = Math.abs(e / 2), a = Math.abs(t / 2);
   const c = 1 - n.curveFitting;
   return i += w(i * c, n), a += w(a * c, n), { increment: s, rx: i, ry: a };
 }
-function vn(e, t, n, r) {
-  const [o, s] = ir(r.increment, e, t, r.rx, r.ry, 1, r.increment * It(0.1, It(0.4, 1, n), n), n);
-  let i = Ot(o, null, n);
+function kn(e, t, n, r) {
+  const [o, s] = hr(r.increment, e, t, r.rx, r.ry, 1, r.increment * Dt(0.1, Dt(0.4, 1, n), n), n);
+  let i = Bt(o, null, n);
   if (!n.disableMultiStroke && n.roughness !== 0) {
-    const [a] = ir(r.increment, e, t, r.rx, r.ry, 1.5, 0, n), c = Ot(a, null, n);
+    const [a] = hr(r.increment, e, t, r.rx, r.ry, 1.5, 0, n), c = Bt(a, null, n);
     i = i.concat(c);
   }
   return { estimatedPoints: s, opset: { type: "path", ops: i } };
 }
-function or(e, t, n, r, o, s, i, a, c) {
+function ur(e, t, n, r, o, s, i, a, c) {
   const l = e, u = t;
   let h = Math.abs(n / 2), d = Math.abs(r / 2);
   h += w(0.01 * h, c), d += w(0.01 * d, c);
   let p = o, f = s;
   for (; p < 0; ) p += 2 * Math.PI, f += 2 * Math.PI;
   f - p > 2 * Math.PI && (p = 0, f = 2 * Math.PI);
-  const m = 2 * Math.PI / c.curveStepCount, g = Math.min(m / 2, (f - p) / 2), _ = cr(g, l, u, h, d, p, f, 1, c);
+  const m = 2 * Math.PI / c.curveStepCount, g = Math.min(m / 2, (f - p) / 2), _ = fr(g, l, u, h, d, p, f, 1, c);
   if (!c.disableMultiStroke) {
-    const b = cr(g, l, u, h, d, p, f, 1.5, c);
+    const b = fr(g, l, u, h, d, p, f, 1.5, c);
     _.push(...b);
   }
-  return i && (a ? _.push(...de(l, u, l + h * Math.cos(p), u + d * Math.sin(p), c), ...de(l, u, l + h * Math.cos(f), u + d * Math.sin(f), c)) : _.push({ op: "lineTo", data: [l, u] }, { op: "lineTo", data: [l + h * Math.cos(p), u + d * Math.sin(p)] })), { type: "path", ops: _ };
+  return i && (a ? _.push(...pe(l, u, l + h * Math.cos(p), u + d * Math.sin(p), c), ...pe(l, u, l + h * Math.cos(f), u + d * Math.sin(f), c)) : _.push({ op: "lineTo", data: [l, u] }, { op: "lineTo", data: [l + h * Math.cos(p), u + d * Math.sin(p)] })), { type: "path", ops: _ };
 }
-function sr(e, t) {
-  const n = oo(ro(Nn(e))), r = [];
+function dr(e, t) {
+  const n = fo(ho(Hn(e))), r = [];
   let o = [0, 0], s = [0, 0];
   for (const { key: i, data: a } of n) switch (i) {
     case "M":
       s = [a[0], a[1]], o = [a[0], a[1]];
       break;
     case "L":
-      r.push(...de(s[0], s[1], a[0], a[1], t)), s = [a[0], a[1]];
+      r.push(...pe(s[0], s[1], a[0], a[1], t)), s = [a[0], a[1]];
       break;
     case "C": {
       const [c, l, u, h, d, p] = a;
-      r.push(..._f(c, l, u, h, d, p, s, t)), s = [d, p];
+      r.push(...If(c, l, u, h, d, p, s, t)), s = [d, p];
       break;
     }
     case "Z":
-      r.push(...de(s[0], s[1], o[0], o[1], t)), s = [o[0], o[1]];
+      r.push(...pe(s[0], s[1], o[0], o[1], t)), s = [o[0], o[1]];
   }
   return { type: "path", ops: r };
 }
-function sn(e, t) {
+function un(e, t) {
   const n = [];
   for (const r of e) if (r.length) {
     const o = t.maxRandomnessOffset || 0, s = r.length;
@@ -1589,70 +1589,70 @@ function sn(e, t) {
   }
   return { type: "fillPath", ops: n };
 }
-function Ee(e, t) {
+function Le(e, t) {
   return (function(n, r) {
     let o = n.fillStyle || "hachure";
     if (!j[o]) switch (o) {
       case "zigzag":
-        j[o] || (j[o] = new lf(r));
+        j[o] || (j[o] = new Sf(r));
         break;
       case "cross-hatch":
-        j[o] || (j[o] = new uf(r));
+        j[o] || (j[o] = new $f(r));
         break;
       case "dots":
-        j[o] || (j[o] = new df(r));
+        j[o] || (j[o] = new Af(r));
         break;
       case "dashed":
-        j[o] || (j[o] = new pf(r));
+        j[o] || (j[o] = new Mf(r));
         break;
       case "zigzag-line":
-        j[o] || (j[o] = new hf(r));
+        j[o] || (j[o] = new Ef(r));
         break;
       default:
-        o = "hachure", j[o] || (j[o] = new Rn(r));
+        o = "hachure", j[o] || (j[o] = new zn(r));
     }
     return j[o];
-  })(t, gf).fillPolygons(e, t);
+  })(t, Cf).fillPolygons(e, t);
 }
-function ar(e) {
+function pr(e) {
   const t = Object.assign({}, e);
   return t.randomizer = void 0, e.seed && (t.seed = e.seed + 1), t;
 }
-function co(e) {
-  return e.randomizer || (e.randomizer = new ff(e.seed || 0)), e.randomizer.next();
+function _o(e) {
+  return e.randomizer || (e.randomizer = new Tf(e.seed || 0)), e.randomizer.next();
 }
-function It(e, t, n, r = 1) {
-  return n.roughness * r * (co(n) * (t - e) + e);
+function Dt(e, t, n, r = 1) {
+  return n.roughness * r * (_o(n) * (t - e) + e);
 }
 function w(e, t, n = 1) {
-  return It(-e, e, t, n);
+  return Dt(-e, e, t, n);
 }
-function de(e, t, n, r, o, s = !1) {
-  const i = s ? o.disableMultiStrokeFill : o.disableMultiStroke, a = xn(e, t, n, r, o, !0, !1);
+function pe(e, t, n, r, o, s = !1) {
+  const i = s ? o.disableMultiStrokeFill : o.disableMultiStroke, a = Sn(e, t, n, r, o, !0, !1);
   if (i) return a;
-  const c = xn(e, t, n, r, o, !0, !0);
+  const c = Sn(e, t, n, r, o, !0, !0);
   return a.concat(c);
 }
-function xn(e, t, n, r, o, s, i) {
+function Sn(e, t, n, r, o, s, i) {
   const a = Math.pow(e - n, 2) + Math.pow(t - r, 2), c = Math.sqrt(a);
   let l = 1;
   l = c < 200 ? 1 : c > 500 ? 0.4 : -16668e-7 * c + 1.233334;
   let u = o.maxRandomnessOffset || 0;
   u * u * 100 > a && (u = c / 10);
-  const h = u / 2, d = 0.2 + 0.2 * co(o);
+  const h = u / 2, d = 0.2 + 0.2 * _o(o);
   let p = o.bowing * o.maxRandomnessOffset * (r - t) / 200, f = o.bowing * o.maxRandomnessOffset * (e - n) / 200;
   p = w(p, o, l), f = w(f, o, l);
   const m = [], g = () => w(h, o, l), _ = () => w(u, o, l), b = o.preserveVertices;
   return i ? m.push({ op: "move", data: [e + (b ? 0 : g()), t + (b ? 0 : g())] }) : m.push({ op: "move", data: [e + (b ? 0 : w(u, o, l)), t + (b ? 0 : w(u, o, l))] }), i ? m.push({ op: "bcurveTo", data: [p + e + (n - e) * d + g(), f + t + (r - t) * d + g(), p + e + 2 * (n - e) * d + g(), f + t + 2 * (r - t) * d + g(), n + (b ? 0 : g()), r + (b ? 0 : g())] }) : m.push({ op: "bcurveTo", data: [p + e + (n - e) * d + _(), f + t + (r - t) * d + _(), p + e + 2 * (n - e) * d + _(), f + t + 2 * (r - t) * d + _(), n + (b ? 0 : _()), r + (b ? 0 : _())] }), m;
 }
-function gt(e, t, n) {
+function _t(e, t, n) {
   if (!e.length) return [];
   const r = [];
   r.push([e[0][0] + w(t, n), e[0][1] + w(t, n)]), r.push([e[0][0] + w(t, n), e[0][1] + w(t, n)]);
   for (let o = 1; o < e.length; o++) r.push([e[o][0] + w(t, n), e[o][1] + w(t, n)]), o === e.length - 1 && r.push([e[o][0] + w(t, n), e[o][1] + w(t, n)]);
-  return Ot(r, null, n);
+  return Bt(r, null, n);
 }
-function Ot(e, t, n) {
+function Bt(e, t, n) {
   const r = e.length, o = [];
   if (r > 3) {
     const s = [], i = 1 - n.curveTightness;
@@ -1661,10 +1661,10 @@ function Ot(e, t, n) {
       const c = e[a];
       s[0] = [c[0], c[1]], s[1] = [c[0] + (i * e[a + 1][0] - i * e[a - 1][0]) / 6, c[1] + (i * e[a + 1][1] - i * e[a - 1][1]) / 6], s[2] = [e[a + 1][0] + (i * e[a][0] - i * e[a + 2][0]) / 6, e[a + 1][1] + (i * e[a][1] - i * e[a + 2][1]) / 6], s[3] = [e[a + 1][0], e[a + 1][1]], o.push({ op: "bcurveTo", data: [s[1][0], s[1][1], s[2][0], s[2][1], s[3][0], s[3][1]] });
     }
-  } else r === 3 ? (o.push({ op: "move", data: [e[1][0], e[1][1]] }), o.push({ op: "bcurveTo", data: [e[1][0], e[1][1], e[2][0], e[2][1], e[2][0], e[2][1]] })) : r === 2 && o.push(...xn(e[0][0], e[0][1], e[1][0], e[1][1], n, !0, !0));
+  } else r === 3 ? (o.push({ op: "move", data: [e[1][0], e[1][1]] }), o.push({ op: "bcurveTo", data: [e[1][0], e[1][1], e[2][0], e[2][1], e[2][0], e[2][1]] })) : r === 2 && o.push(...Sn(e[0][0], e[0][1], e[1][0], e[1][1], n, !0, !0));
   return o;
 }
-function ir(e, t, n, r, o, s, i, a) {
+function hr(e, t, n, r, o, s, i, a) {
   const c = [], l = [];
   if (a.roughness === 0) {
     e /= 4, l.push([t + r * Math.cos(-e), n + o * Math.sin(-e)]);
@@ -1685,33 +1685,33 @@ function ir(e, t, n, r, o, s, i, a) {
   }
   return [l, c];
 }
-function cr(e, t, n, r, o, s, i, a, c) {
+function fr(e, t, n, r, o, s, i, a, c) {
   const l = s + w(0.1, c), u = [];
   u.push([w(a, c) + t + 0.9 * r * Math.cos(l - e), w(a, c) + n + 0.9 * o * Math.sin(l - e)]);
   for (let h = l; h <= i; h += e) u.push([w(a, c) + t + r * Math.cos(h), w(a, c) + n + o * Math.sin(h)]);
-  return u.push([t + r * Math.cos(i), n + o * Math.sin(i)]), u.push([t + r * Math.cos(i), n + o * Math.sin(i)]), Ot(u, null, c);
+  return u.push([t + r * Math.cos(i), n + o * Math.sin(i)]), u.push([t + r * Math.cos(i), n + o * Math.sin(i)]), Bt(u, null, c);
 }
-function _f(e, t, n, r, o, s, i, a) {
+function If(e, t, n, r, o, s, i, a) {
   const c = [], l = [a.maxRandomnessOffset || 1, (a.maxRandomnessOffset || 1) + 0.3];
   let u = [0, 0];
   const h = a.disableMultiStroke ? 1 : 2, d = a.preserveVertices;
   for (let p = 0; p < h; p++) p === 0 ? c.push({ op: "move", data: [i[0], i[1]] }) : c.push({ op: "move", data: [i[0] + (d ? 0 : w(l[0], a)), i[1] + (d ? 0 : w(l[0], a))] }), u = d ? [o, s] : [o + w(l[p], a), s + w(l[p], a)], c.push({ op: "bcurveTo", data: [e + w(l[p], a), t + w(l[p], a), n + w(l[p], a), r + w(l[p], a), u[0], u[1]] });
   return c;
 }
-function Ve(e) {
+function Xe(e) {
   return [...e];
 }
-function lr(e, t = 0) {
+function mr(e, t = 0) {
   const n = e.length;
   if (n < 3) throw new Error("A curve must have at least three points.");
   const r = [];
-  if (n === 3) r.push(Ve(e[0]), Ve(e[1]), Ve(e[2]), Ve(e[2]));
+  if (n === 3) r.push(Xe(e[0]), Xe(e[1]), Xe(e[2]), Xe(e[2]));
   else {
     const o = [];
     o.push(e[0], e[0]);
     for (let a = 1; a < e.length; a++) o.push(e[a]), a === e.length - 1 && o.push(e[a]);
     const s = [], i = 1 - t;
-    r.push(Ve(o[0]));
+    r.push(Xe(o[0]));
     for (let a = 1; a + 2 < o.length; a++) {
       const c = o[a];
       s[0] = [c[0], c[1]], s[1] = [c[0] + (i * o[a + 1][0] - i * o[a - 1][0]) / 6, c[1] + (i * o[a + 1][1] - i * o[a - 1][1]) / 6], s[2] = [o[a + 1][0] + (i * o[a][0] - i * o[a + 2][0]) / 6, o[a + 1][1] + (i * o[a][1] - i * o[a + 2][1]) / 6], s[3] = [o[a + 1][0], o[a + 1][1]], r.push(s[1], s[2], s[3]);
@@ -1719,19 +1719,19 @@ function lr(e, t = 0) {
   }
   return r;
 }
-function $t(e, t) {
+function Mt(e, t) {
   return Math.pow(e[0] - t[0], 2) + Math.pow(e[1] - t[1], 2);
 }
-function yf(e, t, n) {
-  const r = $t(t, n);
-  if (r === 0) return $t(e, t);
+function Of(e, t, n) {
+  const r = Mt(t, n);
+  if (r === 0) return Mt(e, t);
   let o = ((e[0] - t[0]) * (n[0] - t[0]) + (e[1] - t[1]) * (n[1] - t[1])) / r;
-  return o = Math.max(0, Math.min(1, o)), $t(e, me(t, n, o));
+  return o = Math.max(0, Math.min(1, o)), Mt(e, ge(t, n, o));
 }
-function me(e, t, n) {
+function ge(e, t, n) {
   return [e[0] + (t[0] - e[0]) * n, e[1] + (t[1] - e[1]) * n];
 }
-function wn(e, t, n, r) {
+function $n(e, t, n, r) {
   const o = r || [];
   if ((function(a, c) {
     const l = a[c + 0], u = a[c + 1], h = a[c + 2], d = a[c + 3];
@@ -1745,34 +1745,34 @@ function wn(e, t, n, r) {
     return g *= g, p < m && (p = m), f < g && (f = g), p + f;
   })(e, t) < n) {
     const a = e[t + 0];
-    o.length ? (s = o[o.length - 1], i = a, Math.sqrt($t(s, i)) > 1 && o.push(a)) : o.push(a), o.push(e[t + 3]);
+    o.length ? (s = o[o.length - 1], i = a, Math.sqrt(Mt(s, i)) > 1 && o.push(a)) : o.push(a), o.push(e[t + 3]);
   } else {
-    const c = e[t + 0], l = e[t + 1], u = e[t + 2], h = e[t + 3], d = me(c, l, 0.5), p = me(l, u, 0.5), f = me(u, h, 0.5), m = me(d, p, 0.5), g = me(p, f, 0.5), _ = me(m, g, 0.5);
-    wn([c, d, m, _], 0, n, o), wn([_, g, f, h], 0, n, o);
+    const c = e[t + 0], l = e[t + 1], u = e[t + 2], h = e[t + 3], d = ge(c, l, 0.5), p = ge(l, u, 0.5), f = ge(u, h, 0.5), m = ge(d, p, 0.5), g = ge(p, f, 0.5), _ = ge(m, g, 0.5);
+    $n([c, d, m, _], 0, n, o), $n([_, g, f, h], 0, n, o);
   }
   var s, i;
   return o;
 }
-function vf(e, t) {
-  return Rt(e, 0, e.length, t);
+function Rf(e, t) {
+  return qt(e, 0, e.length, t);
 }
-function Rt(e, t, n, r, o) {
+function qt(e, t, n, r, o) {
   const s = o || [], i = e[t], a = e[n - 1];
   let c = 0, l = 1;
   for (let u = t + 1; u < n - 1; ++u) {
-    const h = yf(e[u], i, a);
+    const h = Of(e[u], i, a);
     h > c && (c = h, l = u);
   }
-  return Math.sqrt(c) > r ? (Rt(e, t, l + 1, r, s), Rt(e, l, n, r, s)) : (s.length || s.push(i), s.push(a)), s;
+  return Math.sqrt(c) > r ? (qt(e, t, l + 1, r, s), qt(e, l, n, r, s)) : (s.length || s.push(i), s.push(a)), s;
 }
-function an(e, t = 0.15, n) {
+function dn(e, t = 0.15, n) {
   const r = [], o = (e.length - 1) / 3;
   for (let s = 0; s < o; s++)
-    wn(e, 3 * s, t, r);
-  return n && n > 0 ? Rt(r, 0, r.length, n) : r;
+    $n(e, 3 * s, t, r);
+  return n && n > 0 ? qt(r, 0, r.length, n) : r;
 }
 const V = "none";
-class Nt {
+class Ft {
   constructor(t) {
     this.defaultOptions = { maxRandomnessOffset: 2, roughness: 1, bowing: 1, stroke: "#000", strokeWidth: 1, curveTightness: 0, curveFitting: 0.95, curveStepCount: 9, fillStyle: "hachure", fillWeight: -1, hachureAngle: -41, hachureGap: -1, dashOffset: -1, dashGap: -1, zigzagOffset: -1, seed: 0, disableMultiStroke: !1, disableMultiStrokeFill: !1, preserveVertices: !1, fillShapeRoughnessGain: 0.8 }, this.config = t || {}, this.config.options && (this.defaultOptions = this._o(this.config.options));
   }
@@ -1787,22 +1787,22 @@ class Nt {
   }
   line(t, n, r, o, s) {
     const i = this._o(s);
-    return this._d("line", [ao(t, n, r, o, i)], i);
+    return this._d("line", [go(t, n, r, o, i)], i);
   }
   rectangle(t, n, r, o, s) {
-    const i = this._o(s), a = [], c = bf(t, n, r, o, i);
+    const i = this._o(s), a = [], c = Pf(t, n, r, o, i);
     if (i.fill) {
       const l = [[t, n], [t + r, n], [t + r, n + o], [t, n + o]];
-      i.fillStyle === "solid" ? a.push(sn([l], i)) : a.push(Ee([l], i));
+      i.fillStyle === "solid" ? a.push(un([l], i)) : a.push(Le([l], i));
     }
     return i.stroke !== V && a.push(c), this._d("rectangle", a, i);
   }
   ellipse(t, n, r, o, s) {
-    const i = this._o(s), a = [], c = io(r, o, i), l = vn(t, n, i, c);
+    const i = this._o(s), a = [], c = bo(r, o, i), l = kn(t, n, i, c);
     if (i.fill) if (i.fillStyle === "solid") {
-      const u = vn(t, n, i, c).opset;
+      const u = kn(t, n, i, c).opset;
       u.type = "fillPath", a.push(u);
-    } else a.push(Ee([l.estimatedPoints], i));
+    } else a.push(Le([l.estimatedPoints], i));
     return i.stroke !== V && a.push(l.opset), this._d("ellipse", a, i);
   }
   circle(t, n, r, o) {
@@ -1811,72 +1811,72 @@ class Nt {
   }
   linearPath(t, n) {
     const r = this._o(n);
-    return this._d("linearPath", [St(t, !1, r)], r);
+    return this._d("linearPath", [At(t, !1, r)], r);
   }
   arc(t, n, r, o, s, i, a = !1, c) {
-    const l = this._o(c), u = [], h = or(t, n, r, o, s, i, a, !0, l);
+    const l = this._o(c), u = [], h = ur(t, n, r, o, s, i, a, !0, l);
     if (a && l.fill) if (l.fillStyle === "solid") {
       const d = Object.assign({}, l);
       d.disableMultiStroke = !0;
-      const p = or(t, n, r, o, s, i, !0, !1, d);
+      const p = ur(t, n, r, o, s, i, !0, !1, d);
       p.type = "fillPath", u.push(p);
     } else u.push((function(d, p, f, m, g, _, b) {
       const k = d, R = p;
-      let P = Math.abs(f / 2), T = Math.abs(m / 2);
-      P += w(0.01 * P, b), T += w(0.01 * T, b);
+      let P = Math.abs(f / 2), L = Math.abs(m / 2);
+      P += w(0.01 * P, b), L += w(0.01 * L, b);
       let G = g, Q = _;
       for (; G < 0; ) G += 2 * Math.PI, Q += 2 * Math.PI;
       Q - G > 2 * Math.PI && (G = 0, Q = 2 * Math.PI);
-      const ht = (Q - G) / b.curveStepCount, X = [];
-      for (let fe = G; fe <= Q; fe += ht) X.push([k + P * Math.cos(fe), R + T * Math.sin(fe)]);
-      return X.push([k + P * Math.cos(Q), R + T * Math.sin(Q)]), X.push([k, R]), Ee([X], b);
+      const mt = (Q - G) / b.curveStepCount, X = [];
+      for (let me = G; me <= Q; me += mt) X.push([k + P * Math.cos(me), R + L * Math.sin(me)]);
+      return X.push([k + P * Math.cos(Q), R + L * Math.sin(Q)]), X.push([k, R]), Le([X], b);
     })(t, n, r, o, s, i, l));
     return l.stroke !== V && u.push(h), this._d("arc", u, l);
   }
   curve(t, n) {
-    const r = this._o(n), o = [], s = rr(t, r);
+    const r = this._o(n), o = [], s = lr(t, r);
     if (r.fill && r.fill !== V) if (r.fillStyle === "solid") {
-      const i = rr(t, Object.assign(Object.assign({}, r), { disableMultiStroke: !0, roughness: r.roughness ? r.roughness + r.fillShapeRoughnessGain : 0 }));
+      const i = lr(t, Object.assign(Object.assign({}, r), { disableMultiStroke: !0, roughness: r.roughness ? r.roughness + r.fillShapeRoughnessGain : 0 }));
       o.push({ type: "fillPath", ops: this._mergedShape(i.ops) });
     } else {
       const i = [], a = t;
       if (a.length) {
         const c = typeof a[0][0] == "number" ? [a] : a;
-        for (const l of c) l.length < 3 ? i.push(...l) : l.length === 3 ? i.push(...an(lr([l[0], l[0], l[1], l[2]]), 10, (1 + r.roughness) / 2)) : i.push(...an(lr(l), 10, (1 + r.roughness) / 2));
+        for (const l of c) l.length < 3 ? i.push(...l) : l.length === 3 ? i.push(...dn(mr([l[0], l[0], l[1], l[2]]), 10, (1 + r.roughness) / 2)) : i.push(...dn(mr(l), 10, (1 + r.roughness) / 2));
       }
-      i.length && o.push(Ee([i], r));
+      i.length && o.push(Le([i], r));
     }
     return r.stroke !== V && o.push(s), this._d("curve", o, r);
   }
   polygon(t, n) {
-    const r = this._o(n), o = [], s = St(t, !0, r);
-    return r.fill && (r.fillStyle === "solid" ? o.push(sn([t], r)) : o.push(Ee([t], r))), r.stroke !== V && o.push(s), this._d("polygon", o, r);
+    const r = this._o(n), o = [], s = At(t, !0, r);
+    return r.fill && (r.fillStyle === "solid" ? o.push(un([t], r)) : o.push(Le([t], r))), r.stroke !== V && o.push(s), this._d("polygon", o, r);
   }
   path(t, n) {
     const r = this._o(n), o = [];
     if (!t) return this._d("path", o, r);
     t = (t || "").replace(/\n/g, " ").replace(/(-\s)/g, "-").replace("/(ss)/g", " ");
     const s = r.fill && r.fill !== "transparent" && r.fill !== V, i = r.stroke !== V, a = !!(r.simplification && r.simplification < 1), c = (function(u, h, d) {
-      const p = oo(ro(Nn(u))), f = [];
+      const p = fo(ho(Hn(u))), f = [];
       let m = [], g = [0, 0], _ = [];
       const b = () => {
-        _.length >= 4 && m.push(...an(_, h)), _ = [];
+        _.length >= 4 && m.push(...dn(_, h)), _ = [];
       }, k = () => {
         b(), m.length && (f.push(m), m = []);
       };
-      for (const { key: P, data: T } of p) switch (P) {
+      for (const { key: P, data: L } of p) switch (P) {
         case "M":
-          k(), g = [T[0], T[1]], m.push(g);
+          k(), g = [L[0], L[1]], m.push(g);
           break;
         case "L":
-          b(), m.push([T[0], T[1]]);
+          b(), m.push([L[0], L[1]]);
           break;
         case "C":
           if (!_.length) {
             const G = m.length ? m[m.length - 1] : g;
             _.push([G[0], G[1]]);
           }
-          _.push([T[0], T[1]]), _.push([T[2], T[3]]), _.push([T[4], T[5]]);
+          _.push([L[0], L[1]]), _.push([L[2], L[3]]), _.push([L[4], L[5]]);
           break;
         case "Z":
           b(), m.push([g[0], g[1]]);
@@ -1884,18 +1884,18 @@ class Nt {
       if (k(), !d) return f;
       const R = [];
       for (const P of f) {
-        const T = vf(P, d);
-        T.length && R.push(T);
+        const L = Rf(P, d);
+        L.length && R.push(L);
       }
       return R;
-    })(t, 1, a ? 4 - 4 * (r.simplification || 1) : (1 + r.roughness) / 2), l = sr(t, r);
+    })(t, 1, a ? 4 - 4 * (r.simplification || 1) : (1 + r.roughness) / 2), l = dr(t, r);
     if (s) if (r.fillStyle === "solid") if (c.length === 1) {
-      const u = sr(t, Object.assign(Object.assign({}, r), { disableMultiStroke: !0, roughness: r.roughness ? r.roughness + r.fillShapeRoughnessGain : 0 }));
+      const u = dr(t, Object.assign(Object.assign({}, r), { disableMultiStroke: !0, roughness: r.roughness ? r.roughness + r.fillShapeRoughnessGain : 0 }));
       o.push({ type: "fillPath", ops: this._mergedShape(u.ops) });
-    } else o.push(sn(c, r));
-    else o.push(Ee(c, r));
+    } else o.push(un(c, r));
+    else o.push(Le(c, r));
     return i && (a ? c.forEach(((u) => {
-      o.push(St(u, !1, r));
+      o.push(At(u, !1, r));
     })) : o.push(l)), this._d("path", o, r);
   }
   opsToPath(t, n) {
@@ -1941,9 +1941,9 @@ class Nt {
     return t.filter(((n, r) => r === 0 || n.op !== "move"));
   }
 }
-class xf {
+class Nf {
   constructor(t, n) {
-    this.canvas = t, this.ctx = this.canvas.getContext("2d"), this.gen = new Nt(n);
+    this.canvas = t, this.ctx = this.canvas.getContext("2d"), this.gen = new Ft(n);
   }
   draw(t) {
     const n = t.sets || [], r = t.options || this.getDefaultOptions(), o = this.ctx, s = t.options.fixedDecimalPlaceDigits;
@@ -2025,21 +2025,21 @@ class xf {
     return this.draw(r), r;
   }
 }
-const bt = "http://www.w3.org/2000/svg";
-class wf {
+const yt = "http://www.w3.org/2000/svg";
+class Df {
   constructor(t, n) {
-    this.svg = t, this.gen = new Nt(n);
+    this.svg = t, this.gen = new Ft(n);
   }
   draw(t) {
-    const n = t.sets || [], r = t.options || this.getDefaultOptions(), o = this.svg.ownerDocument || window.document, s = o.createElementNS(bt, "g"), i = t.options.fixedDecimalPlaceDigits;
+    const n = t.sets || [], r = t.options || this.getDefaultOptions(), o = this.svg.ownerDocument || window.document, s = o.createElementNS(yt, "g"), i = t.options.fixedDecimalPlaceDigits;
     for (const a of n) {
       let c = null;
       switch (a.type) {
         case "path":
-          c = o.createElementNS(bt, "path"), c.setAttribute("d", this.opsToPath(a, i)), c.setAttribute("stroke", r.stroke), c.setAttribute("stroke-width", r.strokeWidth + ""), c.setAttribute("fill", "none"), r.strokeLineDash && c.setAttribute("stroke-dasharray", r.strokeLineDash.join(" ").trim()), r.strokeLineDashOffset && c.setAttribute("stroke-dashoffset", `${r.strokeLineDashOffset}`);
+          c = o.createElementNS(yt, "path"), c.setAttribute("d", this.opsToPath(a, i)), c.setAttribute("stroke", r.stroke), c.setAttribute("stroke-width", r.strokeWidth + ""), c.setAttribute("fill", "none"), r.strokeLineDash && c.setAttribute("stroke-dasharray", r.strokeLineDash.join(" ").trim()), r.strokeLineDashOffset && c.setAttribute("stroke-dashoffset", `${r.strokeLineDashOffset}`);
           break;
         case "fillPath":
-          c = o.createElementNS(bt, "path"), c.setAttribute("d", this.opsToPath(a, i)), c.setAttribute("stroke", "none"), c.setAttribute("stroke-width", "0"), c.setAttribute("fill", r.fill || ""), t.shape !== "curve" && t.shape !== "polygon" || c.setAttribute("fill-rule", "evenodd");
+          c = o.createElementNS(yt, "path"), c.setAttribute("d", this.opsToPath(a, i)), c.setAttribute("stroke", "none"), c.setAttribute("stroke-width", "0"), c.setAttribute("fill", r.fill || ""), t.shape !== "curve" && t.shape !== "polygon" || c.setAttribute("fill-rule", "evenodd");
           break;
         case "fillSketch":
           c = this.fillSketch(o, a, r);
@@ -2051,7 +2051,7 @@ class wf {
   fillSketch(t, n, r) {
     let o = r.fillWeight;
     o < 0 && (o = r.strokeWidth / 2);
-    const s = t.createElementNS(bt, "path");
+    const s = t.createElementNS(yt, "path");
     return s.setAttribute("d", this.opsToPath(n, r.fixedDecimalPlaceDigits)), s.setAttribute("stroke", r.fill || ""), s.setAttribute("stroke-width", o + ""), s.setAttribute("fill", "none"), r.fillLineDash && s.setAttribute("stroke-dasharray", r.fillLineDash.join(" ").trim()), r.fillLineDashOffset && s.setAttribute("stroke-dashoffset", `${r.fillLineDashOffset}`), s;
   }
   get generator() {
@@ -2100,12 +2100,12 @@ class wf {
     return this.draw(r);
   }
 }
-var kf = { canvas: (e, t) => new xf(e, t), svg: (e, t) => new wf(e, t), generator: (e) => new Nt(e), newSeed: () => Nt.newSeed() };
-const ur = "data-wp-animations";
-function Sf() {
-  if (document.head.querySelector(`[${ur}]`)) return;
+var Bf = { canvas: (e, t) => new Nf(e, t), svg: (e, t) => new Df(e, t), generator: (e) => new Ft(e), newSeed: () => Ft.newSeed() };
+const gr = "data-wp-animations";
+function qf() {
+  if (document.head.querySelector(`[${gr}]`)) return;
   const e = document.createElement("style");
-  e.setAttribute(ur, "true"), e.textContent = `
+  e.setAttribute(gr, "true"), e.textContent = `
     @keyframes wp-fade { from { opacity: 0; } to { opacity: 1; } }
     @keyframes wp-slide-left {
       from { transform: translateX(-30px) rotate(0deg); opacity: 0; }
@@ -2140,8 +2140,8 @@ function Sf() {
     }
   `, document.head.appendChild(e);
 }
-function Qe(e, t, n) {
-  if (!t || t.kind === "none" || Yr() !== "replay") return;
+function rt(e, t, n) {
+  if (!t || t.kind === "none" || ro() !== "replay") return;
   const r = Math.max(50, t.durationMs || 400), o = Math.max(0, t.delayMs || 0);
   e.style.transformBox = "fill-box", e.style.transformOrigin = "center", e.style.setProperty("--wp-final-rot", `${n}deg`), e.style.animation = `wp-${t.kind} ${r}ms ease-out ${o}ms backwards`;
   const s = () => {
@@ -2149,62 +2149,62 @@ function Qe(e, t, n) {
   };
   e.addEventListener("animationend", s), e.addEventListener("animationcancel", s);
 }
-const Dt = "http://www.w3.org/2000/svg", lo = "data-annotation-text", dr = "data-annotation-arrow", uo = "data-annotation-shape", pr = "data-annotation-freedraw", M = {
+const zt = "http://www.w3.org/2000/svg", yo = "data-annotation-text", br = "data-annotation-arrow", vo = "data-annotation-shape", _r = "data-annotation-freedraw", M = {
   host: null,
   svg: null,
   roughSvg: null,
   unsubscribe: null,
   unsubscribeMode: null
 };
-function Dn(e) {
+function Wn(e) {
   var t;
   return ((t = e.closest) == null ? void 0 : t.call(e, '[data-manuscript="ui"]')) !== null;
 }
-function $f(e, t) {
+function Ff(e, t) {
   try {
     const n = Array.from(t.querySelectorAll(e.cssSelector)), r = [];
     for (const o of n)
-      if (!Dn(o) && (r.push(o), r.length > 1))
+      if (!Wn(o) && (r.push(o), r.length > 1))
         return null;
     return r[0] ?? null;
   } catch {
     return null;
   }
 }
-function Af(e, t) {
+function zf(e, t) {
   return !e || !e.text ? null : (e.parentSelector ? Array.from(t.querySelectorAll(`${e.parentSelector} ${e.tagName}`)) : Array.from(t.querySelectorAll(e.tagName))).find(
-    (r) => !Dn(r) && (r.textContent ?? "").trim().includes(e.text)
+    (r) => !Wn(r) && (r.textContent ?? "").trim().includes(e.text)
   ) ?? null;
 }
-function Mf(e, t) {
+function Hf(e, t) {
   var a;
   if (!e || typeof t.elementFromPoint != "function") return null;
   const n = t.elementFromPoint(
     e.x + Math.floor(e.width / 2),
     e.y + Math.floor(e.height / 2)
   );
-  if (!(n instanceof HTMLElement) || Dn(n)) return null;
+  if (!(n instanceof HTMLElement) || Wn(n)) return null;
   const r = n.getBoundingClientRect();
   if (!(Math.abs(r.width - e.width) < e.width * 0.5 && Math.abs(r.height - e.height) < e.height * 0.5)) return null;
   if (e.nearbyText.length === 0) return n;
   const s = (((a = n.parentElement) == null ? void 0 : a.textContent) ?? "").trim();
   return e.nearbyText.some((c) => s.includes(c)) ? n : null;
 }
-function po(e) {
+function xo(e) {
   var t;
-  return ((t = kn(e)) == null ? void 0 : t.el) ?? null;
+  return ((t = An(e)) == null ? void 0 : t.el) ?? null;
 }
-function kn(e) {
-  const t = ho(e.framePath);
+function An(e) {
+  const t = wo(e.framePath);
   if (!t) return null;
-  const n = $f(e.layer1, t);
+  const n = Ff(e.layer1, t);
   if (n) return { el: n, layer: 1 };
-  const r = Af(e.layer2, t);
+  const r = zf(e.layer2, t);
   if (r) return { el: r, layer: 2 };
-  const o = Mf(e.layer3, t);
+  const o = Hf(e.layer3, t);
   return o ? { el: o, layer: 3 } : null;
 }
-function ho(e) {
+function wo(e) {
   if (!e || e.length === 0) return document;
   if (typeof window > "u") return null;
   let t = window;
@@ -2220,36 +2220,36 @@ function ho(e) {
   }
 }
 function J() {
-  const e = pe();
+  const e = he();
   if (!e || !e.selectors) return null;
   try {
-    const t = po(e.selectors);
+    const t = xo(e.selectors);
     return t ? t.getBoundingClientRect() : null;
   } catch {
     return null;
   }
 }
-function Ef(e, t) {
+function Wf(e, t) {
   return e.anchorOffset && t ? { x: t.left + e.anchorOffset.x, y: t.top + e.anchorOffset.y } : e.position;
 }
-function jt(e, t) {
+function Kt(e, t) {
   return e.boundsAnchorOffset && t ? { x: t.left + e.boundsAnchorOffset.x, y: t.top + e.boundsAnchorOffset.y } : { x: e.bounds.x, y: e.bounds.y };
 }
-function Lf(e, t) {
+function Uf(e, t) {
   const n = e.fromAnchorOffset && t ? { x: t.left + e.fromAnchorOffset.x, y: t.top + e.fromAnchorOffset.y } : e.from, r = e.toAnchorOffset && t ? { x: t.left + e.toAnchorOffset.x, y: t.top + e.toAnchorOffset.y } : e.to;
   return { from: n, to: r };
 }
-function Vt(e, t) {
+function Zt(e, t) {
   return e.pointsAnchorOffset && t && e.pointsAnchorOffset.length === e.points.length ? e.pointsAnchorOffset.map((n) => ({
     x: t.left + n.x,
     y: t.top + n.y
   })) : e.points;
 }
-function Tf(e, t) {
+function jf(e, t) {
   const { svg: n, roughSvg: r } = M;
   if (!n || !r) return;
-  const o = Pf(e.id), { from: s, to: i } = Lf(e, t);
-  fo(
+  const o = Gf(e.id), { from: s, to: i } = Uf(e, t);
+  ko(
     e,
     (a) => r.line(s.x, s.y, i.x, i.y, {
       roughness: 1.5,
@@ -2257,13 +2257,13 @@ function Tf(e, t) {
       seed: o,
       ...a
     })
-  ), Cf(e, s, i, o + 1);
+  ), Vf(e, s, i, o + 1);
 }
-function Cf(e, t, n, r) {
+function Vf(e, t, n, r) {
   const { roughSvg: o } = M;
   if (!o) return;
   const s = Math.atan2(n.y - t.y, n.x - t.x), i = 14 + e.strokeWidth * 2, a = Math.PI / 7, c = n.x - i * Math.cos(s - a), l = n.y - i * Math.sin(s - a), u = n.x - i * Math.cos(s + a), h = n.y - i * Math.sin(s + a), d = `M ${c} ${l} L ${n.x} ${n.y} L ${u} ${h}`;
-  fo(
+  ko(
     e,
     (p) => o.path(d, {
       roughness: 1.5,
@@ -2273,21 +2273,21 @@ function Cf(e, t, n, r) {
     })
   );
 }
-function fo(e, t) {
+function ko(e, t) {
   const { svg: n } = M;
   if (!n) return;
   const r = t({ stroke: "#ffffff", strokeWidth: e.strokeWidth + 4 });
-  r.setAttribute(dr, e.id), Qe(r, e.entryAnimation, 0), n.appendChild(r);
+  r.setAttribute(br, e.id), rt(r, e.entryAnimation, 0), n.appendChild(r);
   const o = t({ stroke: e.color, strokeWidth: e.strokeWidth });
-  o.setAttribute(dr, e.id), Qe(o, e.entryAnimation, 0), n.appendChild(o);
+  o.setAttribute(br, e.id), rt(o, e.entryAnimation, 0), n.appendChild(o);
 }
-function Pf(e) {
+function Gf(e) {
   let t = 0;
   for (let n = 0; n < e.length; n++)
     t = t * 31 + e.charCodeAt(n) | 0;
   return Math.abs(t % 1e5);
 }
-function mo(e, t, n) {
+function So(e, t, n) {
   const r = Math.floor(e / 60 % 6), o = e / 60 - Math.floor(e / 60), s = n * (1 - t), i = n * (1 - o * t), a = n * (1 - (1 - o) * t);
   let c = 0, l = 0, u = 0;
   switch (r) {
@@ -2312,26 +2312,26 @@ function mo(e, t, n) {
   }
   return [Math.round(c * 255), Math.round(l * 255), Math.round(u * 255)];
 }
-function go(e, t, n) {
+function $o(e, t, n) {
   const r = e / 255, o = t / 255, s = n / 255, i = Math.max(r, o, s), a = Math.min(r, o, s), c = i - a;
   let l = 0;
   return c !== 0 && (i === r ? l = (o - s) / c % 6 : i === o ? l = (s - r) / c + 2 : l = (r - o) / c + 4, l *= 60, l < 0 && (l += 360)), { h: l, s: i === 0 ? 0 : c / i, v: i };
 }
-function bo(e, t, n) {
+function Ao(e, t, n) {
   return "#" + [e, t, n].map((r) => r.toString(16).padStart(2, "0")).join("");
 }
-function _o(e) {
+function Mo(e) {
   let t = e.trim();
   if (!t.startsWith("#")) return { h: 0, s: 1, v: 1 };
   if (t = t.slice(1), t.length === 3 && (t = t.split("").map((s) => s + s).join("")), t.length !== 6) return { h: 0, s: 1, v: 1 };
   const n = parseInt(t.slice(0, 2), 16), r = parseInt(t.slice(2, 4), 16), o = parseInt(t.slice(4, 6), 16);
-  return [n, r, o].some((s) => !Number.isFinite(s)) ? { h: 0, s: 1, v: 1 } : go(n, r, o);
+  return [n, r, o].some((s) => !Number.isFinite(s)) ? { h: 0, s: 1, v: 1 } : $o(n, r, o);
 }
-function cn(e) {
+function pn(e) {
   const t = Number(e);
   return Number.isFinite(t) ? Math.max(0, Math.min(255, Math.round(t))) : 0;
 }
-function hr(e, t) {
+function yr(e, t) {
   let n = !1;
   e.addEventListener("mousedown", (r) => {
     n = !0, t(r), r.preventDefault();
@@ -2341,7 +2341,7 @@ function hr(e, t) {
     n = !1;
   });
 }
-async function If(e) {
+async function Yf(e) {
   let t;
   try {
     const n = window.top;
@@ -2358,7 +2358,7 @@ async function If(e) {
   } catch {
   }
 }
-const Of = `/* ─────────────────────────────────────────────────────────────
+const Xf = `/* ─────────────────────────────────────────────────────────────
    Manuscript — Design tokens
    3 palettes (A Ink, B Graphite, C Sepia) + shared accents + type scale
    All colors authored in oklch for perceptual harmony.
@@ -2575,10 +2575,10 @@ body {
 }
 * { box-sizing: border-box; }
 `;
-function it() {
-  return Of.replace(/:root\s*\{/g, ":host {").replace(/\[data-palette([^\]]*)\]\s*\{/g, ":host([data-palette$1]) {");
+function lt() {
+  return Xf.replace(/:root\s*\{/g, ":host {").replace(/\[data-palette([^\]]*)\]\s*\{/g, ":host([data-palette$1]) {");
 }
-const yo = "studio", Rf = [
+const Eo = "studio", Kf = [
   "studio",
   "ink",
   "graphite",
@@ -2586,59 +2586,59 @@ const yo = "studio", Rf = [
   "studio-dark",
   "ink-dark"
 ];
-function vo(e) {
-  return typeof e == "string" && Rf.includes(e);
+function To(e) {
+  return typeof e == "string" && Kf.includes(e);
 }
-function Nf(e) {
+function Zf(e) {
   return e.endsWith("-dark");
 }
-let Xe = null;
-const Sn = /* @__PURE__ */ new Set();
-let fr = !1;
-async function Df() {
-  if (Xe) return Xe;
+let Je = null;
+const Mn = /* @__PURE__ */ new Set();
+let vr = !1;
+async function Jf() {
+  if (Je) return Je;
   try {
-    const e = await W().get(U.palette);
-    if (vo(e))
-      return Xe = e, e;
+    const e = await z().get(H.palette);
+    if (To(e))
+      return Je = e, e;
   } catch {
   }
-  return yo;
+  return Eo;
 }
-function Bf() {
-  return Xe ?? yo;
+function Qf() {
+  return Je ?? Eo;
 }
-function qf(e) {
-  Sn.add(new WeakRef(e)), e.setAttribute("data-palette", Bf()), Df().then((t) => {
+function em(e) {
+  Mn.add(new WeakRef(e)), e.setAttribute("data-palette", Qf()), Jf().then((t) => {
     e.isConnected && e.setAttribute("data-palette", t);
-  }), Ff();
+  }), tm();
 }
-function Ff() {
-  if (!fr) {
-    fr = !0;
+function tm() {
+  if (!vr) {
+    vr = !0;
     try {
-      W().subscribe([U.palette], (e, t) => {
-        vo(t) && (Xe = t, zf(t));
+      z().subscribe([H.palette], (e, t) => {
+        To(t) && (Je = t, nm(t));
       });
     } catch {
     }
   }
 }
-function zf(e) {
-  for (const t of [...Sn]) {
+function nm(e) {
+  for (const t of [...Mn]) {
     const n = t.deref();
-    n && n.isConnected ? (n.setAttribute("data-palette", e), Hf(n, e)) : Sn.delete(t);
+    n && n.isConnected ? (n.setAttribute("data-palette", e), rm(n, e)) : Mn.delete(t);
   }
 }
-function Hf(e, t) {
+function rm(e, t) {
   var r;
   const n = (r = e.shadowRoot) == null ? void 0 : r.querySelector('[data-region="palette-toggle"]');
-  n && n.setAttribute("aria-pressed", Nf(t) ? "true" : "false");
+  n && n.setAttribute("aria-pressed", Zf(t) ? "true" : "false");
 }
-const Wf = 140, Uf = 140;
-function jf() {
+const om = 140, sm = 140;
+function am() {
   return `
-    ${it()}
+    ${lt()}
     :host {
       display: block;
       font-family: var(--ff-sans);
@@ -2662,7 +2662,7 @@ function jf() {
     .sv {
       position: relative;
       flex: 1;
-      height: ${Wf}px;
+      height: ${om}px;
       border-radius: var(--r-sm);
       border: 1px solid var(--c-border);
       cursor: crosshair;
@@ -2691,7 +2691,7 @@ function jf() {
     .hue {
       position: relative;
       width: 12px;
-      height: ${Uf}px;
+      height: ${sm}px;
       border-radius: 999px;
       border: 1px solid var(--c-border);
       cursor: pointer;
@@ -2715,7 +2715,7 @@ function jf() {
     }
   `;
 }
-function Vf() {
+function im() {
   return `
     .actions { display: flex; align-items: center; gap: 6px; }
     .icon-btn {
@@ -2841,31 +2841,31 @@ function Vf() {
     }
   `;
 }
-function Gf() {
-  return [jf(), Vf()].join(`
+function cm() {
+  return [am(), im()].join(`
 `);
 }
-function xo(e) {
+function Lo(e) {
   return e.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
-function Yf(e) {
-  return xo(e).replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+function lm(e) {
+  return Lo(e).replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
-function H(e) {
-  return Yf(e);
+function U(e) {
+  return lm(e);
 }
-function Xf() {
+function um() {
   return `
-    <style>${Gf()}</style>
+    <style>${cm()}</style>
     <div class="picker" role="dialog" aria-label="Custom color picker">
-      ${Kf()}
-      ${Zf()}
-      ${Jf()}
-      ${Qf()}
+      ${dm()}
+      ${pm()}
+      ${hm()}
+      ${fm()}
     </div>
   `;
 }
-function Kf() {
+function dm() {
   return `
     <div class="top">
       <div class="sv" data-region="sv">
@@ -2880,7 +2880,7 @@ function Kf() {
     </div>
   `;
 }
-function Zf() {
+function pm() {
   return `
     <div class="actions">
       <button type="button" class="icon-btn" data-action="eyedrop" title="Pick from page" aria-label="Eyedropper">
@@ -2899,7 +2899,7 @@ function Zf() {
     </div>
   `;
 }
-function Jf() {
+function hm() {
   return `
     <div class="rgb-wrap">
       <div class="rgb-head">
@@ -2927,19 +2927,19 @@ function Jf() {
     </div>
   `;
 }
-function Qf() {
+function fm() {
   var s, i;
   const e = D(), t = ((s = e == null ? void 0 : e.customColors) == null ? void 0 : s.text) ?? [], n = ((i = e == null ? void 0 : e.customColors) == null ? void 0 : i.background) ?? [], r = Array.from(/* @__PURE__ */ new Set([...t, ...n])).slice(-7);
   return r.length === 0 ? "" : `
     <div class="recent" data-region="recent">
       <span class="recent-label">Recent</span>
       <div class="recent-list">${r.map(
-    (a) => `<button type="button" class="recent-swatch" data-action="recent" data-color="${H(a)}" style="background: ${H(a)}" aria-label="Use ${H(a)}" title="${H(a)}"></button>`
+    (a) => `<button type="button" class="recent-swatch" data-action="recent" data-color="${U(a)}" style="background: ${U(a)}" aria-label="Use ${U(a)}" title="${U(a)}"></button>`
   ).join("")}</div>
     </div>
   `;
 }
-function em(e, t) {
+function mm(e, t) {
   const n = t.getBoundingClientRect();
   e.style.top = "0px", e.style.left = "0px";
   const r = e.getBoundingClientRect();
@@ -2948,37 +2948,37 @@ function em(e, t) {
   let s = n.left;
   s + r.width > window.innerWidth - 8 && (s = window.innerWidth - r.width - 8), e.style.top = `${Math.max(8, o)}px`, e.style.left = `${Math.max(8, s)}px`;
 }
-function Ue() {
+function Ve() {
   const e = document.createElement("div");
-  e.setAttribute("data-manuscript", "ui"), qf(e);
+  e.setAttribute("data-manuscript", "ui"), em(e);
   const t = e.attachShadow({ mode: "open" });
   return { host: e, shadow: t };
 }
-let K = null, O = null, le = 0, we = 1, ke = 1, ue = null;
-function tm(e) {
-  Se(), ue = e.onConfirm;
-  const t = _o(e.initialColor);
-  le = t.h, we = t.s, ke = t.v, { host: K, shadow: O } = Ue(), K.style.cssText = [
+let K = null, O = null, ue = 0, Se = 1, $e = 1, de = null;
+function gm(e) {
+  Ae(), de = e.onConfirm;
+  const t = Mo(e.initialColor);
+  ue = t.h, Se = t.s, $e = t.v, { host: K, shadow: O } = Ve(), K.style.cssText = [
     "position: fixed",
     `z-index: ${te + 7}`,
     "pointer-events: auto"
-  ].join("; "), O.innerHTML = Xf(), rm(), document.body.appendChild(K), em(K, e.anchor), ct(), document.addEventListener("mousedown", ko, !0), document.addEventListener("keydown", So, !0);
+  ].join("; "), O.innerHTML = um(), _m(), document.body.appendChild(K), mm(K, e.anchor), ut(), document.addEventListener("mousedown", Po, !0), document.addEventListener("keydown", Io, !0);
 }
-function Se() {
-  K && (document.removeEventListener("mousedown", ko, !0), document.removeEventListener("keydown", So, !0), K.remove(), K = null, O = null, ue = null);
+function Ae() {
+  K && (document.removeEventListener("mousedown", Po, !0), document.removeEventListener("keydown", Io, !0), K.remove(), K = null, O = null, de = null);
 }
-function nm() {
+function bm() {
   return K !== null;
 }
-function ct() {
+function ut() {
   if (!O) return;
   const e = O.querySelector('[data-region="sv-base"]');
-  e && (e.style.background = `hsl(${le}deg, 100%, 50%)`);
+  e && (e.style.background = `hsl(${ue}deg, 100%, 50%)`);
   const t = O.querySelector('[data-region="sv-cursor"]');
-  t && (t.style.left = `${we * 100}%`, t.style.top = `${(1 - ke) * 100}%`);
+  t && (t.style.left = `${Se * 100}%`, t.style.top = `${(1 - $e) * 100}%`);
   const n = O.querySelector('[data-region="hue-cursor"]');
-  n && (n.style.top = `${le / 360 * 100}%`);
-  const [r, o, s] = mo(le, we, ke), i = bo(r, o, s), a = O.querySelector('[data-region="preview"]');
+  n && (n.style.top = `${ue / 360 * 100}%`);
+  const [r, o, s] = So(ue, Se, $e), i = Ao(r, o, s), a = O.querySelector('[data-region="preview"]');
   a && (a.style.background = `rgb(${r}, ${o}, ${s})`);
   const c = O.querySelector('[data-region="hex"]');
   c && (c.textContent = i), O.querySelectorAll("[data-channel]").forEach((l) => {
@@ -2987,56 +2987,56 @@ function ct() {
     u === "r" ? l.value = String(r) : u === "g" ? l.value = String(o) : u === "b" && (l.value = String(s));
   });
 }
-function wo() {
-  const [e, t, n] = mo(le, we, ke);
-  return bo(e, t, n);
+function Co() {
+  const [e, t, n] = So(ue, Se, $e);
+  return Ao(e, t, n);
 }
-function rm() {
+function _m() {
   if (!O) return;
   const e = O.querySelector('[data-region="sv"]');
-  e && hr(e, (n) => om(e, n));
+  e && yr(e, (n) => ym(e, n));
   const t = O.querySelector('[data-region="hue"]');
-  t && hr(t, (n) => sm(t, n)), O.addEventListener("input", (n) => {
+  t && yr(t, (n) => vm(t, n)), O.addEventListener("input", (n) => {
     var c, l, u;
     const r = n.target;
     if (!(r instanceof HTMLInputElement) || !r.dataset.channel) return;
-    const o = cn((c = O.querySelector('[data-channel="r"]')) == null ? void 0 : c.value), s = cn((l = O.querySelector('[data-channel="g"]')) == null ? void 0 : l.value), i = cn((u = O.querySelector('[data-channel="b"]')) == null ? void 0 : u.value), a = go(o, s, i);
-    le = a.h, we = a.s, ke = a.v, ct();
+    const o = pn((c = O.querySelector('[data-channel="r"]')) == null ? void 0 : c.value), s = pn((l = O.querySelector('[data-channel="g"]')) == null ? void 0 : l.value), i = pn((u = O.querySelector('[data-channel="b"]')) == null ? void 0 : u.value), a = $o(o, s, i);
+    ue = a.h, Se = a.s, $e = a.v, ut();
   }), O.addEventListener("click", (n) => {
     const r = n.target;
     if (!(r instanceof Element)) return;
     const o = r.closest("[data-action]"), s = o == null ? void 0 : o.getAttribute("data-action");
     if (s === "confirm")
-      ue == null || ue(wo()), Se();
+      de == null || de(Co()), Ae();
     else if (s === "eyedrop")
-      If(mr);
+      Yf(xr);
     else if (s === "recent") {
       const i = o == null ? void 0 : o.getAttribute("data-color");
-      i && mr(i);
+      i && xr(i);
     }
   });
 }
-function mr(e) {
-  const t = _o(e);
-  le = t.h, we = t.s, ke = t.v, ct();
+function xr(e) {
+  const t = Mo(e);
+  ue = t.h, Se = t.s, $e = t.v, ut();
 }
-function om(e, t) {
+function ym(e, t) {
   const n = e.getBoundingClientRect();
-  we = Math.max(0, Math.min(1, (t.clientX - n.left) / n.width)), ke = Math.max(0, Math.min(1, 1 - (t.clientY - n.top) / n.height)), ct();
+  Se = Math.max(0, Math.min(1, (t.clientX - n.left) / n.width)), $e = Math.max(0, Math.min(1, 1 - (t.clientY - n.top) / n.height)), ut();
 }
-function sm(e, t) {
+function vm(e, t) {
   const n = e.getBoundingClientRect();
-  le = Math.max(0, Math.min(1, (t.clientY - n.top) / n.height)) * 360, ct();
+  ue = Math.max(0, Math.min(1, (t.clientY - n.top) / n.height)) * 360, ut();
 }
-function ko(e) {
+function Po(e) {
   if (!K) return;
   const t = e.target;
-  t instanceof HTMLElement && K.contains(t) || Se();
+  t instanceof HTMLElement && K.contains(t) || Ae();
 }
-function So(e) {
-  e.key === "Escape" ? (e.preventDefault(), Se()) : e.key === "Enter" && (e.preventDefault(), ue == null || ue(wo()), Se());
+function Io(e) {
+  e.key === "Escape" ? (e.preventDefault(), Ae()) : e.key === "Enter" && (e.preventDefault(), de == null || de(Co()), Ae());
 }
-const _t = 8, Le = 6, $o = 32, gr = 16, yt = 4, Ao = [
+const vt = 8, Ce = 6, Oo = 32, wr = 16, xt = 4, Ro = [
   { name: "nw", cursor: "nwse-resize", offset: (e) => ({ x: e.x, y: e.y }) },
   { name: "n", cursor: "ns-resize", offset: (e) => ({ x: e.x + e.width / 2, y: e.y }) },
   { name: "ne", cursor: "nesw-resize", offset: (e) => ({ x: e.x + e.width, y: e.y }) },
@@ -3046,18 +3046,18 @@ const _t = 8, Le = 6, $o = 32, gr = 16, yt = 4, Ao = [
   { name: "sw", cursor: "nesw-resize", offset: (e) => ({ x: e.x, y: e.y + e.height }) },
   { name: "w", cursor: "ew-resize", offset: (e) => ({ x: e.x, y: e.y + e.height / 2 }) }
 ];
-function br(e, t, n, r) {
+function kr(e, t, n, r) {
   let { x: o, y: s, width: i, height: a } = t;
-  return e === "nw" || e === "w" || e === "sw" ? (o += n, i -= n) : (e === "ne" || e === "e" || e === "se") && (i += n), e === "nw" || e === "n" || e === "ne" ? (s += r, a -= r) : (e === "sw" || e === "s" || e === "se") && (a += r), i < Le && (o = t.x + t.width - Le, i = Le), a < Le && (s = t.y + t.height - Le, a = Le), { x: o, y: s, width: i, height: a };
+  return e === "nw" || e === "w" || e === "sw" ? (o += n, i -= n) : (e === "ne" || e === "e" || e === "se") && (i += n), e === "nw" || e === "n" || e === "ne" ? (s += r, a -= r) : (e === "sw" || e === "s" || e === "se") && (a += r), i < Ce && (o = t.x + t.width - Ce, i = Ce), a < Ce && (s = t.y + t.height - Ce, a = Ce), { x: o, y: s, width: i, height: a };
 }
-function Mo(e) {
+function No(e) {
   if (e.length === 0) return null;
   let t = 1 / 0, n = 1 / 0, r = -1 / 0, o = -1 / 0;
   for (const s of e)
     s.x < t && (t = s.x), s.y < n && (n = s.y), s.x > r && (r = s.x), s.y > o && (o = s.y);
   return { x: t, y: n, width: r - t, height: o - n };
 }
-function am(e) {
+function xm(e) {
   const t = document.querySelector(`[data-annotation-text="${e}"]`);
   if (!t) return null;
   const n = t.getBoundingClientRect();
@@ -3070,7 +3070,7 @@ const $ = {
   dragState: null,
   unsubscribeScenario: null
 }, C = "http://www.w3.org/2000/svg";
-function Eo(e) {
+function Do(e) {
   if (!e.bounds) return e;
   const t = J();
   return t ? {
@@ -3081,7 +3081,7 @@ function Eo(e) {
     }
   } : { ...e, boundsAnchorOffset: void 0 };
 }
-function im(e) {
+function wm(e) {
   if (!e.points) return e;
   const t = J();
   return t ? {
@@ -3092,26 +3092,26 @@ function im(e) {
     }))
   } : { ...e, pointsAnchorOffset: void 0 };
 }
-function cm() {
-  document.removeEventListener("mousemove", Bn, !0), document.removeEventListener("mouseup", qn, !0), document.removeEventListener("keydown", To, !0);
+function km() {
+  document.removeEventListener("mousemove", Un, !0), document.removeEventListener("mouseup", jn, !0), document.removeEventListener("keydown", qo, !0);
 }
-function lm() {
-  document.addEventListener("keydown", To, !0);
+function Sm() {
+  document.addEventListener("keydown", qo, !0);
 }
-function um(e, t) {
+function $m(e, t) {
   if (!$.activeId) return;
   e.stopPropagation(), e.preventDefault();
   const n = E($.activeId);
   if (!n || n.kind !== "shape") return;
-  const r = jt(n, J());
+  const r = Kt(n, J());
   $.dragState = {
     kind: "resize",
     handle: t,
     startMouse: { x: e.clientX, y: e.clientY },
     startBounds: { ...n.bounds, x: r.x, y: r.y }
-  }, Gt();
+  }, Jt();
 }
-function dm(e) {
+function Am(e) {
   if (!$.activeId) return;
   e.stopPropagation(), e.preventDefault();
   const t = E($.activeId);
@@ -3122,9 +3122,9 @@ function dm(e) {
     center: { x: n, y: r },
     startMouseAngle: o,
     startRotation: t.rotate ?? 0
-  }, Gt();
+  }, Jt();
 }
-function Lo(e, t) {
+function Bo(e, t) {
   if (!$.activeId) return;
   e.stopPropagation(), e.preventDefault();
   const n = E($.activeId);
@@ -3135,26 +3135,26 @@ function Lo(e, t) {
     center: r,
     startMouseAngle: o,
     startRotation: s
-  }, Gt();
+  }, Jt();
 }
-function pm(e, t) {
+function Mm(e, t) {
   if (!$.activeId) return;
   e.stopPropagation(), e.preventDefault();
   const n = E($.activeId);
   if (!n || n.kind !== "freedraw") return;
-  const r = Vt(n, J()), o = Mo(r);
+  const r = Zt(n, J()), o = No(r);
   !o || o.width === 0 || o.height === 0 || ($.dragState = {
     kind: "freedraw-resize",
     handle: t,
     startMouse: { x: e.clientX, y: e.clientY },
     startBounds: { ...o },
     startPoints: r.map((s) => ({ ...s }))
-  }, Gt());
+  }, Jt());
 }
-function Gt() {
-  Pt("handle-drag"), document.addEventListener("mousemove", Bn, !0), document.addEventListener("mouseup", qn, !0);
+function Jt() {
+  Nt("handle-drag"), document.addEventListener("mousemove", Un, !0), document.addEventListener("mouseup", jn, !0);
 }
-function Bn(e) {
+function Un(e) {
   const { activeId: t, dragState: n } = $;
   if (!t || !n) return;
   e.preventDefault();
@@ -3162,24 +3162,24 @@ function Bn(e) {
   if (!r) return;
   const o = n.kind !== "rotate" ? e.clientX - n.startMouse.x : 0, s = n.kind !== "rotate" ? e.clientY - n.startMouse.y : 0;
   if (n.kind === "resize" && r.kind === "shape") {
-    const i = br(n.handle, n.startBounds, o, s);
-    L(t, Eo({ bounds: i }));
+    const i = kr(n.handle, n.startBounds, o, s);
+    T(t, Do({ bounds: i }));
   } else if (n.kind === "freedraw-resize" && r.kind === "freedraw") {
-    const i = n.startBounds, a = br(n.handle, i, o, s), c = i.width === 0 ? 1 : a.width / i.width, l = i.height === 0 ? 1 : a.height / i.height, u = n.startPoints.map((h) => ({
+    const i = n.startBounds, a = kr(n.handle, i, o, s), c = i.width === 0 ? 1 : a.width / i.width, l = i.height === 0 ? 1 : a.height / i.height, u = n.startPoints.map((h) => ({
       x: a.x + (h.x - i.x) * c,
       y: a.y + (h.y - i.y) * l
     }));
-    L(t, im({ points: u }));
+    T(t, wm({ points: u }));
   } else if (n.kind === "rotate") {
     const i = Math.atan2(e.clientY - n.center.y, e.clientX - n.center.x) * 180 / Math.PI;
     let a = (n.startRotation + (i - n.startMouseAngle)) % 360;
-    a < 0 && (a += 360), r.kind === "shape" ? L(t, { rotate: a }) : r.kind === "freedraw" ? L(t, { rotate: a }) : r.kind === "text" && L(t, { rotate: a });
+    a < 0 && (a += 360), r.kind === "shape" ? T(t, { rotate: a }) : r.kind === "freedraw" ? T(t, { rotate: a }) : r.kind === "text" && T(t, { rotate: a });
   }
 }
-function qn() {
-  document.removeEventListener("mousemove", Bn, !0), document.removeEventListener("mouseup", qn, !0), $.dragState = null, st();
+function jn() {
+  document.removeEventListener("mousemove", Un, !0), document.removeEventListener("mouseup", jn, !0), $.dragState = null, it();
 }
-function To(e) {
+function qo(e) {
   var o;
   const { activeId: t } = $;
   if (!t) return;
@@ -3188,7 +3188,7 @@ function To(e) {
   const r = document.activeElement;
   if (!(r != null && r.isContentEditable)) {
     if (e.key === "Delete" || e.key === "Backspace") {
-      e.preventDefault(), Vr(t);
+      e.preventDefault(), to(t);
       return;
     }
     if (e.key.startsWith("Arrow")) {
@@ -3197,21 +3197,21 @@ function To(e) {
       const i = e.shiftKey ? 10 : 1, a = e.key === "ArrowLeft" ? -i : e.key === "ArrowRight" ? i : 0, c = e.key === "ArrowUp" ? -i : e.key === "ArrowDown" ? i : 0;
       if (a !== 0 || c !== 0) {
         e.preventDefault();
-        const l = jt(s, J());
-        L(
+        const l = Kt(s, J());
+        T(
           t,
-          Eo({ bounds: { ...s.bounds, x: l.x + a, y: l.y + c } })
+          Do({ bounds: { ...s.bounds, x: l.x + a, y: l.y + c } })
         );
       }
     }
   }
 }
-function Co(e, t, n, r, o) {
+function Fo(e, t, n, r, o) {
   const s = document.createElementNS(C, "rect");
-  return s.setAttribute("x", String(e - _t / 2)), s.setAttribute("y", String(t - _t / 2)), s.setAttribute("width", String(_t)), s.setAttribute("height", String(_t)), s.setAttribute("fill", "oklch(1 0 0)"), s.setAttribute("stroke", "oklch(0.48 0.085 245)"), s.setAttribute("stroke-width", "2"), s.style.cursor = r, s.style.pointerEvents = "auto", s.setAttribute("pointer-events", "all"), s.addEventListener("mousedown", (i) => o(i, n)), s;
+  return s.setAttribute("x", String(e - vt / 2)), s.setAttribute("y", String(t - vt / 2)), s.setAttribute("width", String(vt)), s.setAttribute("height", String(vt)), s.setAttribute("fill", "oklch(1 0 0)"), s.setAttribute("stroke", "oklch(0.48 0.085 245)"), s.setAttribute("stroke-width", "2"), s.style.cursor = r, s.style.pointerEvents = "auto", s.setAttribute("pointer-events", "all"), s.addEventListener("mousedown", (i) => o(i, n)), s;
 }
-function Po(e, t, n) {
-  const r = document.createElementNS(C, "g"), o = t - 18, s = t - $o, i = 12, a = document.createElementNS(C, "line");
+function zo(e, t, n) {
+  const r = document.createElementNS(C, "g"), o = t - 18, s = t - Oo, i = 12, a = document.createElementNS(C, "line");
   a.setAttribute("x1", String(e)), a.setAttribute("y1", String(t)), a.setAttribute("x2", String(e)), a.setAttribute("y2", String(o)), a.setAttribute("stroke", "oklch(0.48 0.085 245)"), a.setAttribute("stroke-width", "1"), a.setAttribute("stroke-dasharray", "2 3"), a.style.pointerEvents = "none", r.appendChild(a);
   const c = document.createElementNS(C, "circle");
   c.setAttribute("cx", String(e)), c.setAttribute("cy", String(s + 1)), c.setAttribute("r", String(i)), c.setAttribute("fill", "rgba(0,0,0,0.04)"), c.style.pointerEvents = "none", r.appendChild(c);
@@ -3225,11 +3225,11 @@ function Po(e, t, n) {
     `M ${u + 11} ${h + 1.5} L ${u + 14} ${h + 4} L ${u + 11} ${h + 6.5} Z`
   ), p.setAttribute("fill", "oklch(0.48 0.085 245)"), p.setAttribute("stroke", "oklch(0.48 0.085 245)"), p.setAttribute("stroke-width", "1.5"), p.setAttribute("stroke-linejoin", "round"), p.style.pointerEvents = "none", r.appendChild(p), l.addEventListener("mousedown", (f) => n(f)), r;
 }
-function Fn(e, t) {
-  const n = document.createElementNS(C, "g"), r = e.x - gr, o = e.y - gr;
-  return n.appendChild(hm(r, o, t)), n;
+function Vn(e, t) {
+  const n = document.createElementNS(C, "g"), r = e.x - wr, o = e.y - wr;
+  return n.appendChild(Em(r, o, t)), n;
 }
-function hm(e, t, n) {
+function Em(e, t, n) {
   const r = document.createElementNS(C, "g");
   r.style.cursor = "pointer", r.style.pointerEvents = "auto", r.setAttribute("pointer-events", "all");
   const o = document.createElementNS(C, "circle");
@@ -3248,44 +3248,44 @@ function hm(e, t, n) {
     l.stopPropagation(), l.preventDefault(), n();
   }), r;
 }
-function zn(e) {
+function Gn(e) {
   const t = document.createElementNS(C, "rect");
   return t.setAttribute("x", String(e.x)), t.setAttribute("y", String(e.y)), t.setAttribute("width", String(e.width)), t.setAttribute("height", String(e.height)), t.setAttribute("fill", "none"), t.setAttribute("stroke", "oklch(0.48 0.085 245)"), t.setAttribute("stroke-width", "1"), t.setAttribute("stroke-dasharray", "4 3"), t;
 }
-function Yt() {
+function Qt() {
   const { host: e, activeId: t, activeMode: n } = $;
   if (!e || !t) return;
   for (; e.firstChild; ) e.removeChild(e.firstChild);
   const r = E(t);
   if (!r) {
-    $n();
+    En();
     return;
   }
   if (n === "freedraw" && r.kind === "freedraw") {
-    bm(e, r);
+    Pm(e, r);
     return;
   }
   if (n === "text" && r.kind === "text") {
-    gm(e, r);
+    Cm(e, r);
     return;
   }
   if (r.kind !== "shape") {
-    $n();
+    En();
     return;
   }
-  fm(e, r);
+  Tm(e, r);
 }
-function fm(e, t) {
-  const n = jt(t, J()), r = { ...t.bounds, x: n.x, y: n.y }, o = t.rotate ?? 0, s = r.x + r.width / 2, i = r.y + r.height / 2, a = document.createElementNS(C, "g");
-  o && a.setAttribute("transform", `rotate(${o} ${s} ${i})`), a.appendChild(zn(r));
-  for (const c of Ao) {
+function Tm(e, t) {
+  const n = Kt(t, J()), r = { ...t.bounds, x: n.x, y: n.y }, o = t.rotate ?? 0, s = r.x + r.width / 2, i = r.y + r.height / 2, a = document.createElementNS(C, "g");
+  o && a.setAttribute("transform", `rotate(${o} ${s} ${i})`), a.appendChild(Gn(r));
+  for (const c of Ro) {
     const { x: l, y: u } = c.offset(r);
-    a.appendChild(Co(l, u, c.name, c.cursor, um));
+    a.appendChild(Fo(l, u, c.name, c.cursor, $m));
   }
-  a.appendChild(mm(r)), e.appendChild(a), e.appendChild(Fn(r, Hn));
+  a.appendChild(Lm(r)), e.appendChild(a), e.appendChild(Vn(r, Yn));
 }
-function mm(e) {
-  const t = e.x + e.width / 2, n = e.y - $o, r = document.createElementNS(C, "g"), o = document.createElementNS(C, "line");
+function Lm(e) {
+  const t = e.x + e.width / 2, n = e.y - Oo, r = document.createElementNS(C, "g"), o = document.createElementNS(C, "line");
   o.setAttribute("x1", String(t)), o.setAttribute("y1", String(e.y)), o.setAttribute("x2", String(t)), o.setAttribute("y2", String(n)), o.setAttribute("stroke", "oklch(0.48 0.085 245)"), o.setAttribute("stroke-width", "1"), r.appendChild(o);
   const s = document.createElementNS(C, "g");
   s.style.cursor = "grab", s.style.pointerEvents = "auto", s.setAttribute("pointer-events", "all");
@@ -3295,39 +3295,39 @@ function mm(e) {
   return a.setAttribute(
     "d",
     `M ${t - 4} ${n - 1} A 4 4 0 1 1 ${t + 3} ${n + 2} M ${t + 1} ${n - 1} L ${t + 3} ${n + 2} L ${t + 5} ${n - 1}`
-  ), a.setAttribute("fill", "none"), a.setAttribute("stroke", "oklch(0.48 0.085 245)"), a.setAttribute("stroke-width", "1.4"), a.setAttribute("stroke-linecap", "round"), a.setAttribute("stroke-linejoin", "round"), a.style.pointerEvents = "none", s.appendChild(a), s.addEventListener("mousedown", (c) => dm(c)), r.appendChild(s), r;
+  ), a.setAttribute("fill", "none"), a.setAttribute("stroke", "oklch(0.48 0.085 245)"), a.setAttribute("stroke-width", "1.4"), a.setAttribute("stroke-linecap", "round"), a.setAttribute("stroke-linejoin", "round"), a.style.pointerEvents = "none", s.appendChild(a), s.addEventListener("mousedown", (c) => Am(c)), r.appendChild(s), r;
 }
-function gm(e, t) {
-  const n = am(t.id);
+function Cm(e, t) {
+  const n = xm(t.id);
   if (!n) return;
-  const r = Io(n), o = r.x + r.width / 2, s = r.y + r.height / 2;
-  e.appendChild(zn(r)), e.appendChild(Po(o, r.y, (i) => Lo(i, () => ({ x: o, y: s })))), e.appendChild(Fn(r, Hn));
+  const r = Ho(n), o = r.x + r.width / 2, s = r.y + r.height / 2;
+  e.appendChild(Gn(r)), e.appendChild(zo(o, r.y, (i) => Bo(i, () => ({ x: o, y: s })))), e.appendChild(Vn(r, Yn));
 }
-function bm(e, t) {
-  const n = Vt(t, J()), r = Mo(n);
+function Pm(e, t) {
+  const n = Zt(t, J()), r = No(n);
   if (!r) return;
-  const o = Io(r), s = o.x + o.width / 2, i = o.y + o.height / 2;
-  e.appendChild(zn(o));
-  for (const a of Ao) {
+  const o = Ho(r), s = o.x + o.width / 2, i = o.y + o.height / 2;
+  e.appendChild(Gn(o));
+  for (const a of Ro) {
     if (a.name !== "nw" && a.name !== "ne" && a.name !== "sw" && a.name !== "se") continue;
     const { x: c, y: l } = a.offset(o);
-    e.appendChild(Co(c, l, a.name, a.cursor, pm));
+    e.appendChild(Fo(c, l, a.name, a.cursor, Mm));
   }
-  e.appendChild(Po(s, o.y, (a) => Lo(a, () => ({ x: s, y: i })))), e.appendChild(Fn(o, Hn));
+  e.appendChild(zo(s, o.y, (a) => Bo(a, () => ({ x: s, y: i })))), e.appendChild(Vn(o, Yn));
 }
-function Io(e) {
+function Ho(e) {
   return {
-    x: e.x - yt,
-    y: e.y - yt,
-    width: e.width + yt * 2,
-    height: e.height + yt * 2
+    x: e.x - xt,
+    y: e.y - xt,
+    width: e.width + xt * 2,
+    height: e.height + xt * 2
   };
 }
-function Hn() {
+function Yn() {
   const e = $.activeId;
-  e && Vr(e);
+  e && to(e);
 }
-function _m(e) {
+function Im(e) {
   const t = E(e);
   if (!t) return;
   const n = t.entryAnimation;
@@ -3352,26 +3352,26 @@ function _m(e) {
     a.addEventListener("animationend", c), a.addEventListener("animationcancel", c);
   });
 }
-function ym(e) {
+function Om(e) {
   const t = E(e);
-  !t || t.kind !== "shape" || ($.activeId = e, $.activeMode = "shape", Wn(), Yt());
+  !t || t.kind !== "shape" || ($.activeId = e, $.activeMode = "shape", Xn(), Qt());
 }
-function vm(e) {
+function Rm(e) {
   const t = E(e);
-  !t || t.kind !== "freedraw" || ($.activeId = e, $.activeMode = "freedraw", Wn(), Yt());
+  !t || t.kind !== "freedraw" || ($.activeId = e, $.activeMode = "freedraw", Xn(), Qt());
 }
-function xm(e) {
+function Nm(e) {
   const t = E(e);
-  !t || t.kind !== "text" || ($.activeId = e, $.activeMode = "text", Wn(), Yt());
+  !t || t.kind !== "text" || ($.activeId = e, $.activeMode = "text", Xn(), Qt());
 }
-function $n() {
+function En() {
   var e;
-  $.host && (cm(), (e = $.unsubscribeScenario) == null || e.call($), $.unsubscribeScenario = null, $.host.remove(), $.host = null, $.activeId = null, $.activeMode = "shape", $.dragState = null);
+  $.host && (km(), (e = $.unsubscribeScenario) == null || e.call($), $.unsubscribeScenario = null, $.host.remove(), $.host = null, $.activeId = null, $.activeMode = "shape", $.dragState = null);
 }
-function wm(e) {
+function Dm(e) {
   return $.host !== null && e !== null && $.host.contains(e);
 }
-function Wn() {
+function Xn() {
   if ($.host) return;
   const e = document.createElementNS(C, "svg");
   e.setAttribute("data-manuscript", "ui"), e.setAttribute("width", "100%"), e.setAttribute("height", "100%"), e.style.cssText = [
@@ -3383,9 +3383,9 @@ function Wn() {
     "pointer-events: none",
     `z-index: ${te + 4}`,
     "overflow: visible"
-  ].join("; "), document.body.appendChild(e), $.host = e, lm(), $.unsubscribeScenario = ot(Yt);
+  ].join("; "), document.body.appendChild(e), $.host = e, Sm(), $.unsubscribeScenario = at(Qt);
 }
-function km(e) {
+function Bm(e) {
   switch (e.kind) {
     case "text":
       return { style: { ...e.style }, entryAnimation: e.entryAnimation };
@@ -3408,19 +3408,19 @@ function km(e) {
       };
   }
 }
-const Sm = 400, $m = 0;
-function Am(e) {
+const qm = 400, Fm = 0;
+function zm(e) {
   return {
     kind: e,
-    durationMs: Sm,
-    delayMs: $m
+    durationMs: qm,
+    delayMs: Fm
   };
 }
-function Mm(e) {
+function Hm(e) {
   var t;
   return ((t = e.entryAnimation) == null ? void 0 : t.kind) ?? "none";
 }
-const _r = 10, Em = 46, Oo = 12, Ro = 36, No = 0, Do = 20, Lm = [
+const Sr = 10, Wm = 46, Wo = 12, Uo = 36, jo = 0, Vo = 20, Um = [
   { token: "var(--ann-mut-1)", resolved: "oklch(0.20 0.008 250)" },
   { token: "var(--ann-mut-2)", resolved: "oklch(0.99 0 0)" },
   { token: "var(--ann-mut-3)", resolved: "oklch(0.45 0.10 27)" },
@@ -3429,7 +3429,7 @@ const _r = 10, Em = 46, Oo = 12, Ro = 36, No = 0, Do = 20, Lm = [
   { token: "var(--ann-mut-6)", resolved: "oklch(0.42 0.09 250)" },
   { token: "var(--ann-mut-7)", resolved: "oklch(0.62 0.10 75)" },
   { token: "var(--ann-mut-8)", resolved: "oklch(0.42 0.08 290)" }
-], Tm = [
+], jm = [
   { token: "var(--ann-vib-1)", resolved: "oklch(0.18 0.005 250)" },
   { token: "var(--ann-vib-2)", resolved: "oklch(0.99 0 0)" },
   { token: "var(--ann-vib-3)", resolved: "oklch(0.62 0.22 27)" },
@@ -3438,18 +3438,18 @@ const _r = 10, Em = 46, Oo = 12, Ro = 36, No = 0, Do = 20, Lm = [
   { token: "var(--ann-vib-6)", resolved: "oklch(0.55 0.18 250)" },
   { token: "var(--ann-vib-7)", resolved: "oklch(0.82 0.15 90)" },
   { token: "var(--ann-vib-8)", resolved: "oklch(0.50 0.18 290)" }
-], yr = [
+], $r = [
   { label: "Sans", value: "'Pretendard Variable', Pretendard, system-ui, sans-serif" },
   { label: "Serif", value: "'EB Garamond', Georgia, serif" },
   { label: "Mono", value: "ui-monospace, monospace" }
 ];
-function Cm(e) {
-  return !e || e.length === 0 ? [...yr] : [
-    ...e.map((t) => ({ label: qh(t), value: t })),
-    ...yr
+function Vm(e) {
+  return !e || e.length === 0 ? [...$r] : [
+    ...e.map((t) => ({ label: Qh(t), value: t })),
+    ...$r
   ];
 }
-const Pm = [
+const Gm = [
   { value: "none", label: "None" },
   { value: "fade", label: "Fade" },
   { value: "slide-left", label: "Slide →" },
@@ -3468,104 +3468,104 @@ const Pm = [
   swatchMode: "muted",
   unsubscribeScenario: null
 };
-function Bo(e) {
+function Go(e) {
   const t = S.activeId;
   if (!t) return;
   const n = E(t);
-  n && (n.kind === "text" ? L(t, { style: { ...n.style, color: e } }) : n.kind === "shape" ? L(t, { stroke: e }) : n.kind === "freedraw" && L(t, { stroke: e }));
+  n && (n.kind === "text" ? T(t, { style: { ...n.style, color: e } }) : n.kind === "shape" ? T(t, { stroke: e }) : n.kind === "freedraw" && T(t, { stroke: e }));
 }
-function qo(e) {
+function Yo(e) {
   const t = S.activeId;
   if (!t) return;
   const n = E(t);
-  n && (n.kind === "text" ? L(t, { style: { ...n.style, backgroundColor: e } }) : n.kind === "shape" && L(t, { fill: e }));
+  n && (n.kind === "text" ? T(t, { style: { ...n.style, backgroundColor: e } }) : n.kind === "shape" && T(t, { fill: e }));
 }
-function Fo(e) {
+function Xo(e) {
   const t = S.activeId;
   if (!t) return;
   const n = E(t);
-  !n || n.kind !== "text" || L(t, { style: { ...n.style, borderColor: e } });
+  !n || n.kind !== "text" || T(t, { style: { ...n.style, borderColor: e } });
 }
-function Im(e) {
+function Ym(e) {
   const t = S.activeId;
   if (!t) return;
   const n = E(t);
-  !n || n.kind !== "text" || L(t, { style: { ...n.style, fontFamily: e } });
+  !n || n.kind !== "text" || T(t, { style: { ...n.style, fontFamily: e } });
 }
-function Om(e) {
+function Xm(e) {
   const t = S.activeId;
   if (!t) return;
   const n = E(t);
-  !n || n.kind !== "text" || L(t, { style: { ...n.style, fontSize: e } });
+  !n || n.kind !== "text" || T(t, { style: { ...n.style, fontSize: e } });
 }
-function Rm() {
+function Km() {
   const e = S.activeId;
   if (!e) return;
   const t = E(e);
-  !t || t.kind !== "text" || L(e, { style: { ...t.style, bold: !t.style.bold } });
+  !t || t.kind !== "text" || T(e, { style: { ...t.style, bold: !t.style.bold } });
 }
-function Nm() {
+function Zm() {
   const e = S.activeId;
   if (!e) return;
   const t = E(e);
-  !t || t.kind !== "text" || L(e, {
+  !t || t.kind !== "text" || T(e, {
     style: { ...t.style, italic: t.style.italic !== !0 }
   });
 }
-function Dm(e) {
+function Jm(e) {
   const t = S.activeId;
-  t && L(t, {
-    entryAnimation: e === "none" ? void 0 : Am(e)
+  t && T(t, {
+    entryAnimation: e === "none" ? void 0 : zm(e)
   });
 }
-function Bm(e) {
+function Qm(e) {
   const t = S.activeId;
   if (!t) return;
   const n = E(t);
   if (!n) return;
   const r = Math.max(0, Math.min(1, e));
-  n.kind === "text" ? L(t, { style: { ...n.style, backgroundOpacity: r } }) : n.kind === "shape" ? L(t, { fillOpacity: r }) : n.kind === "freedraw" && L(t, { strokeOpacity: r });
+  n.kind === "text" ? T(t, { style: { ...n.style, backgroundOpacity: r } }) : n.kind === "shape" ? T(t, { fillOpacity: r }) : n.kind === "freedraw" && T(t, { strokeOpacity: r });
 }
-function qm(e) {
+function eg(e) {
   const t = S.activeId;
   if (!t) return;
   const n = E(t);
-  n && (n.kind === "shape" ? L(t, { strokeWidth: e }) : n.kind === "freedraw" && L(t, { strokeWidth: e }));
+  n && (n.kind === "shape" ? T(t, { strokeWidth: e }) : n.kind === "freedraw" && T(t, { strokeWidth: e }));
 }
-function Fm() {
+function tg() {
   const { shadow: e } = S;
   if (!e) return;
   const t = e.querySelector('[data-region="alpha-track"]'), n = e.querySelector('[data-region="alpha-thumb"]');
   if (!t || !n) return;
   let r = !1;
   const o = (i) => {
-    r && ln(t, i.clientX);
+    r && hn(t, i.clientX);
   }, s = () => {
-    r = !1, document.removeEventListener("mousemove", o, !0), document.removeEventListener("mouseup", s, !0), st();
+    r = !1, document.removeEventListener("mousemove", o, !0), document.removeEventListener("mouseup", s, !0), it();
   };
   n.addEventListener("mousedown", (i) => {
-    Pt("alpha"), r = !0, ln(t, i.clientX), document.addEventListener("mousemove", o, !0), document.addEventListener("mouseup", s, !0), i.preventDefault();
+    Nt("alpha"), r = !0, hn(t, i.clientX), document.addEventListener("mousemove", o, !0), document.addEventListener("mouseup", s, !0), i.preventDefault();
   }), t.addEventListener("mousedown", (i) => {
     const a = i.target;
-    a instanceof Element && a.closest('[data-region="alpha-thumb"]') || (Pt("alpha"), ln(t, i.clientX), r = !0, document.addEventListener("mousemove", o, !0), document.addEventListener("mouseup", s, !0));
+    a instanceof Element && a.closest('[data-region="alpha-thumb"]') || (Nt("alpha"), hn(t, i.clientX), r = !0, document.addEventListener("mousemove", o, !0), document.addEventListener("mouseup", s, !0));
   });
 }
-function ln(e, t) {
+function hn(e, t) {
   const n = e.getBoundingClientRect();
-  Bm(Math.max(0, Math.min(1, (t - n.left) / n.width)));
+  Qm(Math.max(0, Math.min(1, (t - n.left) / n.width)));
 }
-function An(e, t) {
+function Tn(e, t) {
   return e.kind === "text" ? t === "text" ? e.style.color : t === "border" ? e.style.borderColor ?? "#000000" : e.style.backgroundColor ?? "transparent" : e.kind === "shape" ? t === "text" ? e.stroke : e.fill : t === "text" ? e.stroke : "";
 }
-function zm(e) {
+function ng(e) {
   return e.kind === "text" ? e.style.backgroundOpacity ?? 1 : e.kind === "shape" ? e.fillOpacity ?? 1 : e.strokeOpacity ?? 1;
 }
-function un(e, t) {
+function fn(e, t) {
   return e ? e === t ? !0 : e.replace(/\s+/g, "") === t.replace(/\s+/g, "") : !1;
 }
-function dn(e, t, n) {
+function mn(e, t, n) {
   var l, u, h;
-  const r = S.swatchMode === "muted" ? Lm : Tm, o = [];
+  const r = S.swatchMode === "muted" ? Um : jm, o = [];
   if (n && (e === "bg" || e === "border")) {
     const d = t === "transparent" || !t;
     o.push(`
@@ -3579,25 +3579,25 @@ function dn(e, t, n) {
   for (let d = 0; d < r.length; d++) {
     const p = r[d];
     if (!p) continue;
-    const f = d === 1, m = un(t, p.resolved);
+    const f = d === 1, m = fn(t, p.resolved);
     o.push(`
       <button type="button" class="swatch${f ? " is-white" : ""}" data-swatch="${e}" data-value="${p.resolved}" style="background:${p.resolved}" aria-pressed="${m}" title="${e} ${p.resolved}"></button>
     `);
   }
   const s = D(), i = (e === "text" || e === "border" ? (l = s == null ? void 0 : s.siteColors) == null ? void 0 : l.text : (u = s == null ? void 0 : s.siteColors) == null ? void 0 : u.background) ?? [];
   for (const d of i) {
-    const p = un(t, d);
+    const p = fn(t, d);
     o.push(`
-      <button type="button" class="swatch site" data-swatch="${e}" data-value="${H(d)}" style="background:${H(d)}" aria-pressed="${p}" title="Site color ${H(d)}"></button>
+      <button type="button" class="swatch site" data-swatch="${e}" data-value="${U(d)}" style="background:${U(d)}" aria-pressed="${p}" title="Site color ${U(d)}"></button>
     `);
   }
   const a = e === "text" || e === "border" ? "text" : "background", c = ((h = s == null ? void 0 : s.customColors) == null ? void 0 : h[a]) ?? [];
   for (const d of c) {
-    const p = un(t, d);
+    const p = fn(t, d);
     o.push(`
       <span class="swatch-wrap">
-        <button type="button" class="swatch" data-swatch="${e}" data-value="${H(d)}" style="background:${H(d)}" aria-pressed="${p}" title="Custom ${H(d)}"></button>
-        <button type="button" class="swatch-remove" data-action="custom-remove" data-slot="${e}" data-value="${H(d)}" title="Remove" aria-label="Remove color ${H(d)}">×</button>
+        <button type="button" class="swatch" data-swatch="${e}" data-value="${U(d)}" style="background:${U(d)}" aria-pressed="${p}" title="Custom ${U(d)}"></button>
+        <button type="button" class="swatch-remove" data-action="custom-remove" data-slot="${e}" data-value="${U(d)}" title="Remove" aria-label="Remove color ${U(d)}">×</button>
       </span>
     `);
   }
@@ -3605,18 +3605,18 @@ function dn(e, t, n) {
     <button type="button" class="swatch more" data-action="more-colors" data-slot="${e}" title="More colors" aria-label="More colors">···</button>
   `), o.join("");
 }
-function Un() {
+function Kn() {
   const { shadow: e, activeId: t, activeKind: n } = S;
   if (!e || !t || !n) return;
   const r = E(t);
   if (!r || r.kind === "arrow") return;
   const o = r, s = e.querySelector('[data-region="caption"]');
-  s && (s.textContent = Ym(n)), e.querySelectorAll('[data-action="swatch-mode"]').forEach((i) => {
+  s && (s.textContent = lg(n)), e.querySelectorAll('[data-action="swatch-mode"]').forEach((i) => {
     const a = i.getAttribute("data-mode");
     i.setAttribute("aria-pressed", String(a === S.swatchMode));
-  }), Hm(e, n), Wm(e, n, o), Um(e, n, o), jm(e, n, o), Vm(e, o), Gm(e, o);
+  }), rg(e, n), og(e, n, o), sg(e, n, o), ag(e, n, o), ig(e, o), cg(e, o);
 }
-function Hm(e, t) {
+function rg(e, t) {
   const n = e.querySelector('[data-region="type-row"]'), r = e.querySelector('[data-region="divider-1"]'), o = t === "text";
   n && (n.hidden = !o), r && (r.hidden = !o);
   const s = e.querySelector('[data-region="width-row"]'), i = t === "shape" || t === "freedraw";
@@ -3630,7 +3630,7 @@ function Hm(e, t) {
   const u = e.querySelector('[data-region="bg-label"]');
   u && (u.textContent = t === "text" ? "Bg" : "Fill");
 }
-function Wm(e, t, n) {
+function og(e, t, n) {
   if (t !== "text" || n.kind !== "text") return;
   const r = e.querySelector('[data-region="font"]');
   r && (r.value = n.style.fontFamily);
@@ -3641,60 +3641,60 @@ function Wm(e, t, n) {
   const i = e.querySelector('[data-region="italic"]');
   i && i.setAttribute("aria-pressed", String(n.style.italic === !0));
 }
-function Um(e, t, n) {
+function sg(e, t, n) {
   if (t !== "shape" && t !== "freedraw" || n.kind !== "shape" && n.kind !== "freedraw") return;
   const r = e.querySelector('[data-region="width"]'), o = e.querySelector('[data-region="width-value"]'), s = n.strokeWidth;
   r && (r.value = String(s)), o && (o.textContent = String(s));
 }
-function jm(e, t, n) {
-  const r = e.querySelector('[data-region="text-swatches"]'), o = e.querySelector('[data-region="bg-swatches"]'), s = e.querySelector('[data-region="border-swatches"]'), i = e.querySelector('[data-region="bg-row"]'), a = e.querySelector('[data-region="border-row"]'), c = An(n, "text"), l = An(n, "bg");
-  if (r && (r.innerHTML = dn("text", c, !1)), o && !(i != null && i.hidden) && (o.innerHTML = dn("bg", l, t === "text")), s && !(a != null && a.hidden) && n.kind === "text") {
+function ag(e, t, n) {
+  const r = e.querySelector('[data-region="text-swatches"]'), o = e.querySelector('[data-region="bg-swatches"]'), s = e.querySelector('[data-region="border-swatches"]'), i = e.querySelector('[data-region="bg-row"]'), a = e.querySelector('[data-region="border-row"]'), c = Tn(n, "text"), l = Tn(n, "bg");
+  if (r && (r.innerHTML = mn("text", c, !1)), o && !(i != null && i.hidden) && (o.innerHTML = mn("bg", l, t === "text")), s && !(a != null && a.hidden) && n.kind === "text") {
     const u = n.style.borderColor ?? "#000000";
-    s.innerHTML = dn("border", u, !0);
+    s.innerHTML = mn("border", u, !0);
   }
 }
-function Vm(e, t) {
+function ig(e, t) {
   const n = e.querySelector('[data-region="effect"]');
-  n && (n.value = Mm(t));
+  n && (n.value = Hm(t));
 }
-function Gm(e, t) {
-  const n = Math.round(zm(t) * 100), r = e.querySelector('[data-region="alpha-fill"]'), o = e.querySelector('[data-region="alpha-thumb"]'), s = e.querySelector('[data-region="alpha-value"]');
+function cg(e, t) {
+  const n = Math.round(ng(t) * 100), r = e.querySelector('[data-region="alpha-fill"]'), o = e.querySelector('[data-region="alpha-thumb"]'), s = e.querySelector('[data-region="alpha-value"]');
   r && (r.style.width = `${n}%`), o && (o.style.left = `${n}%`), s && (s.textContent = `${n}%`);
 }
-function Ym(e) {
+function lg(e) {
   return e === "text" ? "Text" : e === "shape" ? "Shape" : "Freedraw";
 }
-let He = !1;
-function Xm(e) {
+let We = !1;
+function ug(e) {
   const { shadow: t, host: n } = S;
   if (!t || !n) return;
   const r = (s) => s.stopPropagation();
-  n.addEventListener("keydown", r), n.addEventListener("keypress", r), n.addEventListener("keyup", r), t.addEventListener("click", (s) => Km(s)), t.addEventListener("change", (s) => Zm(s)), t.addEventListener("input", (s) => Jm(s)), Fm();
+  n.addEventListener("keydown", r), n.addEventListener("keypress", r), n.addEventListener("keyup", r), t.addEventListener("click", (s) => dg(s)), t.addEventListener("change", (s) => pg(s)), t.addEventListener("input", (s) => hg(s)), tg();
   const o = () => {
-    He && (He = !1, st()), e();
+    We && (We = !1, it()), e();
   };
-  document.addEventListener("mousedown", (s) => eg(s, o), !0), document.addEventListener("keydown", (s) => tg(s, o), !0);
+  document.addEventListener("mousedown", (s) => mg(s, o), !0), document.addEventListener("keydown", (s) => gg(s, o), !0);
 }
-function pn(e) {
+function gn(e) {
   const t = S.shadow;
   if (!t) return;
   const n = t.querySelector('[data-region="format-painter-menu"]'), r = t.querySelector('[data-region="format-painter"]');
   n && (e ? n.removeAttribute("hidden") : n.setAttribute("hidden", "")), r == null || r.setAttribute("aria-expanded", String(e));
 }
-function Km(e) {
+function dg(e) {
   var l;
   const t = e.target;
   if (!(t instanceof Element)) return;
   if (t.closest('[data-action="format-painter-toggle"]')) {
     const u = (l = S.shadow) == null ? void 0 : l.querySelector('[data-region="format-painter-menu"]');
-    pn((u == null ? void 0 : u.hasAttribute("hidden")) ?? !1);
+    gn((u == null ? void 0 : u.hasAttribute("hidden")) ?? !1);
     return;
   }
-  t.closest(".format-painter-wrap") || pn(!1);
+  t.closest(".format-painter-wrap") || gn(!1);
   const n = t.closest('[data-action="swatch-mode"]');
   if (n) {
     const u = n.getAttribute("data-mode");
-    (u === "muted" || u === "vibrant") && (S.swatchMode = u, Un());
+    (u === "muted" || u === "vibrant") && (S.swatchMode = u, Kn());
     return;
   }
   const r = t.closest('[data-action="batch-apply"]');
@@ -3703,92 +3703,92 @@ function Km(e) {
     if (!u) return;
     const h = E(u);
     if (!h) return;
-    const d = km(h);
-    r.getAttribute("data-scope") === "scenario" ? Gh(h.kind, d) : Vh(h.kind, d), pn(!1);
+    const d = Bm(h);
+    r.getAttribute("data-scope") === "scenario" ? cf(h.kind, d) : af(h.kind, d), gn(!1);
     return;
   }
-  if (t.closest('[data-region="bold"]')) return Rm();
-  if (t.closest('[data-region="italic"]')) return Nm();
+  if (t.closest('[data-region="bold"]')) return Km();
+  if (t.closest('[data-region="italic"]')) return Zm();
   if (t.closest('[data-region="effect-play"]')) {
-    S.activeId && _m(S.activeId);
+    S.activeId && Im(S.activeId);
     return;
   }
   const o = t.closest('[data-swatch="text"]');
-  if (o) return Bo(o.getAttribute("data-value") ?? "");
+  if (o) return Go(o.getAttribute("data-value") ?? "");
   const s = t.closest('[data-swatch="bg"]');
-  if (s) return qo(s.getAttribute("data-value") ?? "");
+  if (s) return Yo(s.getAttribute("data-value") ?? "");
   const i = t.closest('[data-swatch="border"]');
-  if (i) return Fo(i.getAttribute("data-value") ?? "");
+  if (i) return Xo(i.getAttribute("data-value") ?? "");
   const a = t.closest('[data-action="more-colors"]');
-  if (a instanceof HTMLElement) return Qm(a);
+  if (a instanceof HTMLElement) return fg(a);
   const c = t.closest('[data-action="custom-remove"]');
   if (c instanceof HTMLElement) {
     const u = c.getAttribute("data-slot"), h = c.getAttribute("data-value");
-    u && h && Xh(u === "text" || u === "border" ? "text" : "background", h);
+    u && h && uf(u === "text" || u === "border" ? "text" : "background", h);
   }
 }
-function Zm(e) {
+function pg(e) {
   const t = e.target;
-  t instanceof HTMLElement && (t.dataset.region === "font" ? Im(t.value) : t.dataset.region === "effect" ? Dm(t.value) : t.dataset.region === "width" && He && (He = !1, st()));
+  t instanceof HTMLElement && (t.dataset.region === "font" ? Ym(t.value) : t.dataset.region === "effect" ? Jm(t.value) : t.dataset.region === "width" && We && (We = !1, it()));
 }
-function Jm(e) {
+function hg(e) {
   const t = e.target;
   if (t instanceof HTMLInputElement) {
     if (t.dataset.region === "size") {
-      const n = Math.max(Oo, Math.min(Ro, Number(t.value) || 16));
-      Om(n);
+      const n = Math.max(Wo, Math.min(Uo, Number(t.value) || 16));
+      Xm(n);
     } else if (t.dataset.region === "width") {
-      He || (He = !0, Pt("width"));
-      const n = Math.max(No, Math.min(Do, Number(t.value) || 0));
-      qm(n);
+      We || (We = !0, Nt("width"));
+      const n = Math.max(jo, Math.min(Vo, Number(t.value) || 0));
+      eg(n);
     }
   }
 }
-function Qm(e) {
+function fg(e) {
   const { activeId: t, activeKind: n } = S;
   if (!t || !n) return;
   const r = E(t);
   if (!r || r.kind === "arrow") return;
   const o = r, s = e.getAttribute("data-slot");
   if (!s) return;
-  const i = An(o, s) || "#ffffff";
-  tm({
+  const i = Tn(o, s) || "#ffffff";
+  gm({
     anchor: e,
     initialColor: i,
     onConfirm: (a) => {
-      Yh(s === "text" || s === "border" ? "text" : "background", a), s === "text" ? Bo(a) : s === "border" ? Fo(a) : qo(a);
+      lf(s === "text" || s === "border" ? "text" : "background", a), s === "text" ? Go(a) : s === "border" ? Xo(a) : Yo(a);
     }
   });
 }
-function eg(e, t) {
+function mg(e, t) {
   const { host: n, activeAnchorSelector: r } = S, o = e.target;
-  !(o instanceof HTMLElement) && !(o instanceof SVGElement) || n != null && n.contains(o) || wm(o) || nm() || r && o instanceof Element && o.closest(r) || o instanceof Element && o.closest('[data-manuscript="ui"]') || (t(), Se());
+  !(o instanceof HTMLElement) && !(o instanceof SVGElement) || n != null && n.contains(o) || Dm(o) || bm() || r && o instanceof Element && o.closest(r) || o instanceof Element && o.closest('[data-manuscript="ui"]') || (t(), Ae());
 }
-function tg(e, t) {
+function gg(e, t) {
   e.key === "Escape" && (e.preventDefault(), t());
 }
-function zo(e) {
+function Ko(e) {
   const { host: t } = S;
   if (!t) return;
   t.style.left = "0px", t.style.top = "0px";
   const n = t.getBoundingClientRect(), r = e.getBoundingClientRect();
-  let o = r.top - n.height - _r - Em;
-  o < 8 && (o = r.bottom + _r);
+  let o = r.top - n.height - Sr - Wm;
+  o < 8 && (o = r.bottom + Sr);
   const s = Math.max(
     8,
     Math.min(r.left + r.width / 2 - n.width / 2, window.innerWidth - n.width - 8)
   );
   t.style.top = `${o}px`, t.style.left = `${s}px`;
 }
-function ng(e, t) {
+function bg(e, t) {
   return e === "text" ? `[data-annotation-text="${t}"]` : e === "shape" ? `[data-annotation-shape="${t}"]` : `[data-annotation-freedraw="${t}"]`;
 }
-function rg(e, t) {
-  e === "text" ? xm(t) : e === "shape" ? ym(t) : vm(t);
+function _g(e, t) {
+  e === "text" ? Nm(t) : e === "shape" ? Om(t) : Rm(t);
 }
-function og() {
+function yg() {
   return `
-    ${it()}
+    ${lt()}
     :host { display: block; font-family: var(--ff-sans); color: var(--c-text); }
     *, *::before, *::after { box-sizing: border-box; }
 
@@ -3910,7 +3910,7 @@ function og() {
     .type-btn[aria-pressed="false"] { color: var(--c-text-mute); }
   `;
 }
-function sg() {
+function vg() {
   return `
     .swatch-row { display: flex; align-items: center; gap: 8px; }
     .swatches { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
@@ -4091,27 +4091,27 @@ function sg() {
     .batch-btn:hover { background: var(--c-tint); color: var(--c-text); }
   `;
 }
-function ag() {
-  return [og(), sg()].join(`
+function xg() {
+  return [yg(), vg()].join(`
 `);
 }
-function ig() {
+function wg() {
   return `
-    <style>${ag()}</style>
+    <style>${xg()}</style>
     <div class="popup" role="dialog" aria-label="Annotation properties">
-      ${cg()}
-      ${lg()}
+      ${kg()}
+      ${Sg()}
       <div class="divider" data-region="divider-1" hidden></div>
-      ${ug()}
+      ${$g()}
       <div class="divider"></div>
-      ${dg()}
-      ${pg()}
-      ${hg()}
-      ${fg()}
+      ${Ag()}
+      ${Mg()}
+      ${Eg()}
+      ${Tg()}
     </div>
   `;
 }
-function cg() {
+function kg() {
   return `
     <div class="header">
       <span class="label wide" data-region="caption">Annotation · 속성</span>
@@ -4137,22 +4137,22 @@ function cg() {
     </div>
   `;
 }
-function lg() {
+function Sg() {
   var t;
   return `
     <div class="type-row" data-region="type-row" hidden>
       <select class="select" data-region="font">
-        ${Cm((t = D()) == null ? void 0 : t.siteFonts).map(
-    (n) => `<option value="${H(n.value)}" style="font-family: ${H(n.value)};">${n.label}</option>`
+        ${Vm((t = D()) == null ? void 0 : t.siteFonts).map(
+    (n) => `<option value="${U(n.value)}" style="font-family: ${U(n.value)};">${n.label}</option>`
   ).join("")}
       </select>
-      <input class="size-input" type="number" min="${Oo}" max="${Ro}" data-region="size" />
+      <input class="size-input" type="number" min="${Wo}" max="${Uo}" data-region="size" />
       <button type="button" class="type-btn" data-region="bold" aria-pressed="false" title="Bold">B</button>
       <button type="button" class="type-btn italic" data-region="italic" aria-pressed="false" title="Italic">I</button>
     </div>
   `;
 }
-function ug() {
+function $g() {
   return `
     <div class="swatch-row" data-region="text-row">
       <span class="label" data-region="text-label">Text</span>
@@ -4168,22 +4168,22 @@ function ug() {
     </div>
   `;
 }
-function dg() {
+function Ag() {
   return `
     <div class="width-row" data-region="width-row" hidden>
       <span class="label">Width</span>
-      <input class="width-input" type="range" min="${No}" max="${Do}" step="1" data-region="width" />
+      <input class="width-input" type="range" min="${jo}" max="${Vo}" step="1" data-region="width" />
       <span class="width-value" data-region="width-value">2</span>
     </div>
   `;
 }
-function pg() {
+function Mg() {
   return `
     <div class="row label-row">
       <span class="label">Effect</span>
       <div class="effect-controls">
         <select class="select" data-region="effect">
-          ${Pm.map((e) => `<option value="${e.value}">${e.label}</option>`).join("")}
+          ${Gm.map((e) => `<option value="${e.value}">${e.label}</option>`).join("")}
         </select>
         <button type="button" class="icon-btn" data-region="effect-play" title="Preview effect" aria-label="Preview effect">
           <svg width="9" height="9" viewBox="0 0 16 16" fill="currentColor"><path d="M 4 3 L 4 13 L 13 8 Z"/></svg>
@@ -4192,7 +4192,7 @@ function pg() {
     </div>
   `;
 }
-function hg() {
+function Eg() {
   return `
     <div class="alpha-row">
       <span class="label">Opacity</span>
@@ -4206,7 +4206,7 @@ function hg() {
     </div>
   `;
 }
-function fg() {
+function Tg() {
   return `
     <div class="anchor-tick">
       <svg viewBox="0 0 12 6" width="12" height="6">
@@ -4216,68 +4216,68 @@ function fg() {
     </div>
   `;
 }
-function jn(e, t, n) {
-  E(e) && (S.activeId = e, S.activeKind = n, S.activeAnchorSelector = ng(n, e), S.host || _g(), Un(), zo(t), rg(n, e), document.dispatchEvent(
+function Zn(e, t, n) {
+  E(e) && (S.activeId = e, S.activeKind = n, S.activeAnchorSelector = bg(n, e), S.host || Ig(), Kn(), Ko(t), _g(n, e), document.dispatchEvent(
     new CustomEvent("manuscript:annotation-selected", { detail: { id: e } })
   ));
 }
-function Ho() {
+function Zo() {
   var e;
-  S.host && ((e = S.unsubscribeScenario) == null || e.call(S), S.unsubscribeScenario = null, Se(), $n(), S.host.remove(), S.host = null, S.shadow = null, S.activeId = null, S.activeKind = null, S.activeAnchorSelector = null, document.dispatchEvent(
+  S.host && ((e = S.unsubscribeScenario) == null || e.call(S), S.unsubscribeScenario = null, Ae(), En(), S.host.remove(), S.host = null, S.shadow = null, S.activeId = null, S.activeKind = null, S.activeAnchorSelector = null, document.dispatchEvent(
     new CustomEvent("manuscript:annotation-selected", { detail: { id: null } })
   ));
 }
-function mg(e, t) {
-  jn(e, t, "text");
+function Lg(e, t) {
+  Zn(e, t, "text");
 }
-function gg(e, t) {
-  jn(e, t, "shape");
+function Cg(e, t) {
+  Zn(e, t, "shape");
 }
-function bg(e, t) {
-  jn(e, t, "freedraw");
+function Pg(e, t) {
+  Zn(e, t, "freedraw");
 }
-function _g() {
-  const { host: e, shadow: t } = Ue();
+function Ig() {
+  const { host: e, shadow: t } = Ve();
   e.setAttribute("data-popup", "annotation-editor"), e.style.cssText = [
     "position: fixed",
     `z-index: ${te + 5}`,
     "pointer-events: auto"
-  ].join("; "), t.innerHTML = ig(), S.host = e, S.shadow = t, document.body.appendChild(e), Xm(Ho), S.unsubscribeScenario = ot(yg);
+  ].join("; "), t.innerHTML = wg(), S.host = e, S.shadow = t, document.body.appendChild(e), ug(Zo), S.unsubscribeScenario = at(Og);
 }
-function yg() {
+function Og() {
   const { activeId: e, host: t, activeAnchorSelector: n } = S;
   if (!e || !t) return;
   if (!E(e)) {
-    Ho();
+    Zo();
     return;
   }
-  if (Un(), n) {
+  if (Kn(), n) {
     const o = document.querySelector(n);
-    o && zo(o);
+    o && Ko(o);
   }
 }
 const v = {
   state: null,
   unsubscribeStep: null
 };
-function lt() {
+function dt() {
   return v.state !== null;
 }
-function Vn() {
+function Jn() {
   var e;
   return ((e = v.state) == null ? void 0 : e.standalone) === !0;
 }
-function vg(e, t) {
+function Rg(e, t) {
   const { svg: n } = M;
   if (!n) return;
-  const r = Vt(e, t), o = xg(e, r), s = r.map((c) => `${c.x},${c.y}`).join(" "), i = document.createElementNS(Dt, "polyline");
-  if (i.setAttribute("points", s), i.setAttribute("fill", "none"), i.setAttribute("stroke", e.stroke), i.setAttribute("stroke-width", String(e.strokeWidth)), i.setAttribute("stroke-linecap", "round"), i.setAttribute("stroke-linejoin", "round"), i.setAttribute(pr, e.id), e.strokeOpacity !== void 0 && e.strokeOpacity < 1 && i.setAttribute("stroke-opacity", String(Math.max(0, Math.min(1, e.strokeOpacity)))), o && i.setAttribute("transform", o), i.style.pointerEvents = "none", Qe(i, e.entryAnimation, e.rotate ?? 0), n.appendChild(i), Vn()) return;
-  const a = document.createElementNS(Dt, "polyline");
-  a.setAttribute(pr, e.id), a.setAttribute("points", s), a.setAttribute("fill", "none"), a.setAttribute("stroke", "transparent"), a.setAttribute("stroke-width", String(Math.max(12, e.strokeWidth + 10))), a.setAttribute("stroke-linecap", "round"), a.setAttribute("stroke-linejoin", "round"), a.setAttribute("pointer-events", "stroke"), o && a.setAttribute("transform", o), a.style.cursor = "pointer", a.addEventListener("mousedown", (c) => {
-    c.button === 0 && (c.stopPropagation(), c.preventDefault(), wg(e.id, c, a));
+  const r = Zt(e, t), o = Ng(e, r), s = r.map((c) => `${c.x},${c.y}`).join(" "), i = document.createElementNS(zt, "polyline");
+  if (i.setAttribute("points", s), i.setAttribute("fill", "none"), i.setAttribute("stroke", e.stroke), i.setAttribute("stroke-width", String(e.strokeWidth)), i.setAttribute("stroke-linecap", "round"), i.setAttribute("stroke-linejoin", "round"), i.setAttribute(_r, e.id), e.strokeOpacity !== void 0 && e.strokeOpacity < 1 && i.setAttribute("stroke-opacity", String(Math.max(0, Math.min(1, e.strokeOpacity)))), o && i.setAttribute("transform", o), i.style.pointerEvents = "none", rt(i, e.entryAnimation, e.rotate ?? 0), n.appendChild(i), Jn()) return;
+  const a = document.createElementNS(zt, "polyline");
+  a.setAttribute(_r, e.id), a.setAttribute("points", s), a.setAttribute("fill", "none"), a.setAttribute("stroke", "transparent"), a.setAttribute("stroke-width", String(Math.max(12, e.strokeWidth + 10))), a.setAttribute("stroke-linecap", "round"), a.setAttribute("stroke-linejoin", "round"), a.setAttribute("pointer-events", "stroke"), o && a.setAttribute("transform", o), a.style.cursor = "pointer", a.addEventListener("mousedown", (c) => {
+    c.button === 0 && (c.stopPropagation(), c.preventDefault(), Dg(e.id, c, a));
   }), n.appendChild(a);
 }
-function xg(e, t) {
+function Ng(e, t) {
   const n = e.rotate ?? 0;
   if (!n || t.length === 0) return "";
   let r = 1 / 0, o = 1 / 0, s = -1 / 0, i = -1 / 0;
@@ -4286,10 +4286,10 @@ function xg(e, t) {
   const a = (r + s) / 2, c = (o + i) / 2;
   return `rotate(${n} ${a} ${c})`;
 }
-function wg(e, t, n) {
+function Dg(e, t, n) {
   const r = E(e);
   if (!r || r.kind !== "freedraw") return;
-  const o = { x: t.clientX, y: t.clientY }, s = J(), i = Vt(r, s).map((u) => ({ ...u }));
+  const o = { x: t.clientX, y: t.clientY }, s = J(), i = Zt(r, s).map((u) => ({ ...u }));
   let a = !1;
   const c = (u) => {
     const h = u.clientX - o.x, d = u.clientY - o.y;
@@ -4302,41 +4302,41 @@ function wg(e, t, n) {
         y: m.y - s.top
       }))
     } : { points: p, pointsAnchorOffset: void 0 };
-    L(e, f);
+    T(e, f);
   }, l = () => {
     document.removeEventListener("mousemove", c, !0), document.removeEventListener("mouseup", l, !0);
     const u = document.querySelectorAll(`[data-annotation-freedraw="${e}"]`), h = u[u.length - 1] ?? n;
-    bg(e, h);
+    Pg(e, h);
   };
   document.addEventListener("mousemove", c, !0), document.addEventListener("mouseup", l, !0);
 }
-const ut = "http://www.w3.org/2000/svg";
-function kg(e, t) {
+const pt = "http://www.w3.org/2000/svg";
+function Bg(e, t) {
   let n;
   switch (e) {
     case "rectangle":
-      n = Sg(t);
+      n = qg(t);
       break;
     case "ellipse":
-      n = $g(t);
+      n = Fg(t);
       break;
     case "triangle":
-      n = vt(Eg(t), t);
+      n = wt(Wg(t), t);
       break;
     case "diamond":
-      n = vt(Lg(t), t);
+      n = wt(Ug(t), t);
       break;
     case "star":
-      n = vt(Tg(t), t);
+      n = wt(jg(t), t);
       break;
     case "callout":
-      n = Mg(Cg(t), t);
+      n = Hg(Vg(t), t);
       break;
     case "line":
-      n = Ag(t);
+      n = zg(t);
       break;
     case "block-arrow":
-      n = vt(Pg(t), t);
+      n = wt(Gg(t), t);
       break;
   }
   if (n && t.rotate) {
@@ -4345,38 +4345,38 @@ function kg(e, t) {
   }
   return n;
 }
-function Sg(e) {
-  const t = document.createElementNS(ut, "rect");
-  return t.setAttribute("x", String(e.x)), t.setAttribute("y", String(e.y)), t.setAttribute("width", String(e.width)), t.setAttribute("height", String(e.height)), Xt(t, e), t;
+function qg(e) {
+  const t = document.createElementNS(pt, "rect");
+  return t.setAttribute("x", String(e.x)), t.setAttribute("y", String(e.y)), t.setAttribute("width", String(e.width)), t.setAttribute("height", String(e.height)), en(t, e), t;
 }
-function $g(e) {
-  const t = document.createElementNS(ut, "ellipse");
-  return t.setAttribute("cx", String(e.x + e.width / 2)), t.setAttribute("cy", String(e.y + e.height / 2)), t.setAttribute("rx", String(Math.max(0, e.width / 2))), t.setAttribute("ry", String(Math.max(0, e.height / 2))), Xt(t, e), t;
+function Fg(e) {
+  const t = document.createElementNS(pt, "ellipse");
+  return t.setAttribute("cx", String(e.x + e.width / 2)), t.setAttribute("cy", String(e.y + e.height / 2)), t.setAttribute("rx", String(Math.max(0, e.width / 2))), t.setAttribute("ry", String(Math.max(0, e.height / 2))), en(t, e), t;
 }
-function Ag(e) {
-  const t = document.createElementNS(ut, "line");
+function zg(e) {
+  const t = document.createElementNS(pt, "line");
   return t.setAttribute("x1", String(e.x)), t.setAttribute("y1", String(e.y)), t.setAttribute("x2", String(e.x + e.width)), t.setAttribute("y2", String(e.y + e.height)), t.setAttribute("stroke", e.stroke || "#000000"), t.setAttribute("stroke-width", String(e.strokeWidth)), t.setAttribute("stroke-linecap", "round"), t.setAttribute("fill", "none"), t;
 }
-function vt(e, t) {
-  const n = document.createElementNS(ut, "polygon");
-  return n.setAttribute("points", e), Xt(n, t), n.setAttribute("stroke-linejoin", "round"), n;
+function wt(e, t) {
+  const n = document.createElementNS(pt, "polygon");
+  return n.setAttribute("points", e), en(n, t), n.setAttribute("stroke-linejoin", "round"), n;
 }
-function Mg(e, t) {
-  const n = document.createElementNS(ut, "path");
-  return n.setAttribute("d", e), Xt(n, t), n.setAttribute("stroke-linejoin", "round"), n;
+function Hg(e, t) {
+  const n = document.createElementNS(pt, "path");
+  return n.setAttribute("d", e), en(n, t), n.setAttribute("stroke-linejoin", "round"), n;
 }
-function Xt(e, t) {
+function en(e, t) {
   e.setAttribute("fill", t.fill || "transparent"), e.setAttribute("stroke", t.stroke || "transparent"), e.setAttribute("stroke-width", String(t.strokeWidth)), t.fillOpacity !== void 0 && t.fillOpacity < 1 && e.setAttribute("fill-opacity", String(Math.max(0, Math.min(1, t.fillOpacity))));
 }
-function Eg(e) {
+function Wg(e) {
   const t = e.x, n = e.x + e.width, r = e.y, o = e.y + e.height;
   return `${(t + n) / 2},${r} ${n},${o} ${t},${o}`;
 }
-function Lg(e) {
+function Ug(e) {
   const t = e.x + e.width / 2, n = e.y + e.height / 2;
   return `${t},${e.y} ${e.x + e.width},${n} ${t},${e.y + e.height} ${e.x},${n}`;
 }
-function Tg(e) {
+function jg(e) {
   const t = e.x + e.width / 2, n = e.y + e.height / 2, r = Math.min(e.width, e.height) / 2, o = r * 0.5, s = [];
   for (let i = 0; i < 10; i++) {
     const a = Math.PI / 5 * i - Math.PI / 2, c = i % 2 === 0 ? r : o;
@@ -4384,7 +4384,7 @@ function Tg(e) {
   }
   return s.join(" ");
 }
-function Cg(e) {
+function Vg(e) {
   const t = Math.min(10, e.width / 4, e.height / 4), n = Math.min(18, e.height * 0.2), r = e.y + e.height - n, o = e.x + e.width * 0.32, s = e.x + e.width * 0.5, i = e.x + e.width * 0.22, a = e.y + e.height;
   return [
     `M ${e.x + t} ${e.y}`,
@@ -4402,7 +4402,7 @@ function Cg(e) {
     "Z"
   ].join(" ");
 }
-function Pg(e) {
+function Gg(e) {
   const t = e.x + e.width / 2, n = e.y + e.height * 0.45, r = Math.min(e.width / 2, e.width * 0.22);
   return [
     `${t},${e.y}`,
@@ -4414,10 +4414,10 @@ function Pg(e) {
     `${e.x},${n}`
   ].join(" ");
 }
-function Ig(e, t) {
+function Yg(e, t) {
   const { svg: n } = M;
   if (!n) return;
-  const r = jt(e, t), o = kg(e.shapeKind, {
+  const r = Kt(e, t), o = Bg(e.shapeKind, {
     x: r.x,
     y: r.y,
     width: e.bounds.width,
@@ -4428,17 +4428,17 @@ function Ig(e, t) {
     fillOpacity: e.fillOpacity,
     rotate: e.rotate
   });
-  o && (o.setAttribute(uo, e.id), o.style.pointerEvents = "none", Qe(o, e.entryAnimation, e.rotate ?? 0), n.appendChild(o), Vn() || n.appendChild(Og(e, r)));
+  o && (o.setAttribute(vo, e.id), o.style.pointerEvents = "none", rt(o, e.entryAnimation, e.rotate ?? 0), n.appendChild(o), Jn() || n.appendChild(Xg(e, r)));
 }
-function Og(e, t) {
-  const n = document.createElementNS(Dt, "rect");
-  if (n.setAttribute(uo, e.id), n.setAttribute("x", String(t.x)), n.setAttribute("y", String(t.y)), n.setAttribute("width", String(Math.max(0, e.bounds.width))), n.setAttribute("height", String(Math.max(0, e.bounds.height))), n.setAttribute("fill", "rgba(0, 0, 0, 0.001)"), n.setAttribute("stroke", "none"), n.setAttribute("pointer-events", "all"), n.style.pointerEvents = "all", n.style.cursor = "pointer", e.rotate) {
+function Xg(e, t) {
+  const n = document.createElementNS(zt, "rect");
+  if (n.setAttribute(vo, e.id), n.setAttribute("x", String(t.x)), n.setAttribute("y", String(t.y)), n.setAttribute("width", String(Math.max(0, e.bounds.width))), n.setAttribute("height", String(Math.max(0, e.bounds.height))), n.setAttribute("fill", "rgba(0, 0, 0, 0.001)"), n.setAttribute("stroke", "none"), n.setAttribute("pointer-events", "all"), n.style.pointerEvents = "all", n.style.cursor = "pointer", e.rotate) {
     const r = t.x + e.bounds.width / 2, o = t.y + e.bounds.height / 2;
     n.setAttribute("transform", `rotate(${e.rotate} ${r} ${o})`);
   }
-  return n.addEventListener("mousedown", (r) => Rg(e.id, r, n)), n;
+  return n.addEventListener("mousedown", (r) => Kg(e.id, r, n)), n;
 }
-function Rg(e, t, n) {
+function Kg(e, t, n) {
   if (t.button !== 0) return;
   t.stopPropagation(), t.preventDefault();
   const r = { x: t.clientX, y: t.clientY }, o = E(e);
@@ -4459,20 +4459,20 @@ function Rg(e, t, n) {
       bounds: { ...a, x: f, y: m },
       boundsAnchorOffset: void 0
     };
-    L(e, g);
+    T(e, g);
   }, u = () => {
     document.removeEventListener("mousemove", l, !0), document.removeEventListener("mouseup", u, !0);
     const h = document.querySelectorAll(`[data-annotation-shape="${e}"]`), d = h[h.length - 1] ?? n;
-    gg(e, d);
+    Cg(e, d);
   };
   document.addEventListener("mousemove", l, !0), document.addEventListener("mouseup", u, !0);
 }
-function Ng(e, t) {
+function Zg(e, t) {
   const { host: n } = M;
   if (!n) return;
   const r = document.createElement("div");
-  r.setAttribute(lo, e.id), r.setAttribute("data-manuscript", "ui"), r.dataset.annotationId = e.id;
-  const o = e.style.italic === !0, s = e.style.backgroundColor ?? "#ffffff", i = e.style.backgroundOpacity ?? 0.96, a = s === "transparent" ? "transparent" : Dg(s, i), c = e.rotate ?? 0, l = e.style.borderColor ?? "#000000", u = l === "transparent" ? "none" : `2px solid ${l}`, h = Ef(e, t), d = Vn();
+  r.setAttribute(yo, e.id), r.setAttribute("data-manuscript", "ui"), r.dataset.annotationId = e.id;
+  const o = e.style.italic === !0, s = e.style.backgroundColor ?? "#ffffff", i = e.style.backgroundOpacity ?? 0.96, a = s === "transparent" ? "transparent" : Jg(s, i), c = e.rotate ?? 0, l = e.style.borderColor ?? "#000000", u = l === "transparent" ? "none" : `2px solid ${l}`, h = Wf(e, t), d = Jn();
   r.style.cssText = [
     "position: absolute",
     `left: ${h.x}px`,
@@ -4495,9 +4495,9 @@ function Ng(e, t) {
     "line-height: 1.4",
     `transform: rotate(${c}deg)`,
     "transform-origin: center center"
-  ].join("; "), r.textContent = e.text, d || Bg(r, e.id), Qe(r, e.entryAnimation, e.rotate ?? 0), n.appendChild(r);
+  ].join("; "), r.textContent = e.text, d || Qg(r, e.id), rt(r, e.entryAnimation, e.rotate ?? 0), n.appendChild(r);
 }
-function Dg(e, t) {
+function Jg(e, t) {
   const n = Math.max(0, Math.min(1, t)), r = e.trim();
   if (r.startsWith("#")) {
     let o = 0, s = 0, i = 0;
@@ -4505,7 +4505,7 @@ function Dg(e, t) {
   }
   return e;
 }
-function Bg(e, t) {
+function Qg(e, t) {
   let n = !1, r = 0, o = 0, s = 0, i = 0, a = !1;
   e.addEventListener("mousedown", (c) => {
     if (e.isContentEditable) return;
@@ -4522,26 +4522,26 @@ function Bg(e, t) {
       position: { x: c, y: l },
       anchorOffset: { x: c - u.left, y: l - u.top }
     } : { position: { x: c, y: l }, anchorOffset: void 0 };
-    L(t, h);
+    T(t, h);
   }), e.addEventListener("click", (c) => {
-    a || e.isContentEditable || (c.stopPropagation(), mg(t, e));
+    a || e.isContentEditable || (c.stopPropagation(), Lg(t, e));
   }), e.addEventListener("dblclick", () => {
-    e.contentEditable = "true", e.style.cursor = "text", e.focus(), qg(e);
+    e.contentEditable = "true", e.style.cursor = "text", e.focus(), e0(e);
   }), e.addEventListener("blur", () => {
-    e.isContentEditable && (e.contentEditable = "false", e.style.cursor = "move", L(t, { text: e.textContent ?? "" }));
+    e.isContentEditable && (e.contentEditable = "false", e.style.cursor = "move", T(t, { text: e.textContent ?? "" }));
   }), e.addEventListener("keydown", (c) => {
     c.key === "Escape" && e.isContentEditable && e.blur();
   });
 }
-function qg(e) {
+function e0(e) {
   const t = document.createRange();
   t.selectNodeContents(e), t.collapse(!1);
   const n = window.getSelection();
   n && (n.removeAllRanges(), n.addRange(t));
 }
-function Wo() {
+function Jo() {
   if (M.host) return;
-  Sf();
+  qf();
   const e = document.createElement("div");
   e.setAttribute("data-manuscript", "ui"), e.style.cssText = [
     "position: fixed",
@@ -4552,63 +4552,63 @@ function Wo() {
     "pointer-events: none",
     `z-index: ${te + 3}`
   ].join("; ");
-  const t = document.createElementNS(Dt, "svg");
+  const t = document.createElementNS(zt, "svg");
   t.setAttribute("width", "100%"), t.setAttribute("height", "100%"), t.style.cssText = [
     "position: absolute",
     "top: 0",
     "left: 0",
     "pointer-events: none",
     "overflow: visible"
-  ].join("; "), e.appendChild(t), M.host = e, M.svg = t, M.roughSvg = kf.svg(t), document.body.appendChild(e), M.unsubscribe = ot(At), M.unsubscribeMode = Kr(At), Fg(), At();
+  ].join("; "), e.appendChild(t), M.host = e, M.svg = t, M.roughSvg = Bf.svg(t), document.body.appendChild(e), M.unsubscribe = at(Et), M.unsubscribeMode = so(Et), t0(), Et();
 }
-let De = null;
-function Ke() {
-  De === null && (De = requestAnimationFrame(() => {
-    De = null, At();
+let Be = null;
+function Qe() {
+  Be === null && (Be = requestAnimationFrame(() => {
+    Be = null, Et();
   }));
 }
-let ve = null, Mn = null;
-function Fg() {
-  window.addEventListener("resize", Ke), window.addEventListener("scroll", Ke, !0), typeof ResizeObserver < "u" && (ve = new ResizeObserver(Ke));
+let xe = null, Ln = null;
+function t0() {
+  window.addEventListener("resize", Qe), window.addEventListener("scroll", Qe, !0), typeof ResizeObserver < "u" && (xe = new ResizeObserver(Qe));
 }
-function zg() {
-  window.removeEventListener("resize", Ke), window.removeEventListener("scroll", Ke, !0), ve && (ve.disconnect(), ve = null), Mn = null, De !== null && (cancelAnimationFrame(De), De = null);
+function n0() {
+  window.removeEventListener("resize", Qe), window.removeEventListener("scroll", Qe, !0), xe && (xe.disconnect(), xe = null), Ln = null, Be !== null && (cancelAnimationFrame(Be), Be = null);
 }
-function Hg() {
+function r0() {
   var e, t;
-  (e = M.unsubscribe) == null || e.call(M), M.unsubscribe = null, (t = M.unsubscribeMode) == null || t.call(M), M.unsubscribeMode = null, zg(), M.host && (M.host.remove(), M.host = null, M.svg = null, M.roughSvg = null);
+  (e = M.unsubscribe) == null || e.call(M), M.unsubscribe = null, (t = M.unsubscribeMode) == null || t.call(M), M.unsubscribeMode = null, n0(), M.host && (M.host.remove(), M.host = null, M.svg = null, M.roughSvg = null);
 }
-function Uo() {
+function Qo() {
   return M.host !== null;
 }
-function At() {
+function Et() {
   const { host: e, svg: t } = M;
   if (!e || !t) return;
-  for (e.querySelectorAll(`[${lo}]`).forEach((o) => o.remove()); t.firstChild; ) t.removeChild(t.firstChild);
+  for (e.querySelectorAll(`[${yo}]`).forEach((o) => o.remove()); t.firstChild; ) t.removeChild(t.firstChild);
   const n = J();
-  if (ve) {
+  if (xe) {
     let o = null;
     try {
-      o = Wg();
+      o = o0();
     } catch {
       o = null;
     }
-    o !== Mn && (ve.disconnect(), o && ve.observe(o), Mn = o);
+    o !== Ln && (xe.disconnect(), o && xe.observe(o), Ln = o);
   }
-  const r = Gr();
+  const r = no();
   for (const o of r)
-    o.kind === "text" ? Ng(o, n) : o.kind === "arrow" ? Tf(o, n) : o.kind === "shape" ? Ig(o, n) : o.kind === "freedraw" && vg(o, n);
+    o.kind === "text" ? Zg(o, n) : o.kind === "arrow" ? jf(o, n) : o.kind === "shape" ? Yg(o, n) : o.kind === "freedraw" && Rg(o, n);
 }
-function Wg() {
-  const e = pe();
+function o0() {
+  const e = he();
   if (!(e != null && e.selectors)) return null;
   try {
-    return po(e.selectors);
+    return xo(e.selectors);
   } catch {
     return null;
   }
 }
-function Pe(e, t, n) {
+function Oe(e, t, n) {
   return Math.max(t, Math.min(n, e));
 }
 const y = {
@@ -4626,17 +4626,17 @@ const y = {
    *  muted speaker + "click for sound" hint). Set on mount, cleared on unmount. */
   cleanupBlocked: null
 };
-function jo(e) {
+function es(e) {
   const { shadow: t } = y;
   if (!t) return;
   const n = t.querySelector(".bar");
   if (!n) return;
   n.classList.toggle("vertical", e === "vertical");
   const r = t.querySelector('[data-region="orient-icon"]');
-  r && (r.innerHTML = Gg()), jg(), Bt();
+  r && (r.innerHTML = c0()), a0(), Ht();
 }
-const Ug = 12;
-function Bt() {
+const s0 = 12;
+function Ht() {
   const { host: e, shadow: t } = y;
   if (!e || !t) return;
   const n = t.querySelector(".bar");
@@ -4646,50 +4646,50 @@ function Bt() {
     return;
   }
   const r = e.getBoundingClientRect();
-  n.classList.toggle("progress-right", r.left < Ug);
+  n.classList.toggle("progress-right", r.left < s0);
 }
-function jg() {
+function a0() {
   const { host: e } = y;
   if (!e || e.style.transform !== "none") return;
   const t = e.getBoundingClientRect(), n = Math.max(0, window.innerWidth - t.width), r = Math.max(0, window.innerHeight - t.height), o = parseFloat(e.style.left), s = parseFloat(e.style.top);
-  Number.isFinite(o) && (e.style.left = `${Pe(o, 0, n)}px`), Number.isFinite(s) && (e.style.top = `${Pe(s, 0, r)}px`);
+  Number.isFinite(o) && (e.style.left = `${Oe(o, 0, n)}px`), Number.isFinite(s) && (e.style.top = `${Oe(s, 0, r)}px`);
 }
-async function Vo() {
+async function ts() {
   try {
-    return await W().get(U.replayControlsOrientation) === "vertical" ? "vertical" : "horizontal";
+    return await z().get(H.replayControlsOrientation) === "vertical" ? "vertical" : "horizontal";
   } catch {
     return "horizontal";
   }
 }
-async function Vg(e) {
+async function i0(e) {
   try {
-    await W().set(U.replayControlsOrientation, e);
+    await z().set(H.replayControlsOrientation, e);
   } catch (t) {
     console.warn("[manuscript] save orientation failed", t);
   }
 }
-function Gg() {
+function c0() {
   return '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M 5.5 1.5 L 3 4 L 5.5 6.5 M 3 4 L 12 4 L 12 13 M 9.5 10.5 L 12 13 L 14.5 10.5"/></svg>';
 }
-async function Go() {
+async function ns() {
   try {
-    const e = await W().get(U.replayControlsPosition);
+    const e = await z().get(H.replayControlsPosition);
     return e && typeof e == "object" && typeof e.left == "number" && typeof e.top == "number" ? e : null;
   } catch {
     return null;
   }
 }
-async function vr(e) {
+async function Ar(e) {
   try {
-    await W().set(U.replayControlsPosition, e);
+    await z().set(H.replayControlsPosition, e);
   } catch {
   }
 }
-function Yg(e, t) {
+function l0(e, t) {
   const n = e.getBoundingClientRect(), r = Math.max(0, Math.min(t.left, window.innerWidth - n.width)), o = Math.max(0, Math.min(t.top, window.innerHeight - n.height));
   e.style.left = `${r}px`, e.style.top = `${o}px`, e.style.bottom = "auto", e.style.transform = "none";
 }
-function Xg() {
+function u0() {
   const { host: e, shadow: t } = y;
   if (!e || !t) return;
   const n = t.querySelector('[data-region="move-handle"]');
@@ -4702,28 +4702,28 @@ function Xg() {
     y.host.style.left = `${p.left}px`, y.host.style.top = `${p.top}px`, y.host.style.bottom = "auto", y.host.style.transform = "none", o = d.clientX, s = d.clientY, i = p.left, a = p.top, document.addEventListener("mousemove", l, !0), document.addEventListener("mouseup", u, !0);
   }, l = (d) => {
     if (!r || !y.host) return;
-    const p = y.host.getBoundingClientRect(), f = d.clientX - o, m = d.clientY - s, g = Pe(i + f, 0, window.innerWidth - p.width), _ = Pe(a + m, 0, window.innerHeight - p.height);
-    y.host.style.left = `${g}px`, y.host.style.top = `${_}px`, Bt();
+    const p = y.host.getBoundingClientRect(), f = d.clientX - o, m = d.clientY - s, g = Oe(i + f, 0, window.innerWidth - p.width), _ = Oe(a + m, 0, window.innerHeight - p.height);
+    y.host.style.left = `${g}px`, y.host.style.top = `${_}px`, Ht();
   }, u = () => {
     r = !1, n.classList.remove("dragging"), document.removeEventListener("mousemove", l, !0), document.removeEventListener("mouseup", u, !0);
     const d = y.host;
     if (d) {
       const p = parseFloat(d.style.left || "0"), f = parseFloat(d.style.top || "0");
-      Number.isFinite(p) && Number.isFinite(f) && vr({ left: p, top: f });
+      Number.isFinite(p) && Number.isFinite(f) && Ar({ left: p, top: f });
     }
   }, h = () => {
     if (y.host && y.host.style.transform === "none") {
-      const d = y.host.getBoundingClientRect(), p = Pe(d.left, 0, window.innerWidth - d.width), f = Pe(d.top, 0, window.innerHeight - d.height);
-      y.host.style.left = `${p}px`, y.host.style.top = `${f}px`, vr({ left: p, top: f }), Bt();
+      const d = y.host.getBoundingClientRect(), p = Oe(d.left, 0, window.innerWidth - d.width), f = Oe(d.top, 0, window.innerHeight - d.height);
+      y.host.style.left = `${p}px`, y.host.style.top = `${f}px`, Ar({ left: p, top: f }), Ht();
     }
   };
   n.addEventListener("mousedown", c), window.addEventListener("resize", h), y.cleanupDrag = () => {
     n.removeEventListener("mousedown", c), window.removeEventListener("resize", h), document.removeEventListener("mousemove", l, !0), document.removeEventListener("mouseup", u, !0);
   };
 }
-function Yo() {
+function rs() {
   return `
-    ${it()}
+    ${lt()}
     :host {
       display: block;
       font-family: var(--ff-sans);
@@ -4815,16 +4815,16 @@ function Yo() {
     }
   `;
 }
-function Kg(e, t) {
+function d0(e, t) {
   const { shadow: n } = y;
   if (!n) return;
   const r = n.querySelector('[data-region="step-popup"]');
   r && (r.innerHTML = e.map((o, s) => {
     const i = o.name && o.name.length > 0 ? o.name : "Step Name";
-    return `<li class="step-item${s === t ? " active" : ""}" role="option" data-action="step-jump" data-index="${s}" aria-selected="${s === t}" title="${H(i)}">${s + 1}. ${xo(i)}</li>`;
+    return `<li class="step-item${s === t ? " active" : ""}" role="option" data-action="step-jump" data-index="${s}" aria-selected="${s === t}" title="${U(i)}">${s + 1}. ${Lo(i)}</li>`;
   }).join(""));
 }
-function Zg() {
+function p0() {
   const { shadow: e } = y;
   if (!e) return;
   const t = e.querySelector('[data-region="step-popup"]');
@@ -4836,7 +4836,7 @@ function Zg() {
     r && typeof r.scrollIntoView == "function" && r.scrollIntoView({ block: "nearest" });
   }
 }
-function En() {
+function Cn() {
   const { shadow: e } = y;
   if (!e) return;
   const t = e.querySelector('[data-region="step-popup"]');
@@ -4844,28 +4844,28 @@ function En() {
   const n = e.querySelector('[data-region="counter"]');
   n == null || n.setAttribute("aria-expanded", "false");
 }
-function Xo(e) {
+function os(e) {
   const { host: t, shadow: n } = y;
   if (!t || !n) return;
   const r = n.querySelector('[data-region="step-popup"]');
-  !r || r.hidden || e.target instanceof Node && t.contains(e.target) || En();
+  !r || r.hidden || e.target instanceof Node && t.contains(e.target) || Cn();
 }
-let Mt = -1, Et = !1;
-function Jg() {
-  Mt = -1, Et = !1;
+let Tt = -1, Lt = !1;
+function h0() {
+  Tt = -1, Lt = !1;
 }
-function Qg(e, t, n, r = 0) {
+function f0(e, t, n, r = 0) {
   const { shadow: o } = y;
   if (!o) return;
   const s = o.querySelector('[data-region="progress"]');
   if (!s) return;
   if (t === null || t <= 0) {
-    s.classList.add("hidden"), s.innerHTML = "", Mt = -1, Et = !1;
+    s.classList.add("hidden"), s.innerHTML = "", Tt = -1, Lt = !1;
     return;
   }
   s.classList.remove("hidden");
-  const c = e !== Mt || Et && !n;
-  Mt = e, Et = n;
+  const c = e !== Tt || Lt && !n;
+  Tt = e, Lt = n;
   let l = s.querySelector(".progress-fill");
   if (!l || c) {
     l == null || l.remove(), l = document.createElement("div"), l.className = "progress-fill", l.style.animationDuration = `${t}ms`;
@@ -4874,9 +4874,9 @@ function Qg(e, t, n, r = 0) {
   }
   l.classList.toggle("paused", n);
 }
-function e0() {
+function m0() {
   return `
-    ${it()}
+    ${lt()}
     :host {
       display: block;
       font-family: var(--ff-sans);
@@ -5176,111 +5176,148 @@ function e0() {
     }
   `;
 }
-let _e = null, Be = null, re = null, et = 0, Ie = null, ge = null, Ze = 0, tt = !1, Ko = 15, Zo = 0, Ln = !1, xr = !1, nt = null, hn = !1, Tn = !1;
-const Cn = /* @__PURE__ */ new Set();
-function rt(e) {
-  if (Tn !== e) {
-    Tn = e;
-    for (const t of [...Cn]) t(e);
-    W().set(U.ttsBlocked, e).catch(() => {
+let ae = null, we = null, re = null, ot = 0, Re = null, be = null, et = 0, st = !1, ss = 15, as = 0, Pn = !1, Mr = !1, In = [], On = null, is = !1, Ct = null, Rn = 0, cs = !1;
+const g0 = 2;
+function Wt() {
+  Ct !== null && (clearTimeout(Ct), Ct = null);
+}
+function b0() {
+  return !cs && Rn >= g0;
+}
+let Ue = null, Pt = !1, Nn = !1;
+const Dn = /* @__PURE__ */ new Set();
+function qe(e) {
+  if (Nn !== e) {
+    Nn = e;
+    for (const t of [...Dn]) t(e);
+    z().set(H.ttsBlocked, e).catch(() => {
     });
   }
 }
-function t0() {
-  return Tn;
+function _0() {
+  return Nn;
 }
-function n0(e) {
-  return Cn.add(e), () => Cn.delete(e);
+function y0(e) {
+  return Dn.add(e), () => Dn.delete(e);
 }
-function r0() {
-  if (hn || typeof window > "u") return;
-  hn = !0;
+let tt = null;
+function Er() {
+  if (Pt || typeof window > "u") return;
+  Pt = !0;
   const e = () => {
-    window.removeEventListener("click", e), hn = !1, rt(!1);
-    const t = nt;
-    nt = null, t && Qo(t);
+    window.removeEventListener("click", e), Pt = !1, tt = null, qe(!1);
+    const t = Ue;
+    Ue = null, t && hs(t);
   };
-  window.addEventListener("click", e);
+  tt = e, window.addEventListener("click", e);
 }
-async function o0() {
-  xr || (xr = !0, Ln = await Gn(), l0((e) => {
-    Ln = e;
-  }));
+function ls() {
+  tt && typeof window < "u" && window.removeEventListener("click", tt), tt = null, Pt = !1;
 }
-function s0() {
-  return Ln;
+async function v0() {
+  if (Mr) return;
+  Mr = !0, Pn = await Qn(), $0((t) => {
+    Pn = t;
+  }), On = await ds(), A0((t) => {
+    On = t;
+  }), In = await ps(), is = !0;
+  const e = Ge();
+  e == null || e.addEventListener("voiceschanged", () => {
+    In = e.getVoices();
+  });
 }
-function Kt() {
+function x0() {
+  return Pn;
+}
+function Ge() {
   return typeof speechSynthesis > "u" ? null : speechSynthesis;
 }
-function a0(e, t) {
+let Tr = !1;
+function w0() {
+  if (Tr) return;
+  const e = Ge();
+  if (e) {
+    Tr = !0;
+    try {
+      const t = new SpeechSynthesisUtterance(" ");
+      t.volume = 0, e.speak(t);
+    } catch {
+    }
+  }
+}
+function k0(e, t) {
   if (t <= 0) return 0;
   if (t >= e.length) return e.length;
   let n = t;
   for (; n > 0 && !/\s/.test(e[n - 1] || ""); ) n--;
   return n;
 }
-async function Gn() {
+async function Qn() {
   try {
-    return await W().get(U.ttsEnabled) === !0;
+    return await z().get(H.ttsEnabled) === !0;
   } catch {
     return !1;
   }
 }
-async function Jo(e) {
+async function us(e) {
   try {
-    await W().set(U.ttsEnabled, !!e);
+    await z().set(H.ttsEnabled, !!e);
   } catch {
   }
 }
-async function i0() {
+async function ds() {
   try {
-    const e = await W().get(U.ttsVoiceName);
+    const e = await z().get(H.ttsVoiceName);
     return typeof e == "string" && e.length > 0 ? e : null;
   } catch {
     return null;
   }
 }
-async function c0(e) {
+async function S0(e) {
   try {
-    e === null ? await W().remove(U.ttsVoiceName) : await W().set(U.ttsVoiceName, e);
+    e === null ? await z().remove(H.ttsVoiceName) : await z().set(H.ttsVoiceName, e);
   } catch {
   }
 }
-function l0(e) {
-  return W().subscribe([U.ttsEnabled], (t, n) => {
+function $0(e) {
+  return z().subscribe([H.ttsEnabled], (t, n) => {
     e(n === !0);
   });
 }
-function Yn() {
+function A0(e) {
+  return z().subscribe([H.ttsVoiceName], (t, n) => {
+    e(typeof n == "string" && n.length > 0 ? n : null);
+  });
+}
+function er() {
   var e;
-  if (_e = null, Be = null, et = 0, Ie = null, tt = !1, Ze = 0, ge = null, nt = null, rt(!1), (e = Kt()) == null || e.cancel(), re) {
+  if (ae = null, we = null, ot = 0, Re = null, st = !1, et = 0, be = null, Ue = null, ls(), Wt(), qe(!1), (e = Ge()) == null || e.cancel(), re) {
     const t = re;
     re = null, t(!1);
   }
 }
-function u0() {
-  const e = Kt();
+function M0() {
+  const e = Ge();
   if (e) {
-    if (_e && Ie) {
-      let t = et;
-      if (!tt && Ze > 0) {
-        const n = Date.now() - Ze, r = Math.round(n / 1e3 * Ko), o = Zo + r;
-        t = a0(Ie, o);
+    if (ae && Re) {
+      let t = ot;
+      if (!st && et > 0) {
+        const n = Date.now() - et, r = Math.round(n / 1e3 * ss), o = as + r;
+        t = k0(Re, o);
       }
-      ge = {
-        text: Ie,
+      be = {
+        text: Re,
         charIndex: t
       };
     }
-    if (_e = null, Be = null, et = 0, Ie = null, tt = !1, Ze = 0, nt = null, rt(!1), e.cancel(), re) {
+    if (ae = null, we = null, ot = 0, Re = null, st = !1, et = 0, Ue = null, ls(), Wt(), qe(!1), e.cancel(), re) {
       const t = re;
       re = null, t(!1);
     }
   }
 }
-function d0(e = 1500) {
-  const t = Kt();
+function ps(e = 1500) {
+  const t = Ge();
   if (!t) return Promise.resolve([]);
   const n = t.getVoices();
   return n.length > 0 ? Promise.resolve(n) : new Promise((r) => {
@@ -5291,7 +5328,7 @@ function d0(e = 1500) {
     t.addEventListener("voiceschanged", i), setTimeout(() => s(t.getVoices()), e);
   });
 }
-function p0(e) {
+function E0(e) {
   const t = (navigator.language || "").toLowerCase().split("-")[0];
   if (!t) return null;
   const n = e.filter(
@@ -5299,76 +5336,88 @@ function p0(e) {
   );
   return n.find((r) => r.name.startsWith("Google")) ?? n[0] ?? null;
 }
-function Lt() {
-  return Be;
+function It() {
+  return we;
 }
-function Qo(e) {
-  const t = Kt();
+function Lr(e, t, n, r, o, s) {
+  const i = new Promise((a) => {
+    var f;
+    re = a;
+    const c = new SpeechSynthesisUtterance(t), l = s && o.find((m) => m.name === s) || E0(o);
+    l && (c.voice = l, c.lang = l.lang), ae = c, Re = n, ot = r, st = !1, et = Date.now(), as = r;
+    const u = (c.lang || ((f = c.voice) == null ? void 0 : f.lang) || navigator.language || "en").toLowerCase().split("-")[0];
+    ss = (u === "ko" || u === "ja" || u === "zh" ? 7 : 14) * (c.rate || 1);
+    let d = !1;
+    const p = (m) => {
+      Wt(), re === a && (re = null), ae === c && (ae = null), we === i && (we = null), a(m);
+    };
+    c.addEventListener("boundary", (m) => {
+      ae === c && (ot = r + (m.charIndex || 0), st = !0);
+    }), c.addEventListener("start", () => {
+      d = !0, cs = !0, Rn = 0, Wt(), qe(!1);
+    }), c.addEventListener("end", () => p(!0)), c.addEventListener("error", (m) => {
+      m.error === "not-allowed" && (Ue = n, qe(!0), Er()), p(!1);
+    }), Ct = setTimeout(() => {
+      ae !== c || d || (Rn += 1, Ue = n, qe(!0), Er(), p(!1));
+    }, df), e.speak(c);
+  });
+  return we = i, i;
+}
+function hs(e) {
+  const t = Ge();
   if (!t) return Promise.resolve(!1);
   const n = e.trim();
-  if (n.length === 0) return Promise.resolve(!1);
+  if (n.length === 0 || b0()) return Promise.resolve(!1);
   let r = n;
-  if (ge && ge.text === n) {
-    if (r = n.slice(ge.charIndex).trimStart(), ge = null, r.length === 0) return Promise.resolve(!0);
+  if (be && be.text === n) {
+    if (r = n.slice(be.charIndex).trimStart(), be = null, r.length === 0) return Promise.resolve(!0);
   } else
-    ge = null, Yn();
-  const o = n, s = o.length - r.length, i = (async () => {
-    const a = await d0(), c = await i0();
-    return new Promise((l) => {
-      var m;
-      re = l;
-      const u = new SpeechSynthesisUtterance(r), h = c && a.find((g) => g.name === c) || p0(a);
-      h && (u.voice = h, u.lang = h.lang), _e = u, Ie = o, et = s, tt = !1, Ze = Date.now(), Zo = s;
-      const d = (u.lang || ((m = u.voice) == null ? void 0 : m.lang) || navigator.language || "en").toLowerCase().split("-")[0];
-      Ko = (d === "ko" || d === "ja" || d === "zh" ? 7 : 14) * (u.rate || 1), u.addEventListener("boundary", (g) => {
-        _e === u && (et = s + (g.charIndex || 0), tt = !0);
-      });
-      const f = (g) => {
-        re === l && (re = null), _e === u && (_e = null), Be === i && (Be = null), l(g);
-      };
-      u.addEventListener("start", () => rt(!1)), u.addEventListener("end", () => f(!0)), u.addEventListener("error", (g) => {
-        g.error === "not-allowed" && (nt = o, rt(!0), r0()), f(!1);
-      }), t.speak(u);
-    });
+    be = null, er();
+  const o = n, s = o.length - r.length;
+  if (is)
+    return Lr(t, r, o, s, In, On);
+  const i = (async () => {
+    const a = await ps(), c = await ds();
+    return Lr(t, r, o, s, a, c);
   })();
-  return Be = i, i;
+  return we = i, i;
 }
-let Tt = !1;
-function h0(e = 14) {
+let Ot = !1;
+function T0(e = 14) {
   return `<svg width="${e}" height="${e}" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="display:block"><path d="M 3 6 L 3 10 L 6 10 L 9 12.5 L 9 3.5 L 6 6 Z" fill="currentColor"/><path d="M 11 6 a 2.5 2.5 0 0 1 0 4"/><path d="M 12.5 4 a 5 5 0 0 1 0 8"/></svg>`;
 }
-function f0(e = 14) {
+function L0(e = 14) {
   return `<svg width="${e}" height="${e}" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="display:block"><path d="M 3 6 L 3 10 L 6 10 L 9 12.5 L 9 3.5 L 6 6 Z" fill="currentColor"/><path d="M 11 6 L 14 9 M 14 6 L 11 9"/></svg>`;
 }
-function m0(e) {
-  Tt = e, es();
+function C0(e) {
+  Ot = e, fs();
 }
-function wr() {
-  es();
+function Cr() {
+  fs();
 }
-function es() {
+function fs() {
   const { shadow: e } = y;
   if (!e) return;
   const t = e.querySelector('[data-action="tts-toggle"]');
   if (!t) return;
-  const n = t0();
-  t.setAttribute("aria-pressed", String(Tt)), t.classList.toggle("active", Tt && !n), t.classList.toggle("blocked", n);
+  const n = _0();
+  t.setAttribute("aria-pressed", String(Ot)), t.classList.toggle("active", Ot && !n), t.classList.toggle("blocked", n);
   const r = t.querySelector('[data-region="tts-icon"]');
-  r && (r.innerHTML = n || !Tt ? f0(14) : h0(14));
+  r && (r.innerHTML = n || !Ot ? L0(14) : T0(14));
   const o = t.querySelector('[data-region="tts-hint"]');
   o && (o.hidden = !n);
 }
-function g0({ height: e = 16, color: t, title: n } = {}) {
-  const r = Math.round(e * 0.7), o = t ?? "currentColor", s = n ? `<title>${b0(n)}</title>` : "";
+function P0({ height: e = 16, color: t, title: n } = {}) {
+  const r = Math.round(e * 0.7), o = t ?? "currentColor", s = n ? `<title>${I0(n)}</title>` : "";
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 20" width="${r}" height="${e}" fill="${o}" aria-hidden="${n ? "false" : "true"}" focusable="false">${s}<g fill-rule="evenodd"><path d="M 7 0.5 L 12.5 5 L 12.5 9.5 L 10 14 L 4 14 L 1.5 9.5 L 1.5 5 Z M 6.5 1.2 L 6.5 7.2 L 7.5 7.2 L 7.5 1.2 Z M 8.1 8.5 A 1.1 1.1 0 1 1 5.9 8.5 A 1.1 1.1 0 1 1 8.1 8.5 Z"/><rect x="3.5" y="15.5" width="7" height="2.8"/></g></svg>`;
 }
-function b0(e) {
+function I0(e) {
   return e.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
-function _0(e) {
+function O0(e) {
   var r;
   if (y.host) return;
-  const { host: t, shadow: n } = Ue();
+  const { host: t, shadow: n } = Ve();
   y.host = t, y.shadow = n, t.style.cssText = [
     "position: fixed",
     "bottom: 32px",
@@ -5378,18 +5427,18 @@ function _0(e) {
     "pointer-events: auto",
     // Recording flow already requested hidden — respect it on mount.
     ""
-  ].filter(Boolean).join("; "), n.innerHTML = `<style>${e0()}</style>${y0()}`, n.addEventListener("click", (o) => v0(o, e)), document.body.appendChild(t), Xg(), document.addEventListener("mousedown", Xo, !0), (r = y.cleanupBlocked) == null || r.call(y), y.cleanupBlocked = n0(() => wr()), wr(), y.orientationApplied = !1, Vo().then((o) => {
-    y.orientationApplied || (y.orientationApplied = !0, jo(o));
-  }), Go().then((o) => {
-    y.host && o && y.host.style.transform !== "none" && (Yg(y.host, o), Bt());
+  ].filter(Boolean).join("; "), n.innerHTML = `<style>${m0()}</style>${R0()}`, n.addEventListener("click", (o) => N0(o, e)), document.body.appendChild(t), u0(), document.addEventListener("mousedown", os, !0), (r = y.cleanupBlocked) == null || r.call(y), y.cleanupBlocked = y0(() => Cr()), Cr(), y.orientationApplied = !1, ts().then((o) => {
+    y.orientationApplied || (y.orientationApplied = !0, es(o));
+  }), ns().then((o) => {
+    y.host && o && y.host.style.transform !== "none" && (l0(y.host, o), Ht());
   });
 }
-function y0() {
+function R0() {
   var n, r;
-  const t = ((r = (n = ce()).isSupported) == null ? void 0 : r.call(n)) !== !1 ? `<button class="ctrl" data-action="prompter" aria-label="${A("replay.prompter-aria")}" title="${A("replay.prompter-title")}"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="display:block"><rect x="2.5" y="3" width="11" height="9" rx="1"/><path d="M 4.5 5.8 L 11.5 5.8 M 4.5 8 L 11.5 8 M 4.5 10.2 L 9 10.2"/></svg></button>` : "";
+  const t = ((r = (n = le()).isSupported) == null ? void 0 : r.call(n)) !== !1 ? `<button class="ctrl" data-action="prompter" aria-label="${A("replay.prompter-aria")}" title="${A("replay.prompter-title")}"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" style="display:block"><rect x="2.5" y="3" width="11" height="9" rx="1"/><path d="M 4.5 5.8 L 11.5 5.8 M 4.5 8 L 11.5 8 M 4.5 10.2 L 9 10.2"/></svg></button>` : "";
   return `
     <div class="bar" role="toolbar" aria-label="${A("replay.counter-aria")}">
-      <span class="mn-brand" data-region="move-handle" role="button" aria-label="${A("replay.move-aria")}" title="${A("replay.move-title")}">${g0({ height: 26 })}</span>
+      <span class="mn-brand" data-region="move-handle" role="button" aria-label="${A("replay.move-aria")}" title="${A("replay.move-title")}">${P0({ height: 26 })}</span>
       <span class="counter" data-region="counter" aria-live="polite" role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="0">1 / 1</span>
       <button class="ctrl" data-action="prev" aria-label="${A("replay.prev-aria")}">‹</button>
       <button class="ctrl" data-action="pause" aria-label="${A("replay.pause-aria")}"><span data-region="pause-icon">II</span></button>
@@ -5404,18 +5453,18 @@ function y0() {
     </div>
   `;
 }
-function v0(e, t) {
+function N0(e, t) {
   var s;
   const n = e.target;
   if (!(n instanceof Element)) return;
   if (n.closest('[data-region="counter"]')) {
-    Zg();
+    p0();
     return;
   }
   const r = n.closest('[data-action="step-jump"]');
   if (r) {
     const i = Number(r.getAttribute("data-index"));
-    Number.isFinite(i) && (En(), t.onStepSelect(i));
+    Number.isFinite(i) && (Cn(), t.onStepSelect(i));
     return;
   }
   if (n.closest('[data-action="tts-toggle"]')) {
@@ -5423,7 +5472,7 @@ function v0(e, t) {
     return;
   }
   const o = (s = n.closest("[data-action]")) == null ? void 0 : s.getAttribute("data-action");
-  switch (o && En(), o) {
+  switch (o && Cn(), o) {
     case "prev":
       t.onPrev();
       break;
@@ -5440,23 +5489,23 @@ function v0(e, t) {
       t.onTogglePrompter();
       break;
     case "orient":
-      x0();
+      D0();
       break;
   }
 }
-function x0() {
+function D0() {
   const { shadow: e } = y;
   if (!e) return;
   const t = e.querySelector(".bar");
   if (!t) return;
   const n = t.classList.contains("vertical") ? "horizontal" : "vertical";
-  y.orientationApplied = !0, jo(n), Vg(n);
+  y.orientationApplied = !0, es(n), i0(n);
 }
-function w0() {
+function B0() {
   var e, t, n;
-  (e = y.cleanupDrag) == null || e.call(y), y.cleanupDrag = null, (t = y.cleanupBlocked) == null || t.call(y), y.cleanupBlocked = null, document.removeEventListener("mousedown", Xo, !0), (n = y.host) == null || n.remove(), y.host = null, y.shadow = null, y.orientationApplied = !1, Jg();
+  (e = y.cleanupDrag) == null || e.call(y), y.cleanupDrag = null, (t = y.cleanupBlocked) == null || t.call(y), y.cleanupBlocked = null, document.removeEventListener("mousedown", os, !0), (n = y.host) == null || n.remove(), y.host = null, y.shadow = null, y.orientationApplied = !1, h0();
 }
-function kr(e) {
+function Pr(e) {
   const { shadow: t } = y;
   if (!t) return;
   const n = t.querySelector('[data-region="counter"]');
@@ -5471,18 +5520,18 @@ function kr(e) {
   i && (i.toggleAttribute("disabled", !1), i.setAttribute(
     "aria-label",
     e.currentIndex >= e.total - 1 ? A("replay.finish-aria") : A("replay.next-aria")
-  )), Qg(
+  )), f0(
     e.currentIndex,
     e.timerDurationMs ?? null,
     e.paused,
     e.timerElapsedMs ?? 0
-  ), Kg(e.steps ?? [], e.currentIndex), m0(e.ttsEnabled === !0);
+  ), d0(e.steps ?? [], e.currentIndex), C0(e.ttsEnabled === !0);
 }
-let ae = null;
-function k0(e) {
-  dt();
-  const { host: t, shadow: n } = Ue();
-  ae = t, ae.style.cssText = [
+let ie = null;
+function q0(e) {
+  ht();
+  const { host: t, shadow: n } = Ve();
+  ie = t, ie.style.cssText = [
     "position: fixed",
     "inset: 0",
     "background: rgba(0, 0, 0, 0.40)",
@@ -5492,7 +5541,7 @@ function k0(e) {
     "justify-content: center",
     "pointer-events: auto"
   ].join("; "), n.innerHTML = `
-    <style>${Yo()}</style>
+    <style>${rs()}</style>
     <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="nf-title">
       <div class="modal-head">
         <div class="icon-circle" aria-hidden="true">!</div>
@@ -5516,20 +5565,20 @@ function k0(e) {
   const r = (o) => {
     o.key === "Enter" ? (o.preventDefault(), e.onSkip()) : o.key === "Escape" && (o.preventDefault(), e.onStop());
   };
-  document.addEventListener("keydown", r, !0), ae.__cleanup = () => {
+  document.addEventListener("keydown", r, !0), ie.__cleanup = () => {
     document.removeEventListener("keydown", r, !0);
-  }, document.body.appendChild(ae);
+  }, document.body.appendChild(ie);
 }
-function dt() {
-  if (!ae) return;
-  const e = ae.__cleanup;
-  e == null || e(), ae.remove(), ae = null;
+function ht() {
+  if (!ie) return;
+  const e = ie.__cleanup;
+  e == null || e(), ie.remove(), ie = null;
 }
-let ie = null;
-function S0(e) {
-  qt();
-  const { host: t, shadow: n } = Ue();
-  ie = t, ie.style.cssText = [
+let ce = null;
+function F0(e) {
+  Ut();
+  const { host: t, shadow: n } = Ve();
+  ce = t, ce.style.cssText = [
     "position: fixed",
     "inset: 0",
     "background: rgba(0, 0, 0, 0.40)",
@@ -5540,7 +5589,7 @@ function S0(e) {
     "pointer-events: auto"
   ].join("; "), n.innerHTML = `
     <style>
-      ${Yo()}
+      ${rs()}
       .modal { border-top-color: var(--c-info); max-width: 480px; }
       .icon-circle { background: color-mix(in oklab, var(--c-info) 14%, transparent); color: var(--c-info); }
     </style>
@@ -5571,19 +5620,19 @@ function S0(e) {
   const o = (s) => {
     s.key === "Escape" ? (s.preventDefault(), e.onCancel()) : s.key === "Enter" && (s.preventDefault(), e.onNavigate());
   };
-  document.addEventListener("keydown", o, !0), ie.__cleanup = () => {
+  document.addEventListener("keydown", o, !0), ce.__cleanup = () => {
     document.removeEventListener("keydown", o, !0);
-  }, document.body.appendChild(ie);
+  }, document.body.appendChild(ce);
 }
-function qt() {
-  if (!ie) return;
-  const e = ie.__cleanup;
-  e == null || e(), ie.remove(), ie = null;
+function Ut() {
+  if (!ce) return;
+  const e = ce.__cleanup;
+  e == null || e(), ce.remove(), ce = null;
 }
 let ye = null;
-function ts(e) {
-  pt();
-  const t = e.getBoundingClientRect(), n = $0(e), r = t.left + n.x, o = t.top + n.y, s = t.bottom + n.y, i = 36, a = 8, c = o - a - i < 8, l = c ? Math.min(window.innerHeight - 8 - i, s + a) : Math.max(8, o - a - i), u = Math.max(8, Math.min(r, window.innerWidth - 200)), h = c ? "up" : "down", { host: d, shadow: p } = Ue();
+function ms(e) {
+  ft();
+  const t = e.getBoundingClientRect(), n = z0(e), r = t.left + n.x, o = t.top + n.y, s = t.bottom + n.y, i = 36, a = 8, c = o - a - i < 8, l = c ? Math.min(window.innerHeight - 8 - i, s + a) : Math.max(8, o - a - i), u = Math.max(8, Math.min(r, window.innerWidth - 200)), h = c ? "up" : "down", { host: d, shadow: p } = Ve();
   ye = d, ye.style.cssText = [
     "position: fixed",
     `top: ${l}px`,
@@ -5592,7 +5641,7 @@ function ts(e) {
     "pointer-events: none"
   ].join("; "), p.innerHTML = `
     <style>
-      ${it()}
+      ${lt()}
       :host { display: block; font-family: var(--ff-sans); }
       *, *::before, *::after { box-sizing: border-box; }
       .bubble {
@@ -5634,10 +5683,10 @@ function ts(e) {
     </div>
   `, document.body.appendChild(ye);
 }
-function pt() {
+function ft() {
   ye == null || ye.remove(), ye = null;
 }
-function $0(e) {
+function z0(e) {
   var t;
   try {
     const n = (t = e.ownerDocument) == null ? void 0 : t.defaultView;
@@ -5650,9 +5699,9 @@ function $0(e) {
     return { x: 0, y: 0 };
   }
 }
-let qe = null;
-function A0(e) {
-  qe || (qe = (t) => {
+let Fe = null;
+function H0(e) {
+  Fe || (Fe = (t) => {
     if (v.state)
       switch (t.key) {
         case "ArrowRight":
@@ -5669,12 +5718,12 @@ function A0(e) {
           t.preventDefault(), e.onExit();
           break;
       }
-  }, document.addEventListener("keydown", qe, !0));
+  }, document.addEventListener("keydown", Fe, !0));
 }
-function M0() {
-  qe && (document.removeEventListener("keydown", qe, !0), qe = null);
+function W0() {
+  Fe && (document.removeEventListener("keydown", Fe, !0), Fe = null);
 }
-function ns(e, t, n = !1) {
+function gs(e, t, n = !1) {
   try {
     const r = new URL(e), o = new URL(t);
     return r.origin !== o.origin || r.pathname !== o.pathname ? !1 : n ? r.search === o.search && r.hash === o.hash : !0;
@@ -5682,24 +5731,24 @@ function ns(e, t, n = !1) {
     return !1;
   }
 }
-function E0(e) {
+function U0(e) {
   var n;
   const t = (n = e.steps[0]) == null ? void 0 : n.pickedAtUrl;
   return t && t.length > 0 ? t : e.url;
 }
-async function L0(e, t) {
+async function j0(e, t) {
   var r, o, s, i;
   const n = (r = e.steps[t]) == null ? void 0 : r.pickedAtUrl;
-  if (!n || ns(n, location.href, !!e.strictUrlMatch)) return !1;
+  if (!n || gs(n, location.href, !!e.strictUrlMatch)) return !1;
   if (((o = v.state) == null ? void 0 : o.standalone) === !0)
-    return $s().tryHandoff({
+    return qs().tryHandoff({
       targetUrl: n,
       scenarioId: e.id,
       stepIndex: t,
       paused: ((s = v.state) == null ? void 0 : s.paused) ?? !1
     });
   try {
-    await We().setActiveReplay({
+    await je().setActiveReplay({
       scenarioId: e.id,
       stepIndex: t,
       startedAt: Date.now(),
@@ -5710,33 +5759,33 @@ async function L0(e, t) {
   }
   return location.href = n, !0;
 }
-function T0(e) {
+function V0(e) {
   return new Promise((t) => {
-    S0({
+    F0({
       savedUrl: e,
       onNavigate: () => t("navigate"),
       onForce: () => {
-        qt(), t("force");
+        Ut(), t("force");
       },
       onCancel: () => {
-        qt(), t("cancel");
+        Ut(), t("cancel");
       }
     });
   });
 }
-async function C0(e) {
+async function G0(e) {
   try {
-    const t = await We().getActiveReplay();
+    const t = await je().getActiveReplay();
     return (t == null ? void 0 : t.scenarioId) === e;
   } catch {
     return !1;
   }
 }
-async function Xn() {
+async function tr() {
   const e = D();
   if (!(!e || !v.state) && v.state.standalone !== !0)
     try {
-      await We().setActiveReplay({
+      await je().setActiveReplay({
         scenarioId: e.id,
         stepIndex: B(),
         startedAt: Date.now(),
@@ -5746,38 +5795,38 @@ async function Xn() {
       console.warn("[manuscript] persist activeReplay failed", t);
     }
 }
-async function rs(e, t, n) {
+async function bs(e, t, n) {
   const r = D();
   if (!r) return { ok: !1 };
-  if (n && await C0(r.id)) return { ok: !0 };
-  const o = E0(r);
-  if (!o || ns(o, location.href, !!r.strictUrlMatch))
+  if (n && await G0(r.id)) return { ok: !0 };
+  const o = U0(r);
+  if (!o || gs(o, location.href, !!r.strictUrlMatch))
     return { ok: !0 };
-  const s = await T0(o);
-  return s === "cancel" ? { ok: !1 } : s === "navigate" ? (await We().setActiveReplay({
+  const s = await V0(o);
+  return s === "cancel" ? { ok: !1 } : s === "navigate" ? (await je().setActiveReplay({
     scenarioId: e,
     stepIndex: t,
     startedAt: Date.now()
   }), location.href = o, { ok: !1 }) : { ok: !0 };
 }
-class os extends Error {
+class _s extends Error {
   constructor(t) {
     super("element-not-found"), this.chain = t, this.name = "ElementNotFoundError";
   }
 }
-function ss(e, t = Zr) {
-  return P0(e, t).then((n) => n.el);
+function ys(e, t = ao) {
+  return Y0(e, t).then((n) => n.el);
 }
-function P0(e, t = Zr) {
-  const n = kn(e);
+function Y0(e, t = ao) {
+  const n = An(e);
   return n ? Promise.resolve(n) : new Promise((r, o) => {
     let s = !1;
-    const a = (ho(e.framePath) ?? document).body ?? document.body, c = new MutationObserver(() => {
+    const a = (wo(e.framePath) ?? document).body ?? document.body, c = new MutationObserver(() => {
       if (s) return;
-      const u = kn(e);
+      const u = An(e);
       u && (s = !0, c.disconnect(), clearTimeout(l), r(u));
     }), l = setTimeout(() => {
-      s || (s = !0, c.disconnect(), o(new os(e)));
+      s || (s = !0, c.disconnect(), o(new _s(e)));
     }, t);
     c.observe(a, {
       childList: !0,
@@ -5787,7 +5836,7 @@ function P0(e, t = Zr) {
     });
   });
 }
-function Sr(e) {
+function Ir(e) {
   const t = {
     name: e.name,
     description: e.description,
@@ -5801,7 +5850,7 @@ function Sr(e) {
     dwellMs: r[s + 1] ?? 0
   }))), t;
 }
-function $e() {
+function Me() {
   const { state: e } = v;
   if (!e) return;
   const t = D();
@@ -5819,8 +5868,8 @@ function $e() {
       o = Math.max(0, Math.min(r, c + i));
     }
   }
-  if (Gn().then((s) => {
-    kr({
+  if (Qn().then((s) => {
+    Pr({
       currentIndex: B(),
       total: t.steps.length,
       paused: e.paused,
@@ -5829,16 +5878,16 @@ function $e() {
       steps: t.steps.map((i) => ({ name: i.name })),
       ttsEnabled: s
     });
-  }), kr({
+  }), Pr({
     currentIndex: B(),
     total: t.steps.length,
     paused: e.paused,
     timerDurationMs: r,
     timerElapsedMs: o,
     steps: t.steps.map((s) => ({ name: s.name }))
-  }), ce().isPrompterOpen() || Ss().isRecordingArmed()) {
+  }), le().isPrompterOpen() || Bs().isRecordingArmed()) {
     const s = B(), i = t.steps[s], a = t.steps[s + 1];
-    ce().updatePrompter({
+    le().updatePrompter({
       scenarioId: t.id,
       scenarioName: t.name,
       currentIndex: s,
@@ -5846,19 +5895,19 @@ function $e() {
       paused: e.paused,
       timerElapsedMs: o,
       steps: t.steps.map((c) => ({ name: c.name })),
-      current: i ? Sr(i) : null,
-      next: a ? Sr(a) : null
+      current: i ? Ir(i) : null,
+      next: a ? Ir(a) : null
     });
   }
 }
-async function I0() {
-  if (ce().isPrompterOpen()) {
-    await ce().closePrompter(), Pn(!1);
+async function X0() {
+  if (le().isPrompterOpen()) {
+    await le().closePrompter(), Bn(!1);
     return;
   }
-  Pn(!0), await ce().openPrompter(), $e();
+  Bn(!0), await le().openPrompter(), Me();
 }
-function Pn(e) {
+function Bn(e) {
   var t;
   for (const n of document.querySelectorAll('[data-manuscript="ui"]'))
     if ((t = n.shadowRoot) != null && t.querySelector(".bar")) {
@@ -5866,49 +5915,49 @@ function Pn(e) {
       break;
     }
 }
-const O0 = 0.125;
-function as(e, t = {}) {
+const K0 = 0.125;
+function vs(e, t = {}) {
   const { behavior: n } = t, r = window.innerHeight, o = e.getBoundingClientRect(), s = window.scrollY + o.top;
   let i;
-  o.height > r ? i = s - r * O0 : i = s - (r - o.height) / 2, i = Math.max(0, Math.round(i)), window.scrollTo(n ? { top: i, behavior: n } : { top: i });
+  o.height > r ? i = s - r * K0 : i = s - (r - o.height) / 2, i = Math.max(0, Math.round(i)), window.scrollTo(n ? { top: i, behavior: n } : { top: i });
 }
-async function Zt(e) {
+async function tn(e) {
   var i, a;
   const { state: t } = v;
   if (!t) return;
   const n = D();
   if (!n) return;
   const r = n.steps[B()];
-  if ($e(), !r) return;
-  dt(), pt();
+  if (Me(), !r) return;
+  ht(), ft();
   const o = B();
-  if (s0() && !t.paused && t.narratedStepIndex !== o && Qo(r.description).then((c) => {
+  if (x0() && !t.paused && t.narratedStepIndex !== o && hs(r.description).then((c) => {
     c && v.state && B() === o && (v.state.narratedStepIndex = o);
   }), !r.selectors) {
-    _n(), r.waitForNavigation || Mr(e);
+    xn(), r.waitForNavigation || Nr(e);
     return;
   }
   const s = new AbortController();
   t.pendingWait = s;
   try {
-    const c = await ss(r.selectors);
+    const c = await ys(r.selectors);
     if (s.signal.aborted) return;
-    as(c), Jr(c);
+    vs(c), io(c);
     const l = r.subElements ?? [];
     if (l.length > 0) {
       if (t.paused) return;
       const u = new AbortController();
-      (i = t.subSequenceAbort) == null || i.abort(), t.subSequenceAbort = u, R0(c, r, l, u, e).finally(() => {
+      (i = t.subSequenceAbort) == null || i.abort(), t.subSequenceAbort = u, Z0(c, r, l, u, e).finally(() => {
         var h;
         ((h = v.state) == null ? void 0 : h.subSequenceAbort) === u && (v.state.subSequenceAbort = null);
       });
       return;
     }
-    r.waitForNavigation ? (ts(c), is(c, s, e.onNext)) : Mr(e);
+    r.waitForNavigation ? (ms(c), xs(c, s, e.onNext)) : Nr(e);
   } catch (c) {
     if (s.signal.aborted) return;
-    if (c instanceof os) {
-      _n(), k0({
+    if (c instanceof _s) {
+      xn(), q0({
         onSkip: e.onNext,
         onStop: e.onExit
       });
@@ -5919,15 +5968,15 @@ async function Zt(e) {
     ((a = v.state) == null ? void 0 : a.pendingWait) === s && (v.state.pendingWait = null);
   }
 }
-async function R0(e, t, n, r, o) {
+async function Z0(e, t, n, r, o) {
   var p;
   const s = t.subDwellsMs ?? [], i = s[0] ?? 0;
   let a = e;
   const c = ((p = v.state) == null ? void 0 : p.subSeqResume) ?? null, l = (c == null ? void 0 : c.idx) ?? -1, u = (c == null ? void 0 : c.elapsedMs) ?? 0;
   if (v.state && (v.state.subSeqResume = null), l === -1) {
-    $r(-1);
+    Or(-1);
     const f = Math.max(0, i - u);
-    if (await Ar(f, r.signal), r.signal.aborted) return;
+    if (await Rr(f, r.signal), r.signal.aborted) return;
   }
   const h = Math.max(0, l);
   for (let f = h; f < n.length; f++) {
@@ -5935,21 +5984,21 @@ async function R0(e, t, n, r, o) {
     if (!m) continue;
     let g;
     try {
-      g = await ss(m.selectors);
+      g = await ys(m.selectors);
     } catch (k) {
       console.warn("[manuscript] sub element not resolved, skipping", k);
       continue;
     }
     if (r.signal.aborted) return;
-    as(g), ef(g, { durationMs: 350 }), a = g, $r(f);
+    vs(g), gf(g, { durationMs: 350 }), a = g, Or(f);
     const _ = s[f + 1] ?? 0, b = f === l ? Math.max(0, _ - u) : _;
-    if (await Ar(b, r.signal), r.signal.aborted) return;
+    if (await Rr(b, r.signal), r.signal.aborted) return;
   }
   if (v.state && (v.state.subSeqNodeIdx = null, v.state.subSeqNodeStartMs = null), t.waitForNavigation) {
-    ts(a), is(a, r, o.onNext);
+    ms(a), xs(a, r, o.onNext);
     return;
   }
-  const d = Lt();
+  const d = It();
   d && (await Promise.race([
     d,
     new Promise((f) => {
@@ -5957,11 +6006,11 @@ async function R0(e, t, n, r, o) {
     })
   ]), r.signal.aborted) || !v.state || v.state.paused || o.onNext();
 }
-function $r(e) {
+function Or(e) {
   const { state: t } = v;
   t && (t.subSeqNodeIdx = e, t.subSeqNodeStartMs = Date.now());
 }
-function Ar(e, t) {
+function Rr(e, t) {
   return e <= 0 ? Promise.resolve() : new Promise((n) => {
     const r = window.setTimeout(() => n(), e);
     t.addEventListener(
@@ -5973,7 +6022,7 @@ function Ar(e, t) {
     );
   });
 }
-function is(e, t, n) {
+function xs(e, t, n) {
   if (!v.state) return;
   const r = () => {
     e.removeEventListener("click", o, !0), t.signal.removeEventListener("abort", r);
@@ -5982,7 +6031,7 @@ function is(e, t, n) {
   };
   e.addEventListener("click", o, !0), t.signal.addEventListener("abort", r);
 }
-function Mr(e) {
+function Nr(e) {
   var c;
   const { state: t } = v;
   if (!t || t.paused) return;
@@ -5997,7 +6046,7 @@ function Mr(e) {
   t.autoAdvanceResumeMs = null;
   const a = i ?? o.autoAdvanceMs;
   t.autoAdvanceDeadlineMs = a && a > 0 ? Date.now() + a : null, (async () => {
-    const l = [], u = Lt();
+    const l = [], u = It();
     if (u && l.push(u), a && a > 0 && l.push(
       new Promise((p) => {
         const f = window.setTimeout(() => {
@@ -6013,16 +6062,16 @@ function Mr(e) {
     });
     if (await Promise.race([Promise.all(l).then(() => {
     }), h]), s.signal.aborted) return;
-    let d = Lt();
+    let d = It();
     for (; d; ) {
       if (await Promise.race([d.then(() => {
       }), h]), s.signal.aborted) return;
-      d = Lt();
+      d = It();
     }
     !v.state || v.state.paused || B() === r && e.onNext();
   })();
 }
-function Jt(e = {}) {
+function nn(e = {}) {
   var n, r, o;
   const { state: t } = v;
   if (t) {
@@ -6037,17 +6086,17 @@ function Jt(e = {}) {
       }
     } else
       t.subSeqResume = null, t.autoAdvanceResumeMs = null, t.narratedStepIndex = null;
-    t.subSeqNodeIdx = null, t.subSeqNodeStartMs = null, t.autoAdvanceDeadlineMs = null, t.autoAdvanceTimer !== null && (window.clearTimeout(t.autoAdvanceTimer), t.autoAdvanceTimer = null), (n = t.autoAdvanceAbort) == null || n.abort(), t.autoAdvanceAbort = null, (r = t.pendingWait) == null || r.abort(), t.pendingWait = null, (o = t.subSequenceAbort) == null || o.abort(), t.subSequenceAbort = null, e.pauseTts ? u0() : Yn();
+    t.subSeqNodeIdx = null, t.subSeqNodeStartMs = null, t.autoAdvanceDeadlineMs = null, t.autoAdvanceTimer !== null && (window.clearTimeout(t.autoAdvanceTimer), t.autoAdvanceTimer = null), (n = t.autoAdvanceAbort) == null || n.abort(), t.autoAdvanceAbort = null, (r = t.pendingWait) == null || r.abort(), t.pendingWait = null, (o = t.subSequenceAbort) == null || o.abort(), t.subSequenceAbort = null, e.pauseTts ? M0() : er();
   }
 }
-const Qt = {
-  onNext: () => void Ft(),
-  onExit: () => void zt()
+const rn = {
+  onNext: () => void jt(),
+  onExit: () => void Vt()
 };
-async function Kn(e = 0, t = {}) {
+async function nr(e = 0, t = {}) {
   if (v.state) return;
   const n = D();
-  if (!n || n.steps.length === 0 || t.standalone !== !0 && !(await rs(n.id, e, !0)).ok)
+  if (!n || n.steps.length === 0 || t.standalone !== !0 && !(await bs(n.id, e, !0)).ok)
     return;
   v.state = {
     originalStepIndex: B(),
@@ -6065,91 +6114,91 @@ async function Kn(e = 0, t = {}) {
     atEnd: !1,
     standalone: t.standalone === !0,
     dirtyStepIndex: null
-  }, Xr("replay"), _0({
-    onPrev: In,
-    onNext: Ft,
-    onTogglePause: On,
-    onExit: zt,
-    onStepSelect: (o) => void cs(o),
-    onTogglePrompter: () => void I0(),
-    onToggleTts: () => void N0()
-  }), ce().isPrompterOpen() && Pn(!0), A0({
-    onNext: () => void Ft(),
-    onPrev: () => void In(),
-    onTogglePause: On,
-    onExit: () => void zt()
-  }), v.unsubscribeStep = ot($e);
+  }, oo("replay"), O0({
+    onPrev: qn,
+    onNext: jt,
+    onTogglePause: Fn,
+    onExit: Vt,
+    onStepSelect: (o) => void ws(o),
+    onTogglePrompter: () => void X0(),
+    onToggleTts: () => void J0()
+  }), le().isPrompterOpen() && Bn(!0), H0({
+    onNext: () => void jt(),
+    onPrev: () => void qn(),
+    onTogglePause: Fn,
+    onExit: () => void Vt()
+  }), v.unsubscribeStep = at(Me);
   const r = Math.min(Math.max(0, e), n.steps.length - 1);
-  Wt(r), await Xn(), await Zt(Qt);
+  Yt(r), await tr(), await tn(rn);
 }
-async function en(e) {
+async function on(e) {
   if (!v.state) return;
   const t = D();
-  t && (e < 0 || e >= t.steps.length || (Jt(), dt(), pt(), v.state.atEnd = !1, v.state.dirtyStepIndex = null, !await L0(t, e) && (Wt(e), await Xn(), await Zt(Qt))));
+  t && (e < 0 || e >= t.steps.length || (nn(), ht(), ft(), v.state.atEnd = !1, v.state.dirtyStepIndex = null, !await j0(t, e) && (Yt(e), await tr(), await tn(rn))));
 }
-async function cs(e) {
-  e !== B() && await en(e);
+async function ws(e) {
+  e !== B() && await on(e);
 }
-async function Ft() {
+async function jt() {
   const { state: e } = v;
   if (!e) return;
   const t = D();
   if (!t) return;
   const n = B();
   if (n >= t.steps.length - 1) {
-    Jt(), dt(), pt(), e.paused = !0, e.atEnd = !0, $e(), document.dispatchEvent(new CustomEvent("manuscript:replay-end"));
+    nn(), ht(), ft(), e.paused = !0, e.atEnd = !0, Me(), document.dispatchEvent(new CustomEvent("manuscript:replay-end"));
     return;
   }
-  await en(n + 1);
+  await on(n + 1);
 }
-async function In() {
-  await en(B() - 1);
+async function qn() {
+  await on(B() - 1);
 }
-async function N0() {
-  const e = !await Gn();
-  await Jo(e), e || Yn(), $e();
+async function J0() {
+  const e = !await Qn();
+  await us(e), e || er(), Me();
 }
-function On() {
+function Fn() {
   const { state: e } = v;
   if (!e) return;
   if (e.atEnd && e.paused) {
-    D0();
+    Q0();
     return;
   }
   if (e.paused && e.dirtyStepIndex === B()) {
-    e.dirtyStepIndex = null, e.paused = !1, en(B()), $e();
+    e.dirtyStepIndex = null, e.paused = !1, on(B()), Me();
     return;
   }
-  e.paused = !e.paused, e.paused ? Jt({ pauseTts: !0 }) : Zt(Qt), $e();
+  e.paused = !e.paused, e.paused ? nn({ pauseTts: !0 }) : tn(rn), Me();
 }
-async function D0() {
+async function Q0() {
   if (!v.state) return;
   const e = D();
-  !e || !(await rs(e.id, 0, !1)).ok || v.state && (v.state.paused = !1, v.state.atEnd = !1, Wt(0), await Xn(), await Zt(Qt));
+  !e || !(await bs(e.id, 0, !1)).ok || v.state && (v.state.paused = !1, v.state.atEnd = !1, Yt(0), await tr(), await tn(rn));
 }
-async function zt() {
+async function Vt() {
   var r;
   const { state: e } = v;
   if (!e) return;
-  Jt(), dt(), pt(), qt(), _n(), w0(), ce().closePrompter(), M0(), (r = v.unsubscribeStep) == null || r.call(v), v.unsubscribeStep = null;
+  nn(), ht(), ft(), Ut(), xn(), B0(), le().closePrompter(), W0(), (r = v.unsubscribeStep) == null || r.call(v), v.unsubscribeStep = null;
   const t = e.originalStepIndex, n = e.standalone === !0;
-  v.state = null, Wt(t), Xr("idle"), await We().clearActiveReplay(), n && (Hg(), jh());
+  v.state = null, Yt(t), oo("idle"), await je().clearActiveReplay(), n && (r0(), sf());
 }
-class xt extends Error {
+class kt extends Error {
   constructor(t, n) {
     super(t), this.cause = n, this.name = "SchemaError";
   }
 }
-function Er(e, t = {}) {
-  if (!ls(e))
-    throw new xt("Root must be an object");
+function Dr(e, t = {}) {
+  if (!ks(e))
+    throw new kt("Root must be an object");
   const n = t.strict === !0, r = e.schemaVersion;
   let o;
   if (typeof r == "string")
     o = r;
   else {
     if (n)
-      throw new xt("Missing schemaVersion field");
+      throw new kt("Missing schemaVersion field");
     console.warn(
       "[manuscript] schemaVersion missing on stored scenario — assuming 0.1.0",
       e
@@ -6157,17 +6206,17 @@ function Er(e, t = {}) {
   }
   let s = e;
   if (o === "0.1.0")
-    s = B0(s), s = Lr(s);
+    s = eb(s), s = Br(s);
   else if (o === "0.1.1")
-    s = Lr(s);
-  else if (o !== Hr)
-    throw new xt(`Unsupported schemaVersion: ${o}`);
+    s = Br(s);
+  else if (o !== Zr)
+    throw new kt(`Unsupported schemaVersion: ${o}`);
   if (!Array.isArray(s.steps))
-    throw new xt("Missing or invalid steps array");
+    throw new kt("Missing or invalid steps array");
   return s;
 }
-function B0(e) {
-  const t = e.steps, n = Array.isArray(t) ? t.map((r) => ls(r) ? {
+function eb(e) {
+  const t = e.steps, n = Array.isArray(t) ? t.map((r) => ks(r) ? {
     ...r,
     name: typeof r.name == "string" ? r.name : "",
     description: typeof r.description == "string" ? r.description : "",
@@ -6181,41 +6230,41 @@ function B0(e) {
     steps: n
   };
 }
-function Lr(e) {
-  return { ...e, schemaVersion: Hr };
+function Br(e) {
+  return { ...e, schemaVersion: Zr };
 }
-function ls(e) {
+function ks(e) {
   return typeof e == "object" && e !== null && !Array.isArray(e);
 }
-const Ht = "mn-player";
-function us(e) {
+const Gt = "mn-player";
+function Ss(e) {
   return /^[A-Za-z0-9_-]+$/.test(e) ? e : null;
 }
-function q0(e) {
+function tb(e) {
   let t = `${e.id};${e.stepIndex};${e.paused ? 1 : 0}`;
   return (e.pos != null || e.orient === "v") && (t += `;${e.orient === "v" ? "v" : "h"}`), e.pos != null && (t += `;${Math.round(e.pos.left)},${Math.round(e.pos.top)}`), t;
 }
-function F0(e) {
+function nb(e) {
   if (!e) return null;
   const t = /^([^;]+);(\d+);([01])(?:;([hv]))?(?:;(-?\d+),(-?\d+))?$/.exec(e);
   if (!t || !t[1] || !t[2] || !t[3]) return null;
-  const n = us(t[1]);
+  const n = Ss(t[1]);
   if (!n) return null;
   const r = { id: n, stepIndex: Number(t[2]), paused: t[3] === "1" };
   return t[4] && (r.orient = t[4] === "v" ? "v" : "h"), t[5] && t[6] && (r.pos = { left: Number(t[5]), top: Number(t[6]) }), r;
 }
-function z0(e) {
-  return F0(new URLSearchParams(e).get(Ht));
+function rb(e) {
+  return nb(new URLSearchParams(e).get(Gt));
 }
-function H0(e, t) {
+function ob(e, t) {
   const n = new URL(e);
-  return n.searchParams.set(Ht, q0(t)), n.href;
+  return n.searchParams.set(Gt, tb(t)), n.href;
 }
-function W0(e = window) {
+function sb(e = window) {
   const t = new URL(e.location.href);
-  t.searchParams.has(Ht) && (t.searchParams.delete(Ht), e.history.replaceState(null, "", t.pathname + t.search + t.hash));
+  t.searchParams.has(Gt) && (t.searchParams.delete(Gt), e.history.replaceState(null, "", t.pathname + t.search + t.hash));
 }
-function U0(e, t) {
+function ab(e, t) {
   const n = /* @__PURE__ */ new Set();
   for (const r of e.steps) {
     const o = r.pickedAtUrl;
@@ -6228,7 +6277,7 @@ function U0(e, t) {
   }
   return [...n];
 }
-function j0(e) {
+function ib(e) {
   return {
     async tryHandoff({ targetUrl: t, scenarioId: n, stepIndex: r, paused: o }) {
       let s;
@@ -6239,11 +6288,11 @@ function j0(e) {
       }
       if (s === e.currentOrigin())
         return e.persistState({ scenarioId: n, stepIndex: r, paused: o }), e.navigate(t), !0;
-      if (!us(n)) return !1;
+      if (!Ss(n)) return !1;
       if (await e.presence.get(s) === "present") {
         const a = e.readControls ? await e.readControls() : { orient: "h", pos: null };
         e.navigate(
-          H0(t, {
+          ob(t, {
             id: n,
             stepIndex: r,
             paused: o,
@@ -6257,20 +6306,20 @@ function j0(e) {
     }
   };
 }
-function V0(e) {
+function cb(e) {
   window.location.href = e;
 }
-function G0() {
+function lb() {
   const e = document.createElement("div");
   e.setAttribute("data-manuscript", "ui"), e.style.cssText = `position:fixed;right:16px;bottom:16px;z-index:${te + 2};`;
   const t = e.attachShadow({ mode: "open" });
   t.innerHTML = `<div style="font:13px/1.4 -apple-system,system-ui,sans-serif;background:#1a2438;color:#fff;padding:10px 14px;border-radius:10px;box-shadow:0 8px 24px rgb(0 0 0 / 0.2);max-width:280px;">${A("player.handoff.unavailable")}</div>`, document.documentElement.appendChild(e), setTimeout(() => e.remove(), 6e3);
 }
-const ds = (e) => `mn:player:scenario:${e}`, be = "mn:player:state", Fe = "mn:player:armed";
-let ps = "/", hs = () => {
+const $s = (e) => `mn:player:scenario:${e}`, _e = "mn:player:state", ze = "mn:player:armed";
+let As = "/", Ms = () => {
 };
-const Tr = /* @__PURE__ */ new Set();
-function Cr(e) {
+const qr = /* @__PURE__ */ new Set();
+function Fr(e) {
   if (!e) return null;
   try {
     return new URL(e).origin;
@@ -6278,30 +6327,30 @@ function Cr(e) {
     return null;
   }
 }
-function Y0(e) {
+function ub(e) {
   var t;
-  if (!Tr.has(e.id))
+  if (!qr.has(e.id))
     for (let n = 0; n < e.steps.length - 1; n++) {
       const r = e.steps[n];
       if (!(r != null && r.waitForNavigation)) continue;
-      const o = Cr(r.pickedAtUrl), s = Cr((t = e.steps[n + 1]) == null ? void 0 : t.pickedAtUrl);
+      const o = Fr(r.pickedAtUrl), s = Fr((t = e.steps[n + 1]) == null ? void 0 : t.pickedAtUrl);
       if (o && s && o !== s) {
-        Tr.add(e.id), console.warn(
+        qr.add(e.id), console.warn(
           `[manuscript-player] Step ${n + 1} "${r.name}" uses waitForNavigation, but the next step is on a different origin (${o} → ${s}). The player can't attach its resume state to a site-driven cross-origin navigation, so the tour won't resume there. Model cross-origin hops as a player-driven step instead. See player.html#player-crossorigin`
         );
         return;
       }
     }
 }
-const Oe = {};
-let Pr = !1;
-async function fs() {
-  Pr || (Pr = !0, typeof Oe.enabled == "boolean" && await Jo(Oe.enabled), Oe.voice && await c0(Oe.voice)), await o0();
+const ve = {};
+let zr = !1;
+async function Es() {
+  zr || (zr = !0, typeof ve.enabled == "boolean" && await us(ve.enabled), ve.voice && await S0(ve.voice)), await v0();
 }
-function X0(e) {
-  e.scenarioUrlBase && (ps = e.scenarioUrlBase), e.prefetch && (hs = e.prefetch), typeof e.tts == "boolean" && (Oe.enabled = e.tts), e.ttsVoice && (Oe.voice = e.ttsVoice);
+function db(e) {
+  e.scenarioUrlBase && (As = e.scenarioUrlBase), e.prefetch && (Ms = e.prefetch), typeof e.tts == "boolean" && (ve.enabled = e.tts), e.ttsVoice && (ve.voice = e.ttsVoice);
 }
-function K0(e) {
+function pb(e) {
   if (e == null)
     throw new Error("scenario is required");
   if (typeof e == "string") {
@@ -6311,18 +6360,18 @@ function K0(e) {
     } catch {
       throw new Error("Invalid JSON");
     }
-    return Er(t, { strict: !0 });
+    return Dr(t, { strict: !0 });
   }
-  return Er(e, { strict: !0 });
+  return Dr(e, { strict: !0 });
 }
-async function Zn(e) {
-  const t = K0(e);
-  Y0(t), hs(U0(t, location.origin)), localStorage.setItem(ds(t.id), JSON.stringify(t)), Uh(t);
+async function rr(e) {
+  const t = pb(e);
+  ub(t), Ms(ab(t, location.origin)), localStorage.setItem($s(t.id), JSON.stringify(t)), of(t);
 }
-async function Z0(e) {
-  await fs();
+async function hb(e) {
+  ve.enabled && w0(), await Es();
   const t = (e == null ? void 0 : e.startIndex) ?? 0, n = (e == null ? void 0 : e.paused) ?? !1;
-  Uo() || Wo();
+  Qo() || Jo();
   const r = D();
   if (!r)
     throw new Error("no scenario loaded");
@@ -6332,29 +6381,29 @@ async function Z0(e) {
     paused: n,
     startedAt: Date.now()
   };
-  sessionStorage.setItem(be, JSON.stringify(o)), sessionStorage.removeItem(Fe), await Kn(t, { paused: n, standalone: !0 });
+  sessionStorage.setItem(_e, JSON.stringify(o)), sessionStorage.removeItem(ze), await nr(t, { paused: n, standalone: !0 });
 }
-function J0() {
-  lt() && On();
+function fb() {
+  dt() && Fn();
 }
-async function Q0() {
-  lt() && await Ft();
+async function mb() {
+  dt() && await jt();
 }
-async function eb() {
-  lt() && await In();
+async function gb() {
+  dt() && await qn();
 }
-async function tb(e) {
-  lt() && await cs(e);
+async function bb(e) {
+  dt() && await ws(e);
 }
-async function nb() {
-  lt() && await zt(), sessionStorage.removeItem(be), sessionStorage.removeItem(Fe);
+async function _b() {
+  dt() && await Vt(), sessionStorage.removeItem(_e), sessionStorage.removeItem(ze);
 }
-function rb(e) {
-  return Kr(({ prev: n, next: r }) => {
+function yb(e) {
+  return so(({ prev: n, next: r }) => {
     n === "replay" && r === "idle" && e();
   });
 }
-function ob() {
+function vb() {
   var e;
   try {
     const n = (e = performance.getEntriesByType("navigation")[0]) == null ? void 0 : e.type;
@@ -6363,14 +6412,14 @@ function ob() {
     return !1;
   }
 }
-async function ms() {
-  if (ob()) {
-    sessionStorage.removeItem(be), sessionStorage.removeItem(Fe);
+async function Ts() {
+  if (vb()) {
+    sessionStorage.removeItem(_e), sessionStorage.removeItem(ze);
     return;
   }
-  if (sessionStorage.getItem(Fe) !== "1") return;
-  sessionStorage.removeItem(Fe);
-  const e = sessionStorage.getItem(be);
+  if (sessionStorage.getItem(ze) !== "1") return;
+  sessionStorage.removeItem(ze);
+  const e = sessionStorage.getItem(_e);
   if (!e)
     return;
   let t;
@@ -6381,63 +6430,63 @@ async function ms() {
   }
   if (!t || typeof t != "object" || typeof t.scenarioId != "string" || typeof t.stepIndex != "number")
     return;
-  const n = t.scenarioId, r = t.stepIndex, o = t.paused === !0, s = localStorage.getItem(ds(n));
+  const n = t.scenarioId, r = t.stepIndex, o = t.paused === !0, s = localStorage.getItem($s(n));
   if (!s) {
-    sessionStorage.removeItem(be);
+    sessionStorage.removeItem(_e);
     return;
   }
   try {
     const i = JSON.parse(s);
-    await Zn(i);
+    await rr(i);
     const a = D();
     if (!a || r < 0 || r >= a.steps.length) {
-      sessionStorage.removeItem(be);
+      sessionStorage.removeItem(_e);
       return;
     }
-    await Kn(r, { paused: o, standalone: !0 });
+    await nr(r, { paused: o, standalone: !0 });
   } catch {
-    sessionStorage.removeItem(be);
+    sessionStorage.removeItem(_e);
   }
 }
-async function sb() {
+async function xb() {
   try {
-    await fs();
-    const e = z0(location.search);
+    await Es();
+    const e = rb(location.search);
     if (e) {
-      W0(), e.orient && await W().set(
-        U.replayControlsOrientation,
+      sb(), e.orient && await z().set(
+        H.replayControlsOrientation,
         e.orient === "v" ? "vertical" : "horizontal"
-      ), e.pos && await W().set(U.replayControlsPosition, e.pos);
+      ), e.pos && await z().set(H.replayControlsPosition, e.pos);
       try {
-        const n = await (await fetch(`${ps}${e.id}.json`)).json();
-        await Zn(n);
+        const n = await (await fetch(`${As}${e.id}.json`)).json();
+        await rr(n);
         const r = D();
         if (!r || e.stepIndex < 0 || e.stepIndex >= r.steps.length) return;
-        Uo() || Wo(), await Kn(e.stepIndex, { paused: e.paused, standalone: !0 });
+        Qo() || Jo(), await nr(e.stepIndex, { paused: e.paused, standalone: !0 });
         return;
       } catch {
       }
     }
-    await ms();
+    await Ts();
   } catch {
   }
 }
-const ab = {
-  load: Zn,
-  play: Z0,
-  pause: J0,
-  next: Q0,
-  prev: eb,
-  jump: tb,
-  exit: nb,
-  onExit: rb,
-  resumeIfActive: ms,
-  bootResume: sb
-}, ib = 1;
-function cb(e) {
+const wb = {
+  load: rr,
+  play: hb,
+  pause: fb,
+  next: mb,
+  prev: gb,
+  jump: bb,
+  exit: _b,
+  onExit: yb,
+  resumeIfActive: Ts,
+  bootResume: xb
+}, kb = 1;
+function Sb(e) {
   return typeof e == "object" && e !== null && e.source === "manuscript:player" && e.kind === "present";
 }
-function lb(e, t) {
+function $b(e, t) {
   return new Promise((n) => {
     let r = !1, o = () => {
     }, s;
@@ -6449,91 +6498,91 @@ function lb(e, t) {
     }), s = setTimeout(() => i("absent"), t.timeoutMs);
   });
 }
-function ub(e, t) {
+function Ab(e, t) {
   const n = document.createElement("iframe");
   n.setAttribute("aria-hidden", "true"), n.style.cssText = "position:fixed;width:0;height:0;border:0;left:-9999px;top:-9999px;";
   const r = (o) => {
-    o.origin === e && o.source === n.contentWindow && cb(o.data) && t();
+    o.origin === e && o.source === n.contentWindow && Sb(o.data) && t();
   };
   return window.addEventListener("message", r), document.documentElement.appendChild(n), n.src = e + "/", () => {
     window.removeEventListener("message", r), n.remove();
   };
 }
-function db(e) {
+function Mb(e) {
   const t = /* @__PURE__ */ new Map(), n = (r) => {
     let o = t.get(r);
-    return o || (o = lb(r, e), t.set(r, o)), o;
+    return o || (o = $b(r, e), t.set(r, o)), o;
   };
   return {
     prefetch: (r) => r.forEach(n),
     get: n
   };
 }
-function pb(e) {
+function Eb(e) {
   const t = e.win ?? window;
   if (t === t.top) return !1;
   const n = {
     source: "manuscript:player",
     kind: "present",
-    version: e.version ?? ib
+    version: e.version ?? kb
   }, r = e.allowedParentOrigins && e.allowedParentOrigins.length ? e.allowedParentOrigins : ["*"];
   for (const o of r) t.parent.postMessage(n, o);
   return !0;
 }
-const Re = (typeof window < "u" ? window.__MANUSCRIPT_PLAYER__ : void 0) || {};
-Is({ assetBaseUrl: Re.assetBaseUrl });
-Nh();
-const hb = pb({
-  allowedParentOrigins: Re.allowedParentOrigins
+const Ne = (typeof window < "u" ? window.__MANUSCRIPT_PLAYER__ : void 0) || {};
+Gs({ assetBaseUrl: Ne.assetBaseUrl });
+Kh();
+const Tb = Eb({
+  allowedParentOrigins: Ne.allowedParentOrigins
 });
-if (!hb) {
-  const e = db({
-    mountProbe: ub,
-    timeoutMs: Re.beaconTimeoutMs ?? 1500
+if (!Tb) {
+  const e = Mb({
+    mountProbe: Ab,
+    timeoutMs: Ne.beaconTimeoutMs ?? 1500
   });
-  qr({
-    handoff: j0({
+  Yr({
+    handoff: ib({
       presence: e,
-      navigate: V0,
-      degrade: G0,
+      navigate: cb,
+      degrade: lb,
       currentOrigin: () => location.origin,
       persistState: (t) => {
-        We().setActiveReplay({ ...t, startedAt: Date.now() }), sessionStorage.setItem(Fe, "1");
+        je().setActiveReplay({ ...t, startedAt: Date.now() }), sessionStorage.setItem(ze, "1");
       },
       // Carry the pill's orientation + dragged position across a cross-origin
       // hop so B doesn't reset it (extension does this for free via global
       // chrome.storage; the player's per-origin sessionStorage can't).
       readControls: async () => ({
-        orient: await Vo() === "vertical" ? "v" : "h",
-        pos: await Go()
+        orient: await ts() === "vertical" ? "v" : "h",
+        pos: await ns()
       })
     })
-  }), X0({
-    scenarioUrlBase: Re.scenarioUrlBase,
+  }), db({
+    scenarioUrlBase: Ne.scenarioUrlBase,
     // player.ts's load() already extracts foreign origins and passes the
     // origins array here (see Task 5); just forward to the presence cache.
     prefetch: (t) => e.prefetch(t),
-    tts: Re.tts,
-    ttsVoice: Re.ttsVoice
+    tts: Ne.tts,
+    ttsVoice: Ne.ttsVoice
   });
   try {
-    ab.bootResume().catch(() => {
+    wb.bootResume().catch(() => {
     });
   } catch {
   }
 }
 export {
-  Lm as M,
+  Um as M,
   te as O,
-  Tm as V,
-  mb as a,
-  Pt as b,
-  it as d,
-  st as e,
-  pe as g,
-  Ue as m,
-  ot as o,
-  ab as p,
+  jm as V,
+  Cb as a,
+  Nt as b,
+  lt as d,
+  it as e,
+  he as g,
+  Ve as m,
+  at as o,
+  wb as p,
   A as t,
-  fb as u
+  Lb as u
 };
