@@ -98,8 +98,8 @@
           "applicationSubCategory": "DeveloperApplication",
           "operatingSystem": "Windows, macOS, Linux, ChromeOS",
           "browserRequirements": "Chromium-based browsers (Chrome, Edge) 88 or newer",
-          "softwareVersion": "0.8.0",
-          "releaseNotes": "v0.8.0 — Undo and redo for everything you edit in the panel, a format painter that copies one annotation's whole style onto others (this step or every step, plus the spotlight ring), and copy-paste that places a pasted annotation where it belongs and selects it for editing.",
+          "softwareVersion": "0.8.1",
+          "releaseNotes": "v0.8.1 — Standalone player: embed a tour on a page and let visitors replay it without installing the extension. Plus 'export without thumbnails' for a lighter shareable file, per-step URLs and a cross-origin warning in the validator, and a selector fix so partial tours no longer break replay.",
           "offers": {
             "@type": "Offer",
             "price": "0",
@@ -159,9 +159,9 @@
             { "@type": "ListItem", "position": 2, "name": "Features", "item": "https://zendy00.github.io/manuscript-pages/#features" },
             { "@type": "ListItem", "position": 3, "name": "How it works", "item": "https://zendy00.github.io/manuscript-pages/#how" },
             { "@type": "ListItem", "position": 4, "name": "AI agent", "item": "https://zendy00.github.io/manuscript-pages/#agent" },
-            { "@type": "ListItem", "position": 5, "name": "Bridge", "item": "https://zendy00.github.io/manuscript-pages/#bridge" },
+            { "@type": "ListItem", "position": 5, "name": "Bridge · Player", "item": "https://zendy00.github.io/manuscript-pages/embed.html" },
             { "@type": "ListItem", "position": 6, "name": "Install", "item": "https://zendy00.github.io/manuscript-pages/#install" },
-            { "@type": "ListItem", "position": 7, "name": "Guide", "item": "https://zendy00.github.io/manuscript-pages/#guide" },
+            { "@type": "ListItem", "position": 7, "name": "Guide", "item": "https://zendy00.github.io/manuscript-pages/manual.html" },
             { "@type": "ListItem", "position": 8, "name": "Changelog", "item": "https://zendy00.github.io/manuscript-pages/changelog.html" },
             { "@type": "ListItem", "position": 9, "name": "FAQ", "item": "https://zendy00.github.io/manuscript-pages/#faq" }
           ]
@@ -208,6 +208,30 @@
     </script>
   </head>
   <body data-palette="studio" lang="en">
+    <script data-antiflash>
+      /* Anti-flash: apply stored/preferred palette AND language before first
+         paint so page loads and cross-document view transitions don't flash
+         (light→dark, en→ko) then flip. i18n.js re-applies (idempotent) + wires
+         the toggles. Mirrors i18n.js pickInitialPalette / pickInitialLang. */
+      (function () {
+        try {
+          var s = localStorage.getItem('manuscript-site-palette');
+          var dark = (s === 'studio' || s === 'studio-dark')
+            ? s === 'studio-dark'
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.body.setAttribute('data-palette', 'studio-dark');
+
+          var p = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
+          var ls = localStorage.getItem('manuscript-site-lang');
+          var nav = (navigator.language || 'en').split('-')[0].toLowerCase();
+          var lang = (p === 'en' || p === 'ko') ? p
+            : (ls === 'en' || ls === 'ko') ? ls
+            : (nav === 'ko' ? 'ko' : 'en');
+          document.documentElement.setAttribute('lang', lang);
+          document.body.setAttribute('lang', lang);
+        } catch (e) {}
+      })();
+    </script>
     <!-- ICON SPRITE — externalized to ./assets/sprite.svg, preloaded in <head>;
          prose references it via <use href="./assets/sprite.svg#i-…">. The sprite
          mirrors src/content/floating-panel/panel-icons.ts + panel-shell.ts so the
@@ -232,16 +256,14 @@
           </svg>
         </button>
         <nav id="primary-nav" class="nav" aria-label="Primary">
-          <a href="#features" data-en>Features</a><a href="#features" data-ko>기능</a>
-          <a href="#how" data-en>How it works</a><a href="#how" data-ko>동작 방식</a>
-          <a href="#record" data-en>Record</a><a href="#record" data-ko>녹화</a>
-          <a href="#agent" data-en>AI agent</a><a href="#agent" data-ko>AI 작성</a>
-          <a href="#remote" data-en>Remote Library</a><a href="#remote" data-ko>원격저장소</a>
-          <a href="#install" data-en>Install</a><a href="#install" data-ko>설치</a>
-          <a href="#guide" data-en>Guide</a><a href="#guide" data-ko>사용설명서</a>
-          <a href="#bridge" data-en>Bridge</a><a href="#bridge" data-ko>브리지</a>
+          <a href="./#features" data-en>Features</a><a href="./#features" data-ko>기능</a>
+          <a href="./#how" data-en>How it works</a><a href="./#how" data-ko>동작 방식</a>
+          <a href="./#agent" data-en>AI agent</a><a href="./#agent" data-ko>AI 작성</a>
+          <a href="./#install" data-en>Install</a><a href="./#install" data-ko>설치</a>
+          <a href="./manual.html" data-en>Guide</a><a href="./manual.html" data-ko>사용설명서</a>
+          <a href="./embed.html" data-en><span class="nav-new">NEW</span>Player·Bridge</a><a href="./embed.html" data-ko><span class="nav-new">NEW</span>플레이어·브리지</a>
           <a href="./changelog.html" data-en>Changelog</a><a href="./changelog.html" data-ko>변경사항</a>
-          <a href="#faq" data-en>FAQ</a><a href="#faq" data-ko>FAQ</a>
+          <a href="./#faq" data-en>FAQ</a><a href="./#faq" data-ko>FAQ</a>
           <button
             id="palette-toggle"
             class="palette-toggle"
@@ -278,11 +300,13 @@
               <li><span class="dot"></span>Web tours</li>
               <li><span class="dot"></span>Web manuals</li>
               <li><span class="dot"></span>Video creation</li>
+              <li><span class="dot"></span>No-install replay</li>
             </ul>
             <ul class="hero-keywords" aria-label="Manuscript 으로 만들 수 있는 것" data-ko>
               <li><span class="dot"></span>웹 시연</li>
               <li><span class="dot"></span>웹 매뉴얼</li>
               <li><span class="dot"></span>동영상 제작</li>
+              <li><span class="dot"></span>설치 없이 재생</li>
             </ul>
 
             <p class="lead" data-en>
@@ -326,6 +350,16 @@
               <a class="btn btn-ghost" href="#install" data-en>How to install</a>
               <a class="btn btn-ghost" href="#install" data-ko>설치 방법</a>
             </div>
+            <a class="hero-player-promo" href="#player" data-en>
+              <span class="hpp-new">NEW</span>
+              <span class="hpp-text">Serve manuals &amp; demos to every visitor with just <span class="hpp-file">manuscript-player.js</span> — <strong class="hpp-em">no extension</strong>.</span>
+              <span class="hpp-arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="hero-player-promo" href="#player" data-ko>
+              <span class="hpp-new">NEW</span>
+              <span class="hpp-text">이제 <strong class="hpp-em">확장 없이</strong> <span class="hpp-file">manuscript-player.js</span> 하나로 모든 방문자에게 매뉴얼·시연 제공.</span>
+              <span class="hpp-arrow" aria-hidden="true">→</span>
+            </a>
             <!-- Shown by the version script ONLY when the dev .zip is ahead of
                  the live Web Store build (review weeks). Hidden otherwise. -->
             <p class="hero-install-hint" data-region="hero-zip-hint" data-en hidden>
@@ -403,8 +437,8 @@
         <div class="container">
           <p class="eyebrow" data-en>What's inside</p>
           <p class="eyebrow" data-ko>핵심 기능</p>
-          <h2 class="section-title" data-en>Six little touches that make it nice.</h2>
-          <h2 class="section-title" data-ko>마음에 들 만한 여섯 가지.</h2>
+          <h2 class="section-title" data-en>Eight little touches that make it nice.</h2>
+          <h2 class="section-title" data-ko>마음에 들 만한 여덟 가지.</h2>
 
           <div class="feature-grid">
             <div class="feature-card">
@@ -465,6 +499,24 @@
               <h3 data-ko>발표자 노트 창</h3>
               <p data-en>Move the script and controls to a second screen. You read the notes, the audience watches the tour — no need to memorise anything.</p>
               <p data-ko>대본과 컨트롤을 두 번째 화면으로 옮길 수 있어요. 내가 노트를 보면서 진행하면, 청중에게는 깔끔한 시연만 보입니다.</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <h3 data-en>Export it as a video</h3>
+              <h3 data-ko>동영상으로 내보내기</h3>
+              <p data-en>One button plays your tour into a video file — spotlights, notes, and the read-aloud narration baked right in. It follows the tour across multiple pages, stops itself at the end, and asks where to save. Tap <span class="kbd">Space</span> mid-record to chip in with your own voice.</p>
+              <p data-ko>버튼 하나로 시연이 영상 파일로 저장됩니다 — 강조 표시·메모·읽어주는 안내까지 그대로 담겨요. 여러 페이지를 넘나드는 시연도 따라가며 하나로 잇고, 끝나면 알아서 멈춰 저장 위치를 묻습니다. 녹화 중 <span class="kbd">Space</span> 로 내 목소리도 보탤 수 있어요.</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.66 3.58 3 8 3s8-1.34 8-3V6"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg>
+              </div>
+              <h3 data-en>Play tours from a shared repo</h3>
+              <h3 data-ko>공유 저장소에서 재생</h3>
+              <p data-en>Point Manuscript at a public GitHub repo and a Remote Library tab appears in the popup. Tours your team pushes show up there, ready to play in any tab — edits stay temporary, and a "Save to local" button keeps a copy whenever you want one.</p>
+              <p data-ko>공개 GitHub 리포만 알려주면 팝업에 원격저장소 탭이 생깁니다. 팀이 푸시한 시연이 거기 떠서 어느 탭에서든 바로 재생돼요 — 편집은 임시로만 남고, 필요하면 '내 라이브러리에 저장' 버튼으로 사본을 둘 수 있어요.</p>
             </div>
           </div>
         </div>
@@ -559,84 +611,62 @@
               </div>
             </div>
           </div>
+
+          <div class="how-guide-cta">
+            <p data-en>That’s the whole flow. For every tool in detail, see the full user guide.</p>
+            <p data-ko>여기까지가 전체 흐름이에요. 자세한 사용설명서는 아래 링크를 참조하세요.</p>
+            <a class="btn btn-primary" href="./manual.html" data-en>→ Open the user guide</a>
+            <a class="btn btn-primary" href="./manual.html" data-ko>→ 사용설명서 보기</a>
+          </div>
         </div>
       </section>
 
-      <!-- ───── Record (video output) ───── -->
-      <section id="record" class="record-spotlight">
+      <!-- ───── Replay anywhere — standalone player (headline feature) ───── -->
+      <section id="player" class="player-spotlight">
         <div class="container">
-          <div class="record-copy">
-            <p class="eyebrow" data-en>★ Output as video</p>
-            <p class="eyebrow" data-ko>★ 동영상 출력</p>
+          <p class="eyebrow" data-en>Replay anywhere</p>
+          <p class="eyebrow" data-ko>어디서나 재생</p>
+          <h2 class="section-title" data-en>Share a tour with anyone — <em>no extension</em>.</h2>
+          <h2 class="section-title" data-ko>확장 없이, <em>누구에게나</em> 시연을.</h2>
+          <p class="lead" data-en>
+            The standalone player is one tiny script. Drop it on any page, hand
+            it a tour file, and visitors replay the whole thing — spotlights,
+            notes, narration — with nothing to install.
+          </p>
+          <p class="lead" data-ko>
+            스탠드얼론 플레이어는 작은 스크립트 하나면 됩니다. 어떤 페이지에든
+            넣고 시연 파일만 건네면, 방문자는 설치할 것 없이 전부 그대로
+            재생해요 — 강조·메모·음성 안내까지.
+          </p>
 
-            <h2 class="section-title" data-en>
-              Turn your tour into a <em>video</em>.
-            </h2>
-            <h2 class="section-title" data-ko>
-              내가 만든 시연을 <em>동영상</em>으로.
-            </h2>
-
-            <div class="record-grid">
-              <div class="record-col">
-                <p class="lead" data-en>
-                  Press one button and your tour plays itself into a video file — just the
-                  page, none of the editing tools in the way. Spotlights, notes, the voice
-                  narration — everything lands neatly inside. It stops on its own when the
-                  tour is finished, then asks you where to save it.
-                </p>
-                <p class="lead" data-ko>
-                  버튼 하나만 누르면 내가 만든 시연이 스스로 재생되어 동영상 파일로 저장됩니다.
-                  편집 도구는 화면에서 사라지고 페이지만 깔끔하게 담깁니다. 강조 표시·메모·
-                  음성 안내까지 영상에 그대로 들어갑니다. 시연이 끝나면 자동으로 멈추고 저장할
-                  위치를 물어봐요.
-                </p>
-                <p class="lead" data-en>
-                  Want to chip in with your own voice along the way? Tap <span class="kbd">Space</span>
-                  while you're recording and the tour pauses — the video keeps rolling, so
-                  you can speak up, click around, or just catch your breath. Tap
-                  <span class="kbd">Space</span> again to pick the tour back up. Turn on
-                  <strong>Also record my microphone</strong> in the recorder window first if
-                  you want your voice baked right into the video alongside the read-aloud
-                  narration.
-                </p>
-                <p class="lead" data-ko>
-                  녹화 도중에 내 목소리로 한마디 보태고 싶으면? 녹화 중에
-                  <span class="kbd">Space</span> 키를 누르면 시연이 잠깐 멈춰요. 그동안에도 녹화는
-                  계속되니까, 직접 설명을 보태거나, 페이지를 클릭해서 뭔가 보여주거나,
-                  잠깐 숨을 고르세요. <span class="kbd">Space</span>를 다시 누르면 시연이 이어집니다.
-                  녹화 창에서 <strong>내 목소리도 함께 녹음</strong>을 켜 두면 내가 말한
-                  내용이 읽어주는 안내와 함께 영상에 자연스럽게 담겨요.
-                </p>
-                <div class="hero-ctas">
-                  <a class="btn btn-primary" href="#install" data-en>Install &amp; try</a>
-                  <a class="btn btn-primary" href="#install" data-ko>설치하고 사용해보기</a>
-                  <a class="btn btn-ghost" href="#guide" data-en>See the guide</a>
-                  <a class="btn btn-ghost" href="#guide" data-ko>사용 설명서 보기</a>
-                </div>
+          <div class="record-grid">
+            <div class="record-col">
+              <ul class="record-bullets" data-en>
+                <li><strong>Nothing to install.</strong> No extension — it works for every visitor.</li>
+                <li><strong>The same tour file.</strong> Author once in the extension, replay it anywhere.</li>
+                <li><strong>Across pages.</strong> A multi-page walkthrough carries itself from page to page.</li>
+                <li><strong>You host it.</strong> Just one <code>&lt;script&gt;</code> — nothing uploaded, nothing tracked.</li>
+              </ul>
+              <ul class="record-bullets" data-ko>
+                <li><strong>설치가 필요 없어요.</strong> 확장 없이 모든 방문자에게 그대로 동작합니다.</li>
+                <li><strong>같은 시연 파일 그대로.</strong> 확장에서 한 번 만들고, 어디서나 재생.</li>
+                <li><strong>여러 페이지도.</strong> 여러 페이지를 넘나드는 흐름을 스스로 따라갑니다.</li>
+                <li><strong>내가 직접 호스팅.</strong> <code>&lt;script&gt;</code> 한 줄 — 업로드도, 추적도 없어요.</li>
+              </ul>
+              <div class="player-actions">
+                <a class="btn btn-primary" href="./player.html" data-en>→ Player guide</a>
+                <a class="btn btn-primary" href="./player.html" data-ko>→ 플레이어 가이드</a>
+                <a class="btn btn-ghost" href="./embed.html" data-en>Bridge · Player</a>
+                <a class="btn btn-ghost" href="./embed.html" data-ko>브리지·플레이어</a>
               </div>
+            </div>
+            <div class="record-col">
+<pre class="code"><span class="tok-cmt">&lt;!-- one script, any page --&gt;</span>
+<span class="tok-key">import</span> player <span class="tok-key">from</span> <span class="tok-str">'./player/manuscript-player.0.1.0.esm.js'</span>;
 
-              <div class="record-col">
-                <ul class="record-bullets" data-en>
-                  <li><strong>Just the page</strong> — the editor panel and controls slide out of view while you record, and the page goes fullscreen.</li>
-                  <li><strong>Spans multiple pages</strong> — if your tour moves between pages, the recording follows along and lands as one continuous video.</li>
-                  <li><strong>3-second countdown</strong> so you can get ready, with a Cancel button or <span class="kbd">Space</span> / <span class="kbd">Esc</span> to back out.</li>
-                  <li><strong>Voice narration included</strong> — the spoken descriptions are captured along with the video.</li>
-                  <li><strong>Pause anytime to chip in</strong> — tap <span class="kbd">Space</span> while recording and the tour holds still. The video keeps rolling, so you can speak up, click around, or just collect your thoughts. <span class="kbd">Space</span> again picks it back up.</li>
-                  <li><strong>Bring your own voice (optional)</strong> — turn on "Also record my microphone" in the recorder window and your voice lands in the video alongside the read-aloud narration.</li>
-                  <li><strong>Stops by itself</strong> when the tour reaches the end. Want to stop sooner? Just press <span class="kbd">Esc</span> anywhere on the page.</li>
-                  <li><strong>You pick where it saves</strong> — the browser's Save dialog opens when the tour ends. Nothing is uploaded; everything stays on your computer.</li>
-                </ul>
-                <ul class="record-bullets" data-ko>
-                  <li><strong>페이지만 담깁니다</strong> — 녹화 중에는 편집 패널과 컨트롤이 화면에서 사라지고, 페이지가 전체 화면으로 바뀌어요.</li>
-                  <li><strong>여러 페이지도 OK</strong> — 시연이 페이지를 오가도 녹화가 따라가면서 하나의 영상으로 이어집니다.</li>
-                  <li><strong>3 초 카운트다운</strong>으로 마음의 준비를 할 시간이 있고, 취소 버튼이나 <span class="kbd">Space</span> / <span class="kbd">Esc</span> 로 언제든 멈출 수 있어요.</li>
-                  <li><strong>음성 안내까지 함께</strong> — 읽어주는 설명도 영상에 그대로 담깁니다.</li>
-                  <li><strong>언제든 잠깐 멈추고 거들 수 있어요</strong> — 녹화 중에 <span class="kbd">Space</span> 키를 누르면 시연이 멈춥니다. 녹화는 그대로 계속되니까 한마디 보태거나, 페이지를 클릭해서 뭔가 보여주거나, 잠깐 생각을 정리할 수 있어요. <span class="kbd">Space</span>를 다시 누르면 시연이 이어집니다.</li>
-                  <li><strong>내 목소리도 함께 (선택)</strong> — 녹화 창에서 "내 목소리도 함께 녹음"을 체크하면 내가 말한 내용이 읽어주는 안내와 함께 영상에 담깁니다.</li>
-                  <li><strong>알아서 멈춥니다</strong> — 시연 마지막에 자동으로 종료. 더 일찍 끝내고 싶으면 페이지 아무 곳에서 <span class="kbd">Esc</span> 키만 누르세요.</li>
-                  <li><strong>저장 위치는 직접 선택</strong> — 시연이 끝나면 브라우저의 "다른 이름으로 저장" 다이얼로그가 뜹니다. 어디로도 업로드되지 않고 컴퓨터 안에만 남습니다.</li>
-                </ul>
-              </div>
+<span class="tok-key">const</span> tour = <span class="tok-key">await</span> fetch(<span class="tok-str">'./tour.json'</span>).then(r =&gt; r.json());
+<span class="tok-key">await</span> player.load(tour);
+<span class="tok-key">await</span> player.play();</pre>
             </div>
           </div>
         </div>
@@ -696,8 +726,10 @@
           <div class="agent-prompt">
             <p class="agent-prompt-label" data-en>Example prompt</p>
             <p class="agent-prompt-label" data-ko>예시 프롬프트</p>
-            <pre><code>Use SKILL.md. Generate a Manuscript tour for
+            <pre data-en><code>Use SKILL.md. Generate a Manuscript tour for
 https://example.com/dashboard. English, 6 steps.</code></pre>
+            <pre data-ko><code>Use SKILL.md. Generate a Manuscript tour for
+https://example.com/dashboard. Korean, 6 steps.</code></pre>
           </div>
 
           <p class="agent-note" data-en>
@@ -717,139 +749,6 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
           <div class="agent-actions">
             <a class="btn btn-primary" href="./tours/SKILL.md" download data-en>↓ Download SKILL.md</a>
             <a class="btn btn-primary" href="./tours/SKILL.md" download data-ko>↓ SKILL.md 다운로드</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ───── Remote library (v0.7.0+) ───── -->
-      <section id="remote" class="remote-spotlight">
-        <div class="container">
-          <p class="eyebrow" data-en>★ Shared library</p>
-          <p class="eyebrow" data-ko>★ 공유 라이브러리</p>
-
-          <h2 class="section-title" data-en>
-            A team's tours, from <em>their</em> repo.
-          </h2>
-          <h2 class="section-title" data-ko>
-            팀의 시연을, <em>리포에서 그대로</em>.
-          </h2>
-
-          <p class="lead" data-en>
-            Hand a public GitHub repo to Manuscript and the popup gains
-            a <strong>Remote Library</strong> tab. Tours your team pushes to that
-            repo show up there, ready to play in any tab — no JSON file
-            handoff, no manual import, no second copy in your library to
-            keep in sync.
-          </p>
-          <p class="lead" data-ko>
-            GitHub 공개 리포 주소를 매뉴스크립트에 알려주면 팝업에 <strong>원격저장소</strong>
-            탭이 생깁니다. 팀이 그 리포에 푸시한 시연이 거기 그대로 떠서, 어느 탭에서든
-            바로 재생할 수 있어요 — JSON 파일을 주고받거나, 직접 가져오기 하거나,
-            내 라이브러리에 사본을 두고 동기화할 필요 없이.
-          </p>
-
-          <div class="remote-rows">
-
-            <!-- Row 1: Connect a repo + catalog -->
-            <div class="remote-row">
-              <div class="remote-row-copy">
-                <h3 data-en>Connect a GitHub repo</h3>
-                <h3 data-ko>GitHub 리포 연결</h3>
-                <p data-en>
-                  Paste a repo URL (or just <code>owner/repo</code>) in
-                  the Remote Library tab and the catalog populates from the
-                  files at the repo root or whatever folder you point
-                  at. Each scenario shows its title and step count —
-                  click the manuscript icon to play. Sub-folders are
-                  navigable too, with a small back chip at the top.
-                </p>
-                <p data-ko>
-                  원격저장소 탭에 리포 URL (혹은 짧게 <code>owner/repo</code>)
-                  만 붙여넣으면, 리포 루트나 지정한 폴더의 시나리오 목록이
-                  채워집니다. 시나리오마다 제목과 단계 수가 보이고,
-                  매뉴스크립트 아이콘을 누르면 재생돼요. 하위 폴더도 들어갈
-                  수 있고, 위쪽 작은 ← 표시로 다시 나옵니다.
-                </p>
-              </div>
-              <div class="remote-row-image">
-                <img src="./assets/screenshots/remote-tab-en.png"
-                  alt="The popup's Remote Library tab listing scenarios from a GitHub repo"
-                  data-en
-                  onerror="this.style.display='none'" />
-                <img src="./assets/screenshots/remote-tab-ko.png"
-                  alt="팝업 원격저장소 탭에서 GitHub 리포의 시나리오 목록"
-                  data-ko
-                  onerror="this.style.display='none'" />
-              </div>
-            </div>
-
-            <!-- Row 2: HIGHLIGHT — edits won't be saved -->
-            <div class="remote-row remote-row-highlight">
-              <div class="remote-row-copy">
-                <h3 data-en>Edits won't be saved <span class="remote-pin">important</span></h3>
-                <h3 data-ko>편집은 저장되지 않습니다 <span class="remote-pin">꼭 알아두세요</span></h3>
-                <p data-en>
-                  Every remote play opens with a sticky banner above
-                  the panel header that names the source
-                  (📡 owner/repo · file.json) and reminds you that
-                  edits are temporary. The teammate who owns the repo
-                  is the only one whose version is authoritative — your
-                  tweaks live just for this play, and the next refresh
-                  brings their copy back untouched.
-                </p>
-                <p data-ko>
-                  원격저장소 시나리오를 재생할 때마다 패널 위쪽에 작은 배너가
-                  떠서, 어디서 온 시나리오인지 (📡 owner/repo · file.json)
-                  알려주고 편집해도 저장되지 않는다고 분명히 안내합니다.
-                  리포 주인의 버전이 진본이라서, 내가 만진 부분은 이번
-                  재생에만 남고 다음에 다시 열면 원본 그대로예요.
-                </p>
-              </div>
-              <div class="remote-row-image">
-                <img src="./assets/screenshots/remote-banner-en.png"
-                  alt="The in-panel banner: 'Edits won't be saved' with a Save to local button"
-                  data-en
-                  onerror="this.style.display='none'" />
-                <img src="./assets/screenshots/remote-banner-ko.png"
-                  alt="패널 배너: '편집은 저장되지 않습니다' + 내 라이브러리에 저장 버튼"
-                  data-ko
-                  onerror="this.style.display='none'" />
-              </div>
-            </div>
-
-            <!-- Row 3: Save to local -->
-            <div class="remote-row">
-              <div class="remote-row-copy">
-                <h3 data-en>Save to local — when you want to keep a copy</h3>
-                <h3 data-ko>내 라이브러리에 저장 — 갖고 있고 싶을 때</h3>
-                <p data-en>
-                  Made changes you don't want to lose? The banner has a
-                  <strong>Save to local</strong> button right there.
-                  One click promotes the current scenario into your own
-                  library with a fresh id, the banner disappears, and
-                  you're back in normal editing mode — your copy now,
-                  with no link back to the repo.
-                </p>
-                <p data-ko>
-                  편집한 내용을 잃고 싶지 않다면 배너의
-                  <strong>내 라이브러리에 저장</strong> 버튼을 누르세요.
-                  지금 재생 중인 시나리오가 새 id 로 내 라이브러리에
-                  들어가고, 배너는 사라지고, 평소처럼 편집·저장이 됩니다 —
-                  그때부터는 내 사본이고, 리포와는 분리돼요.
-                </p>
-              </div>
-              <div class="remote-row-image">
-                <img src="./assets/screenshots/remote-save-en.png"
-                  alt="After clicking Save to local — the scenario appears in the Local tab"
-                  data-en
-                  onerror="this.style.display='none'" />
-                <img src="./assets/screenshots/remote-save-ko.png"
-                  alt="내 라이브러리에 저장 클릭 후 — 시나리오가 내 라이브러리 탭에 등장"
-                  data-ko
-                  onerror="this.style.display='none'" />
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
@@ -1143,1397 +1042,6 @@ https://example.com/dashboard. English, 6 steps.</code></pre>
         </div>
       </section>
 
-      <!-- ───── Guide ───── -->
-      <section id="guide" class="guide">
-        <div class="container">
-          <p class="eyebrow" data-en>How to use it</p>
-          <p class="eyebrow" data-ko>사용 설명서</p>
-          <h2 class="section-title" data-en>A friendly handbook to walk you through.</h2>
-          <h2 class="section-title" data-ko>처음부터 끝까지, 친절한 안내서.</h2>
-
-          <div class="guide-grid">
-            <aside class="guide-toc" aria-label="Guide contents">
-              <h4 data-en>Contents</h4>
-              <h4 data-ko>목차</h4>
-              <ol>
-                <li><a href="#g-quickstart" data-en>Quick start</a><a href="#g-quickstart" data-ko>퀵 스타트</a></li>
-                <li><a href="#g-pick" data-en>Picking elements</a><a href="#g-pick" data-ko>요소 선택</a></li>
-                <li><a href="#g-annotate" data-en>Annotation tools</a><a href="#g-annotate" data-ko>주석 도구</a></li>
-                <li><a href="#g-steps" data-en>Steps &amp; reorder</a><a href="#g-steps" data-ko>스텝과 재배치</a></li>
-                <li><a href="#g-subs" data-en>Inner flow</a><a href="#g-subs" data-ko>내부 흐름</a></li>
-                <li><a href="#g-action" data-en>Action steps</a><a href="#g-action" data-ko>action 스텝</a></li>
-                <li><a href="#g-replay" data-en>Replay &amp; prompter</a><a href="#g-replay" data-ko>재생과 발표자 창</a></li>
-                <li><a href="#g-record" data-en>Recording</a><a href="#g-record" data-ko>녹화</a></li>
-                <li><a href="#g-validate" data-en>Check steps still match</a><a href="#g-validate" data-ko>스텝 점검</a></li>
-                <li><a href="#g-io" data-en>Export &amp; import</a><a href="#g-io" data-ko>내보내기·불러오기</a></li>
-                <li><a href="#g-popup" data-en>Previous Manuscripts</a><a href="#g-popup" data-ko>이전 매뉴스크립트</a></li>
-              </ol>
-            </aside>
-
-            <div class="guide-body">
-              <section id="g-quickstart">
-                <h2 data-en>1. Quick start</h2>
-                <h2 data-ko>1. 퀵 스타트</h2>
-                <figure>
-                  <img
-                    src="./assets/screenshots/flow-01-popup-en.png"
-                    alt="Browser toolbar popup with the Manuscript icon — title at top, primary action button 'New Manuscript' below, 'Open a JSON file' below that, and the Previous Manuscripts list."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/flow-01-popup-ko.png"
-                    alt="Manuscript 도구막대 팝업 — 상단 타이틀, 기본 액션 '새 매뉴스크립트', 그 아래 'JSON 파일 가져오기', 이전 매뉴스크립트 목록."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>The browser-action popup — start a new manuscript, open a JSON, or jump back into a previous one.</figcaption>
-                  <figcaption data-ko>브라우저 액션 팝업 — 새 매뉴스크립트 시작, JSON 가져오기, 또는 이전 매뉴스크립트로 복귀.</figcaption>
-                </figure>
-                <ol data-en>
-                  <li>Open any regular web page (not <code>chrome://</code>, not the new-tab page).</li>
-                  <li>Click the Manuscript icon and hit <strong>New Manuscript</strong>.</li>
-                  <li>A floating panel appears top-right of the page. The page's theme color and fonts auto-populate the palette.</li>
-                  <li>Click the panel title to rename your manuscript (e.g. "Checkout walkthrough").</li>
-                  <li>Click the <strong>picker</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-picker"/></svg></span> on a step card → hover the page → click the target element.</li>
-                  <li>Use the toolbar buttons (<span class="iicon"><svg><use href="./assets/sprite.svg#i-text"/></svg></span>, shapes, freedraw) to layer annotations.</li>
-                  <li>Hit <span class="iicon"><svg><use href="./assets/sprite.svg#i-play"/></svg></span> to replay. Use <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> <span class="kbd">Esc</span>.</li>
-                </ol>
-                <ol data-ko>
-                  <li>일반 웹 페이지를 엽니다 (<code>chrome://</code>·새 탭 페이지에서는 동작하지 않아요).</li>
-                  <li>Manuscript 아이콘을 클릭하고 <strong>새 매뉴스크립트</strong>를 누르세요.</li>
-                  <li>페이지 오른쪽 위에 작성 패널이 나타납니다. 페이지의 테마 색과 글꼴이 자동으로 팔레트에 들어와요.</li>
-                  <li>패널 제목을 클릭해 이름을 바꿔 보세요 (예: "결제 페이지 가이드").</li>
-                  <li>단계 카드의 <strong>선택 도구</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-picker"/></svg></span> 를 누른 뒤 페이지에서 원하는 부분에 마우스를 올리고 클릭하세요.</li>
-                  <li>상단 주석 도구(<span class="iicon"><svg><use href="./assets/sprite.svg#i-text"/></svg></span>, 도형, 손그림)로 설명을 덧붙입니다.</li>
-                  <li><span class="iicon"><svg><use href="./assets/sprite.svg#i-play"/></svg></span> 로 재생. 단축키 <span class="kbd">←</span> <span class="kbd">→</span> <span class="kbd">Space</span> <span class="kbd">Esc</span>.</li>
-                </ol>
-                <figure>
-                  <img
-                    src="./assets/screenshots/quickstart-panel-en.png"
-                    alt="Floating panel on the right edge of a page, just after creating a new manuscript — empty step list with a single 'Step 1' card, picker armed, palette across the top borrowed from the page's theme color, and footer controls."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/quickstart-panel-ko.png"
-                    alt="페이지 오른쪽에 떠 있는 작성 패널 — 새 매뉴스크립트 직후 모습. 'Step 1' 카드 하나, 선택 도구 준비, 상단에 페이지 테마 색에서 가져온 팔레트, 하단 컨트롤 영역."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Floating panel right after <em>New Manuscript</em> — palette across the top (auto-populated from the page's theme color + fonts), one empty step card, picker ready to arm, footer with play / record / validate / export controls.</figcaption>
-                  <figcaption data-ko><em>새 매뉴스크립트</em> 직후의 작성 패널 — 상단 팔레트(페이지 테마 색·글꼴이 자동으로 들어옴), 빈 단계 카드 하나, 선택 도구 준비, 하단에 재생 / 녹화 / 점검 / 내보내기 컨트롤.</figcaption>
-                </figure>
-              </section>
-
-              <section id="g-pick">
-                <h2 data-en>2. Picking elements</h2>
-                <h2 data-ko>2. 요소 선택</h2>
-                <p data-en>
-                  When you pick an element, Manuscript writes down three different
-                  ways to find that same spot later. <strong>First</strong>, any
-                  internal name tag the page already attaches to it. <strong>Second</strong>,
-                  the words visible on the element together with where it sits on
-                  the page. <strong>Third</strong>, the location on the screen and
-                  the text right around it. If the page changes later, Manuscript
-                  tries each clue in turn until one of them lands on the right spot.
-                </p>
-                <p data-ko>
-                  요소를 한 번 고르면 Manuscript 는 그 자리를 다시 찾기 위한 단서
-                  세 가지를 적어 둡니다. <strong>첫째</strong> — 페이지가 그 요소에
-                  붙여 둔 내부 이름표. <strong>둘째</strong> — 화면에 보이는 글자와
-                  그 주변 위치. <strong>셋째</strong> — 화면 안에서의 위치와 근처에
-                  있는 글자들. 나중에 페이지가 조금 바뀌어도 Manuscript 는 이 세
-                  단서를 차례로 시도해 같은 자리를 다시 찾아냅니다.
-                </p>
-                <p data-en><strong>Pages inside pages (iframe, one level deep):</strong> If the inner page comes from the same website, picking and playback both work. If it comes from a different website, the first click still registers, but the browser locks Manuscript out at playback time so that step shows a "couldn't find it" message. Pages nested two or more levels deep aren't supported yet.</p>
-                <p data-ko><strong>페이지 안에 들어 있는 또 다른 페이지(iframe, 한 단계 깊이):</strong> 안쪽이 같은 사이트라면 선택과 재생 모두 정상으로 동작합니다. 안쪽이 다른 사이트라면 클릭은 등록되지만, 재생할 때 브라우저가 접근을 막아 "요소를 찾지 못했어요" 라는 안내가 뜹니다. 두 단계 이상 깊게 들어간 페이지는 아직 지원하지 않습니다.</p>
-                <figure>
-                  <img
-                    src="./assets/screenshots/flow-02-picker-en.png"
-                    alt="A page with a pink rectangular outline tracking the mouse over a button — the picker is armed and the cursor reads as a crosshair."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/flow-02-picker-ko.png"
-                    alt="페이지 위에서 선택 모드가 켜진 상태 — 분홍색 사각형 테두리가 마우스를 따라 움직입니다."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Picker armed — a pink outline tracks the mouse; one click locks the target and the spotlight darkens the rest of the page.</figcaption>
-                  <figcaption data-ko>선택 모드가 켜진 상태 — 분홍색 테두리가 마우스를 따라옵니다. 클릭 한 번이면 그 자리가 고정되고 페이지의 나머지 부분이 어두워지면서 강조 표시가 나타나요.</figcaption>
-                </figure>
-
-                <h3 data-en>Edit the ring &amp; the dim background</h3>
-                <h3 data-ko>강조 테두리·어두운 배경 편집</h3>
-                <p data-en>
-                  Once a step has a picked element, the spotlight draws a colored
-                  ring around the target and dims everything else. Both are
-                  per-step. <strong>Click the ring</strong> (the colored outline,
-                  not the inside) and a <em>Spotlight</em> popup opens — same
-                  swatch + slider model as the annotation property popup.
-                </p>
-                <p data-ko>
-                  단계에 요소가 선택되어 있으면 강조 표시가 그 요소 둘레에 색
-                  테두리를 그리고 나머지 페이지는 어둡게 처리합니다. 둘 다 단계
-                  단위로 설정돼요. <strong>테두리(요소 둘레의 색 띠)를 클릭</strong>
-                  하면 <em>강조 표시</em> 속성 창이 열립니다 — 주석 속성 창과 같은
-                  색 견본 + 슬라이더 구성이에요.
-                </p>
-
-                <figure>
-                  <img
-                    src="./assets/screenshots/spotlight-editor-en.png"
-                    alt="Spotlight property popup — Muted/Vibrant toggle at top right next to a SPOTLIGHT caption, Ring row with a swatch palette and a Width slider, divider, Dim row with a swatch palette and an Opacity slider, footer with 'Reset to default' button and a close X."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/spotlight-editor-ko.png"
-                    alt="강조 표시 속성 창 — 상단 SPOTLIGHT 라벨과 Muted/Vibrant 토글, 테두리 줄에 색 견본 팔레트와 굵기 슬라이더, 구분선, 어두운 배경 줄에 색 견본 팔레트와 투명도 슬라이더, 하단 기본값 복원 버튼과 닫기 X."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>The Spotlight property popup — Ring section (color + Width slider) on top, Dim section (color + Opacity slider) below, with the Muted / Vibrant swatch toggle and a Reset to default button along the edges.</figcaption>
-                  <figcaption data-ko>강조 표시 속성 창 — 상단 테두리 영역(색 + 굵기 슬라이더), 하단 어두운 배경 영역(색 + 투명도 슬라이더). Muted / Vibrant 색 견본 토글과 기본값 복원 버튼이 가장자리에 배치돼 있습니다.</figcaption>
-                </figure>
-
-                <ul data-en>
-                  <li><strong>Muted / Vibrant toggle</strong> — same swatch set as the annotation editor, so the ring color stays in tone with annotations on the same step.</li>
-                  <li><strong>Ring color</strong> — 8 swatches in the current swatch mode. Default is the theme's primary blue (<code>oklch(0.42 0.09 250)</code>).</li>
-                  <li><strong>Width</strong> slider — 0 to 12 px. Default <strong>3 px</strong>. Set to 0 to hide the ring while keeping the dim.</li>
-                  <li><strong>Dim color</strong> — same 8 swatches. Default black (<code>#000000</code>). The page outside the spotlight rect tints with this color.</li>
-                  <li><strong>Opacity</strong> slider — 0 to 100 %. Default <strong>55 %</strong>.</li>
-                  <li><strong>Reset to default</strong> — clears the step's <code>spotlight</code> field. The spotlight falls back to the extension's hardcoded defaults.</li>
-                  <li><span class="iicon"><svg><use href="./assets/sprite.svg#i-close"/></svg></span> or click outside — closes the popup. Changes save as you edit; no separate apply step.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>Muted / Vibrant 토글</strong> — 주석 편집기와 같은 색 견본 묶음이라서, 테두리 색이 같은 단계의 주석과 자연스럽게 어울립니다.</li>
-                  <li><strong>테두리 색</strong> — 현재 모드의 색 견본 8 개. 기본값은 테마의 주 색(파랑).</li>
-                  <li><strong>굵기</strong> 슬라이더 — 0 ~ 12 px. 기본 <strong>3 px</strong>. 0 으로 두면 테두리는 사라지고 어두운 배경만 남습니다.</li>
-                  <li><strong>어두운 배경 색</strong> — 같은 색 견본 8 개. 기본은 검정. 강조된 영역 바깥쪽 페이지가 이 색으로 덮입니다.</li>
-                  <li><strong>투명도</strong> 슬라이더 — 0 ~ 100 %. 기본 <strong>55 %</strong>.</li>
-                  <li><strong>기본값 복원</strong> — 그 단계의 강조 표시 설정을 비웁니다. 비워두면 기본 스타일로 자동으로 그려져요.</li>
-                  <li><span class="iicon"><svg><use href="./assets/sprite.svg#i-close"/></svg></span> 또는 창 바깥 클릭 — 닫기. 변경은 그 자리에서 저장되며 별도의 적용 버튼은 없습니다.</li>
-                </ul>
-
-                <p class="callout" data-en>
-                  <strong>Per-step, not global.</strong> Spotlight style is stored
-                  on each <code>Step</code> (<code>Step.spotlight</code>). To keep
-                  one tone across the whole manuscript, set the first step's
-                  spotlight and copy the values into the others — there's no
-                  global "apply to all" yet.
-                </p>
-                <p class="callout" data-ko>
-                  <strong>단계마다 따로 저장됩니다.</strong> 강조 표시 스타일은 단계
-                  단위로 저장되기 때문에, 매뉴스크립트 전체에 같은 톤을 입히고
-                  싶다면 첫 단계의 값을 다른 단계에 똑같이 맞춰 두세요. 아직
-                  "모든 단계에 한꺼번에 적용" 옵션은 없습니다.
-                </p>
-
-                <p class="callout" data-en>
-                  <strong>Authoring-only.</strong> The popup opens during
-                  authoring. During replay the ring click passes through so it
-                  doesn't interfere with action steps or page interactions.
-                </p>
-                <p class="callout" data-ko>
-                  <strong>편집 중에만 열립니다.</strong> 이 속성 창은 매뉴스크립트를
-                  만들고 있을 때만 열려요. 재생 중에는 테두리 클릭이 그대로 통과돼
-                  사용자가 페이지를 누르는 동작이나 액션 단계의 흐름을 방해하지
-                  않습니다.
-                </p>
-              </section>
-
-              <section id="g-annotate">
-                <h2 data-en>3. Annotation tools</h2>
-                <h2 data-ko>3. 주석 도구</h2>
-                <p data-en>
-                  The palette across the top of the panel — labelled
-                  <strong>Annotation tools</strong> — holds three kinds: text,
-                  shape (8 sub-kinds: rectangle, ellipse, triangle, diamond,
-                  star, callout, line, block arrow), and freedraw (hand-drawn
-                  via rough.js). Click any annotation on the page to open its
-                  property popup.
-                </p>
-                <p data-ko>
-                  패널 상단의 <strong>주석 도구</strong> 영역에 세 종류가 있습니다 —
-                  글상자, 도형 (사각형·타원·삼각형·마름모·별·콜아웃·선·블록 화살표
-                  8가지), 손그림 (rough.js). 페이지에 그려진 주석을 클릭하면 그 자리에
-                  속성 popup이 열립니다.
-                </p>
-                <h3 data-en>Property popup</h3>
-                <h3 data-ko>속성 창</h3>
-                <ul data-en>
-                  <li><strong>Color</strong> — 8 swatches + site-extracted colors + custom picker.</li>
-                  <li><strong>Muted / Vibrant</strong> toggle — swaps the 8-swatch palette without changing the UI palette.</li>
-                  <li><strong>Font</strong> — site fonts first, then base fonts. With <strong>Asta Sans</strong> as a fallback so the font survives a page-context move.</li>
-                  <li><strong>Effect</strong> — Fade / Slide / Bounce / Zoom / Rotate 2× as an entry animation.</li>
-                  <li><strong>Opacity</strong> slider — separate for stroke, fill, text background.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>색상</strong> — 색 견본 8 개 + 사이트에서 추출한 색 + 직접 색 고르기.</li>
-                  <li><strong>Muted / Vibrant</strong> 토글 — 패널 자체 색은 그대로 두고 색 견본 묶음만 두 톤으로 전환합니다.</li>
-                  <li><strong>글꼴</strong> — 사이트 글꼴이 먼저 나오고, 그다음 기본 글꼴. <strong>Asta Sans</strong> 가 예비 글꼴로 들어가 있어 페이지가 바뀌어도 글꼴이 유지돼요.</li>
-                  <li><strong>등장 효과</strong> — Fade / Slide / Bounce / Zoom / Rotate 2× 중 선택할 수 있습니다.</li>
-                  <li><strong>투명도</strong> 슬라이더 — 선 / 채움 / 글상자 배경 각각 따로 조절합니다.</li>
-                </ul>
-                <figure>
-                  <img
-                    src="./assets/screenshots/flow-03-annotate-en.png"
-                    alt="Annotation property popup showing font select, size, bold/italic, text/bg/border swatch rows, effect dropdown, and alpha slider"
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/flow-03-annotate-ko.png"
-                    alt="주석 속성 창 — 글꼴 선택, 크기, 굵게/기울임, 글자색·배경·테두리 색 견본 줄, 등장 효과 드롭다운, 투명도 슬라이더."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>The property popup — font picker on top, swatch rows for Text / Bg / Border in the middle, Effect dropdown and Alpha slider at the bottom.</figcaption>
-                  <figcaption data-ko>속성 창 — 상단 글꼴 선택, 가운데 글자색·배경·테두리 색 견본 줄, 하단 등장 효과 드롭다운과 투명도 슬라이더.</figcaption>
-                </figure>
-                <h3 data-en>Per-step annotation list</h3>
-                <h3 data-ko>스텝별 주석 목록</h3>
-                <p data-en>
-                  Every step card now opens an <strong>Annotation tools (N)</strong>
-                  section that lists every text box, shape, and drawing on that
-                  step. Each row carries a small preview that reflects the
-                  actual colors and shape kind, so you can spot the right one
-                  at a glance.
-                </p>
-                <p data-ko>
-                  단계 카드마다 <strong>주석 도구 (N)</strong> 영역이 열려
-                  그 단계에 그려진 모든 글상자·도형·손그림을 한 줄씩 보여줍니다.
-                  각 항목 옆 작은 미리보기에 실제 색과 도형 종류가 그대로
-                  반영되어 한눈에 어느 항목인지 알아볼 수 있어요.
-                </p>
-                <ul data-en>
-                  <li><strong>Click a row</strong> — opens that annotation's property panel. If the annotation belongs to another step, the panel switches step automatically. If it lives on another page, that page loads and the annotation is selected when it's ready.</li>
-                  <li><strong>Trash icon</strong> <span class="iicon is-trash"><svg><use href="./assets/sprite.svg#i-trash"/></svg></span> — removes the annotation from the step.</li>
-                  <li><strong>Header click</strong> — folds the list. The Inner flow section right above folds the same way.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>항목 클릭</strong> — 해당 주석의 속성 패널이 열립니다. 다른 단계의 주석이면 단계가 함께 전환되고, 다른 페이지의 주석이면 그 페이지를 자동으로 불러와 선택해 줍니다.</li>
-                  <li><strong>휴지통 아이콘</strong> <span class="iicon is-trash"><svg><use href="./assets/sprite.svg#i-trash"/></svg></span> — 단계에서 해당 주석을 삭제합니다.</li>
-                  <li><strong>머리글 클릭</strong> — 목록을 접습니다. 바로 위의 내부 흐름 영역도 같은 방식으로 접고 펼 수 있어요.</li>
-                </ul>
-                <figure>
-                  <img
-                    src="./assets/screenshots/step-annotations-list-en.png"
-                    alt="Step card in the floating panel showing the Inner flow row and an expanded Annotation tools section with three rows — each row has a small kind icon (T, square, scribble) followed by a color-accurate mini preview, and a trash icon on the right."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/step-annotations-list-ko.png"
-                    alt="플로팅 패널의 단계 카드 — 내부 흐름 줄과 펼쳐진 주석 도구 영역. 각 항목은 작은 종류 아이콘 (T, 도형, 손그림) + 실제 색이 반영된 미리보기 + 우측 휴지통 아이콘."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>The annotation list inside a step card — color-accurate previews per kind, single-click to open the property popup, trash to delete. The Inner flow header above it folds and unfolds with the same gesture.</figcaption>
-                  <figcaption data-ko>단계 카드 안 주석 목록 — 종류별로 실제 색이 반영된 미리보기, 클릭 한 번으로 속성 popup, 휴지통으로 삭제. 그 위의 내부 흐름 머리글도 같은 방식으로 접고 펼 수 있습니다.</figcaption>
-                </figure>
-
-                <h3 data-en>Resize, rotate, animate</h3>
-                <h3 data-ko>크기 조절·회전·애니메이션</h3>
-                <p data-en>Click an annotation to reveal handles. Corner drag = resize, top <span class="iicon"><svg><use href="./assets/sprite.svg#i-rotate"/></svg></span> = rotate, bottom-left <span class="iicon is-trash"><svg><use href="./assets/sprite.svg#i-trash"/></svg></span> = delete. Rotation + animation combine, the annotation lands at the chosen angle.</p>
-                <p data-ko>주석을 클릭하면 모서리 손잡이가 나타납니다. 모서리를 드래그하면 크기 조절, 상단의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-rotate"/></svg></span> 로 회전, 좌측 아래의 <span class="iicon is-trash"><svg><use href="./assets/sprite.svg#i-trash"/></svg></span> 로 삭제. 회전과 등장 효과가 결합되어 최종 각도로 자연스럽게 안착합니다.</p>
-
-                <h3 data-en>Undo &amp; redo <span class="new-badge">NEW v0.8.0</span></h3>
-                <h3 data-ko>되돌리기·다시 실행 <span class="new-badge">NEW v0.8.0</span></h3>
-                <p data-en>Any edit you make in the panel — a color, a move, a delete, applying formatting — can be stepped back. Press <span class="kbd">Ctrl</span><span class="kbd">Z</span> to undo and <span class="kbd">Ctrl</span><span class="kbd">Shift</span><span class="kbd">Z</span> to redo, or use the <strong>↶ ↷</strong> buttons next to the theme toggle in the panel header. Moving between steps doesn't count as an edit. If you undo while you're on a different step, Manuscript jumps back to the step where the change happened so you see it revert.</p>
-                <p data-ko>작성 패널에서 한 편집 — 색, 이동, 삭제, 서식 적용 — 은 한 단계씩 되돌릴 수 있어요. <span class="kbd">Ctrl</span><span class="kbd">Z</span> 로 되돌리기, <span class="kbd">Ctrl</span><span class="kbd">Shift</span><span class="kbd">Z</span> 로 다시 실행, 또는 패널 머리글의 테마 버튼 옆 <strong>↶ ↷</strong> 버튼을 쓰세요. 단계 사이를 오가는 건 편집으로 치지 않습니다. 다른 단계에 있을 때 되돌리면, 변경이 일어난 단계로 먼저 이동해 되돌려지는 모습을 보여줘요.</p>
-                <figure>
-                  <img
-                    src="./assets/screenshots/undo-redo-en.png"
-                    alt="Panel header close-up — the undo (↶) and redo (↷) buttons sit just left of the theme toggle."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/undo-redo-ko.png"
-                    alt="패널 머리글 근접 — 되돌리기(↶)·다시 실행(↷) 버튼이 테마 버튼 바로 왼쪽에 있습니다."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>The ↶ ↷ buttons sit in the panel header, just left of the theme toggle — or press Ctrl+Z / Ctrl+Shift+Z.</figcaption>
-                  <figcaption data-ko>↶ ↷ 버튼은 패널 머리글의 테마 버튼 바로 왼쪽에 있어요 — 또는 Ctrl+Z / Ctrl+Shift+Z 를 누르세요.</figcaption>
-                </figure>
-
-                <h3 data-en>Copy formatting <span class="new-badge">NEW v0.8.0</span></h3>
-                <h3 data-ko>서식 복사 <span class="new-badge">NEW v0.8.0</span></h3>
-                <p data-en>Spent time styling one annotation and want the rest to match? Open its property popup and click the <strong>brush</strong> button to the left of the Muted / Vibrant toggle. A small menu drops down: <strong>This step only</strong> copies the style onto the same kind of annotation on this step; <strong>All steps</strong> does it across the whole manuscript. Position, size, and wording stay as they are — only the look is copied. The spotlight has the same brush button to match every step's highlight at once.</p>
-                <p data-ko>주석 하나를 공들여 꾸몄고 나머지도 똑같이 맞추고 싶다면, 그 주석의 속성 창을 열고 Muted / Vibrant 토글 왼쪽의 <strong>붓</strong> 버튼을 누르세요. 작은 메뉴가 펼쳐집니다 — <strong>이 스텝만</strong> 은 이 스텝의 같은 종류 주석에, <strong>전체 스텝</strong> 은 매뉴스크립트 전체에 스타일을 입힙니다. 위치·크기·문구는 그대로 두고 모양만 복사돼요. 강조 표시에도 같은 붓 버튼이 있어 모든 단계의 강조를 한 번에 맞출 수 있습니다.</p>
-                <figure>
-                  <img
-                    src="./assets/screenshots/format-painter-en.png"
-                    alt="Annotation property popup with the brush menu open, showing This step only and All steps."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/format-painter-ko.png"
-                    alt="주석 속성 창에서 붓 메뉴가 열려 이 스텝만·전체 스텝이 보이는 모습."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Click the brush in the property popup, then pick This step only or All steps to copy the look onto matching annotations.</figcaption>
-                  <figcaption data-ko>속성 창의 붓을 누르고 이 스텝만 또는 전체 스텝을 고르면, 같은 종류의 주석에 모양이 그대로 입혀집니다.</figcaption>
-                </figure>
-
-                <h3 data-en>Copy &amp; paste annotations <span class="new-badge">NEW v0.8.0</span></h3>
-                <h3 data-ko>주석 복사·붙여넣기 <span class="new-badge">NEW v0.8.0</span></h3>
-                <p data-en>Select an annotation and press <span class="kbd">Ctrl</span><span class="kbd">C</span>, then <span class="kbd">Ctrl</span><span class="kbd">V</span> to paste a copy. Paste into the <strong>same step</strong> and each copy steps a little down and to the right so it doesn't sit on top of the original. Paste into <strong>another step</strong> and it lands at the same spot on the screen. The pasted copy is selected right away, so its property popup is open and ready to edit.</p>
-                <p data-ko>주석을 고르고 <span class="kbd">Ctrl</span><span class="kbd">C</span>, 이어서 <span class="kbd">Ctrl</span><span class="kbd">V</span> 로 복제합니다. <strong>같은 스텝</strong> 에 붙이면 원본 위에 겹치지 않도록 조금씩 우하단으로 어긋나 놓이고, <strong>다른 스텝</strong> 에 붙이면 화면의 같은 위치에 놓여요. 붙인 주석은 곧바로 선택돼 속성 창이 열린 채라 바로 편집할 수 있습니다.</p>
-
-              </section>
-
-              <section id="g-steps">
-                <h2 data-en>4. Steps &amp; reorder</h2>
-                <h2 data-ko>4. 스텝과 재배치</h2>
-                <ul data-en>
-                  <li><strong>Insert between</strong> — small <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span> between cards.</li>
-                  <li><strong>Append</strong> — large <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span> at the bottom.</li>
-                  <li><strong>Reorder</strong> — drag a step card to move it.</li>
-                  <li><strong>Spotlight a step</strong> — click the card. The page auto-scrolls to the picked element and shows the spotlight.</li>
-                  <li><strong>Title &amp; description</strong> — both editable directly on the card. Description doubles as the presenter note and is read aloud during replay.</li>
-                  <li><strong>Timer chip</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-timer"/></svg></span> — click the seconds value on the top-right to set auto-advance.</li>
-                  <li><strong>Action toggle</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> — the icon on the top-right switches the step between auto-advance and wait-for-user-click.</li>
-                  <li><strong>Inner flow &amp; Annotation tools</strong> — two collapsible sections at the bottom of the card. Click a header to fold or unfold; see §3 (Annotation tools) and §5 (Inner flow) for details.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>스텝 사이 삽입</strong> — 카드 사이 작은 <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span>.</li>
-                  <li><strong>끝에 추가</strong> — 하단 큰 <span class="iicon"><svg><use href="./assets/sprite.svg#i-plus"/></svg></span>.</li>
-                  <li><strong>순서 변경</strong> — 스텝 카드를 드래그.</li>
-                  <li><strong>스텝 spotlight</strong> — 카드 클릭. 페이지가 해당 요소로 자동 스크롤되고 spotlight 표시.</li>
-                  <li><strong>제목 · 설명</strong> — 카드에서 직접 편집 가능. 설명은 발표자 노트로 쓰이고 재생 중 음성으로 읽힙니다.</li>
-                  <li><strong>타이머 chip</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-timer"/></svg></span> — 카드 우상단 초 단위 값을 클릭해 자동 진행 시간 설정.</li>
-                  <li><strong>action 토글</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> — 우상단 아이콘으로 자동 진행과 클릭 대기를 전환.</li>
-                  <li><strong>내부 흐름 · 주석 도구</strong> — 카드 하단의 두 영역. 머리글 클릭으로 접고 펼 수 있습니다. 자세한 동작은 §3 (주석 도구) 와 §5 (내부 흐름) 참고.</li>
-                </ul>
-                <figure>
-                  <img
-                    src="./assets/screenshots/flow-04-steps-en.png"
-                    alt="Floating panel with three step cards stacked vertically — each card shows a number badge, a thumbnail of its picked element, a title and description block, and the timer chip + action toggle in the corner. The middle step has an Inner flow timeline plus an Annotation tools section, both collapsible."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/flow-04-steps-ko.png"
-                    alt="플로팅 패널에 세 개의 단계 카드가 세로로 쌓여 있는 모습 — 각 카드에 번호 배지, picked element 썸네일, 제목·설명 블록, 우상단의 타이머 chip 과 action 토글. 가운데 단계 카드에는 접고 펼 수 있는 내부 흐름 타임라인과 주석 도구 영역도 함께 보임."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Step cards stacked in the panel — drag to reorder, click between cards to insert, click a card to jump the spotlight to that step. Inner flow and Annotation tools sections at the bottom fold and unfold with their headers.</figcaption>
-                  <figcaption data-ko>패널에 쌓인 단계 카드 — 드래그로 순서 변경, 카드 사이 클릭으로 끼워 넣기, 카드 클릭으로 그 단계로 spotlight 이동. 하단의 내부 흐름·주석 도구 영역은 머리글 클릭으로 접고 펼 수 있습니다.</figcaption>
-                </figure>
-              </section>
-
-              <section id="g-subs">
-                <h2 data-en>5. Inner flow</h2>
-                <h2 data-ko>5. 내부 흐름</h2>
-                <p data-en>
-                  A single step can spotlight a <strong>row of related items</strong>
-                  in sequence while the same description plays — toolbar buttons,
-                  feature cards, form fields. The first element you pick is
-                  the main one; extra elements join the step's <strong>Inner flow</strong>
-                  section below the card and are visited one by one during
-                  replay with smooth transitions.
-                </p>
-                <p data-ko>
-                  하나의 단계가 <strong>여러 요소를 순서대로</strong> 비춥니다 —
-                  툴바 버튼, 카드 묶음, 폼 필드 같은 묶음. 처음 picker 로 잡은 게
-                  대표 요소이고, 추가 요소는 단계 카드 아래 <strong>내부 흐름</strong>
-                  영역에 줄지어 추가되어 재생 시 부드러운 전환으로 하나씩
-                  강조됩니다. 단계의 설명이 읽히는 동안 움직여요.
-                </p>
-
-                <h3 data-en>Adding sub-elements</h3>
-                <h3 data-ko>내부 요소 추가</h3>
-                <ul data-en>
-                  <li>Below the step card, click the dashed <strong>+</strong> at the right end of the sub track. The picker turns on — click an element on the page to add it as a sub.</li>
-                  <li><strong>Subs have to live on the same page as the primary.</strong> If you've navigated to a different page, the picker refuses. Either go back to the original page, or rebuild the step from the right page.</li>
-                  <li>When you add a new sub, the step's remaining time is split evenly across the primary and every sub.</li>
-                </ul>
-                <ul data-ko>
-                  <li>단계 카드 아래 내부 흐름 줄 오른쪽 끝의 점선 <strong>+</strong> 를 누르면 선택 모드가 켜집니다 — 페이지에서 원하는 부분을 클릭하면 그 자리에 추가됩니다.</li>
-                  <li><strong>내부 요소는 대표 요소와 같은 페이지에서만 선택할 수 있습니다.</strong> 다른 페이지로 이동한 상태라면 선택이 거부돼요. 원래 페이지로 돌아가거나, 맞는 페이지에서 단계를 새로 만드세요.</li>
-                  <li>새 요소를 추가하면 단계의 남은 시간이 대표 요소와 추가된 모든 내부 요소에 똑같이 나눠집니다.</li>
-                </ul>
-
-                <figure>
-                  <img
-                    src="./assets/screenshots/sub-track-en.png"
-                    alt="Floating panel step card with the sub-element track below — primary thumbnail labeled 1, sub thumbnails labeled 2, 3, 4 in a horizontal row, with the dashed plus button at the right end."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/sub-track-ko.png"
-                    alt="플로팅 패널 단계 카드 아래 내부 흐름 줄 — 대표 썸네일(1번), 추가된 내부 요소 썸네일(2, 3, 4번)이 가로로, 우측 끝에 점선 + 버튼."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Sub-element track on a step card — primary thumbnail (1), sub thumbnails (2, 3, 4), gap labels between them, dashed + at the right end to add a new sub.</figcaption>
-                  <figcaption data-ko>단계 카드의 내부 흐름 줄 — 대표 썸네일(1번), 추가된 내부 요소들(2, 3, 4번), 그 사이의 시간 라벨, 우측 끝의 점선 + 로 새 요소 추가.</figcaption>
-                </figure>
-
-                <h3 data-en>Numbered badges &amp; replay order</h3>
-                <h3 data-ko>번호 뱃지와 재생 순서</h3>
-                <p data-en>
-                  Each node in the sequence wears a circle badge: primary = 1,
-                  first sub = 2, second sub = 3, … The badge is the order the
-                  spotlight visits during replay. Smooth interpolated transitions
-                  (350 ms, ease-in-out-cubic) carry the spotlight from one node
-                  to the next.
-                </p>
-                <p data-ko>
-                  각 요소에 동그라미 번호 배지가 붙습니다 — 대표 요소가 1, 첫 내부 요소가 2,
-                  두 번째 내부 요소가 3 … 식이에요. 재생할 때 강조 표시가 이 번호 순서대로
-                  옮겨갑니다. 요소 사이의 전환은 0.35 초 동안 부드럽게 흘러가요.
-                </p>
-
-                <h3 data-en>Timing model</h3>
-                <h3 data-ko>시간 모델</h3>
-                <ul data-en>
-                  <li><strong>The step's total time stays the same.</strong> The time spent on each node (primary + every sub) adds up to the step's auto-advance seconds. The auto-advance value is the reference; everything else fits inside it.</li>
-                  <li><strong>Drag a gap label</strong> (the marker between two nodes) to change how the time is split. The label slows down a touch so you can land it precisely; the other gaps stretch or shrink in proportion so the total doesn't change.</li>
-                  <li><strong>No node goes under 100 ms.</strong> Even the shortest step stays on each element for at least that long.</li>
-                  <li><strong>Voice narration runs separately.</strong> The step's description is read aloud once over the whole sub sequence, and the step waits for whichever finishes last — narration or the last sub.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>단계 전체 시간은 그대로 유지됩니다.</strong> 각 요소에 머무는 시간을 다 더하면 단계의 자동 진행 시간과 같아요. 자동 진행 값이 기준이고, 그 안에서 요소마다 나눠 갖습니다.</li>
-                  <li><strong>요소 사이의 시간 라벨을 드래그</strong>하면 시간 배분이 바뀝니다. 라벨이 미세하게 따라오도록 살짝 제한이 걸려 있어 원하는 값에 정확히 멈출 수 있고, 다른 시간은 그만큼 비례해 늘거나 줄어 전체 시간은 그대로 유지됩니다.</li>
-                  <li><strong>한 요소의 최소 시간은 0.1 초.</strong> 가장 짧게 잡아도 그만큼은 머무릅니다.</li>
-                  <li><strong>음성 안내는 별도로 흐릅니다.</strong> 단계 설명은 내부 흐름 전체에 걸쳐 한 번 읽히고, 음성과 마지막 요소 중 늦게 끝나는 쪽까지 기다린 다음 다음 단계로 넘어갑니다.</li>
-                </ul>
-
-                <h3 data-en>Time-shift — pull a sub earlier / push later</h3>
-                <h3 data-ko>시간 이동 — 요소를 앞당기거나 늦추기</h3>
-                <p data-en>
-                  When a sub is selected, two small chevron buttons appear at its
-                  bottom corners — <span class="kbd">‹</span> pulls it 0.1 s earlier,
-                  <span class="kbd">›</span> pushes it 0.1 s later. Keyboard
-                  equivalents: <span class="kbd">←</span> / <span class="kbd">→</span>.
-                  The buttons appear on hover (and while a sub is selected), so
-                  they don't clutter the track when you're not adjusting timing.
-                </p>
-                <p data-ko>
-                  내부 요소를 선택하면 그 아래 양쪽 모서리에 작은 화살표 버튼이 나타납니다 —
-                  <span class="kbd">‹</span> 누르면 0.1 초 앞당기기, <span class="kbd">›</span>
-                  누르면 0.1 초 늦추기. 키보드로는 <span class="kbd">←</span> / <span class="kbd">→</span>
-                  로도 같은 동작이 됩니다. 버튼은 요소 위에 마우스를 올렸거나 선택된 상태일 때만
-                  나타나서 평소엔 화면이 어수선하지 않아요.
-                </p>
-                <ul data-en>
-                  <li><strong>One sub selected</strong> — only the gap just before it shrinks or grows. The sub plays for the same length of time, just earlier or later in the sequence.</li>
-                  <li><strong>A connected run selected</strong> — the whole run moves together. Gaps inside the run don't change.</li>
-                  <li><strong>The whole track selected</strong> — the same rule applies to the time at the start (primary) and the time at the end (last sub).</li>
-                  <li><strong>Nothing happens if a 0.1 s shift would squeeze any gap below 100 ms.</strong> Either select fewer items, or stretch the step's overall time.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>요소 하나 선택</strong> — 그 요소 바로 앞 시간만 줄거나 늘어납니다. 요소 자체가 화면에 머무는 길이는 그대로이고, 단계 안에서 시작 시각만 앞이나 뒤로 옮겨가요.</li>
-                  <li><strong>붙어 있는 여러 요소 선택</strong> — 묶음 전체가 함께 이동합니다. 묶음 안쪽 시간은 변하지 않아요.</li>
-                  <li><strong>전체 선택</strong> — 시작(대표 요소가 머무는 시간) 과 끝(마지막 내부 요소가 머무는 시간) 양쪽에 같은 규칙이 적용됩니다.</li>
-                  <li><strong>0.1 초 이동했을 때 어느 시간이라도 0.1 초 아래로 떨어지면 아무 변화도 일어나지 않습니다.</strong> 선택을 줄이거나, 단계 전체 시간을 늘려주세요.</li>
-                </ul>
-
-                <figure>
-                  <img
-                    src="./assets/screenshots/sub-timeshift-en.png"
-                    alt="Two sub thumbnails with the right one selected — the selected sub shows small ‹ and › chevron buttons at its bottom corners."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/sub-timeshift-ko.png"
-                    alt="두 내부 요소 썸네일 중 오른쪽이 선택된 상태 — 선택된 요소 아래 모서리에 작은 ‹ 와 › 화살표 버튼."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Selected sub shows the ‹ › chevrons at its bottom corners. Hover the buttons or press <span class="kbd">←</span> / <span class="kbd">→</span> to shift the sub by 0.1 s.</figcaption>
-                  <figcaption data-ko>선택된 내부 요소의 양쪽 아래 모서리에 ‹ › 화살표 버튼이 나타납니다. 버튼을 누르거나 <span class="kbd">←</span> / <span class="kbd">→</span> 키로 0.1 초씩 이동.</figcaption>
-                </figure>
-
-                <h3 data-en>Multi-select &amp; deletion</h3>
-                <h3 data-ko>다중 선택과 삭제</h3>
-                <ul data-en>
-                  <li><strong>Click</strong> a sub — select just that one and move the spotlight to that element.</li>
-                  <li><strong><span class="kbd">Ctrl</span> / <span class="kbd">Cmd</span> + click</strong> — add or remove this sub from the current selection.</li>
-                  <li><strong><span class="kbd">Shift</span> + click</strong> — select the range from the last clicked sub to this one.</li>
-                  <li><strong><span class="kbd">Esc</span></strong> or click outside the sub track — clear the selection.</li>
-                  <li><strong>Click the primary thumbnail</strong> (badge 1) — selects the primary instead of a sub and moves the spotlight back to it.</li>
-                  <li><strong><span class="kbd">Delete</span> / <span class="kbd">Backspace</span></strong> while subs are selected — removes them all. The remaining gaps share out the freed time so the step's total stays the same. If you're typing into a step name, description, or the panel title, the key is left alone so your typing isn't interrupted.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>클릭</strong> — 내부 요소 하나만 선택하고 강조 표시가 그 요소로 이동합니다.</li>
-                  <li><strong><span class="kbd">Ctrl</span> / <span class="kbd">Cmd</span> + 클릭</strong> — 클릭한 요소를 현재 선택에 더하거나 빼기.</li>
-                  <li><strong><span class="kbd">Shift</span> + 클릭</strong> — 마지막으로 클릭한 요소부터 이번 요소까지 범위 선택.</li>
-                  <li><strong><span class="kbd">Esc</span></strong> 또는 줄 바깥을 클릭 — 선택 해제.</li>
-                  <li><strong>대표 썸네일(1번 배지) 클릭</strong> — 내부 요소 대신 대표 요소가 선택되고 강조 표시가 그쪽으로 돌아갑니다.</li>
-                  <li><strong><span class="kbd">Delete</span> / <span class="kbd">Backspace</span></strong> — 선택된 내부 요소가 모두 삭제됩니다. 남은 요소들이 비워진 시간을 나눠 가져 단계 전체 시간은 그대로 유지돼요. 단계 이름·설명·패널 제목에 글을 입력 중일 때는 이 키가 그대로 입력에 쓰여 작성에 방해되지 않습니다.</li>
-                </ul>
-
-                <h3 data-en>Reorder</h3>
-                <h3 data-ko>재배치</h3>
-                <p data-en>
-                  Drag and drop with <strong>insert-between</strong> behavior.
-                  Drop on the left half of a sub to slip in before it, on the
-                  right half to slip in after. The gap labels between subs work
-                  as drop spots too, and a thin vertical bar shows you exactly
-                  where the sub will land while you're dragging. If you drag a
-                  sub that's part of the current selection, the whole selected
-                  group moves together and keeps its order; dragging a sub
-                  that's not selected moves just that one.
-                </p>
-                <p data-ko>
-                  드래그 & 드롭 — <strong>사이에 끼워 넣기</strong> 방식으로 동작합니다.
-                  sub 의 왼쪽 절반에 떨구면 그 앞에, 오른쪽 절반에 떨구면 그 뒤에
-                  끼워집니다. sub 사이의 간격 라벨도 떨굴 수 있는 자리이며, 드래그하는
-                  동안 얇은 세로 막대가 sub 가 정확히 어디에 들어갈지 미리 보여줍니다.
-                  현재 선택에 포함된 sub 를 드래그하면 선택 묶음 전체가 순서를 유지한
-                  채 함께 이동하고, 선택되지 않은 sub 를 드래그하면 그 sub 하나만
-                  이동합니다.
-                </p>
-
-                <h3 data-en>Action steps + subs</h3>
-                <h3 data-ko>Action 스텝과 sub 의 조합</h3>
-                <p data-en>
-                  When a step is an action step (<em>wait for click</em>) and
-                  also has sub-elements, the sub sequence plays through to the
-                  end first. After the last sub finishes its time on screen, the
-                  click-wait kicks in <strong>on the last sub's element</strong>
-                  — that's where the user clicks to advance to the next step.
-                </p>
-                <p data-ko>
-                  스텝이 action 스텝 (<em>클릭 대기</em>) 이면서 sub 도 가지고 있으면,
-                  sub 시퀀스가 끝까지 재생된 다음 마지막 sub 요소에서 action 대기가
-                  시작됩니다. 사용자는 <strong>마지막 sub 요소</strong> 를 클릭해서 다음
-                  스텝으로 넘어갑니다.
-                </p>
-
-                <h3 data-en>Replay notes</h3>
-                <h3 data-ko>재생 시 참고</h3>
-                <ul data-en>
-                  <li><strong>Page scroll during transition is fine</strong> — the end rect is recomputed each frame so the spotlight tracks the real DOM position.</li>
-                  <li><strong>A sub that fails to resolve on the page is skipped</strong> with a warn — only the primary failing triggers the not-found recovery modal.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>전환 중 페이지 스크롤은 OK</strong> — 종료 rect 를 매 프레임 다시 계산해서 실제 DOM 위치를 따라갑니다.</li>
-                  <li><strong>sub 가 페이지에서 못 찾아지면 그 sub 만 건너뜁니다</strong> (경고 표시) — primary 가 실패할 때만 not-found 복구 모달이 뜹니다.</li>
-                </ul>
-              </section>
-
-              <section id="g-action">
-                <h2 data-en>6. Action steps</h2>
-                <h2 data-ko>6. action 스텝</h2>
-                <p data-en>
-                  Turn a step into an action by clicking the pause icon <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> on the
-                  card. During replay, an <strong>"Click or type in this area"</strong>
-                  bubble appears on the target element and auto-advance pauses
-                  until the user interacts. If the click navigates to a new URL,
-                  Manuscript resumes the manuscript on the new page automatically.
-                </p>
-                <p data-ko>
-                  카드의 일시정지 아이콘 <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> 을 클릭하면 그 스텝이 action 스텝으로 바뀝니다.
-                  재생 중 대상 요소에 <strong>"이 영역을 클릭하거나 입력하세요"</strong>
-                  버블이 뜨고 자동 진행이 멈춥니다. 사용자가 클릭해서 다른 URL로 이동해도
-                  새 페이지에서 시연이 자동 재개됩니다.
-                </p>
-                <figure>
-                  <img
-                    src="./assets/screenshots/action-bubble-en.png"
-                    alt="Replay mode mid-tour — a button on the page is spotlighted with a tooltip-style bubble below it reading 'Click or type in this area' and a small chevron pointing back up at the button."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/action-bubble-ko.png"
-                    alt="재생 중 action 스텝 — spotlight 가 대상 요소를 비추고 그 아래 '이 영역을 클릭하거나 입력하세요' 버블이 떠 있는 모습."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Action step during replay — the spotlight holds on the target and a "Click or type in this area" bubble waits for the user. Auto-advance pauses; the page navigation (if any) resumes the manuscript on the next page automatically.</figcaption>
-                  <figcaption data-ko>재생 중 action 스텝 — spotlight 가 대상에 머무르고 "이 영역을 클릭하거나 입력하세요" 버블이 사용자 액션을 기다립니다. 자동 진행은 정지, 다른 URL 로 이동하면 새 페이지에서 시연이 자동 재개.</figcaption>
-                </figure>
-              </section>
-
-              <section id="g-replay">
-                <h2 data-en>7. Replay &amp; prompter</h2>
-                <h2 data-ko>7. 재생과 프롬프터</h2>
-                <p data-en>
-                  Hit <span class="iicon"><svg><use href="./assets/sprite.svg#i-play"/></svg></span> in the panel footer. A translucent
-                  control bar appears at the bottom — it gets a touch darker when
-                  you hover over it, and it remembers where you dragged it, even
-                  after the page navigates. The progress strip floats just above
-                  the control bar.
-                </p>
-                <p data-ko>
-                  패널 하단의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-play"/></svg></span> 로 재생을 시작합니다. 반투명 컨트롤
-                  바가 하단에 나타나고, 마우스를 올리면 살짝 진해집니다. 드래그로
-                  위치를 옮기면 페이지가 이동해도 그 위치 그대로 유지돼요. 진행
-                  표시줄은 컨트롤 바 바로 위에 떠 있습니다.
-                </p>
-                <h3 data-en>Keyboard</h3>
-                <h3 data-ko>키보드</h3>
-                <ul data-en>
-                  <li><span class="kbd">←</span> / <span class="kbd">→</span> — previous / next step</li>
-                  <li><span class="kbd">Space</span> — pause / resume</li>
-                  <li><span class="kbd">Esc</span> — exit replay</li>
-                </ul>
-                <ul data-ko>
-                  <li><span class="kbd">←</span> / <span class="kbd">→</span> — 이전 / 다음 스텝</li>
-                  <li><span class="kbd">Space</span> — 일시정지 / 재개</li>
-                  <li><span class="kbd">Esc</span> — 재생 종료</li>
-                </ul>
-                <h3 data-en>Detached prompter</h3>
-                <h3 data-ko>발표자 노트 분리</h3>
-                <p data-en>The <span class="iicon"><svg><use href="./assets/sprite.svg#i-prompter"/></svg></span> prompter button in the panel's footer opens a separate browser window with a 3-column layout — step list on the left, the current step in the middle, the next one on the right. Same keyboard shortcuts as the panel, so you can drive the tour from a second screen.</p>
-                <p data-ko>패널 하단의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-prompter"/></svg></span> 프롬프터 버튼을 누르면 별도 브라우저 창이 열립니다. 왼쪽에는 스텝 목록, 가운데에는 현재 스텝, 오른쪽에는 다음 스텝이 보이는 3 열 구조예요. 패널과 같은 단축키를 쓰니 두 번째 모니터에서 편하게 진행할 수 있습니다.</p>
-                <figure>
-                  <img
-                    src="./assets/screenshots/flow-06-prompter-en.png"
-                    alt="Detached prompter window with three columns — Steps list, Now (current step), Next — and a footer with counter, status, TTS toggle, and prev/pause/next controls"
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/flow-06-prompter-ko.png"
-                    alt="분리된 prompter 창 — 세 컬럼 (단계 목록, 현재, 다음) + 하단 카운터, 상태, TTS 토글, 이전/일시정지/다음 컨트롤"
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Detached prompter — Steps rail on the left, current step in the middle, upcoming step on the right, with counter and controls along the bottom.</figcaption>
-                  <figcaption data-ko>분리된 프롬프터 — 좌측 스텝 목록, 중앙 현재 스텝, 우측 다음 스텝, 하단에 카운터와 컨트롤.</figcaption>
-                </figure>
-                <h3 data-en>Voice narration</h3>
-                <h3 data-ko>음성 안내</h3>
-                <p data-en>Toggle the speaker icon on the control bar (or in the prompter window's footer). Step descriptions are read out loud by the browser's built-in voice. Pick a voice in the panel's gear settings. Auto-advance waits for the narration to finish before moving on.</p>
-                <p data-ko>컨트롤 바(또는 프롬프터 창 하단)의 스피커 아이콘으로 켜고 끕니다. 스텝 설명을 브라우저 내장 음성으로 읽어 주고, 사용할 목소리는 패널의 기어(설정) 메뉴에서 고를 수 있어요. 자동 진행은 음성이 끝날 때까지 기다린 다음 다음 스텝으로 넘어갑니다.</p>
-
-                <h3 data-en>Matching pages with a query or hash</h3>
-                <h3 data-ko>쿼리·해시가 있는 페이지 알아보기</h3>
-                <p data-en>
-                  When you play a manuscript, Manuscript checks that you're on
-                  the right page by its web address. Normally it looks only at
-                  the main address and ignores everything after the
-                  <code>?</code> or <code>#</code> — that way a tracking link
-                  like <code>?utm_source=email</code> never makes it think
-                  you're on the wrong page.
-                </p>
-                <p data-ko>
-                  매뉴스크립트를 재생할 때 Manuscript 는 웹 주소를 보고 지금
-                  맞는 페이지인지 확인합니다. 평소에는 주소의 본체만 보고
-                  <code>?</code> 나 <code>#</code> 뒤쪽은 무시해요. 그래야
-                  <code>?utm_source=email</code> 같은 추적용 링크 때문에 엉뚱한
-                  페이지로 오해하지 않거든요.
-                </p>
-                <p data-en>
-                  But some sites switch what's on screen using exactly that
-                  part — think <code>?tab=billing</code> or a
-                  <code>#/reports</code> address. On those, every step can share
-                  the same main address while the screen is completely
-                  different, so playback could start on the wrong view or stop
-                  moving between steps. The fix: open the
-                  <span class="iicon"><svg><use href="./assets/sprite.svg#i-gear"/></svg></span>
-                  gear settings in the panel footer and turn on
-                  <strong>Match full URL (query &amp; hash)</strong>. Manuscript
-                  then treats those addresses as different pages, so the
-                  wrong-page warning and the automatic jumps between steps work
-                  the way you'd expect. Leave it off for ordinary sites.
-                </p>
-                <p data-ko>
-                  그런데 어떤 사이트는 바로 그 뒷부분으로 화면을 바꿉니다 —
-                  <code>?tab=billing</code> 이나 <code>#/reports</code> 같은
-                  주소처럼요. 이런 사이트는 단계마다 주소 본체는 같은데 화면은
-                  전혀 다를 수 있어서, 재생이 엉뚱한 화면에서 시작하거나 단계
-                  사이를 못 넘어갈 수 있어요. 이럴 땐 패널 하단의
-                  <span class="iicon"><svg><use href="./assets/sprite.svg#i-gear"/></svg></span>
-                  기어(설정) 메뉴를 열고 <strong>전체 URL 일치 (쿼리·해시)</strong>
-                  를 켜세요. 그러면 Manuscript 가 그 주소들을 서로 다른 페이지로
-                  보고, 페이지가 다르다는 경고와 단계 사이 자동 이동이 제대로
-                  동작합니다. 일반 사이트에서는 꺼 두면 됩니다.
-                </p>
-                <figure>
-                  <img
-                    src="./assets/screenshots/settings-url-en.png"
-                    alt="The panel's gear settings popup open — under the narration voice picker, a divider, then a 'Match full URL (query & hash)' checkbox with a one-line explanation. The gear button sits in the panel footer just below."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/settings-url-ko.png"
-                    alt="패널의 기어(설정) 팝업이 열린 모습 — 내레이션 음성 선택 아래에 구분선, 그 아래 '전체 URL 일치 (쿼리·해시)' 체크박스와 한 줄 설명. 기어 버튼은 바로 아래 패널 하단에 있습니다."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Gear settings in the panel footer — "Match full URL (query &amp; hash)" sits under the narration voice picker. Off by default; turn it on only for query/hash-routed sites.</figcaption>
-                  <figcaption data-ko>패널 하단의 기어(설정) — "전체 URL 일치 (쿼리·해시)" 가 내레이션 음성 선택 아래에 있어요. 기본은 꺼짐이고, 쿼리·해시로 화면이 바뀌는 사이트에서만 켜면 됩니다.</figcaption>
-                </figure>
-
-                <h3 data-en>Edit a step from the prompter</h3>
-                <h3 data-ko>발표자 창에서 단계 편집</h3>
-                <p data-en>
-                  While the prompter is <strong>paused</strong>, the current
-                  step card in the middle column doubles as a light editor.
-                  Click any field below, type, then click away — the change
-                  saves on the spot. Pressing play after an edit rewinds that
-                  step so the timer, the highlight walk, and the spoken
-                  narration all start over with the new content.
-                </p>
-                <p data-ko>
-                  발표자 창이 <strong>일시정지</strong> 상태일 때는 가운데 단계 카드가
-                  가벼운 편집기 역할을 합니다. 아래 항목을 클릭해 입력한 뒤 다른
-                  곳을 클릭하면 자동 저장돼요. 편집 후 재생 버튼을 누르면 그 단계가
-                  처음으로 돌아가 타이머·강조 표시·음성 안내가 모두 새 내용으로
-                  다시 시작됩니다.
-                </p>
-                <ul data-en>
-                  <li><strong>Title and description</strong> — click the text and type. <span class="kbd">Tab</span> moves between fields, click away to save.</li>
-                  <li><strong>Action toggle</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> — the small badge next to the timer switches the step between auto-advance and wait-for-click.</li>
-                  <li><strong>Step timer</strong> — click the <span class="iicon"><svg><use href="./assets/sprite.svg#i-timer"/></svg></span> 9.5s badge and type a new number. The number is pre-selected so you can replace it in one keystroke.</li>
-                  <li><strong>Each inner element's screen time</strong> — if the step walks through inner-flow elements, they stack vertically under the main thumbnail with each duration underneath. Click one to select it, then <span class="kbd">←</span> / <span class="kbd">→</span> nudges its time by 0.1 seconds. The step's total length stays the same. Press <span class="kbd">Esc</span> to clear the selection.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>제목과 설명</strong> — 글자를 클릭하고 바로 입력. <span class="kbd">Tab</span> 으로 다음 칸 이동, 다른 곳을 클릭하면 저장.</li>
-                  <li><strong>액션 토글</strong> <span class="iicon"><svg><use href="./assets/sprite.svg#i-pause"/></svg></span> — 타이머 옆 작은 배지로 자동 진행 ↔ 클릭 대기를 전환합니다.</li>
-                  <li><strong>단계 타이머</strong> — <span class="iicon"><svg><use href="./assets/sprite.svg#i-timer"/></svg></span> 9.5s 배지를 클릭하고 새 숫자를 입력하세요. 들어가면 숫자가 선택돼 있어 그대로 새 값을 입력하면 됩니다.</li>
-                  <li><strong>각 내부 요소가 화면에 머무는 시간</strong> — 단계가 여러 요소를 순서대로 보여주는 경우, 발표자 창에 대표 썸네일 아래로 요소들이 세로로 쌓이고 각 요소 아래에 머무는 시간이 표시됩니다. 한 요소를 클릭해 선택한 뒤 <span class="kbd">←</span> / <span class="kbd">→</span> 키로 0.1 초씩 조절하세요. 단계 전체 시간은 그대로 유지됩니다. <span class="kbd">Esc</span> 키로 선택을 해제할 수 있어요.</li>
-                </ul>
-                <figure>
-                  <img
-                    src="./assets/screenshots/prompter-edit-en.png"
-                    alt="Prompter window in paused state with the middle column showing inline-editable fields — title and description are highlighted, the timer pill shows ⏱ 9.5s with the number selected, and inner-flow rows stack under the main thumbnail with one row selected (highlighted) and its dwell time visible underneath."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/prompter-edit-ko.png"
-                    alt="일시정지 상태의 발표자 창 — 가운데 컬럼의 제목·설명이 편집 가능, 타이머 배지 ⏱ 9.5s 의 숫자가 선택된 상태, 대표 썸네일 아래 내부 흐름 요소들이 세로로 쌓여 있고 한 요소가 강조 선택된 모습 + 각 요소 아래의 머무는 시간 표시."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Paused prompter as a light editor — title, description, action badge, timer (number-only), and per-element screen time all editable in place. Select an inner element with a click, then <span class="kbd">←</span> / <span class="kbd">→</span> nudges its time ±0.1 seconds.</figcaption>
-                  <figcaption data-ko>일시정지 상태의 발표자 창이 가벼운 편집기로 — 제목·설명·액션 배지·타이머 (숫자만) 와 내부 요소별 머무는 시간을 그 자리에서 수정. 내부 요소를 클릭해 선택하면 <span class="kbd">←</span> / <span class="kbd">→</span> 키로 ±0.1 초씩 조절.</figcaption>
-                </figure>
-                <p class="callout" data-en>
-                  <strong>Paused only.</strong> The editor opens while the
-                  prompter is paused. Press play after an edit to replay that
-                  step from the top with the new copy.
-                </p>
-                <p class="callout" data-ko>
-                  <strong>일시정지 상태에서만.</strong> 편집기는 발표자 창이
-                  일시정지 상태일 때 열립니다. 편집 후 재생 버튼을 누르면 그 단계가
-                  새 내용으로 처음부터 다시 재생돼요.
-                </p>
-              </section>
-
-              <section id="g-record">
-                <h2 data-en>8. Recording</h2>
-                <h2 data-ko>8. 녹화</h2>
-                <p data-en>
-                  The red <span class="iicon is-record"><svg><use href="./assets/sprite.svg#i-record"/></svg></span>
-                  button in the panel footer turns your tour into a video file. A separate
-                  recorder window opens to run it — it plays the whole tour by itself, keeps
-                  every Manuscript control off the page, and captures the voice narration
-                  along with everything on screen. It even keeps recording when your tour
-                  moves between pages, so a multi-page tour comes out as one continuous
-                  video. When the last step finishes it stops on its own and hands you the
-                  file through the browser's normal save dialog.
-                </p>
-                <p data-ko>
-                  패널 아래쪽의 빨간
-                  <span class="iicon is-record"><svg><use href="./assets/sprite.svg#i-record"/></svg></span>
-                  버튼이 만들어 둔 시연을 동영상으로 만들어 줍니다. 녹화를 진행하는 별도의
-                  녹화 창이 열려요 — 시연을 스스로 끝까지 재생하면서, Manuscript 도구는 페이지에
-                  내보내지 않고, 화면에 보이는 것과 음성 안내를 함께 담습니다. 시연이 여러
-                  페이지를 오가도 녹화가 끊기지 않아서, 여러 페이지짜리 시연도 하나의 영상으로
-                  이어져요. 마지막 단계가 끝나면 알아서 멈추고, 브라우저의 저장 다이얼로그로
-                  파일을 건네줍니다.
-                </p>
-
-                <figure class="record-window-figure" data-en>
-                  <img src="./assets/screenshots/recorder-guide-en.png" alt="The Manuscript recorder window — a 'this window is not recorded' note, a screenshot of the browser's share dialog with the Window tab and 'Also share system audio' highlighted, an 'Also record my microphone' option, and a Start recording button." onerror="this.style.display='none'" />
-                  <figcaption>The recorder window. It walks you through the one share dialog — pick a <strong>Window</strong> and turn on <strong>Share system audio</strong> — with an optional microphone switch and the keyboard hints. This window controls the recording and never shows up in the video.</figcaption>
-                </figure>
-                <figure class="record-window-figure" data-ko>
-                  <img src="./assets/screenshots/recorder-guide-ko.png" alt="Manuscript 녹화 창 — '이 창은 녹화되지 않습니다' 안내, 브라우저 공유 다이얼로그에서 창 탭과 '시스템 오디오 공유'가 강조된 스크린샷, '내 목소리도 함께 녹음' 옵션, 녹화 시작 버튼." onerror="this.style.display='none'" />
-                  <figcaption>녹화 창이에요. 공유 다이얼로그 진행을 짚어 줍니다 — <strong>창(Window)</strong>을 고르고 <strong>시스템 오디오 공유</strong>를 켜세요 — 마이크 옵션과 단축키 안내도 함께. 이 창이 녹화를 제어하고, 영상에는 들어가지 않습니다.</figcaption>
-                </figure>
-
-                <h3 data-en>How to record</h3>
-                <h3 data-ko>녹화 방법</h3>
-                <ol data-en>
-                  <li>Click the red <span class="iicon is-record"><svg><use href="./assets/sprite.svg#i-record"/></svg></span> in the panel footer.</li>
-                  <li>A small recorder window opens — it runs the recording and shows your script (the current and next step) as it plays. This window itself is never in the video. Pick the <strong>video quality</strong> — <strong>Standard</strong> suits most tours; choose <strong>High quality</strong> for crisper text (the file gets larger). Want your voice in there too? Turn on <strong>Also record my microphone</strong>, then click <strong>Start recording</strong>.</li>
-                  <li>The browser asks what to share. Pick a <strong>Window</strong> — your browser window, not a single tab — tick <strong>Also share system audio</strong>, then <strong>Share</strong>. That's what carries the voice narration into the video; skip it and the recording still runs, just silent.</li>
-                  <li>Your page jumps to fullscreen and a 3-2-1 countdown gives you a moment to get ready, then recording begins. The panel and control bar are already out of the frame.</li>
-                  <li>The tour plays itself. The recorder window keeps a red dot blinking the whole time so you can tell it's rolling. Tap <span class="kbd">Space</span> to pause the tour (the recording keeps going); press <span class="kbd">Esc</span> when you want to wrap up and save. It also stops on its own when the last step finishes.</li>
-                  <li>The browser's save dialog opens with a filename like <code>manuscript-recording-YYYYMMDD-HHMM.webm</code>.</li>
-                </ol>
-                <ol data-ko>
-                  <li>패널 하단의 빨간 <span class="iicon is-record"><svg><use href="./assets/sprite.svg#i-record"/></svg></span> 버튼을 클릭합니다.</li>
-                  <li>작은 녹화 창이 열립니다 — 녹화를 진행하고, 재생되는 대로 대본(현재·다음 단계)을 보여줘요. 이 창 자체는 영상에 들어가지 않습니다. <strong>영상 화질</strong>을 고르세요 — 대부분 <strong>일반 화질</strong>로 충분하고, 글자를 더 또렷하게 담고 싶으면 <strong>고화질</strong>을 고르면 됩니다(파일이 커져요). 내 목소리도 함께 담고 싶으면 <strong>내 목소리도 함께 녹음</strong>을 켜고 <strong>녹화 시작</strong>을 누르세요.</li>
-                  <li>브라우저가 무엇을 공유할지 물어봅니다. 탭 하나가 아니라 <strong>창(Window)</strong> — 내 브라우저 창 — 을 고르고 <strong>시스템 오디오 공유</strong>를 체크한 뒤 <strong>공유</strong>를 누르세요. 음성 안내가 여기서 영상에 함께 담깁니다. 건너뛰면 녹화는 되지만 소리는 빠져요.</li>
-                  <li>페이지가 전체 화면으로 바뀌고 3·2·1 카운트다운으로 잠깐 준비할 틈을 준 뒤 녹화가 시작됩니다. 패널과 컨트롤 바는 이미 화면 밖으로 빠져 있어요.</li>
-                  <li>시연이 알아서 재생됩니다. 녹화 창에서는 빨간 점이 계속 깜빡여서 녹화 중이라는 걸 알 수 있어요. <span class="kbd">Space</span> 로 시연을 잠깐 멈출 수 있고(녹화는 계속됩니다), 끝내고 저장하려면 <span class="kbd">Esc</span> 를 누르세요. 마지막 단계가 끝나면 알아서 멈춥니다.</li>
-                  <li><code>manuscript-recording-YYYYMMDD-HHMM.webm</code> 형태의 파일명으로 브라우저 저장 다이얼로그가 열립니다.</li>
-                </ol>
-
-                <h3 data-en>Multi-page tours record in one take</h3>
-                <h3 data-ko>여러 페이지 시연도 한 번에</h3>
-                <p data-en>
-                  If your tour walks across several pages, the recording follows along
-                  through every page change and stitches it all into a single video — no
-                  stopping and restarting for each page. Build your tour as usual and hit
-                  record; the recorder window stays open through the moves and keeps the
-                  take going.
-                </p>
-                <p data-ko>
-                  여러 페이지를 오가는 시연이라면, 페이지가 바뀔 때마다 녹화가 따라가면서
-                  전부 하나의 영상으로 이어 붙입니다 — 페이지마다 멈췄다 다시 시작할 필요가
-                  없어요. 평소처럼 시연을 만들고 녹화만 누르면, 페이지를 이동하는 동안에도
-                  녹화 창이 그대로 열려 있으면서 녹화를 계속 이어 갑니다.
-                </p>
-
-                <h3 data-en>Pause anytime to add your voice</h3>
-                <h3 data-ko>잠깐 멈추고 내 목소리 보태기</h3>
-                <figure class="record-window-figure" data-en>
-                  <img src="./assets/screenshots/recorder-live-en.png" alt="The recorder window while recording — a red 'Recording' badge with a blinking dot, a 'Scenario playing' chip, a step counter, the step list, and the current and next step with their descriptions." onerror="this.style.display='none'" />
-                  <figcaption>While it's rolling, the recorder window shows your script — the current and next step — with a step list and a red <strong>Recording</strong> badge that keeps blinking. The chip beside it flips between <em>Scenario playing</em> and <em>Scenario paused</em> when you tap <span class="kbd">Space</span>.</figcaption>
-                </figure>
-                <figure class="record-window-figure" data-ko>
-                  <img src="./assets/screenshots/recorder-live-ko.png" alt="녹화 중인 녹화 창 — 깜빡이는 점이 있는 빨간 '녹화 중' 배지, '시나리오 재생 중' 칩, 단계 카운터, 단계 목록, 그리고 현재·다음 단계와 설명." onerror="this.style.display='none'" />
-                  <figcaption>녹화가 도는 동안 녹화 창은 대본 — 현재·다음 단계 — 을 단계 목록과 함께 보여주고, 빨간 <strong>녹화 중</strong> 배지가 계속 깜빡입니다. 옆의 칩은 <span class="kbd">Space</span> 를 누를 때마다 <em>시나리오 재생 중</em> 과 <em>시나리오 일시정지 중</em> 사이를 오갑니다.</figcaption>
-                </figure>
-                <p data-en>
-                  Any time during recording, tap <span class="kbd">Space</span> and the
-                  tour freezes where it is. The page holds still and the recorder window
-                  shows it's paused — but the red dot keeps blinking, because the recording
-                  never stopped. Now it's your turn: talk through what's on screen (if you
-                  turned the mic on), click around to show something interactive, or just
-                  catch your breath. Tap <span class="kbd">Space</span> again and the tour
-                  picks up like nothing happened.
-                </p>
-                <p data-ko>
-                  녹화 도중 언제든 <span class="kbd">Space</span> 키를 누르면 시연이 그 자리에
-                  그대로 멈춥니다. 화면은 멈춰 있고 녹화 창에는 일시정지 상태가 표시돼요 —
-                  하지만 빨간 점은 계속 깜빡입니다. 녹화는 멈추지 않았거든요. 이제 내 차례 —
-                  마이크를 켜 뒀다면 화면을 보면서 한마디 보태고, 직접 클릭해서 뭔가 보여주거나,
-                  잠깐 숨을 고르세요. <span class="kbd">Space</span> 를 다시 누르면 시연이 아무
-                  일도 없었던 것처럼 이어집니다.
-                </p>
-
-                <h3 data-en>Want your voice in too?</h3>
-                <h3 data-ko>내 목소리도 같이 담고 싶다면?</h3>
-                <p data-en>
-                  Turn on <strong>Also record my microphone</strong> in the recorder window
-                  before you start (it's off by default). Your voice mixes in alongside
-                  the read-aloud narration and the page sounds — everything ends up on
-                  one neat audio track. The browser only asks for microphone permission when
-                  this is on; the normal recording never bothers you with it.
-                </p>
-                <p data-ko>
-                  녹화를 시작하기 전, 녹화 창에서 <strong>내 목소리도 함께 녹음</strong>을
-                  켜 두세요 (기본은 꺼짐). 내가 말한 내용이 읽어주는 안내·페이지 소리와 함께
-                  하나의 트랙으로 깔끔하게 담깁니다. 이 옵션을 켰을 때만 브라우저가 마이크
-                  권한을 한 번 물어봐요 — 평소 녹화에서는 권한 창이 뜨지 않아요.
-                </p>
-
-                <h3 data-en>Limits &amp; gotchas</h3>
-                <h3 data-ko>제한 &amp; 주의사항</h3>
-                <ul data-en>
-                  <li><strong>Share a Window, not a Tab.</strong> When the browser asks what to share, pick a Window and turn on "Share system audio" — that's the only way the voice narration makes it into the video. A single tab can't carry the page's sound.</li>
-                  <li><strong>WebM video file.</strong> Most modern players open it just fine — Chrome, Edge, VLC, the built-in Media Player on Windows 11. Older Windows Media Player just needs Microsoft's free <strong>Web Media Extensions</strong> + <strong>VP9 Video Extensions</strong> from the Microsoft Store (Windows Update often slips these in for you already). Need an MP4 instead? Run the file through ffmpeg to convert it.</li>
-                  <li><strong>Tours that play through the embedded launcher on another site can't be recorded.</strong> Those are view-only on that site by design — record from your own Manuscript panel instead.</li>
-                  <li><strong>Browser-internal pages</strong> (<code>chrome://</code>, <code>edge://</code>) and the new-tab page can't be recorded — same browser rule that blocks the rest of Manuscript on those pages.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>탭 말고 창을 공유하세요.</strong> 브라우저가 무엇을 공유할지 물으면 창(Window)을 고르고 "시스템 오디오 공유"를 켜세요 — 음성 안내가 영상에 담기는 유일한 방법이에요. 탭 하나로는 페이지 소리가 담기지 않습니다.</li>
-                  <li><strong>WebM 동영상 파일.</strong> 요즘 플레이어는 대부분 잘 엽니다 — Chrome, Edge, VLC, Windows 11 기본 Media Player 모두 OK. 구형 Windows Media Player 는 Microsoft Store 의 무료 <strong>Web Media Extensions</strong> + <strong>VP9 Video Extensions</strong> 가 있으면 재생됩니다 (Windows Update 로 이미 깔려 있는 경우도 많아요). MP4 가 필요하면 ffmpeg 로 변환해서 쓰세요.</li>
-                  <li><strong>다른 사이트에 임베드된 런처에서 재생되는 시연은 녹화할 수 없습니다.</strong> 그쪽은 보기 전용으로 설계돼 있어요 — 녹화는 본인의 Manuscript 패널에서 진행하세요.</li>
-                  <li><strong>브라우저 자체 페이지</strong>(<code>chrome://</code>, <code>edge://</code>) 와 새 탭은 녹화 불가 — Manuscript 의 다른 기능과 동일한 브라우저 정책 때문입니다.</li>
-                </ul>
-              </section>
-
-              <section id="g-validate">
-                <h2 data-en>9. Check that steps still match the page</h2>
-                <h2 data-ko>9. 스텝이 페이지와 여전히 맞는지 점검</h2>
-                <p data-en>
-                  Pages change over time — internal names get renamed, ids get
-                  regenerated, words get rewritten. Validation walks through every
-                  step you wrote and tells you, with one of four colors, whether
-                  Manuscript can still find the original spot. Open the modal, hit
-                  <strong>검증 시작</strong> (Start validation), and every step
-                  lights up green / yellow / red one by one. Tours that span
-                  multiple pages navigate themselves.
-                </p>
-                <p data-ko>
-                  페이지는 시간이 지나면 바뀝니다 — 내부 이름이 바뀌고, 식별자가
-                  새로 생성되고, 글자도 다듬어지죠. 검증은 작성한 모든 스텝을 하나씩
-                  돌려보며, Manuscript 가 원래 자리를 아직 찾아낼 수 있는지 네 가지
-                  색으로 알려줍니다. 모달을 열고 <strong>검증 시작</strong> 을 누르면
-                  각 스텝이 녹/노/빨로 차례로 표시됩니다. 여러 페이지에 걸친 시연은
-                  자동으로 페이지를 이동합니다.
-                </p>
-
-                <h3 data-en>How to run</h3>
-                <h3 data-ko>실행 방법</h3>
-                <ol data-en>
-                  <li>Click the <span class="iicon"><svg><use href="./assets/sprite.svg#i-check"/></svg></span> icon in the panel footer.</li>
-                  <li>A modal opens with every step listed in order, waiting to be checked.</li>
-                  <li>Hit <strong>검증 시작</strong>. Steps on the current page light up one by one as Manuscript finds each spot.</li>
-                  <li>If the scenario has steps on other pages, the modal shows a <em>Moving to next page…</em> banner, navigates there, and picks the modal back up automatically on the new page.</li>
-                  <li>After the last page the modal shows <strong>검증 완료</strong> (Validation complete) and the panel takes you back to the scenario's first page so you're back where you started.</li>
-                  <li><span class="kbd">Esc</span> or the <span class="iicon"><svg><use href="./assets/sprite.svg#i-close"/></svg></span> in the corner closes the modal at any time.</li>
-                </ol>
-                <ol data-ko>
-                  <li>패널 하단의 <span class="iicon"><svg><use href="./assets/sprite.svg#i-check"/></svg></span> 아이콘을 클릭합니다.</li>
-                  <li>모든 스텝이 순서대로 나열된, 아직 점검 전 상태의 모달이 열립니다.</li>
-                  <li><strong>검증 시작</strong> 을 누르면, 현재 페이지의 스텝들이 Manuscript 가 자리를 찾는 순서대로 색이 채워집니다.</li>
-                  <li>다른 페이지에 있는 스텝이 있으면 <em>다음 페이지로 이동 중…</em> 배너가 뜨고 자동으로 이동, 이동한 페이지에서 점검이 자연스럽게 이어집니다.</li>
-                  <li>마지막 페이지가 끝나면 <strong>검증 완료</strong> 상태가 되고, 패널이 시연 1번 페이지로 자동 복귀합니다.</li>
-                  <li><span class="kbd">Esc</span> 또는 모서리 <span class="iicon"><svg><use href="./assets/sprite.svg#i-close"/></svg></span> 로 언제든 모달을 닫을 수 있습니다.</li>
-                </ol>
-
-                <figure>
-                  <img
-                    src="./assets/screenshots/validate-modal-en.png"
-                    alt="Validation modal — Manuscript icon and wordmark at the top, title row, summary line with colored dots, then a list of every step in scenario order with status icons (green check, yellow warning, red cross, gray pending), and Start validation / Close buttons at the bottom."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/validate-modal-ko.png"
-                    alt="검증 모달 — 상단 Manuscript 아이콘과 wordmark, 타이틀 행, 색상 dot 이 들어간 요약 줄, 시나리오 순서대로 나열된 스텝 행 (녹색 체크, 노랑 경고, 빨강 X, 회색 대기), 하단 검증 시작 / 닫기 버튼."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Validation modal — brand row, summary with colored dots, step rows in scenario order with per-row status, and Start / Close actions.</figcaption>
-                  <figcaption data-ko>검증 모달 — 브랜드 행, 색상 dot 으로 표시된 요약, 시나리오 순서대로 나열된 스텝 행 + 상태 아이콘, 하단 검증 시작 / 닫기 버튼.</figcaption>
-                </figure>
-
-                <h3 data-en>What the colors mean</h3>
-                <h3 data-ko>색의 의미</h3>
-                <ul data-en>
-                  <li><span class="dot dot-green"></span> <strong>Green</strong> — best shape. The page's internal name tag is still in place, and Manuscript found the spot the most reliable way.</li>
-                  <li><span class="dot dot-yellow"></span> <strong>Yellow</strong> — recovered another way. The original name tag is gone, but the visible text and what's around it still uniquely point to the spot. Re-pick the step when you have time.</li>
-                  <li><span class="dot dot-red"></span> <strong>Red</strong> — couldn't find it. The element doesn't exist on this page anymore (or even the location-based guess didn't recover it within 2 seconds). Use the row's <strong>재픽</strong> (Re-pick) action.</li>
-                  <li><span class="dot dot-gray"></span> <strong>Gray</strong> — not checked yet. Either validation hasn't started, or this step is on a page that hasn't been visited in this run.</li>
-                </ul>
-                <ul data-ko>
-                  <li><span class="dot dot-green"></span> <strong>녹색</strong> — 가장 안정. 페이지의 내부 이름표가 그대로 있고, 가장 튼튼한 방법으로 자리를 찾았습니다.</li>
-                  <li><span class="dot dot-yellow"></span> <strong>노랑</strong> — 다른 방법으로 회복. 원래 이름표는 사라졌지만 보이는 글자와 주변 위치만으로도 그 자리를 유일하게 찾아냈습니다. 여유 있을 때 다시 픽 권장.</li>
-                  <li><span class="dot dot-red"></span> <strong>빨강</strong> — 찾지 못함. 요소가 이 페이지에 더 이상 없거나, 위치 기반 짐작으로도 2 초 안에 회복하지 못함. 행의 <strong>재픽</strong> 버튼 사용.</li>
-                  <li><span class="dot dot-gray"></span> <strong>회색</strong> — 아직 확인 안 함. 검증이 시작되지 않았거나, 그 스텝의 페이지를 이 검증 회차에서 아직 방문하지 않은 상태.</li>
-                </ul>
-
-                <h3 data-en>Sub-elements get small dots too</h3>
-                <h3 data-ko>서브 요소도 작은 dot</h3>
-                <p data-en>
-                  Each sub gets a smaller dot next to the step row, in the same
-                  color scheme. Click the row to expand the sub list and see
-                  which sub failed — fixing one sub doesn't require re-picking
-                  the whole step.
-                </p>
-                <p data-ko>
-                  각 sub 는 스텝 행 옆에 작은 dot 으로 같은 색 체계로 표시됩니다. 행을
-                  클릭해 sub 목록을 펴면 어느 sub 가 실패했는지 보입니다 — sub 하나
-                  고치자고 스텝 전체를 재픽할 필요가 없어요.
-                </p>
-
-                <h3 data-en>Row actions</h3>
-                <h3 data-ko>행 액션</h3>
-                <ul data-en>
-                  <li><strong>이 스텝 보기</strong> (Show this step) — closes the modal and jumps to that step in the panel, scrolling the card into view. If you're already on the right page, no reload — it just focuses.</li>
-                  <li><strong>재픽</strong> (Re-pick) — closes the modal, opens that step, and arms the picker. The next click on the page replaces the original element. Sub-element re-picking is done through the sub track on the step card.</li>
-                </ul>
-                <ul data-ko>
-                  <li><strong>이 스텝 보기</strong> — 모달을 닫고 그 스텝을 패널에서 선택, 카드를 화면 안으로 스크롤합니다. 이미 같은 페이지면 새로고침 없이 focus 만 이동.</li>
-                  <li><strong>재픽</strong> — 모달을 닫고 그 스텝을 열어 picker 를 활성화합니다. 페이지에서 다음 클릭이 기존 요소를 교체합니다. 서브 요소 재픽은 카드의 서브 트랙에서 따로 처리합니다.</li>
-                </ul>
-
-                <h3 data-en>Colors reset when you close the panel</h3>
-                <h3 data-ko>패널을 닫으면 색이 초기화돼요</h3>
-                <p data-en>
-                  Closing the panel clears the colored dots. The next time you
-                  open the panel everything starts blank — run validate again to
-                  see the colors. This is on purpose: dots left over from a long
-                  time ago would be misleading.
-                </p>
-                <p data-ko>
-                  패널을 닫으면 색 표시(dot)가 모두 초기화됩니다. 다시 열면 빈
-                  상태에서 시작하므로, 색을 보려면 검증을 다시 한 번 돌려야 합니다.
-                  의도된 동작이에요 — 오래된 색이 그대로 남아 있으면 오히려
-                  오해를 부를 수 있기 때문입니다.
-                </p>
-
-                <h3 data-en>How long Manuscript waits per element</h3>
-                <h3 data-ko>요소 하나당 기다리는 시간</h3>
-                <p data-en>
-                  Each element gets up to 2 seconds to show up on the page. All
-                  the elements on the same page are checked at the same time, so
-                  a whole page takes at most one 2-second window — if validation
-                  is slow on a page with lots of steps, it's almost always a real
-                  problem and not the waiting time.
-                </p>
-                <p data-ko>
-                  요소 하나당 페이지에 나타날 때까지 최대 2 초 기다립니다. 같은
-                  페이지 안의 요소들은 동시에 함께 확인하므로, 한 페이지의 최대
-                  대기 시간은 2 초입니다 — 스텝이 많은 페이지의 검증이 느리다면
-                  거의 대기 시간 때문이 아니라 실제 문제일 가능성이 높습니다.
-                </p>
-              </section>
-
-              <section id="g-io">
-                <h2 data-en>10. Export &amp; import</h2>
-                <h2 data-ko>10. 내보내기·불러오기</h2>
-                <p data-en>
-                  The export button in the panel footer downloads your whole
-                  manuscript as a single JSON file — every step, every annotation,
-                  every color and font the tour uses. Importing works from the
-                  popup (see just below); older files are automatically upgraded
-                  to the current version.
-                  Hand the JSON to a teammate by email or chat, or keep it
-                  alongside your project files so the manual stays in sync with
-                  what it explains.
-                </p>
-                <p data-ko>
-                  패널 하단의 내보내기 버튼으로 시연 전체를 하나의 JSON 파일로
-                  내려받습니다 — 모든 스텝·메모·색·글꼴이 한 파일 안에 들어 있어요.
-                  불러오기는 팝업에서 합니다(바로 아래 참고). 예전 버전 파일은 현재
-                  버전으로 자동 업그레이드돼요. JSON 파일을 메일이나 메신저로 동료에게 보내거나,
-                  프로젝트 파일 옆에 같이 보관해 시연이 설명 대상과 함께 관리되도록
-                  하세요.
-                </p>
-
-                <h3 data-en>Import from the popup</h3>
-                <h3 data-ko>팝업에서 바로 가져오기</h3>
-                <p data-en>
-                  Received a JSON walkthrough from a colleague? Click the
-                  Manuscript icon to open the popup, then hit
-                  <strong>↑ Open a JSON file</strong> right below the
-                  <em>+ New Manuscript</em> button. The picked file is added to
-                  your <em>Previous Manuscripts</em> list, and the panel opens
-                  on the current tab with that scenario already loaded —
-                  one click, ready to replay or edit.
-                </p>
-                <p data-ko>
-                  동료에게 JSON 시연 파일을 받았다면? Manuscript 아이콘을 눌러 팝업을
-                  열고 <em>+ 새 매뉴스크립트</em> 버튼 바로 아래의
-                  <strong>↑ JSON 파일 가져오기</strong> 를 누르세요. 선택한 파일이
-                  <em>이전 매뉴스크립트</em> 목록에 추가되고, 현재 탭에 패널이 열리면서
-                  그 시연이 바로 로드됩니다 — 한 번 클릭으로 재생·편집 준비 완료.
-                </p>
-                <figure>
-                  <img
-                    src="./assets/screenshots/popup-import-en.png"
-                    alt="Extension popup with '+ New Manuscript' on top, '↑ Open a JSON file' button directly below it, and the Previous Manuscripts list under both."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/popup-import-ko.png"
-                    alt="Extension 팝업 — 상단 '+ 새 매뉴스크립트', 그 아래 'JSON 파일 가져오기' 버튼, 그 아래 이전 매뉴스크립트 목록."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Popup import button — sits right under <em>+ New Manuscript</em>. The picked file is added to your library and the panel opens with the scenario loaded.</figcaption>
-                  <figcaption data-ko>팝업의 JSON 가져오기 버튼 — <em>+ 새 매뉴스크립트</em> 바로 아래. 선택한 파일이 라이브러리에 추가되고 패널이 열리며 시나리오가 자동 로드됩니다.</figcaption>
-                </figure>
-
-              </section>
-
-              <section id="g-popup">
-                <h2 data-en>11. Previous Manuscripts</h2>
-                <h2 data-ko>11. 이전 매뉴스크립트</h2>
-                <p data-en>Clicking the extension icon a second time shows the <strong>Previous Manuscripts</strong> list — every manuscript you've authored. The most recent work is highlighted as <strong>Resume</strong> — one click puts you back where you left off, on the same page.</p>
-                <p data-ko>확장 아이콘을 다시 클릭하면 <strong>이전 매뉴스크립트</strong> 목록이 표시됩니다. 가장 최근 작업은 <strong>이어하기</strong>로 강조되며, 클릭 한 번으로 그 매뉴스크립트로 복귀합니다 (같은 페이지로 자동 이동).</p>
-                <figure>
-                  <img
-                    src="./assets/screenshots/popup-list-en.png"
-                    alt="Extension popup showing the Previous Manuscripts list — each row has a thumbnail, scenario name, last-edited timestamp; the topmost row is highlighted as 'Resume' with a primary-colored button."
-                    data-en
-                    onerror="this.style.display='none'"
-                  />
-                  <img
-                    src="./assets/screenshots/popup-list-ko.png"
-                    alt="Extension 팝업의 이전 매뉴스크립트 목록 — 각 행에 thumbnail, 시나리오 이름, 마지막 편집 시각. 맨 위 행은 '이어하기' 강조."
-                    data-ko
-                    onerror="this.style.display='none'"
-                  />
-                  <figcaption data-en>Previous Manuscripts — most recent at the top, marked <strong>Resume</strong>. Click any row to reopen that scenario in the panel on its original page.</figcaption>
-                  <figcaption data-ko>이전 매뉴스크립트 — 최근 작업이 맨 위, <strong>이어하기</strong>로 강조. 어느 행을 클릭하든 그 시나리오를 원래 페이지에서 패널로 다시 엽니다.</figcaption>
-                </figure>
-              </section>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ───── Runtime bridge ───── -->
-      <section id="bridge" class="bridge">
-        <div class="container">
-          <p class="eyebrow" data-en>Embed it on your own site</p>
-          <p class="eyebrow" data-ko>내 사이트에 끼워 넣기</p>
-          <h2 class="section-title" data-en>Put a "Take the tour" button on your own page.</h2>
-          <h2 class="section-title" data-ko>내 사이트에 '둘러보기' 버튼 달기.</h2>
-
-          <div class="callout" data-en>
-            <strong>Your visitors need the Manuscript extension installed.</strong>
-            The bridge is a remote control rather than a player on its own.
-            When a visitor doesn't have the extension yet, the bridge can
-            either pop a small install prompt itself or hand the moment
-            back to you via <code>manuscript.openStore()</code> /
-            <code>manuscript.openHomepage()</code>. Both behaviors are
-            opt-in — the bridge never injects UI you didn't ask for.
-          </div>
-          <div class="callout" data-ko>
-            <strong>방문자에게 Manuscript 확장이 설치되어 있어야 합니다.</strong>
-            브리지는 사이트 안에서 시연을 실행하는 리모컨 역할이라, 확장이 없으면
-            (a) 브리지가 작은 설치 안내를 직접 띄워주거나 (b)
-            <code>manuscript.openStore()</code> /
-            <code>manuscript.openHomepage()</code> 로 그 순간을 직접 다룰 수
-            있어요. 두 방식 모두 옵션 — 호출하지 않은 UI 는 브리지가 알아서
-            띄우지 않습니다.
-          </div>
-
-          <p class="lead" data-en>
-            <strong>manuscript-bridge.0.1.3.js</strong> is a small, dependency-free
-            file (about 14 KB) you drop onto your page. From there, your "Take the
-            tour" button can load a saved tour and ask Manuscript to play it — the
-            spotlights, notes, and narration take care of themselves. By default
-            playback is read-only and cleans up after itself once the tour ends.
-          </p>
-          <p class="lead" data-ko>
-            <strong>manuscript-bridge.0.1.3.js</strong> 는 의존성 없는 약 14 KB
-            짜리 작은 파일입니다. 내 페이지에 넣어두기만 하면, "둘러보기" 같은
-            버튼으로 저장해 둔 시연을 불러와 Manuscript 에 재생을 부탁할 수 있어요.
-            강조 표시·메모·음성 안내는 알아서 처리됩니다. 기본 재생은 보기 전용이며
-            시연이 끝나면 흔적 없이 깔끔하게 정리됩니다.
-          </p>
-
-          <h3 data-en>Option A — your own button</h3>
-          <h3 data-ko>방법 A — 내 버튼 직접 만들기</h3>
-          <p data-en>
-            Most common pattern. You author the button (any styling you
-            want) and wire it to the bridge. When the extension is
-            missing, send the visitor to the Web Store with
-            <code>openStore()</code>; optionally to your own product page
-            with <code>openHomepage()</code>.
-          </p>
-          <p data-ko>
-            가장 자주 쓰는 패턴. 버튼은 직접 만들고(원하는 디자인 그대로)
-            브리지에 연결만 합니다. 확장이 없으면
-            <code>openStore()</code> 로 웹 스토어로 보내고, 옵션으로
-            <code>openHomepage()</code> 로 본인 제품 페이지로도 안내할 수 있어요.
-          </p>
-
-<pre class="code" data-en><span class="tok-cmt">&lt;!-- in your page --&gt;</span>
-&lt;script src=<span class="tok-str">"/manuscript-bridge.0.1.3.js"</span>&gt;&lt;/script&gt;
-&lt;button id=<span class="tok-str">"start"</span>&gt;Take the tour&lt;/button&gt;
-
-&lt;script&gt;
-  <span class="tok-cmt">// Opt in to the homepage fallback — without this, openHomepage() warns and no-ops.</span>
-  manuscript.configure({
-    homepageUrl: <span class="tok-str">'https://zendy00.github.io/manuscript-pages/'</span>,
-    banner: <span class="tok-key">false</span>,  <span class="tok-cmt">// suppress the bridge's built-in install prompt — we handle it below</span>
-  });
-
-  <span class="tok-key">const</span> btn = document.getElementById(<span class="tok-str">'start'</span>);
-
-  btn.addEventListener(<span class="tok-str">'click'</span>, <span class="tok-key">async</span> () =&gt; {
-    <span class="tok-key">if</span> (!(<span class="tok-key">await</span> manuscript.isInstalled())) {
-      manuscript.openStore();         <span class="tok-cmt">// or: manuscript.openHomepage()</span>
-      <span class="tok-key">return</span>;
-    }
-    btn.hidden = <span class="tok-key">true</span>;
-    <span class="tok-key">const</span> scenario = <span class="tok-key">await</span> fetch(<span class="tok-str">'/tours/tour-en.json'</span>).then(r =&gt; r.json());
-    <span class="tok-key">await</span> manuscript.load(scenario);
-    <span class="tok-key">await</span> manuscript.play({ standalone: <span class="tok-key">true</span> });
-  });
-
-  manuscript.onExit(() =&gt; { btn.hidden = <span class="tok-key">false</span>; });
-&lt;/script&gt;</pre>
-<pre class="code" data-ko><span class="tok-cmt">&lt;!-- 호스트 페이지 안에 둡니다 --&gt;</span>
-&lt;script src=<span class="tok-str">"/manuscript-bridge.0.1.3.js"</span>&gt;&lt;/script&gt;
-&lt;button id=<span class="tok-str">"start"</span>&gt;투어 시작&lt;/button&gt;
-
-&lt;script&gt;
-  <span class="tok-cmt">// 홈페이지 fallback 은 opt-in — 호출하지 않으면 openHomepage() 는 경고만 출력하고 no-op.</span>
-  manuscript.configure({
-    homepageUrl: <span class="tok-str">'https://zendy00.github.io/manuscript-pages/'</span>,
-    banner: <span class="tok-key">false</span>,  <span class="tok-cmt">// 기본 설치 안내 끄기 — 아래에서 직접 처리</span>
-  });
-
-  <span class="tok-key">const</span> btn = document.getElementById(<span class="tok-str">'start'</span>);
-
-  btn.addEventListener(<span class="tok-str">'click'</span>, <span class="tok-key">async</span> () =&gt; {
-    <span class="tok-key">if</span> (!(<span class="tok-key">await</span> manuscript.isInstalled())) {
-      manuscript.openStore();         <span class="tok-cmt">// 또는: manuscript.openHomepage()</span>
-      <span class="tok-key">return</span>;
-    }
-    btn.hidden = <span class="tok-key">true</span>;
-    <span class="tok-key">const</span> scenario = <span class="tok-key">await</span> fetch(<span class="tok-str">'/tours/tour-ko.json'</span>).then(r =&gt; r.json());
-    <span class="tok-key">await</span> manuscript.load(scenario);
-    <span class="tok-key">await</span> manuscript.play({ standalone: <span class="tok-key">true</span> });
-  });
-
-  manuscript.onExit(() =&gt; { btn.hidden = <span class="tok-key">false</span>; });
-&lt;/script&gt;</pre>
-
-          <h3 data-en>Option B — let the bridge mount the launcher</h3>
-          <h3 data-ko>방법 B — 브리지가 런처를 직접 띄우기</h3>
-          <p data-en>
-            Zero-DOM-touch path. <code>mountLauncher()</code> attaches a
-            Shadow-DOM-isolated pill to the bottom-right of your page.
-            When the extension is installed it reads "Take the tour" and
-            runs the configured scenario on click; when it's missing the
-            same pill morphs into "Install Manuscript" (plus an optional
-            "Learn more" link if you set <code>homepageUrl</code>). A
-            small ✕ on the install prompt persists dismissal to
-            <code>localStorage</code>.
-          </p>
-          <p data-ko>
-            DOM 안 건드리는 경로. <code>mountLauncher()</code> 가
-            Shadow DOM 격리된 pill 을 페이지 우하단에 띄웁니다. 확장이 설치돼
-            있으면 "투어 시작" 으로, 미설치면 같은 자리에 "Manuscript 설치" 가
-            뜨고 <code>homepageUrl</code> 을 지정해 두면 "자세히 보기" 링크도
-            함께 나옵니다. 안내의 ✕ 닫기 버튼은 <code>localStorage</code> 에
-            기억되어 같은 사이트에서 다시 뜨지 않아요.
-          </p>
-
-<pre class="code" data-en><span class="tok-cmt">&lt;!-- in your page --&gt;</span>
-&lt;script src=<span class="tok-str">"/manuscript-bridge.0.1.3.js"</span>&gt;&lt;/script&gt;
-&lt;script&gt;
-  manuscript.configure({
-    homepageUrl: <span class="tok-str">'https://zendy00.github.io/manuscript-pages/'</span>,  <span class="tok-cmt">// optional "Learn more"</span>
-    lang: <span class="tok-str">'auto'</span>,           <span class="tok-cmt">// 'auto' (default) / 'en' / 'ko'</span>
-  });
-
-  manuscript.mountLauncher({
-    scenarioUrl: <span class="tok-str">'/tours/tour-en.json'</span>,  <span class="tok-cmt">// or scenario: {...}</span>
-    label: <span class="tok-str">'Take the tour'</span>,             <span class="tok-cmt">// optional override</span>
-  });
-&lt;/script&gt;</pre>
-<pre class="code" data-ko><span class="tok-cmt">&lt;!-- 호스트 페이지 안에 둡니다 --&gt;</span>
-&lt;script src=<span class="tok-str">"/manuscript-bridge.0.1.3.js"</span>&gt;&lt;/script&gt;
-&lt;script&gt;
-  manuscript.configure({
-    homepageUrl: <span class="tok-str">'https://zendy00.github.io/manuscript-pages/'</span>,  <span class="tok-cmt">// 옵션: "자세히 보기"</span>
-    lang: <span class="tok-str">'auto'</span>,           <span class="tok-cmt">// 'auto'(기본) / 'en' / 'ko'</span>
-  });
-
-  manuscript.mountLauncher({
-    scenarioUrl: <span class="tok-str">'/tours/tour-ko.json'</span>,  <span class="tok-cmt">// 또는 scenario: {...}</span>
-    label: <span class="tok-str">'투어 시작'</span>,                  <span class="tok-cmt">// 옵션: 라벨 직접 지정</span>
-  });
-&lt;/script&gt;</pre>
-
-          <h3 data-en>Public API (<code>manuscript.*</code>)</h3>
-          <h3 data-ko>공개 API (<code>manuscript.*</code>)</h3>
-
-<pre class="code" data-en><span class="tok-cmt">// ── Discovery</span>
-manuscript.isInstalled()                    <span class="tok-cmt">// → Promise&lt;boolean&gt; (cached per page)</span>
-manuscript.refreshInstalled()               <span class="tok-cmt">// re-ping, bust the cache</span>
-
-<span class="tok-cmt">// ── Lifecycle</span>
-manuscript.load(scenario)                   <span class="tok-cmt">// object or JSON string</span>
-manuscript.play({ startIndex, paused, standalone })
-manuscript.pause() / manuscript.next() / manuscript.prev()
-manuscript.jump(index)
-manuscript.exit()
-
-<span class="tok-cmt">// ── Navigation (new in 0.1.3) — works with or without a launcher</span>
-manuscript.openStore()                      <span class="tok-cmt">// opens the extension store in a new tab</span>
-manuscript.openHomepage()                   <span class="tok-cmt">// opens configured homepageUrl, or warns + no-ops</span>
-
-<span class="tok-cmt">// ── Auto-mounted launcher (new in 0.1.3)</span>
-manuscript.mountLauncher({ scenarioUrl, scenario, label, standalone })
-manuscript.unmountLauncher()
-
-<span class="tok-cmt">// ── Configure</span>
-manuscript.configure({
-  banner: <span class="tok-key">true</span>,                         <span class="tok-cmt">// show install prompt on missing extension</span>
-  timeoutMs: 1500,
-  lang: <span class="tok-str">'auto'</span>,                          <span class="tok-cmt">// 'auto' | 'en' | 'ko'</span>
-  storeUrl: <span class="tok-str">'https://chromewebstore.google.com/...'</span>,
-  homepageUrl: <span class="tok-str">'https://example.com'</span>,     <span class="tok-cmt">// opt-in extra link</span>
-  onInstallClick: () =&gt; analytics.track(<span class="tok-str">'mn:install'</span>),
-  onHomeClick:    () =&gt; analytics.track(<span class="tok-str">'mn:learn-more'</span>),
-})
-
-<span class="tok-cmt">// ── Replay-end — fires on ✕ or natural end of tour</span>
-<span class="tok-key">const</span> off = manuscript.onExit(() =&gt; { <span class="tok-cmt">/* restore your UI */</span> });
-<span class="tok-cmt">// off()  ← call to unregister</span>
-<span class="tok-cmt">// or:    window.addEventListener('manuscript:exited', handler)</span></pre>
-<pre class="code" data-ko><span class="tok-cmt">// ── 발견</span>
-manuscript.isInstalled()                    <span class="tok-cmt">// → Promise&lt;boolean&gt; (페이지 내 캐시)</span>
-manuscript.refreshInstalled()               <span class="tok-cmt">// 캐시 초기화 후 재핑</span>
-
-<span class="tok-cmt">// ── 라이프사이클</span>
-manuscript.load(scenario)                   <span class="tok-cmt">// 객체 또는 JSON 문자열</span>
-manuscript.play({ startIndex, paused, standalone })
-manuscript.pause() / manuscript.next() / manuscript.prev()
-manuscript.jump(index)
-manuscript.exit()
-
-<span class="tok-cmt">// ── 이동 API (0.1.3 신규) — 런처 유무와 무관하게 호출 가능</span>
-manuscript.openStore()                      <span class="tok-cmt">// 새 탭에서 확장 스토어 열기</span>
-manuscript.openHomepage()                   <span class="tok-cmt">// homepageUrl 열기 (미설정 시 경고 + no-op)</span>
-
-<span class="tok-cmt">// ── 자동 마운트 런처 (0.1.3 신규)</span>
-manuscript.mountLauncher({ scenarioUrl, scenario, label, standalone })
-manuscript.unmountLauncher()
-
-<span class="tok-cmt">// ── 설정</span>
-manuscript.configure({
-  banner: <span class="tok-key">true</span>,                         <span class="tok-cmt">// 확장 미설치 시 설치 안내 자동 표시</span>
-  timeoutMs: 1500,
-  lang: <span class="tok-str">'auto'</span>,                          <span class="tok-cmt">// 'auto' | 'en' | 'ko'</span>
-  storeUrl: <span class="tok-str">'https://chromewebstore.google.com/...'</span>,
-  homepageUrl: <span class="tok-str">'https://example.com'</span>,     <span class="tok-cmt">// opt-in 추가 링크</span>
-  onInstallClick: () =&gt; analytics.track(<span class="tok-str">'mn:install'</span>),
-  onHomeClick:    () =&gt; analytics.track(<span class="tok-str">'mn:learn-more'</span>),
-})
-
-<span class="tok-cmt">// ── 재생 종료 — ✕ 클릭 또는 마지막 step 완료 시</span>
-<span class="tok-key">const</span> off = manuscript.onExit(() =&gt; { <span class="tok-cmt">/* 사용자 UI 복원 */</span> });
-<span class="tok-cmt">// off()  ← 호출해서 등록 해제</span>
-<span class="tok-cmt">// 또는:  window.addEventListener('manuscript:exited', handler)</span></pre>
-
-          <h3 data-en>Downloads</h3>
-          <h3 data-ko>다운로드</h3>
-
-          <div class="bridge-cards">
-            <div class="card">
-              <h3>manuscript-bridge.0.1.3.js <small>(current)</small></h3>
-              <p data-en>The bridge library. <code>openStore()</code>, <code>openHomepage()</code>, <code>mountLauncher()</code>, and a Shadow-DOM-isolated install prompt. Drop it into your page and the <code>manuscript.*</code> global appears. The legacy <code>manuscript-bridge.0.1.2.js</code> URL stays live as an alias of this same file, so hosts pinned to it keep working unchanged.</p>
-              <p data-ko>브리지 라이브러리. <code>openStore()</code>, <code>openHomepage()</code>, <code>mountLauncher()</code> 와 Shadow DOM 격리된 설치 안내가 포함됩니다. 페이지에 추가하면 <code>manuscript.*</code> 전역이 노출됩니다. 구버전 <code>manuscript-bridge.0.1.2.js</code> URL 도 이 파일의 alias 로 그대로 살아 있어, 이 URL 에 고정해 둔 호스트는 무수정으로 계속 동작합니다.</p>
-              <a class="dl" href="./manuscript-bridge.0.1.3.js" download>↓ Download 0.1.3</a>
-            </div>
-            <div class="card">
-              <h3>SKILL.md</h3>
-              <p data-en>Hand this file to an AI agent (Claude, Cursor, …) along with a URL — the agent emits a ready-to-play tour JSON. No DOM picking, no manual JSON editing.</p>
-              <p data-ko>이 파일을 AI agent(Claude, Cursor 등)에 URL과 함께 전달하면 agent가 그대로 재생 가능한 투어 JSON을 출력합니다. DOM 직접 선택·JSON 수동 편집 불필요.</p>
-              <a class="dl" href="./tours/SKILL.md" download>↓ Download</a>
-            </div>
-            <div class="card">
-              <h3>Tour JSON <small>(example)</small></h3>
-              <p data-en><strong>Example only — not a template for your site.</strong> The 8-step tour of <em>this</em> landing page. Selectors target elements that exist here (<code>#features</code>, <code>#bridge</code>, …) and will not match your own page. Use it as a reference shape, then have your AI agent author a fresh JSON for your URL via SKILL.md. English and Korean versions share the same selectors — only narration and step names differ.</p>
-              <p data-ko><strong>예제일 뿐 — 본인 사이트 템플릿이 아닙니다.</strong> <em>이</em> 랜딩 페이지를 8 스텝으로 안내하는 투어입니다. 셀렉터가 이 페이지의 요소(<code>#features</code>, <code>#bridge</code> 등)를 가리키므로 본인 페이지에서는 매칭되지 않습니다. 구조만 참고하고 본인 URL용 JSON은 SKILL.md로 AI agent에 새로 생성시키세요. 영어·한국어 버전은 셀렉터가 동일하며 narration과 step 이름만 다릅니다.</p>
-              <div class="dl-row">
-                <a class="dl" href="./tours/tour-en.json" download>↓ tour-en.json</a>
-                <a class="dl" href="./tours/tour-ko.json" download>↓ tour-ko.json</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
       <!-- ───── FAQ / Known limits ───── -->
       <section id="faq">
         <div class="container">
@@ -2561,6 +1069,11 @@ manuscript.configure({
                 <td data-en>Limited</td><td data-ko>제한적</td>
                 <td data-en>You can still pick something inside one — the click goes through. But during playback Manuscript can't reach back in to find that spot again, because the browser blocks one site from looking inside another site's frame. Embedded pages from the same site work fully.</td><td data-ko>안에 있는 요소를 선택하는 것까지는 됩니다 — 클릭은 통과해요. 다만 재생 시점에는 Manuscript 가 그 자리를 다시 찾을 수 없습니다. 브라우저가 한 사이트에서 다른 사이트의 프레임 안을 들여다보지 못하도록 막기 때문이에요. 같은 사이트에서 들어온 프레임은 문제 없이 작동합니다.</td>
               </tr>
+              <tr>
+                <td data-en>Voice narration on pages a tour auto-advances to</td><td data-ko>투어가 자동으로 넘어가서 연 페이지의 음성 안내</td>
+                <td data-en>One click per page</td><td data-ko>페이지마다 클릭 한 번</td>
+                <td data-en>Browsers don't let a page play sound until someone has interacted with it. So on a page the tour opens on its own (auto-advancing across pages), narration can't start there until you click — the speaker icon turns orange and a little "click anywhere for sound" hint bounces above it. Click anywhere on the page and narration begins. Pages you advance yourself by clicking keep sound flowing. (Applies to both the extension and the standalone player.)</td><td data-ko>브라우저는 누군가 페이지를 한 번 건드리기 전까지 소리 재생을 막습니다. 그래서 투어가 스스로 연 페이지(페이지 간 자동 진행)에서는 클릭 전까지 음성이 시작되지 못해요 — 스피커 아이콘이 주황색으로 바뀌고 "아무 곳이나 클릭하세요" 안내가 그 위에서 통통 튑니다. 페이지 아무 곳이나 한 번 클릭하면 음성이 시작됩니다. 직접 클릭해서 넘긴 페이지는 소리가 알아서 이어져요. (확장·독립 플레이어 모두 해당.)</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -2572,19 +1085,15 @@ manuscript.configure({
         <div class="links">
           <a href="https://github.com/zendy00/manuscript-pages" target="_blank" rel="noopener">GitHub</a>
           <a href="mailto:zendy00@gmail.com">zendy00@gmail.com</a>
-          <a href="#install" data-en>Install</a><a href="#install" data-ko>설치</a>
-          <a href="#guide" data-en>Guide</a><a href="#guide" data-ko>사용설명서</a>
-          <a href="./changelog.html" data-en>Changelog</a><a href="./changelog.html" data-ko>변경사항</a>
           <a href="./privacy.html" data-en>Privacy</a><a href="./privacy.html" data-ko>개인정보</a>
-          <a href="#bridge" data-en>Bridge</a><a href="#bridge" data-ko>브리지</a>
           <a href="./tours/SKILL.md" download>SKILL.md</a>
         </div>
         <div class="sponsor-row">
           <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.8.0 · © 2026</span>
-          <span data-ko>Manuscript v0.8.0 · © 2026</span>
+          <span data-en>Manuscript v0.8.1 · © 2026</span>
+          <span data-ko>Manuscript v0.8.1 · © 2026</span>
         </div>
       </div>
     </footer>
@@ -2635,7 +1144,6 @@ manuscript.configure({
       <span class="verchip-cta" data-ko>변경사항 →</span>
     </a>
 
-    <script src="./manuscript-bridge.0.1.3.js"></script>
     <script src="./i18n.js"></script>
     <script>
       // Manuscript version badges + What's-new toast.
@@ -2833,71 +1341,6 @@ manuscript.configure({
         }
       })();
 
-      // Wire the tour launcher to the bridge. This is the host-owned
-      // button pattern: we already shipped a styled #mn-tour pill, so
-      // we keep it and just adapt its label/action based on whether
-      // the extension is installed.
-      //   - extension present  → "Take the tour" / "투어 시작"     → starts replay
-      //   - extension missing  → "Install Manuscript" / "Manuscript 설치"
-      //                           → manuscript.openStore() opens the
-      //                              Web Store listing in a new tab
-      // The auto install prompt from the bridge is suppressed because
-      // we handle the moment ourselves with a single styled button.
-      (async () => {
-        if (typeof manuscript === 'undefined') return;
-        const btn = document.getElementById('mn-tour');
-        if (!btn) return;
-
-        // Mobile Chrome/Edge can't install extensions, so the tour /
-        // install pill has nowhere useful to lead. Leave the button
-        // hidden (it starts with `hidden`) and bail.
-        if (manuscript.isMobile && manuscript.isMobile()) return;
-
-        // We're hosting our own button, so disable bridge's own
-        // install banner. openStore() / openHomepage() still work.
-        manuscript.configure({
-          banner: false,
-          homepageUrl: 'https://zendy00.github.io/manuscript-pages/',
-        });
-
-        const labelEn = btn.querySelector('.label[data-en]');
-        const labelKo = btn.querySelector('.label[data-ko]');
-        function setLabels(en, ko) {
-          if (labelEn) labelEn.textContent = en;
-          if (labelKo) labelKo.textContent = ko;
-        }
-
-        async function startTour() {
-          btn.disabled = true;
-          const lang = document.body.getAttribute('lang') === 'ko' ? 'ko' : 'en';
-          try {
-            const res = await fetch('./tours/tour-' + lang + '.json');
-            const scenario = await res.json();
-            await manuscript.load(scenario);
-            await manuscript.play({ standalone: true });
-            btn.hidden = true;
-          } catch (err) {
-            btn.disabled = false;
-            console.warn('[manuscript-site] tour failed:', err);
-          }
-        }
-
-        const installed = await manuscript.isInstalled();
-        btn.hidden = false;
-        if (installed) {
-          btn.addEventListener('click', startTour);
-        } else {
-          setLabels('Install Manuscript', 'Manuscript 설치');
-          btn.classList.add('is-install');
-          btn.addEventListener('click', () => manuscript.openStore());
-        }
-
-        manuscript.onExit(() => {
-          btn.disabled = false;
-          btn.hidden = false;
-        });
-      })();
-
       // Lite YouTube embed activation — first interaction with .hero-video
       // swaps the thumbnail+button for a real <iframe>. Uses
       // youtube-nocookie.com so no cookies are dropped until the viewer
@@ -2933,6 +1376,37 @@ manuscript.configure({
           activate(card);
         });
       })();
+    </script>
+
+    <!-- Floating "Take the tour" button → plays the multi-page site tour with
+         the STANDALONE PLAYER (no extension; works for every visitor). It walks
+         index → manual → player → changelog; the player carries it across pages
+         on its own (each of those pages imports the same bundle to auto-resume).
+         The tour JSON is the single source of truth — played verbatim so the
+         bridge and the player behave identically. Its URLs are the dev origin
+         (localhost) and get rewritten to the live domain at deploy time by
+         scripts/01.build/rewrite-tour-urls.mjs. -->
+    <script type="module">
+      import player from './player/manuscript-player.0.1.0.esm.js';
+
+      const btn = document.getElementById('mn-tour');
+      if (btn) {
+        btn.hidden = false;
+        btn.addEventListener('click', async () => {
+          btn.disabled = true;
+          const lang = document.body.getAttribute('lang') === 'ko' ? 'ko' : 'en';
+          try {
+            const sc = await fetch('./tours/site-tour-' + lang + '.json').then((r) => r.json());
+            await player.load(sc);
+            await player.play();
+            btn.hidden = true;
+          } catch (err) {
+            btn.disabled = false;
+            console.warn('[manuscript-site] tour failed:', err);
+          }
+        });
+        player.onExit(() => { btn.disabled = false; btn.hidden = false; });
+      }
     </script>
   </body>
 </html>

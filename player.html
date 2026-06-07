@@ -1,0 +1,1070 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Standalone Player — embed Manuscript replay without the extension</title>
+    <meta
+      name="description"
+      content="Developer guide for the Manuscript standalone player — a chrome-free replay bundle you drop onto any static page to play a saved tour, with no browser extension required. Quick start, config, multi-page tours, and a full API reference."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c1525" media="(prefers-color-scheme: dark)" />
+
+    <link rel="canonical" href="https://zendy00.github.io/manuscript-pages/player.html" />
+    <link rel="alternate" hreflang="en" href="https://zendy00.github.io/manuscript-pages/player.html" />
+    <link rel="alternate" hreflang="ko" href="https://zendy00.github.io/manuscript-pages/player.html?lang=ko" />
+
+    <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./assets/icons/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" sizes="128x128" href="./assets/icons/favicon-128.png" />
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://zendy00.github.io/manuscript-pages/player.html" />
+    <meta property="og:title" content="Manuscript — Standalone Player guide" />
+    <meta property="og:description" content="Drop a chrome-free replay bundle onto any static page and play a saved Manuscript tour — no extension required." />
+    <meta property="og:image" content="https://zendy00.github.io/manuscript-pages/assets/icons/favicon-128.png" />
+  </head>
+  <body data-palette="studio" lang="en">
+    <script data-antiflash>
+      /* Anti-flash: apply stored/preferred palette AND language before first
+         paint so page loads and cross-document view transitions don't flash
+         (light→dark, en→ko) then flip. i18n.js re-applies (idempotent) + wires
+         the toggles. Mirrors i18n.js pickInitialPalette / pickInitialLang. */
+      (function () {
+        try {
+          var s = localStorage.getItem('manuscript-site-palette');
+          var dark = (s === 'studio' || s === 'studio-dark')
+            ? s === 'studio-dark'
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.body.setAttribute('data-palette', 'studio-dark');
+
+          var p = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
+          var ls = localStorage.getItem('manuscript-site-lang');
+          var nav = (navigator.language || 'en').split('-')[0].toLowerCase();
+          var lang = (p === 'en' || p === 'ko') ? p
+            : (ls === 'en' || ls === 'ko') ? ls
+            : (nav === 'ko' ? 'ko' : 'en');
+          document.documentElement.setAttribute('lang', lang);
+          document.body.setAttribute('lang', lang);
+        } catch (e) {}
+      })();
+    </script>
+    <header class="site-header">
+      <div class="inner">
+        <a href="./" class="brand">
+          <img class="brand-mark" src="./assets/icons/manuscript-inverted.svg" alt="" aria-hidden="true" />
+          <span class="brand-word">Manuscript</span>
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-controls="primary-nav"
+          aria-expanded="false"
+          aria-label="Menu"
+        >
+          <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+            <path class="bar-1" d="M3 6h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path class="bar-2" d="M3 11h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path class="bar-3" d="M3 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <nav id="primary-nav" class="nav" aria-label="Primary">
+          <a href="./#features" data-en>Features</a><a href="./#features" data-ko>기능</a>
+          <a href="./#how" data-en>How it works</a><a href="./#how" data-ko>동작 방식</a>
+          <a href="./#agent" data-en>AI agent</a><a href="./#agent" data-ko>AI 작성</a>
+          <a href="./#install" data-en>Install</a><a href="./#install" data-ko>설치</a>
+          <a href="./manual.html" data-en>Guide</a><a href="./manual.html" data-ko>사용설명서</a>
+          <a href="./embed.html" data-en><span class="nav-new">NEW</span>Player·Bridge</a><a href="./embed.html" data-ko><span class="nav-new">NEW</span>플레이어·브리지</a>
+          <a href="./changelog.html" data-en>Changelog</a><a href="./changelog.html" data-ko>변경사항</a>
+          <a href="./#faq" data-en>FAQ</a><a href="./#faq" data-ko>FAQ</a>
+          <button
+            id="palette-toggle"
+            class="palette-toggle"
+            type="button"
+            aria-label="Toggle dark mode"
+            aria-pressed="false"
+            title="Toggle dark mode"
+          >
+            <svg class="palette-sun" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="8" cy="8" r="3"></circle>
+              <path d="M8 1.2v1.6M8 13.2v1.6M14.8 8h-1.6M2.8 8H1.2M12.8 3.2l-1.13 1.13M4.33 11.67l-1.13 1.13M12.8 12.8l-1.13-1.13M4.33 4.33L3.2 3.2"></path>
+            </svg>
+            <svg class="palette-moon" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M6.5 1.5a6.5 6.5 0 1 0 8 8 5.4 5.4 0 0 1-8-8z"></path>
+            </svg>
+          </button>
+          <select id="lang-select" class="lang-select" aria-label="Language">
+            <option value="en">English</option>
+            <option value="ko">한국어</option>
+          </select>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- ───── Hero ───── -->
+      <section class="changelog-hero">
+        <div class="container">
+          <p class="eyebrow" data-en>For developers · Standalone Player</p>
+          <p class="eyebrow" data-ko>개발자용 · 스탠드얼론 플레이어</p>
+          <h1 class="section-title" data-en>Play a saved tour on any page — no extension required.</h1>
+          <h1 class="section-title" data-ko>저장한 시연을 어떤 페이지에서나 재생 — 확장 없이.</h1>
+          <p class="lead" data-en>
+            The <strong>standalone player</strong> is a single, dependency-free
+            JavaScript bundle. Drop it onto a static HTML page, hand it a
+            scenario JSON, and the spotlights, notes, and narration replay
+            themselves — step by step, across pages, with zero browser
+            extension installed on the visitor's machine. This guide takes you
+            from an empty page to a working multi-page tour, one step at a time.
+          </p>
+          <p class="lead" data-ko>
+            <strong>스탠드얼론 플레이어</strong>는 의존성이 없는 단일
+            JavaScript 번들입니다. 정적 HTML 페이지에 끼워 넣고 시나리오
+            JSON 하나만 건네면, 강조 표시·메모·음성 안내가 스스로 재생됩니다 —
+            단계별로, 여러 페이지를 넘나들며, 방문자 기기에 어떤 브라우저 확장도
+            깔지 않은 채로요. 이 문서는 빈 페이지에서 시작해 동작하는 멀티 페이지
+            투어까지, 한 걸음씩 따라갈 수 있도록 안내합니다.
+          </p>
+
+          <!-- Hero infographic: tour file → your page (player) → it plays itself -->
+          <div class="embed-diagram hero-diagram">
+            <svg viewBox="0 0 600 220" role="img"
+              aria-label="How the standalone player runs a tour: a tour file exported from the extension is loaded by a one-line script on your page, which then plays the tour itself — spotlight, note, and a controls bar — carrying across pages with no extension installed.">
+              <!-- stage captions -->
+              <text class="label" x="70" y="20" text-anchor="middle" data-en>the tour file</text>
+              <text class="label" x="70" y="20" text-anchor="middle" data-ko>시연 파일</text>
+              <text class="label" x="255" y="20" text-anchor="middle" data-en>your page</text>
+              <text class="label" x="255" y="20" text-anchor="middle" data-ko>내 페이지</text>
+              <text class="label" x="498" y="20" text-anchor="middle" data-en>it plays itself</text>
+              <text class="label" x="498" y="20" text-anchor="middle" data-ko>스스로 재생</text>
+
+              <!-- A · the tour file (exported from the extension) -->
+              <path class="doc" d="M30 50 a6 6 0 0 1 6 -6 H92 L110 62 V144 a6 6 0 0 1 -6 6 H36 a6 6 0 0 1 -6 -6 Z"/>
+              <polygon class="docfold" points="92,44 110,62 92,62"/>
+              <line class="docline" x1="44" y1="86" x2="96" y2="86"/>
+              <line class="docline" x1="44" y1="100" x2="96" y2="100"/>
+              <line class="docline" x1="44" y1="114" x2="82" y2="114"/>
+              <text class="doctext" x="70" y="136" text-anchor="middle">tour.json</text>
+
+              <!-- arrow A→B -->
+              <line class="wire" x1="118" y1="97" x2="146" y2="97"/>
+              <polygon class="arrow" points="152,97 142,92 142,102"/>
+
+              <!-- B · your page loads the chrome-free player -->
+              <rect class="win" x="158" y="44" width="194" height="120" rx="10"/>
+              <line class="winbar" x1="158" y1="66" x2="352" y2="66"/>
+              <circle class="dot" cx="172" cy="55" r="3"/><circle class="dot" cx="184" cy="55" r="3"/><circle class="dot" cx="196" cy="55" r="3"/>
+              <rect class="addr" x="208" y="49" width="130" height="13" rx="6.5"/>
+              <text class="addrtext" x="273" y="58.5" text-anchor="middle">your-site.com</text>
+              <rect class="chip" x="170" y="82" width="170" height="28" rx="8"/>
+              <text class="chipname" x="255" y="100" text-anchor="middle">manuscript-player</text>
+              <text class="chiptext" x="255" y="136" text-anchor="middle">load() → play()</text>
+
+              <!-- arrow B→C -->
+              <line class="wire" x1="358" y1="97" x2="386" y2="97"/>
+              <polygon class="arrow" points="392,97 382,92 382,102"/>
+
+              <!-- C · the page plays itself — one element spotlighted + controls -->
+              <rect class="win" x="400" y="44" width="190" height="132" rx="10"/>
+              <line class="winbar" x1="400" y1="66" x2="590" y2="66"/>
+              <circle class="dot" cx="414" cy="55" r="3"/><circle class="dot" cx="426" cy="55" r="3"/><circle class="dot" cx="438" cy="55" r="3"/>
+              <rect class="addr" x="452" y="49" width="126" height="13" rx="6.5"/>
+              <text class="addrtext" x="515" y="58.5" text-anchor="middle">your-site.com</text>
+              <!-- page content, with one element spotlighted -->
+              <line class="elline" x1="416" y1="84" x2="470" y2="84"/>
+              <line class="elline" x1="416" y1="93" x2="450" y2="93"/>
+              <rect class="el" x="414" y="104" width="58" height="22" rx="5"/>
+              <line class="elline" x1="424" y1="115" x2="462" y2="115"/>
+              <rect class="spot" x="408" y="98" width="70" height="34" rx="9"/>
+              <!-- step note bubble -->
+              <rect class="chip" x="488" y="100" width="84" height="26" rx="7"/>
+              <text class="chiptext" x="530" y="117" text-anchor="middle" data-en>note</text>
+              <text class="chiptext" x="530" y="117" text-anchor="middle" data-ko>메모</text>
+              <!-- controls bar -->
+              <rect class="pill" x="430" y="150" width="126" height="20" rx="10"/>
+              <text class="pilltext" x="493" y="164" text-anchor="middle">◁   2 / 5   ▷   ⏸</text>
+
+              <!-- bottom takeaway -->
+              <text class="label" x="300" y="206" text-anchor="middle" data-en>no extension · nothing uploaded · carries across pages</text>
+              <text class="label" x="300" y="206" text-anchor="middle" data-ko>확장 불필요 · 업로드 없음 · 여러 페이지 자동 이어가기</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- ───── Body — reuse the .bridge section styling (dark code blocks) ───── -->
+      <section class="bridge">
+        <div class="container">
+
+          <!-- 1. What it is -->
+          <article id="player-what" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>1. What the standalone player is</h2>
+              <h2 data-ko>1. 스탠드얼론 플레이어란</h2>
+            </header>
+            <p data-en>
+              Manuscript has <strong>two</strong> ways to replay a tour outside
+              the authoring extension. Pick the one that matches your audience:
+            </p>
+            <p data-ko>
+              Manuscript 에는 작성용 확장 밖에서 시연을 재생하는 방법이
+              <strong>두 가지</strong> 있습니다. 대상에 맞는 쪽을 고르세요:
+            </p>
+            <ul data-en>
+              <li>
+                <strong>Runtime bridge</strong> (<a href="./bridge.html">see the bridge guide</a>) —
+                a tiny remote control. It asks an <em>installed</em> Manuscript
+                extension to do the replay. Great when your visitors are likely
+                to have the extension, or when you want them to install it.
+              </li>
+              <li>
+                <strong>Standalone player</strong> (this page) — the replay
+                engine itself, packaged as a chrome-free bundle. It plays
+                <em>without</em> any extension. Nothing is installed, nothing is
+                uploaded, and it works for every visitor. This is what you want
+                for a public demo, embedded docs, or an onboarding flow.
+              </li>
+            </ul>
+            <ul data-ko>
+              <li>
+                <strong>런타임 브리지</strong> (<a href="./bridge.html">브리지 가이드 보기</a>) —
+                작은 리모컨입니다. <em>설치된</em> Manuscript 확장에 재생을
+                부탁합니다. 방문자에게 확장이 있을 가능성이 높거나, 설치를
+                유도하고 싶을 때 좋습니다.
+              </li>
+              <li>
+                <strong>스탠드얼론 플레이어</strong> (이 페이지) — 재생 엔진
+                자체를 chrome-free 번들로 묶은 것입니다. <em>어떤</em> 확장도 없이
+                재생됩니다. 아무것도 설치되지 않고, 아무것도 업로드되지 않으며,
+                모든 방문자에게 동작합니다. 공개 데모, 임베드 문서, 온보딩
+                흐름에 바로 이것을 쓰면 됩니다.
+              </li>
+            </ul>
+            <div class="callout" data-en>
+              <strong>The bundle is chrome-free.</strong> It calls only standard
+              browser APIs — <code>sessionStorage</code>,
+              <code>localStorage</code>, <code>fetch</code>, the DOM, and
+              <code>requestAnimationFrame</code>. There is no
+              <code>chrome.*</code> dependency, so it runs in a plain page, an
+              embedded <code>&lt;iframe&gt;</code>, or anywhere a
+              <code>&lt;script&gt;</code> tag can.
+            </div>
+            <div class="callout" data-ko>
+              <strong>번들은 chrome-free 입니다.</strong> 표준 브라우저 API —
+              <code>sessionStorage</code>, <code>localStorage</code>,
+              <code>fetch</code>, DOM, <code>requestAnimationFrame</code> 만
+              사용합니다. <code>chrome.*</code> 의존성이 전혀 없어, 평범한
+              페이지든 임베드된 <code>&lt;iframe&gt;</code> 이든
+              <code>&lt;script&gt;</code> 태그를 넣을 수 있는 어디서나 동작합니다.
+            </div>
+          </article>
+
+          <!-- 2. What you need first -->
+          <article id="player-prereq" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>2. What you need first</h2>
+              <h2 data-ko>2. 먼저 필요한 것</h2>
+            </header>
+            <p data-en>Two things, both of which you may already have:</p>
+            <p data-ko>두 가지인데, 이미 갖고 있을 수도 있습니다:</p>
+            <ul data-en>
+              <li>
+                <strong>A scenario JSON.</strong> This is the tour itself — the
+                steps, spotlights, and notes. Author one with the
+                <a href="./#install">Manuscript extension</a> and click
+                <em>Export</em>, or have an
+                <a href="./#agent">AI agent generate one</a> from
+                <code>SKILL.md</code>. You own the file; it is just JSON.
+              </li>
+              <li>
+                <strong>A static server.</strong> The bundle and the scenario
+                are fetched over HTTP, so opening the file with
+                <code>file://</code> will not work (browsers block
+                <code>fetch</code> there). Any tiny server does — for example
+                <code>npx serve</code> or
+                <code>python -m http.server</code>.
+              </li>
+            </ul>
+            <ul data-ko>
+              <li>
+                <strong>시나리오 JSON.</strong> 투어 그 자체입니다 — 단계,
+                강조 표시, 메모. <a href="./#install">Manuscript 확장</a>으로
+                만들고 <em>내보내기(Export)</em>를 누르거나,
+                <a href="./#agent">AI 에이전트</a>에게 <code>SKILL.md</code> 로
+                생성하게 하세요. 파일은 사용자 소유이며, 그냥 JSON 입니다.
+              </li>
+              <li>
+                <strong>정적 서버.</strong> 번들과 시나리오는 HTTP 로
+                불러오므로, <code>file://</code> 로 파일을 직접 열면 동작하지
+                않습니다(브라우저가 그 환경에서 <code>fetch</code> 를 막습니다).
+                아주 작은 서버면 충분해요 — 예: <code>npx serve</code> 또는
+                <code>python -m http.server</code>.
+              </li>
+            </ul>
+          </article>
+
+          <!-- 3. Quick start -->
+          <article id="player-quickstart" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>3. Quick start — your first replay</h2>
+              <h2 data-ko>3. 빠른 시작 — 첫 재생</h2>
+            </header>
+            <p data-en>
+              Put the bundle and a scenario next to an HTML file, then add this
+              one script. Open the page through your static server and the tour
+              plays itself. That is the whole thing.
+            </p>
+            <p data-ko>
+              번들과 시나리오를 HTML 파일 옆에 두고, 이 스크립트 하나만
+              추가하세요. 정적 서버로 페이지를 열면 투어가 스스로 재생됩니다.
+              이게 전부입니다.
+            </p>
+<pre class="code" data-en><span class="tok-cmt">&lt;!-- index.html --&gt;</span>
+&lt;!doctype html&gt;
+&lt;h1&gt;My product&lt;/h1&gt;
+&lt;button id=<span class="tok-str">"feature"</span>&gt;Cool feature&lt;/button&gt;
+
+&lt;script type=<span class="tok-str">"module"</span>&gt;
+  <span class="tok-cmt">// 1. import the chrome-free bundle (default export is the player)</span>
+  <span class="tok-key">import</span> player <span class="tok-key">from</span> <span class="tok-str">'./player/manuscript-player.0.1.0.esm.js'</span>;
+
+  <span class="tok-cmt">// 2. fetch the tour you exported from the extension</span>
+  <span class="tok-key">const</span> scenario = <span class="tok-key">await</span> fetch(<span class="tok-str">'./tour.json'</span>).then(r =&gt; r.json());
+
+  <span class="tok-cmt">// 3. load it, then play</span>
+  <span class="tok-key">await</span> player.load(scenario);
+  <span class="tok-key">await</span> player.play();
+&lt;/script&gt;</pre>
+<pre class="code" data-ko><span class="tok-cmt">&lt;!-- index.html --&gt;</span>
+&lt;!doctype html&gt;
+&lt;h1&gt;내 제품&lt;/h1&gt;
+&lt;button id=<span class="tok-str">"feature"</span>&gt;멋진 기능&lt;/button&gt;
+
+&lt;script type=<span class="tok-str">"module"</span>&gt;
+  <span class="tok-cmt">// 1. chrome-free 번들 import (default export 가 player)</span>
+  <span class="tok-key">import</span> player <span class="tok-key">from</span> <span class="tok-str">'./player/manuscript-player.0.1.0.esm.js'</span>;
+
+  <span class="tok-cmt">// 2. 확장에서 내보낸 투어를 fetch</span>
+  <span class="tok-key">const</span> scenario = <span class="tok-key">await</span> fetch(<span class="tok-str">'./tour.json'</span>).then(r =&gt; r.json());
+
+  <span class="tok-cmt">// 3. load 한 뒤 play</span>
+  <span class="tok-key">await</span> player.load(scenario);
+  <span class="tok-key">await</span> player.play();
+&lt;/script&gt;</pre>
+            <p data-en>
+              A small controls bar appears at the bottom (a step counter,
+              prev/next, pause). The page does the rest. If you want to start
+              paused, or from a specific step, pass options:
+              <code>player.play({ startIndex: 2, paused: true })</code>.
+            </p>
+            <p data-ko>
+              하단에 작은 컨트롤 바(단계 카운터, 이전/다음, 일시정지)가
+              나타납니다. 나머지는 페이지가 알아서 합니다. 일시정지 상태로,
+              혹은 특정 단계에서 시작하려면 옵션을 넘기세요:
+              <code>player.play({ startIndex: 2, paused: true })</code>.
+            </p>
+          </article>
+
+          <!-- 4. Get the bundle -->
+          <article id="player-bundle" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>4. Where the bundle comes from</h2>
+              <h2 data-ko>4. 번들은 어디서 오나</h2>
+            </header>
+            <p data-en>
+              This site serves a copy under <code>./player/</code> — the same
+              bundle the live demo in §11 below imports. Download the files
+              straight from here:
+            </p>
+            <ul data-en>
+              <li>
+                <strong>UMD — one self-contained file.</strong>
+                <a href="./player/manuscript-player.0.1.0.umd.js" download>manuscript-player.0.1.0.umd.js</a>.
+                Load it with <code>&lt;script src&gt;</code>; nothing else to fetch.
+              </li>
+              <li>
+                <strong>ESM — three files, kept together.</strong> The entry
+                imports the other two by relative path, so save all three into
+                the same folder:
+                <a href="./player/manuscript-player.0.1.0.esm.js" download>manuscript-player.0.1.0.esm.js</a>,
+                <a href="./player/player-entry.js" download>player-entry.js</a>,
+                <a href="./player/spotlight-editor.js" download>spotlight-editor.js</a>.
+              </li>
+            </ul>
+            <p data-ko>
+              이 사이트는 <code>./player/</code> 아래에 사본을 제공합니다 — 아래
+              §11 라이브 데모가 import 하는 바로 그 번들이에요. 여기서 바로
+              내려받으세요:
+            </p>
+            <ul data-ko>
+              <li>
+                <strong>UMD — 단일 자체 완결 파일.</strong>
+                <a href="./player/manuscript-player.0.1.0.umd.js" download>manuscript-player.0.1.0.umd.js</a>.
+                <code>&lt;script src&gt;</code> 로 불러오면 끝, 추가로 받을 게 없어요.
+              </li>
+              <li>
+                <strong>ESM — 세 파일을 함께.</strong> 엔트리가 나머지 둘을 상대
+                경로로 import 하므로, 셋을 같은 폴더에 받으세요:
+                <a href="./player/manuscript-player.0.1.0.esm.js" download>manuscript-player.0.1.0.esm.js</a>,
+                <a href="./player/player-entry.js" download>player-entry.js</a>,
+                <a href="./player/spotlight-editor.js" download>spotlight-editor.js</a>.
+              </li>
+            </ul>
+            <p data-en>
+              You get two flavors. Use whichever fits your page:
+            </p>
+            <p data-ko>
+              두 가지 형태가 나옵니다. 페이지에 맞는 쪽을 쓰세요:
+            </p>
+            <ul data-en>
+              <li>
+                <strong>ESM</strong> — <code>manuscript-player.&lt;ver&gt;.esm.js</code>.
+                Import it with <code>&lt;script type="module"&gt;</code>. It does
+                <em>not</em> touch any global, so it never collides with other
+                scripts. Recommended. (It loads a couple of helper chunks
+                (<code>player-entry.js</code>, <code>spotlight-editor.js</code>)
+                from the same folder, so keep all three files together.)
+              </li>
+              <li>
+                <strong>UMD</strong> — <code>manuscript-player.&lt;ver&gt;.umd.js</code>.
+                A single self-contained file you load with a classic
+                <code>&lt;script src="…"&gt;</code>. It exposes the player as the
+                global <code>window.manuscript</code>. Handy for pages that
+                can't use ES modules, but watch for the name clash below.
+              </li>
+            </ul>
+            <ul data-ko>
+              <li>
+                <strong>ESM</strong> — <code>manuscript-player.&lt;ver&gt;.esm.js</code>.
+                <code>&lt;script type="module"&gt;</code> 로 import 합니다. 전역을
+                <em>건드리지 않아</em> 다른 스크립트와 충돌하지 않습니다. 권장.
+                (같은 폴더의 헬퍼 청크 <code>player-entry.js</code> ·
+                <code>spotlight-editor.js</code> 를 함께 불러오므로,
+                세 파일을 같은 폴더에 함께 두세요.)
+              </li>
+              <li>
+                <strong>UMD</strong> — <code>manuscript-player.&lt;ver&gt;.umd.js</code>.
+                고전적인 <code>&lt;script src="…"&gt;</code> 로 불러오는 단일
+                자체 완결 파일입니다. 플레이어를 전역
+                <code>window.manuscript</code> 로 노출합니다. ES 모듈을 못 쓰는
+                페이지에 편리하지만, 아래 이름 충돌을 주의하세요.
+              </li>
+            </ul>
+            <div class="callout" data-en>
+              <strong>Heads-up — name clash.</strong> The runtime bridge also
+              defines <code>window.manuscript</code>. If a page loads
+              <em>both</em> the bridge and the UMD player, they fight over that
+              global. Prefer the ESM build (no global), or load the UMD bundle
+              and immediately stash it under your own name:
+              <code>const player = window.manuscript;</code> before the bridge
+              script runs.
+            </div>
+            <div class="callout" data-ko>
+              <strong>주의 — 이름 충돌.</strong> 런타임 브리지도
+              <code>window.manuscript</code> 를 정의합니다. 한 페이지가 브리지와
+              UMD 플레이어를 <em>둘 다</em> 불러오면 이 전역을 두고 충돌합니다.
+              ESM 빌드(전역 없음)를 쓰거나, UMD 번들을 불러온 직후 브리지
+              스크립트가 실행되기 전에 본인 이름으로 챙겨두세요:
+              <code>const player = window.manuscript;</code>.
+            </div>
+          </article>
+
+          <!-- 5. Config -->
+          <article id="player-config" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>5. Optional configuration</h2>
+              <h2 data-ko>5. 선택 설정</h2>
+            </header>
+            <p data-en>
+              The bundle reads an optional global, <code>window.__MANUSCRIPT_PLAYER__</code>,
+              <em>before</em> it loads. Set it in a plain script that runs first,
+              then import the module:
+            </p>
+            <p data-ko>
+              번들은 로드 <em>전에</em> 선택적 전역
+              <code>window.__MANUSCRIPT_PLAYER__</code> 를 읽습니다. 먼저
+              실행되는 평범한 스크립트에서 설정한 뒤 모듈을 import 하세요:
+            </p>
+<pre class="code"><span class="tok-key">window</span>.__MANUSCRIPT_PLAYER__ = {
+  scenarioUrlBase: <span class="tok-str">'./tours/'</span>,   <span class="tok-cmt">// where to fetch &lt;id&gt;.json on a cross-origin resume</span>
+  assetBaseUrl:    <span class="tok-str">'./player/'</span>,  <span class="tok-cmt">// optional — reserved for bundled UI assets (currently none)</span>
+  tts:             <span class="tok-key">true</span>,         <span class="tok-cmt">// read step descriptions aloud (Web Speech API)</span>
+  ttsVoice:        <span class="tok-str">'Google US English'</span>,
+  allowedParentOrigins: [<span class="tok-str">'https://app.example.com'</span>],  <span class="tok-cmt">// cross-origin only</span>
+};</pre>
+            <table class="schema-table">
+              <thead>
+                <tr>
+                  <th data-en>Key</th><th data-en>What it does</th>
+                  <th data-ko>키</th><th data-ko>역할</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>scenarioUrlBase</code></td>
+                  <td data-en>Folder the player fetches <code>&lt;scenarioId&gt;.json</code> from when resuming a tour that crossed an origin boundary. Same-origin tours don't need it.</td>
+                  <td data-ko>출처(origin) 경계를 넘은 투어를 이어 재생할 때 <code>&lt;scenarioId&gt;.json</code> 을 불러올 폴더. 같은 출처 투어에는 필요 없습니다.</td>
+                </tr>
+                <tr>
+                  <td><code>assetBaseUrl</code></td>
+                  <td data-en>Reserved base URL for resolving bundled UI assets. The current bundle inlines its controls-bar icons and uses system / Pretendard fonts, so it fetches none — you can leave this unset.</td>
+                  <td data-ko>번들 UI 에셋을 해석할 기준 URL(예약). 현재 번들은 컨트롤 바 아이콘을 인라인 SVG 로 넣고 시스템·Pretendard 글꼴을 쓰므로 따로 받는 에셋이 없습니다 — 비워두면 됩니다.</td>
+                </tr>
+                <tr>
+                  <td><code>tts</code> / <code>ttsVoice</code></td>
+                  <td data-en>Turn on read-aloud narration and pick a voice. Uses the browser's built-in <code>speechSynthesis</code>; nothing leaves the device.</td>
+                  <td data-ko>소리 내어 읽기를 켜고 음성을 고릅니다. 브라우저 내장 <code>speechSynthesis</code> 를 쓰며, 어떤 것도 기기를 벗어나지 않습니다.</td>
+                </tr>
+                <tr>
+                  <td><code>allowedParentOrigins</code></td>
+                  <td data-en>Cross-origin tours only — the parent origins the presence beacon is allowed to answer. See §7.</td>
+                  <td data-ko>크로스 오리진 투어 전용 — presence 비콘이 응답해도 되는 부모 출처. §7 참고.</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- 6. Multi-page (same-origin) -->
+          <article id="player-multipage" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>6. Multi-page tours on one site</h2>
+              <h2 data-ko>6. 한 사이트의 여러 페이지를 잇는 투어</h2>
+            </header>
+            <p data-en>
+              A tour can walk a visitor across several pages of the same site —
+              <code>/</code> → <code>/player.html</code> →
+              <code>/privacy.html</code> — and the player handles the page
+              changes for you. Each step in the scenario carries a
+              <code>pickedAtUrl</code> (the page its element lives on). When the
+              tour advances to a step on a different page, the player saves its
+              place and navigates there; the next page picks the tour right back
+              up where it left off.
+            </p>
+            <p data-ko>
+              하나의 투어로 같은 사이트의 여러 페이지를 가로지를 수 있습니다 —
+              <code>/</code> → <code>/player.html</code> →
+              <code>/privacy.html</code> — 페이지 전환은 플레이어가 알아서
+              처리합니다. 시나리오의 각 단계에는 <code>pickedAtUrl</code>(그
+              요소가 사는 페이지)이 들어 있습니다. 투어가 다른 페이지의 단계로
+              넘어가면 플레이어가 위치를 저장하고 그쪽으로 이동하며, 다음
+              페이지에서 멈췄던 자리부터 투어를 이어갑니다.
+            </p>
+            <p data-en>
+              The one rule: <strong>include the bundle on every page the tour
+              visits.</strong> On load it quietly checks for an in-progress tour
+              and resumes if there is one — so no button is needed on the middle
+              pages. A typical wiring, shared by all pages:
+            </p>
+            <p data-ko>
+              규칙은 하나: <strong>투어가 들르는 모든 페이지에 번들을
+              넣으세요.</strong> 로드될 때 진행 중인 투어가 있는지 조용히
+              확인하고 있으면 이어서 재생합니다 — 그래서 중간 페이지에는 버튼이
+              필요 없어요. 모든 페이지가 공유하는 전형적인 배선:
+            </p>
+<pre class="code" data-en><span class="tok-cmt">&lt;!-- on every page the tour can visit --&gt;</span>
+&lt;script type=<span class="tok-str">"module"</span>&gt;
+  <span class="tok-key">import</span> player <span class="tok-key">from</span> <span class="tok-str">'./player/manuscript-player.0.1.0.esm.js'</span>;
+  <span class="tok-cmt">// On load the bundle auto-resumes an in-progress tour (sessionStorage).</span>
+  <span class="tok-cmt">// You only wire a start button on the page the tour begins on:</span>
+  document.getElementById(<span class="tok-str">'start'</span>)?.addEventListener(<span class="tok-str">'click'</span>, <span class="tok-key">async</span> () =&gt; {
+    <span class="tok-key">const</span> scenario = <span class="tok-key">await</span> fetch(<span class="tok-str">'./tours/site-tour.json'</span>).then(r =&gt; r.json());
+    <span class="tok-key">await</span> player.load(scenario);
+    <span class="tok-key">await</span> player.play();
+  });
+&lt;/script&gt;</pre>
+<pre class="code" data-ko><span class="tok-cmt">&lt;!-- 투어가 들를 수 있는 모든 페이지에 --&gt;</span>
+&lt;script type=<span class="tok-str">"module"</span>&gt;
+  <span class="tok-key">import</span> player <span class="tok-key">from</span> <span class="tok-str">'./player/manuscript-player.0.1.0.esm.js'</span>;
+  <span class="tok-cmt">// 로드 시 번들이 진행 중인 투어를 자동으로 이어 재생합니다(sessionStorage).</span>
+  <span class="tok-cmt">// 시작 버튼은 투어가 시작되는 페이지에만 답니다:</span>
+  document.getElementById(<span class="tok-str">'start'</span>)?.addEventListener(<span class="tok-str">'click'</span>, <span class="tok-key">async</span> () =&gt; {
+    <span class="tok-key">const</span> scenario = <span class="tok-key">await</span> fetch(<span class="tok-str">'./tours/site-tour.json'</span>).then(r =&gt; r.json());
+    <span class="tok-key">await</span> player.load(scenario);
+    <span class="tok-key">await</span> player.play();
+  });
+&lt;/script&gt;</pre>
+            <div class="callout" data-en>
+              <strong>How it survives the page change.</strong> Progress lives in
+              <code>sessionStorage</code> and the scenario is cached in
+              <code>localStorage</code> — both are per-origin, so they carry
+              across same-origin navigations for free. Pressing <em>F5</em> or
+              hitting Back ends the tour on purpose (it isn't a forward step), so
+              a reload never traps the visitor mid-tour.
+            </div>
+            <div class="callout" data-ko>
+              <strong>페이지 전환을 견디는 원리.</strong> 진행 상황은
+              <code>sessionStorage</code> 에, 시나리오는
+              <code>localStorage</code> 에 저장됩니다 — 둘 다 출처별이라 같은
+              출처 이동에서는 그대로 따라옵니다. <em>F5</em> 나 뒤로가기는 투어를
+              의도적으로 끝냅니다(앞으로 가는 단계가 아니므로). 그래서 새로고침이
+              방문자를 투어 중간에 가둬버리는 일이 없습니다.
+            </div>
+          </article>
+
+          <!-- 7. Cross-origin -->
+          <article id="player-crossorigin" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>7. Crossing to another origin (advanced)</h2>
+              <h2 data-ko>7. 다른 출처로 건너가기 (심화)</h2>
+            </header>
+            <p data-en>
+              If a tour needs to jump from <code>marketing.example.com</code> to
+              <code>app.example.com</code>, <code>sessionStorage</code> can't
+              follow — it's per-origin. The player handles this with a
+              presence handshake: the bundle on the destination origin answers a
+              hidden probe, and the tour is handed over through a
+              <code>?mn-player=…</code> URL query parameter (it rides the query,
+              not the hash, so a host hash router's <code>#/route</code> is left
+              intact). To allow it, both sides
+              load the bundle, and the destination lists the source in
+              <code>allowedParentOrigins</code>. If the destination doesn't
+              answer, the player shows a small "continue on the other site"
+              notice instead of navigating blindly. Most users never need this —
+              one site, one origin, is the common case from §6.
+            </p>
+            <p data-ko>
+              투어가 <code>marketing.example.com</code> 에서
+              <code>app.example.com</code> 으로 건너뛰어야 한다면,
+              <code>sessionStorage</code> 는 따라갈 수 없습니다 — 출처별이니까요.
+              플레이어는 presence 핸드셰이크로 이를 처리합니다: 목적지 출처의
+              번들이 숨겨진 probe 에 응답하고, 투어는 <code>?mn-player=…</code>
+              URL 쿼리 파라미터로 넘겨집니다 (해시가 아니라 쿼리에 실어, 호스트
+              해시 라우터의 <code>#/route</code> 를 건드리지 않습니다). 허용하려면
+              양쪽 모두 번들을 불러오고,
+              목적지는 출처를 <code>allowedParentOrigins</code> 에 등록합니다.
+              목적지가 응답하지 않으면 무작정 이동하는 대신 "다른 사이트에서
+              계속" 안내를 띄웁니다. 대부분은 필요 없어요 — §6 의 한 사이트, 한
+              출처가 일반적입니다.
+            </p>
+
+            <h3 data-en>Limitations</h3>
+            <h3 data-ko>제약</h3>
+            <p data-en>The player carries resume state between pages two ways:
+              <strong>same-origin</strong> via <code>sessionStorage</code>, and
+              <strong>cross-origin</strong> via the <code>?mn-player=</code> query
+              parameter — but only when the <em>player</em> drives the navigation.</p>
+            <p data-ko>플레이어는 페이지 사이 재생 상태를 두 가지로 넘깁니다:
+              <strong>같은 출처</strong>는 <code>sessionStorage</code>,
+              <strong>다른 출처</strong>는 <code>?mn-player=</code> 쿼리 파라미터 —
+              단, <em>플레이어가</em> 이동을 주도할 때만요.</p>
+            <table class="schema-table">
+              <thead>
+                <tr><th></th><th>same-origin</th><th>cross-origin</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-en>Player-driven</td><td data-ko>플레이어 주도</td>
+                  <td>sessionStorage</td><td><code>?mn-player=</code> ✅</td>
+                </tr>
+                <tr>
+                  <td data-en>Site-driven (waitForNavigation)</td>
+                  <td data-ko>사이트 주도 (waitForNavigation)</td>
+                  <td>sessionStorage ✅</td><td>❌</td>
+                </tr>
+              </tbody>
+            </table>
+            <p data-en>⚠️ When a <code>waitForNavigation</code> step sends the user to a
+              <strong>different origin</strong> via a site button or link, the destination
+              URL belongs to the site — the player can't attach <code>?mn-player=</code>, so
+              the tour won't resume there. <strong>A warning is printed to the browser
+              console</strong> at load when this combination is detected.</p>
+            <p data-ko>⚠️ <code>waitForNavigation</code> 스텝에서 사용자가 사이트 버튼이나
+              링크로 <strong>다른 출처</strong>로 이동하면, 목적지 URL 은 사이트의 것이라
+              플레이어가 <code>?mn-player=</code> 를 붙일 수 없어 그 페이지에서 투어가
+              이어지지 않습니다. <strong>이 조합이 감지되면 로드 시 브라우저 콘솔에
+              warning 이 출력됩니다.</strong></p>
+            <p data-en>✅ Model cross-origin hops as a <em>player-driven</em> step (set the
+              next step's <code>pickedAtUrl</code> to the other origin) so the player
+              navigates with the parameter. Keep <code>waitForNavigation</code> for
+              same-origin interactions.</p>
+            <p data-ko>✅ 다른 출처로 가는 hop 은 <em>플레이어 주도</em> 스텝(다음 스텝의
+              <code>pickedAtUrl</code> 을 다른 출처로)으로 작성해 플레이어가 파라미터를
+              붙여 이동하게 하세요. <code>waitForNavigation</code> 은 같은 출처
+              상호작용용입니다.</p>
+          </article>
+
+          <!-- 8. API reference -->
+          <article id="player-api" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>8. API reference</h2>
+              <h2 data-ko>8. API 레퍼런스</h2>
+            </header>
+            <p data-en>
+              The default export is the <code>player</code> object. Every method
+              is a no-op when there's nothing to act on (e.g. calling
+              <code>next()</code> with no tour running), so you can wire them to
+              buttons without guarding.
+            </p>
+            <p data-ko>
+              default export 가 <code>player</code> 객체입니다. 모든 메서드는
+              할 일이 없을 때 no-op 입니다(예: 투어가 없을 때
+              <code>next()</code> 호출). 그래서 가드 없이 버튼에 바로 연결할 수
+              있어요.
+            </p>
+            <table class="schema-table">
+              <thead>
+                <tr>
+                  <th data-en>Method</th><th data-en>What it does</th>
+                  <th data-ko>메서드</th><th data-ko>역할</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>load(scenario)</code></td>
+                  <td data-en>Validate &amp; cache a scenario (object or JSON string). Call before <code>play()</code>.</td>
+                  <td data-ko>시나리오(객체 또는 JSON 문자열)를 검증·캐시. <code>play()</code> 전에 호출.</td>
+                </tr>
+                <tr>
+                  <td><code>play({ startIndex?, paused? })</code></td>
+                  <td data-en>Mount the controls and start replay. Defaults: step 0, playing.</td>
+                  <td data-ko>컨트롤을 띄우고 재생 시작. 기본값: 0번 단계, 재생 중.</td>
+                </tr>
+                <tr>
+                  <td><code>pause()</code></td>
+                  <td data-en>Toggle pause/resume of the running tour.</td>
+                  <td data-ko>진행 중인 투어의 일시정지/재개 토글.</td>
+                </tr>
+                <tr>
+                  <td><code>next()</code> / <code>prev()</code></td>
+                  <td data-en>Step forward / back (navigates pages if the next step lives elsewhere).</td>
+                  <td data-ko>앞으로 / 뒤로 한 단계(다음 단계가 다른 페이지면 이동).</td>
+                </tr>
+                <tr>
+                  <td><code>jump(index)</code></td>
+                  <td data-en>Go straight to a step by its index.</td>
+                  <td data-ko>인덱스로 특정 단계로 바로 이동.</td>
+                </tr>
+                <tr>
+                  <td><code>exit()</code></td>
+                  <td data-en>End the tour, tear down the controls, clear progress.</td>
+                  <td data-ko>투어 종료, 컨트롤 정리, 진행 상황 삭제.</td>
+                </tr>
+                <tr>
+                  <td><code>onExit(fn)</code></td>
+                  <td data-en>Subscribe to "tour ended". Returns an unsubscribe function.</td>
+                  <td data-ko>"투어 종료" 구독. 구독 해제 함수를 반환.</td>
+                </tr>
+                <tr>
+                  <td><code>resumeIfActive()</code></td>
+                  <td data-en>Resume an in-progress same-origin tour from <code>sessionStorage</code>. Skipped on F5/Back.</td>
+                  <td data-ko>진행 중인 같은 출처 투어를 <code>sessionStorage</code> 에서 이어 재생. F5/뒤로가기에서는 건너뜀.</td>
+                </tr>
+                <tr>
+                  <td><code>bootResume()</code></td>
+                  <td data-en>What the bundle calls on load: a handoff-hash resume first, then <code>resumeIfActive()</code>. You rarely call it yourself.</td>
+                  <td data-ko>번들이 로드 시 호출하는 것: 핸드오프 해시 재개를 먼저 시도하고, 그다음 <code>resumeIfActive()</code>. 직접 호출할 일은 드뭅니다.</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <!-- 9. Keyboard -->
+          <article id="player-keys" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>9. Keyboard during playback</h2>
+              <h2 data-ko>9. 재생 중 키보드</h2>
+            </header>
+            <p data-en>
+              The controls bar is fully keyboard-driven, so a presenter never
+              has to reach for the mouse:
+            </p>
+            <p data-ko>
+              컨트롤 바는 키보드만으로 조작할 수 있어, 발표자가 마우스를 잡을
+              필요가 없습니다:
+            </p>
+            <ul data-en>
+              <li><span class="kbd">←</span> <span class="kbd">→</span> — previous / next step</li>
+              <li><span class="kbd">Space</span> — pause / resume</li>
+              <li><span class="kbd">Esc</span> — exit the tour</li>
+            </ul>
+            <ul data-ko>
+              <li><span class="kbd">←</span> <span class="kbd">→</span> — 이전 / 다음 단계</li>
+              <li><span class="kbd">Space</span> — 일시정지 / 재개</li>
+              <li><span class="kbd">Esc</span> — 투어 종료</li>
+            </ul>
+          </article>
+
+          <!-- 10. Troubleshooting -->
+          <article id="player-troubleshoot" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>10. When something doesn't play</h2>
+              <h2 data-ko>10. 잘 재생되지 않을 때</h2>
+            </header>
+            <ul data-en>
+              <li>
+                <strong>Nothing happens / the console says <code>fetch</code> failed.</strong>
+                You opened the file with <code>file://</code>. Serve it over
+                <code>http://</code> instead (§2).
+              </li>
+              <li>
+                <strong>The module fails to import.</strong> The ESM bundle pulls
+                a couple of helper files from its own folder — keep all three
+                player files together, not just the one
+                <code>.esm.js</code>.
+              </li>
+              <li>
+                <strong>The spotlight lands in the wrong place, or a "couldn't
+                find it" note appears.</strong> The page changed since the tour
+                was authored. Manuscript remembers each element three ways and
+                keeps going, but re-pick that step in the extension and re-export
+                for a perfect hit.
+              </li>
+              <li>
+                <strong>A multi-page tour stops after the first navigation.</strong>
+                The bundle isn't on the second page. Include it on every page the
+                tour visits (§6).
+              </li>
+              <li>
+                <strong>No narration.</strong> Set <code>tts: true</code> in the
+                config (§5), and note that browsers only allow speech after a
+                user gesture — start the tour from a click.
+              </li>
+              <li>
+                <strong>Narration goes quiet on pages the tour auto-advances to.</strong>
+                Browsers block audio on a page opened without a click, so a page
+                the tour moves to on its own can't start narration. The speaker
+                turns orange with a bouncing "click anywhere for sound" hint —
+                click the page to play its narration. Pages the viewer advances
+                by clicking keep sound. (Same limit applies to the extension's
+                replay; for a hands-free multi-page tour, expect a click per
+                auto-opened page.)
+              </li>
+            </ul>
+            <ul data-ko>
+              <li>
+                <strong>아무 일도 없고 콘솔에 <code>fetch</code> 실패가 뜬다.</strong>
+                <code>file://</code> 로 파일을 열었습니다. 대신
+                <code>http://</code> 로 띄우세요(§2).
+              </li>
+              <li>
+                <strong>모듈 import 가 실패한다.</strong> ESM 번들은 자기 폴더에서
+                헬퍼 파일 몇 개를 불러옵니다 — <code>.esm.js</code>
+                하나만이 아니라 세 파일을 같은 폴더에 함께 두세요.
+              </li>
+              <li>
+                <strong>강조 표시가 엉뚱한 곳에 뜨거나 "찾지 못했어요" 메모가
+                보인다.</strong> 투어를 만든 뒤 페이지가 바뀐 것입니다.
+                Manuscript 는 각 요소를 세 가지 방법으로 기억해 계속 진행하지만,
+                확장에서 그 단계를 다시 선택하고 다시 내보내면 정확히 맞습니다.
+              </li>
+              <li>
+                <strong>멀티 페이지 투어가 첫 이동 후 멈춘다.</strong> 두 번째
+                페이지에 번들이 없습니다. 투어가 들르는 모든 페이지에 넣으세요(§6).
+              </li>
+              <li>
+                <strong>음성 안내가 없다.</strong> 설정에서
+                <code>tts: true</code> 를 켜세요(§5). 그리고 브라우저는 사용자
+                동작 이후에만 음성을 허용하므로, 투어를 클릭으로 시작하세요.
+              </li>
+              <li>
+                <strong>투어가 자동으로 넘어가서 연 페이지에서 음성이 끊긴다.</strong>
+                브라우저는 클릭 없이 열린 페이지의 소리를 막습니다. 그래서 투어가
+                스스로 넘어간 페이지에서는 음성을 시작하지 못해요. 이때 스피커가
+                주황색으로 바뀌고 "아무 곳이나 클릭하세요" 안내가 통통 튑니다 —
+                페이지를 클릭하면 그 페이지 음성이 재생됩니다. 보는 사람이 직접
+                클릭해서 넘긴 페이지는 소리가 이어집니다. (확장 재생에도 동일하게
+                적용되며, 핸드프리 멀티 페이지 투어라면 자동으로 열린 페이지마다
+                클릭이 필요합니다.)
+              </li>
+            </ul>
+          </article>
+
+          <!-- 11. Live single-page demo of THIS page + the exact source -->
+          <article id="player-try" class="changelog-entry">
+            <header class="changelog-entry-head">
+              <h2 data-en>11. Try it — right here on this page</h2>
+              <h2 data-ko>11. 바로 이 페이지에서 해보기</h2>
+            </header>
+            <p data-en>
+              This guide embeds the standalone player and tours <em>itself</em>.
+              Press play and a spotlight walks across the key sections of this
+              very page — what it is, quick start, the bundle, config, and the
+              API — <strong>in the page's current language, with no extension and
+              no page navigation</strong>. The source that powers it is printed
+              right below, so you can copy it onto your own page and just swap
+              the selectors. (Arrow keys move, <span class="kbd">Space</span>
+              pauses, <span class="kbd">Esc</span> exits.)
+            </p>
+            <p data-ko>
+              이 가이드는 스탠드얼론 플레이어를 임베드해 <em>자기 자신</em>을
+              둘러봅니다. 재생을 누르면 강조 표시가 이 페이지의 핵심 영역 —
+              소개·빠른 시작·번들·설정·API — 을 차례로 비춥니다.
+              <strong>페이지의 현재 언어로, 확장도 페이지 이동도 없이요.</strong>
+              이를 구동하는 소스가 바로 아래 적혀 있으니, 내 페이지에 복붙하고
+              셀렉터만 바꾸면 됩니다. (방향키 이동, <span class="kbd">Space</span>
+              일시정지, <span class="kbd">Esc</span> 종료.)
+            </p>
+            <div class="agent-actions">
+              <button id="mn-page-demo" class="btn btn-primary" type="button">
+                <span data-en>▶ Play this page's tour</span><span data-ko>▶ 이 페이지 투어 재생</span>
+              </button>
+            </div>
+
+            <p data-en><strong>The source applied to this page</strong> — a complete, self-contained demo:</p>
+            <p data-ko><strong>이 페이지에 적용된 소스</strong> — 그대로 완결되는 데모입니다:</p>
+<pre class="code"><span class="tok-cmt">&lt;!-- the button this guide shows above --&gt;</span>
+&lt;button id=<span class="tok-str">"mn-page-demo"</span>&gt;▶ Play this page's tour&lt;/button&gt;
+
+&lt;script type=<span class="tok-str">"module"</span>&gt;
+  <span class="tok-key">import</span> player <span class="tok-key">from</span> <span class="tok-str">'./player/manuscript-player.0.1.0.esm.js'</span>;
+
+  <span class="tok-cmt">// Narration follows the page language (KO / EN). url is location.href,</span>
+  <span class="tok-cmt">// so it's right on localhost now and on your live domain after deploy.</span>
+  <span class="tok-key">const</span> ko = () =&gt; document.body.getAttribute(<span class="tok-str">'lang'</span>) === <span class="tok-str">'ko'</span>;
+  <span class="tok-key">const</span> STEPS = [
+    [<span class="tok-str">'#player-what'</span>,       <span class="tok-str">'The standalone player is one small script, and it needs no extension. It replays a saved tour right here on the page.'</span>, <span class="tok-str">'스탠드얼론 플레이어는 작은 스크립트 하나예요. 확장 없이도 저장한 시연을 이 페이지에서 그대로 재생합니다.'</span>],
+    [<span class="tok-str">'#player-quickstart'</span>, <span class="tok-str">'To start, you import the bundle, fetch your tour file, then call load and play. That is all it takes.'</span>,              <span class="tok-str">'시작은 간단합니다. 번들을 가져오고 시연 파일을 불러온 뒤 load 와 play 만 호출하면 됩니다.'</span>],
+    [<span class="tok-str">'#player-bundle'</span>,     <span class="tok-str">'You download the bundle right from this site — a single UMD file, or the ESM files together.'</span>,                       <span class="tok-str">'번들은 이 사이트에서 바로 내려받을 수 있어요. 단일 UMD 파일이나 ESM 파일 묶음 중에서 고르면 됩니다.'</span>],
+    [<span class="tok-str">'#player-config'</span>,     <span class="tok-str">'Optional settings let you turn on read-aloud narration and choose the voice you like.'</span>,                              <span class="tok-str">'선택 설정에서 소리 내어 읽기를 켜고 원하는 음성을 고를 수 있습니다.'</span>],
+    [<span class="tok-str">'#player-api'</span>,        <span class="tok-str">'The API stays small — load, play, pause, and stepping back and forth — and every method is safe to wire to a button.'</span>, <span class="tok-str">'API 는 단출합니다. 재생과 일시정지, 앞뒤 이동 정도이고, 모든 메서드를 버튼에 바로 연결해도 안전합니다.'</span>],
+  ];
+
+  <span class="tok-key">function</span> buildTour() {
+    <span class="tok-key">const</span> k = ko();
+    <span class="tok-key">return</span> {
+      schemaVersion: <span class="tok-str">'0.1.1'</span>, id: <span class="tok-str">'player-page-tour'</span>,
+      name: k ? <span class="tok-str">'스탠드얼론 플레이어 둘러보기'</span> : <span class="tok-str">'A tour of the standalone player'</span>,
+      url: location.href,
+      steps: STEPS.map(([sel, en, koText], i) =&gt; {
+        <span class="tok-key">const</span> note = k ? koText : en;
+        <span class="tok-key">return</span> {
+          id: <span class="tok-str">'step-'</span> + i, name: note, description: note, thumbnailDataUrl: <span class="tok-key">null</span>,
+          selectors: { layer1: { kind: <span class="tok-str">'stable-attr'</span>, cssSelector: sel } },
+          annotations: [{ kind: <span class="tok-str">'text'</span>, id: <span class="tok-str">'note-'</span> + i, text: note,
+            position: { x: 52, y: 16 },
+            style: { fontSize: 15, bold: <span class="tok-key">true</span>, color: <span class="tok-str">'#1a2438'</span>,
+              backgroundColor: <span class="tok-str">'#fff8df'</span>, backgroundOpacity: 1 } }],
+          autoAdvanceMs: 6000, waitForNavigation: <span class="tok-key">false</span>,
+        };
+      }),
+    };
+  }
+
+  <span class="tok-cmt">// wire the button: load + play (re-enable when the tour ends)</span>
+  <span class="tok-key">const</span> btn = document.getElementById(<span class="tok-str">'mn-page-demo'</span>);
+  btn?.addEventListener(<span class="tok-str">'click'</span>, <span class="tok-key">async</span> () =&gt; {
+    btn.disabled = <span class="tok-key">true</span>;
+    <span class="tok-key">await</span> player.load(buildTour());
+    <span class="tok-key">await</span> player.play();
+  });
+  player.onExit(() =&gt; { btn.disabled = <span class="tok-key">false</span>; });
+&lt;/script&gt;</pre>
+          </article>
+
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="links">
+          <a href="https://github.com/zendy00/manuscript-pages" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:zendy00@gmail.com">zendy00@gmail.com</a>
+          <a href="./privacy.html" data-en>Privacy</a><a href="./privacy.html" data-ko>개인정보</a>
+          <a href="./tours/SKILL.md" download>SKILL.md</a>
+        </div>
+        <div class="sponsor-row">
+          <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
+        </div>
+        <div>
+          <span data-en>Manuscript v0.8.1 · © 2026</span>
+          <span data-ko>Manuscript v0.8.1 · © 2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Live single-page tour for §11 — the same code printed in the
+         "source applied to this page" block above (kept in sync by hand).
+         Self-contained: no scenario file, no cross-page navigation. The
+         narration follows the page's current language (KO / EN). -->
+    <script type="module">
+      import player from './player/manuscript-player.0.1.0.esm.js';
+
+      // Narration follows the page language (KO / EN). url is location.href,
+      // so it is correct on localhost now and on the GitHub Pages domain
+      // after deploy — nothing to change.
+      const ko = () => document.body.getAttribute('lang') === 'ko';
+      const STEPS = [
+        ['#player-what',       'The standalone player is one small script, and it needs no extension. It replays a saved tour right here on the page.', '스탠드얼론 플레이어는 작은 스크립트 하나예요. 확장 없이도 저장한 시연을 이 페이지에서 그대로 재생합니다.'],
+        ['#player-quickstart', 'To start, you import the bundle, fetch your tour file, then call load and play. That is all it takes.',              '시작은 간단합니다. 번들을 가져오고 시연 파일을 불러온 뒤 load 와 play 만 호출하면 됩니다.'],
+        ['#player-bundle',     'You download the bundle right from this site — a single UMD file, or the ESM files together.',                       '번들은 이 사이트에서 바로 내려받을 수 있어요. 단일 UMD 파일이나 ESM 파일 묶음 중에서 고르면 됩니다.'],
+        ['#player-config',     'Optional settings let you turn on read-aloud narration and choose the voice you like.',                              '선택 설정에서 소리 내어 읽기를 켜고 원하는 음성을 고를 수 있습니다.'],
+        ['#player-api',        'The API stays small — load, play, pause, and stepping back and forth — and every method is safe to wire to a button.', 'API 는 단출합니다. 재생과 일시정지, 앞뒤 이동 정도이고, 모든 메서드를 버튼에 바로 연결해도 안전합니다.'],
+      ];
+
+      function buildTour() {
+        const k = ko();
+        return {
+          schemaVersion: '0.1.1',
+          id: 'player-page-tour',
+          name: k ? '스탠드얼론 플레이어 둘러보기' : 'A tour of the standalone player',
+          url: location.href,
+          steps: STEPS.map(([sel, en, koText], i) => {
+            const note = k ? koText : en;
+            return {
+              id: 'step-' + i, name: note, description: note, thumbnailDataUrl: null,
+              selectors: { layer1: { kind: 'stable-attr', cssSelector: sel } },
+              annotations: [{ kind: 'text', id: 'note-' + i, text: note,
+                position: { x: 52, y: 16 },
+                style: { fontSize: 15, bold: true, color: '#1a2438', backgroundColor: '#fff8df', backgroundOpacity: 1 } }],
+              autoAdvanceMs: 6000, waitForNavigation: false,
+            };
+          }),
+        };
+      }
+
+      const btn = document.getElementById('mn-page-demo');
+      btn?.addEventListener('click', async () => {
+        btn.disabled = true;
+        await player.load(buildTour());  // built fresh so it matches the page's language
+        await player.play();
+      });
+      player.onExit(() => { btn.disabled = false; });
+    </script>
+
+    <!-- i18n.js drives the language toggle + dark-mode palette + nav. -->
+    <script src="./i18n.js"></script>
+
+    <!-- Floating launcher for the player tour (player.html self-tour) -->
+    <button id="mn-tour" type="button" hidden>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3 2.5v9l8-4.5-8-4.5z"/></svg>
+      <span class="label" data-en>Tour this page</span>
+      <span class="label" data-ko>이 페이지 둘러보기</span>
+    </button>
+    <script type="module">
+      import player from './player/manuscript-player.0.1.0.esm.js';
+      const btn = document.getElementById('mn-tour');
+      if (btn) {
+        btn.hidden = false;
+        btn.addEventListener('click', async () => {
+          btn.disabled = true;
+          const lang = document.body.getAttribute('lang') === 'ko' ? 'ko' : 'en';
+          try {
+            const sc = await fetch('./tours/player-tour-' + lang + '.json').then((r) => r.json());
+            await player.load(sc);
+            await player.play();
+            btn.hidden = true;
+          } catch (err) { btn.disabled = false; console.warn('[manuscript-site] tour failed:', err); }
+        });
+        player.onExit(() => { btn.disabled = false; btn.hidden = false; });
+      }
+    </script>
+  </body>
+</html>

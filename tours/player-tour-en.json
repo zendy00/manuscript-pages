@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "player-tour",
+  "name": "Standalone Player guide walkthrough",
+  "url": "https://zendy00.github.io/manuscript-pages/player.html",
+  "steps": [
+    {
+      "id": "step-0",
+      "name": "What the standalone player is",
+      "description": "The standalone player is a chrome-free bundle — no extension needed, just a script you add to your page and it replays your tour automatically.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-what"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-0",
+          "text": "The standalone player is a chrome-free bundle — no extension needed, just a script you add to your page and it replays your tour automatically.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-1",
+      "name": "What you need first",
+      "description": "You need two things: a scenario JSON (the tour itself from the extension) and a static server to serve it over HTTP — file:// won't work.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-prereq"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-1",
+          "text": "You need two things: a scenario JSON (the tour itself from the extension) and a static server to serve it over HTTP — file:// won't work.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2",
+      "name": "Quick start — your first replay",
+      "description": "Import the bundle, fetch your tour file, then call load and play. That's all it takes to replay a tour on your page.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-quickstart"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-2",
+          "text": "Import the bundle, fetch your tour file, then call load and play. That's all it takes to replay a tour on your page.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3",
+      "name": "Where the bundle comes from",
+      "description": "Download the bundle right from this site — choose either a single UMD file or ESM files together, depending on how your page loads modules.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-bundle"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-3",
+          "text": "Download the bundle right from this site — choose either a single UMD file or ESM files together, depending on how your page loads modules.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4",
+      "name": "Optional configuration",
+      "description": "Set window.__MANUSCRIPT_PLAYER__ before the bundle loads to turn on text-to-speech narration, pick a voice, or set up cross-origin tour support.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-config"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-4",
+          "text": "Set window.__MANUSCRIPT_PLAYER__ before the bundle loads to turn on text-to-speech narration, pick a voice, or set up cross-origin tour support.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-5",
+      "name": "Multi-page tours on one site",
+      "description": "A tour can walk visitors across several pages of the same site — the player handles navigation, sessionStorage carries the progress, and the next page resumes automatically.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-multipage"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-5",
+          "text": "A tour can walk visitors across several pages of the same site — the player handles navigation, sessionStorage carries the progress, and the next page resumes automatically.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-6",
+      "name": "Crossing to another origin (advanced)",
+      "description": "Cross-origin tours use a presence handoff via query parameter instead of sessionStorage — both sides load the bundle and allowedParentOrigins must list the source.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-crossorigin"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-6",
+          "text": "Cross-origin tours use a presence handoff via query parameter instead of sessionStorage — both sides load the bundle and allowedParentOrigins must list the source.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-7",
+      "name": "API reference",
+      "description": "The player exports load, play, pause, next, prev, jump, exit, onExit, resumeIfActive, and bootResume — all safe to call anytime, with no guard needed.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-api"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-7",
+          "text": "The player exports load, play, pause, next, prev, jump, exit, onExit, resumeIfActive, and bootResume — all safe to call anytime, with no guard needed.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-8",
+      "name": "Keyboard during playback",
+      "description": "Arrow keys move between steps, Space pauses or resumes, and Esc exits the tour — presenters never need to reach for the mouse.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-keys"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-8",
+          "text": "Arrow keys move between steps, Space pauses or resumes, and Esc exits the tour — presenters never need to reach for the mouse.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-9",
+      "name": "When something doesn't play",
+      "description": "Check that you're serving over HTTP not file://, all three ESM files are together, the page hasn't changed since authoring, and every page in a multi-page tour has the bundle.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-troubleshoot"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-9",
+          "text": "Check that you're serving over HTTP not file://, all three ESM files are together, the page hasn't changed since authoring, and every page in a multi-page tour has the bundle.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-10",
+      "name": "Try it — right here on this page",
+      "description": "This guide embeds the player and tours itself — press play and a spotlight walks across key sections with no extension and no page navigation.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-try"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-10",
+          "text": "This guide embeds the player and tours itself — press play and a spotlight walks across key sections with no extension and no page navigation.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

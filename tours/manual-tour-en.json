@@ -1,0 +1,371 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "manual-tour",
+  "name": "User guide walkthrough",
+  "url": "https://zendy00.github.io/manuscript-pages/manual.html",
+  "steps": [
+    {
+      "id": "step-1-quickstart",
+      "name": "Quick start in 7 steps",
+      "description": "Open a web page, click the Manuscript icon, hit New Manuscript, and start authoring—pick elements, layer annotations, replay with keyboard shortcuts.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-quickstart"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-1",
+          "text": "Open a web page, click the Manuscript icon, hit New Manuscript, and start authoring—pick elements, layer annotations, replay with keyboard shortcuts.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2-picking",
+      "name": "Picking elements with 3-layer fallback",
+      "description": "Manuscript records three ways to find each element—internal names, visible text with position, and screen location. The page changes? It tries each clue until one lands on the right spot.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-pick"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-2",
+          "text": "Manuscript records three ways to find each element—internal names, visible text with position, and screen location. The page changes? It tries each clue until one lands on the right spot.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3-annotate",
+      "name": "Text, shapes, freedraw, and effects",
+      "description": "Layer annotations with color, font, effect, and opacity. Click any annotation to open its property popup. Resize, rotate, or delete with handles. Undo, copy formatting, and paste copies—all built in.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-annotate"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-3",
+          "text": "Layer annotations with color, font, effect, and opacity. Click any annotation to open its property popup. Resize, rotate, or delete with handles. Undo, copy formatting, and paste copies—all built in.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4-steps",
+      "name": "Steps, reorder, title, description, timer",
+      "description": "Insert between cards, append at the bottom, drag to reorder. Edit title and description inline. Set auto-advance time with the timer. Toggle between auto-advance and wait-for-click.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-steps"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-4",
+          "text": "Insert between cards, append at the bottom, drag to reorder. Edit title and description inline. Set auto-advance time with the timer. Toggle between auto-advance and wait-for-click.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-5-subs",
+      "name": "Inner flow—sequence elements with smooth transitions",
+      "description": "Add sub-elements to spotlight a row of related items in sequence. The step's total time splits evenly across primary and subs. Drag gaps to rebalance time. Use time-shift chevrons to nudge subs earlier or later.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-subs"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-5",
+          "text": "Add sub-elements to spotlight a row of related items in sequence. The step's total time splits evenly across primary and subs. Drag gaps to rebalance time. Use time-shift chevrons to nudge subs earlier or later.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-6-action",
+      "name": "Action steps—wait for user click",
+      "description": "Click the pause icon to turn a step into an action. During replay, a bubble appears on the target and auto-advance pauses. When the user clicks, Manuscript resumes on the new page if navigation happens.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-action"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-6",
+          "text": "Click the pause icon to turn a step into an action. During replay, a bubble appears on the target and auto-advance pauses. When the user clicks, Manuscript resumes on the new page if navigation happens.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-7-replay",
+      "name": "Replay with control bar, keyboard, prompter, voice",
+      "description": "Hit the play button to start. Use arrow keys and space to navigate. Open the detached prompter window for a three-column view. Enable voice narration. Match full URL for query/hash-routed sites.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-replay"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-7",
+          "text": "Hit the play button to start. Use arrow keys and space to navigate. Open the detached prompter window for a three-column view. Enable voice narration. Match full URL for query/hash-routed sites.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-8-record",
+      "name": "Record tours to video—multi-page in one take",
+      "description": "Click the red record button to start a separate recorder window. It plays the tour automatically, captures voice narration and page sounds, and follows page navigation. Pause anytime to add your voice.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-record"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-8",
+          "text": "Click the red record button to start a separate recorder window. It plays the tour automatically, captures voice narration and page sounds, and follows page navigation. Pause anytime to add your voice.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-9-validate",
+      "name": "Validate steps against page changes",
+      "description": "Check if your steps still match the page. Green means perfect, yellow means recovered another way, red means not found. Navigate multi-page tours automatically. Re-pick individual steps or subs.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-validate"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-9",
+          "text": "Check if your steps still match the page. Green means perfect, yellow means recovered another way, red means not found. Navigate multi-page tours automatically. Re-pick individual steps or subs.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-10-io",
+      "name": "Export as JSON, import from popup",
+      "description": "Download your entire manuscript as a JSON file with all steps, annotations, colors, and fonts. Import from the popup with one click. Older files upgrade automatically to the current version.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-io"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-10",
+          "text": "Download your entire manuscript as a JSON file with all steps, annotations, colors, and fonts. Import from the popup with one click. Older files upgrade automatically to the current version.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-11-popup",
+      "name": "Resume recent manuscripts from popup",
+      "description": "Click the extension icon a second time to see your Previous Manuscripts list. The most recent is marked Resume—one click restores your work on the same page where you left off.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-popup"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-11",
+          "text": "Click the extension icon a second time to see your Previous Manuscripts list. The most recent is marked Resume—one click restores your work on the same page where you left off.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

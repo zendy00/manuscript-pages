@@ -1,0 +1,140 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "embed-tour",
+  "name": "Choose your replay path",
+  "url": "https://zendy00.github.io/manuscript-pages/embed.html",
+  "steps": [
+    {
+      "id": "step-1",
+      "name": "Two ways to replay",
+      "description": "Manuscript offers two paths to replay tours off the extension. This page helps you pick the right one for your use case.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/embed.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#embed-hero"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-1",
+          "text": "Two ways to replay — which one do you need?",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 6000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2",
+      "name": "Standalone Player — no exte",
+      "description": "The player is a chrome-free JavaScript bundle you drop on each page the tour visits. It carries no install requirement, and the tour hands off directly page to page within your browser.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/embed.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#embed-player"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-2",
+          "text": "Standalone Player — embed the script, replay without installing anything.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3",
+      "name": "Runtime Bridge — extensio",
+      "description": "The bridge lets the extension broker between windows on any domain, even ones you can't add the script to. Visitors need the Manuscript extension installed.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/embed.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#embed-bridge"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-3",
+          "text": "Runtime Bridge — the extension reaches any window, any domain.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4",
+      "name": "Pick the right one",
+      "description": "Player: drop the script on every page and get seamless, install-free replay. Bridge: drive pages you can't add the script to, or reach users who already have the extension.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/embed.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#embed-summary"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-4",
+          "text": "Rule of thumb: can you drop the script on every page? Use the player. Otherwise, use the bridge.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 7000,
+      "waitForNavigation": false
+    }
+  ]
+}

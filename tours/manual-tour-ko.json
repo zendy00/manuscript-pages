@@ -1,0 +1,371 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "manual-tour",
+  "name": "사용설명서 둘러보기",
+  "url": "https://zendy00.github.io/manuscript-pages/manual.html",
+  "steps": [
+    {
+      "id": "step-1-quickstart",
+      "name": "퀵 스타트 7단계",
+      "description": "웹 페이지를 열고 Manuscript 아이콘을 클릭한 뒤 새 매뉴스크립트를 시작해요. 요소를 선택하고 주석을 덧붙인 후 단축키로 재생해 봅시다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-quickstart"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-1",
+          "text": "웹 페이지를 열고 Manuscript 아이콘을 클릭한 뒤 새 매뉴스크립트를 시작해요. 요소를 선택하고 주석을 덧붙인 후 단축키로 재생해 봅시다.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2-picking",
+      "name": "3단계 선택자 폴백",
+      "description": "Manuscript 는 각 요소를 찾기 위해 세 가지 단서를 기억해요. 내부 이름, 보이는 글자와 주변 위치, 화면상 위치예요. 페이지가 바뀌어도 이 단서를 차례로 시도해 같은 자리를 찾아냅니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-pick"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-2",
+          "text": "Manuscript 는 각 요소를 찾기 위해 세 가지 단서를 기억해요. 내부 이름, 보이는 글자와 주변 위치, 화면상 위치예요. 페이지가 바뀌어도 이 단서를 차례로 시도해 같은 자리를 찾아냅니다.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3-annotate",
+      "name": "글상자, 도형, 손그림, 효과",
+      "description": "색, 글꼴, 등장 효과, 투명도로 주석을 계층화합니다. 주석을 클릭하면 속성 창이 열려요. 손잡이로 크기를 조절, 회전, 삭제할 수 있고, 되돌리기와 서식 복사, 붙여넣기도 모두 있어요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-annotate"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-3",
+          "text": "색, 글꼴, 등장 효과, 투명도로 주석을 계층화합니다. 주석을 클릭하면 속성 창이 열려요. 손잡이로 크기를 조절, 회전, 삭제할 수 있고, 되돌리기와 서식 복사, 붙여넣기도 모두 있어요.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4-steps",
+      "name": "단계, 순서 바꾸기, 제목, 설명, 타이머",
+      "description": "카드 사이에 끼워 넣거나 맨 뒤에 추가하고, 드래그로 순서를 바꿔요. 제목과 설명을 그 자리에서 편집하고, 타이머로 자동 진행 시간을 정할 수 있어요. 자동 진행과 클릭 대기를 토글합니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-steps"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-4",
+          "text": "카드 사이에 끼워 넣거나 맨 뒤에 추가하고, 드래그로 순서를 바꿔요. 제목과 설명을 그 자리에서 편집하고, 타이머로 자동 진행 시간을 정할 수 있어요. 자동 진행과 클릭 대기를 토글합니다.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-5-subs",
+      "name": "내부 흐름—관련 요소를 부드럽게 순회",
+      "description": "내부 요소를 추가해 여러 항목을 순서대로 강조해요. 단계 시간이 대표 요소와 내부 요소 사이에 똑같이 나뉩니다. 간격을 드래그해 시간을 재배분하고, 화살표 버튼으로 요소를 앞당기거나 늦춰요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-subs"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-5",
+          "text": "내부 요소를 추가해 여러 항목을 순서대로 강조해요. 단계 시간이 대표 요소와 내부 요소 사이에 똑같이 나뉩니다. 간격을 드래그해 시간을 재배분하고, 화살표 버튼으로 요소를 앞당기거나 늦춰요.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-6-action",
+      "name": "Action 스텝—클릭 대기",
+      "description": "일시정지 아이콘을 클릭하면 그 단계가 action 스텝으로 바뀌어요. 재생 중 대상 요소에 버블이 뜨고 자동 진행이 멈춰요. 사용자가 클릭하면 페이지 이동 시 새 페이지에서 자동 재개됩니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-action"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-6",
+          "text": "일시정지 아이콘을 클릭하면 그 단계가 action 스텝으로 바뀌어요. 재생 중 대상 요소에 버블이 뜨고 자동 진행이 멈춰요. 사용자가 클릭하면 페이지 이동 시 새 페이지에서 자동 재개됩니다.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-7-replay",
+      "name": "컨트롤 바, 단축키, 발표자 창, 음성 안내로 재생",
+      "description": "재생 버튼을 누르면 시작돼요. 방향키와 스페이스로 탐색하고, 분리된 발표자 창을 열어 3열 구조를 봅시다. 음성 안내를 켜고, 쿼리/해시 라우팅 사이트에서는 전체 URL 일치를 켜요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-replay"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-7",
+          "text": "재생 버튼을 누르면 시작돼요. 방향키와 스페이스로 탐색하고, 분리된 발표자 창을 열어 3열 구조를 봅시다. 음성 안내를 켜고, 쿼리/해시 라우팅 사이트에서는 전체 URL 일치를 켜요.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-8-record",
+      "name": "동영상으로 녹화—여러 페이지도 한 번에",
+      "description": "빨간 녹화 버튼을 누르면 별도의 녹화 창이 열려요. 시연을 자동으로 재생하고 음성 안내와 페이지 소리를 담으며, 페이지 이동을 따라가요. 언제든 멈춰서 내 목소리를 더할 수 있어요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-record"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-8",
+          "text": "빨간 녹화 버튼을 누르면 별도의 녹화 창이 열려요. 시연을 자동으로 재생하고 음성 안내와 페이지 소리를 담으며, 페이지 이동을 따라가요. 언제든 멈춰서 내 목소리를 더할 수 있어요.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-9-validate",
+      "name": "스텝이 페이지 변화와 여전히 맞는지 점검",
+      "description": "스텝들이 페이지와 맞는지 확인해요. 녹색은 완벽, 노랑은 다른 방법으로 회복, 빨강은 찾지 못함이에요. 여러 페이지 시연은 자동으로 이동합니다. 개별 단계나 내부 요소를 재픽할 수 있어요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-validate"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-9",
+          "text": "스텝들이 페이지와 맞는지 확인해요. 녹색은 완벽, 노랑은 다른 방법으로 회복, 빨강은 찾지 못함이에요. 여러 페이지 시연은 자동으로 이동합니다. 개별 단계나 내부 요소를 재픽할 수 있어요.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-10-io",
+      "name": "JSON 으로 내보내고 팝업에서 가져오기",
+      "description": "매뉴스크립트 전체를 JSON 파일로 내려받으면 모든 스텝, 주석, 색, 글꼴이 한 파일 안에 들어가요. 팝업에서 한 번 클릭으로 불러오고, 예전 파일은 자동 업그레이드돼요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-io"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-10",
+          "text": "매뉴스크립트 전체를 JSON 파일로 내려받으면 모든 스텝, 주석, 색, 글꼴이 한 파일 안에 들어가요. 팝업에서 한 번 클릭으로 불러오고, 예전 파일은 자동 업그레이드돼요.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-11-popup",
+      "name": "팝업에서 최근 매뉴스크립트 이어하기",
+      "description": "확장 아이콘을 다시 클릭하면 이전 매뉴스크립트 목록이 나타나요. 가장 최근 작업은 '이어하기'로 강조되고, 한 번 클릭으로 그 자리에서 작업을 복귀합니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#g-popup"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-11",
+          "text": "확장 아이콘을 다시 클릭하면 이전 매뉴스크립트 목록이 나타나요. 가장 최근 작업은 '이어하기'로 강조되고, 한 번 클릭으로 그 자리에서 작업을 복귀합니다.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

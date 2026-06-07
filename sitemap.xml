@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://zendy00.github.io/manuscript-pages/</loc>
-    <lastmod>2026-06-02</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://zendy00.github.io/manuscript-pages/"/>
@@ -11,8 +11,17 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://zendy00.github.io/manuscript-pages/"/>
   </url>
   <url>
+    <loc>https://zendy00.github.io/manuscript-pages/manual.html</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zendy00.github.io/manuscript-pages/manual.html"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://zendy00.github.io/manuscript-pages/manual.html?lang=ko"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zendy00.github.io/manuscript-pages/manual.html"/>
+  </url>
+  <url>
     <loc>https://zendy00.github.io/manuscript-pages/changelog.html</loc>
-    <lastmod>2026-06-02</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://zendy00.github.io/manuscript-pages/changelog.html"/>
@@ -21,7 +30,7 @@
   </url>
   <url>
     <loc>https://zendy00.github.io/manuscript-pages/privacy.html</loc>
-    <lastmod>2026-05-29</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://zendy00.github.io/manuscript-pages/privacy.html"/>

@@ -1,0 +1,305 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "site-tour",
+  "name": "Manuscript 둘러보기",
+  "url": "https://zendy00.github.io/manuscript-pages/",
+  "steps": [
+    {
+      "id": "step-1",
+      "name": "Manuscript 에 오신 걸 환영합니다. 어떤 웹 페이지든 살아 움직",
+      "description": "Manuscript 에 오신 걸 환영합니다. 어떤 웹 페이지든 살아 움직이는 단계별 안내 설명서로 만들어 주는 브라우저 확장이에요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".hero"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-1",
+          "text": "Manuscript 에 오신 걸 환영합니다. 어떤 웹 페이지든 살아 움직이는 단계별 안내 설명서로 만들어 주는 브라우저 확장이에요.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2",
+      "name": "작은 배려가 가득합니다. 페이지가 바뀌어도 버티는 요소 선택, 음성 안내",
+      "description": "작은 배려가 가득합니다. 페이지가 바뀌어도 버티는 요소 선택, 음성 안내, 발표자 창, 동영상 내보내기, 공유 원격저장소까지 갖췄어요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#features"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-2",
+          "text": "작은 배려가 가득합니다. 페이지가 바뀌어도 버티는 요소 선택, 음성 안내, 발표자 창, 동영상 내보내기, 공유 원격저장소까지 갖췄어요.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3",
+      "name": "제작은 다섯 단계면 됩니다. Manuscript 를 열고, 강조할 곳을 ",
+      "description": "제작은 다섯 단계면 됩니다. Manuscript 를 열고, 강조할 곳을 클릭하고, 메모를 더하고, 나머지 단계를 쌓고, 재생을 누르면 끝나요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#how"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-3",
+          "text": "제작은 다섯 단계면 됩니다. Manuscript 를 열고, 강조할 곳을 클릭하고, 메모를 더하고, 나머지 단계를 쌓고, 재생을 누르면 끝나요.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4",
+      "name": "SKILL.md 와 URL 을 AI 에이전트에 건네면 투어를 대신 작성해",
+      "description": "SKILL.md 와 URL 을 AI 에이전트에 건네면 투어를 대신 작성해 주고, 그대로 불러와 바로 쓸 수 있습니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#agent"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-4",
+          "text": "SKILL.md 와 URL 을 AI 에이전트에 건네면 투어를 대신 작성해 주고, 그대로 불러와 바로 쓸 수 있습니다.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-5",
+      "name": "그리고 지금 이 투어가 쓰고 있는 기능이에요. 작은 스크립트 하나만 있으",
+      "description": "그리고 지금 이 투어가 쓰고 있는 기능이에요. 작은 스크립트 하나만 있으면 확장 없이도 시연을 재생할 수 있습니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-5",
+          "text": "그리고 지금 이 투어가 쓰고 있는 기능이에요. 작은 스크립트 하나만 있으면 확장 없이도 시연을 재생할 수 있습니다.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-6",
+      "name": "더 자세히 보고 싶다면, 여기 전체 사용설명서에 모든 기능이 단계별로 정",
+      "description": "더 자세히 보고 싶다면, 여기 전체 사용설명서에 모든 기능이 단계별로 정리돼 있어요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".guide-toc"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-6",
+          "text": "더 자세히 보고 싶다면, 여기 전체 사용설명서에 모든 기능이 단계별로 정리돼 있어요.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-7",
+      "name": "이 페이지는 스탠드얼론 플레이어를 빠른 시작부터 전체 API 까지 깊이 ",
+      "description": "이 페이지는 스탠드얼론 플레이어를 빠른 시작부터 전체 API 까지 깊이 있게 안내합니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".changelog-hero"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-7",
+          "text": "이 페이지는 스탠드얼론 플레이어를 빠른 시작부터 전체 API 까지 깊이 있게 안내합니다.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-8",
+      "name": "변경사항 페이지에는 버전별로 무엇이 추가됐는지 모여 있어, 새 소식을 한",
+      "description": "변경사항 페이지에는 버전별로 무엇이 추가됐는지 모여 있어, 새 소식을 한눈에 볼 수 있어요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/changelog.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#v0-8-0"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-8",
+          "text": "변경사항 페이지에는 버전별로 무엇이 추가됐는지 모여 있어, 새 소식을 한눈에 볼 수 있어요.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-9",
+      "name": "여기까지가 투어예요. 처음 자리로 돌아왔습니다. 준비되면 Manuscri",
+      "description": "여기까지가 투어예요. 처음 자리로 돌아왔습니다. 준비되면 Manuscript 를 설치하고 1분 만에 첫 시연을 만들어 보세요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".hero"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-9",
+          "text": "여기까지가 투어예요. 처음 자리로 돌아왔습니다. 준비되면 Manuscript 를 설치하고 1분 만에 첫 시연을 만들어 보세요.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

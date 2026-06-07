@@ -42,6 +42,30 @@
     <meta property="og:image" content="https://zendy00.github.io/manuscript-pages/assets/icons/favicon-128.png" />
   </head>
   <body data-palette="studio" lang="en">
+    <script data-antiflash>
+      /* Anti-flash: apply stored/preferred palette AND language before first
+         paint so page loads and cross-document view transitions don't flash
+         (light→dark, en→ko) then flip. i18n.js re-applies (idempotent) + wires
+         the toggles. Mirrors i18n.js pickInitialPalette / pickInitialLang. */
+      (function () {
+        try {
+          var s = localStorage.getItem('manuscript-site-palette');
+          var dark = (s === 'studio' || s === 'studio-dark')
+            ? s === 'studio-dark'
+            : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.body.setAttribute('data-palette', 'studio-dark');
+
+          var p = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
+          var ls = localStorage.getItem('manuscript-site-lang');
+          var nav = (navigator.language || 'en').split('-')[0].toLowerCase();
+          var lang = (p === 'en' || p === 'ko') ? p
+            : (ls === 'en' || ls === 'ko') ? ls
+            : (nav === 'ko' ? 'ko' : 'en');
+          document.documentElement.setAttribute('lang', lang);
+          document.body.setAttribute('lang', lang);
+        } catch (e) {}
+      })();
+    </script>
     <header class="site-header">
       <div class="inner">
         <a href="./" class="brand">
@@ -64,12 +88,10 @@
         <nav id="primary-nav" class="nav" aria-label="Primary">
           <a href="./#features" data-en>Features</a><a href="./#features" data-ko>기능</a>
           <a href="./#how" data-en>How it works</a><a href="./#how" data-ko>동작 방식</a>
-          <a href="./#record" data-en>Record</a><a href="./#record" data-ko>녹화</a>
           <a href="./#agent" data-en>AI agent</a><a href="./#agent" data-ko>AI 작성</a>
-          <a href="./#remote" data-en><span class="new-badge nav-new">NEW</span>Remote Library</a><a href="./#remote" data-ko><span class="new-badge nav-new">NEW</span>원격저장소</a>
           <a href="./#install" data-en>Install</a><a href="./#install" data-ko>설치</a>
-          <a href="./#guide" data-en>Guide</a><a href="./#guide" data-ko>사용설명서</a>
-          <a href="./#bridge" data-en>Bridge</a><a href="./#bridge" data-ko>브리지</a>
+          <a href="./manual.html" data-en>Guide</a><a href="./manual.html" data-ko>사용설명서</a>
+          <a href="./embed.html" data-en><span class="nav-new">NEW</span>Player·Bridge</a><a href="./embed.html" data-ko><span class="nav-new">NEW</span>플레이어·브리지</a>
           <a href="./changelog.html" data-en>Changelog</a><a href="./changelog.html" data-ko>변경사항</a>
           <a href="./#faq" data-en>FAQ</a><a href="./#faq" data-ko>FAQ</a>
           <button
@@ -441,19 +463,15 @@
         <div class="links">
           <a href="https://github.com/zendy00/manuscript-pages" target="_blank" rel="noopener">GitHub</a>
           <a href="mailto:zendy00@gmail.com">zendy00@gmail.com</a>
-          <a href="./#install" data-en>Install</a><a href="./#install" data-ko>설치</a>
-          <a href="./#guide" data-en>Guide</a><a href="./#guide" data-ko>사용설명서</a>
-          <a href="./changelog.html" data-en>Changelog</a><a href="./changelog.html" data-ko>변경사항</a>
           <a href="./privacy.html" data-en>Privacy</a><a href="./privacy.html" data-ko>개인정보</a>
-          <a href="./#bridge" data-en>Bridge</a><a href="./#bridge" data-ko>브리지</a>
           <a href="./tours/SKILL.md" download>SKILL.md</a>
         </div>
         <div class="sponsor-row">
           <a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-en aria-label="Sponsor on GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>Sponsor</a><a href="https://github.com/sponsors/zendy00" target="_blank" rel="noopener" class="btn-sponsor" data-ko aria-label="GitHub 후원하기"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="m8 14.25.345.666a.75.75 0 0 1-.69 0l-.008-.004-.018-.01a7.152 7.152 0 0 1-.31-.17 22.055 22.055 0 0 1-3.434-2.414C2.045 10.731 0 8.35 0 5.5 0 2.836 2.086 1 4.25 1 5.797 1 7.153 1.802 8 3.02 8.847 1.802 10.203 1 11.75 1 13.914 1 16 2.836 16 5.5c0 2.85-2.045 5.231-3.885 6.818a22.066 22.066 0 0 1-3.744 2.584l-.018.01-.006.003h-.002ZM4.25 2.5c-1.336 0-2.75 1.164-2.75 3 0 2.15 1.58 4.144 3.365 5.682A20.58 20.58 0 0 0 8 13.393a20.58 20.58 0 0 0 3.135-2.211C12.92 9.644 14.5 7.65 14.5 5.5c0-1.836-1.414-3-2.75-3-1.373 0-2.609.986-3.029 2.456a.749.749 0 0 1-1.442 0C6.859 3.486 5.623 2.5 4.25 2.5Z"/></svg>후원</a>
         </div>
         <div>
-          <span data-en>Manuscript v0.8.0 · © 2026</span>
-          <span data-ko>Manuscript v0.8.0 · © 2026</span>
+          <span data-en>Manuscript v0.8.1 · © 2026</span>
+          <span data-ko>Manuscript v0.8.1 · © 2026</span>
         </div>
       </div>
     </footer>
@@ -469,64 +487,31 @@
       <span class="label" data-ko>투어 시작</span>
     </button>
 
-    <script src="./manuscript-bridge.0.1.3.js"></script>
     <script src="./i18n.js"></script>
-    <script>
-      // Wire the privacy-page tour launcher to the bridge.
-      // Mirrors the host-owned button pattern from index.html — the only
-      // difference is the scenario filename (tours/privacy-<lang>.json).
-      (async () => {
-        if (typeof manuscript === 'undefined') return;
-        const btn = document.getElementById('mn-tour');
-        if (!btn) return;
-
-        // Mobile Chrome/Edge can't install extensions, so the tour /
-        // install pill has nowhere useful to lead. Leave the button
-        // hidden (it starts with `hidden`) and bail.
-        if (manuscript.isMobile && manuscript.isMobile()) return;
-
-        manuscript.configure({
-          banner: false,
-          homepageUrl: 'https://zendy00.github.io/manuscript-pages/',
-        });
-
-        const labelEn = btn.querySelector('.label[data-en]');
-        const labelKo = btn.querySelector('.label[data-ko]');
-        function setLabels(en, ko) {
-          if (labelEn) labelEn.textContent = en;
-          if (labelKo) labelKo.textContent = ko;
-        }
-
-        async function startTour() {
+    <!-- Floating "Take the tour" button → STANDALONE PLAYER (no extension).
+         The tour JSON is played verbatim (single source of truth, so the bridge
+         and player match); its dev-origin URLs are rewritten to the live domain
+         at deploy time by scripts/01.build/rewrite-tour-urls.mjs. -->
+    <script type="module">
+      import player from './player/manuscript-player.0.1.0.esm.js';
+      const btn = document.getElementById('mn-tour');
+      if (btn) {
+        btn.hidden = false;
+        btn.addEventListener('click', async () => {
           btn.disabled = true;
           const lang = document.body.getAttribute('lang') === 'ko' ? 'ko' : 'en';
           try {
-            const res = await fetch('./tours/privacy-' + lang + '.json');
-            const scenario = await res.json();
-            await manuscript.load(scenario);
-            await manuscript.play({ standalone: true });
+            const sc = await fetch('./tours/privacy-' + lang + '.json').then((r) => r.json());
+            await player.load(sc);
+            await player.play();
             btn.hidden = true;
           } catch (err) {
             btn.disabled = false;
             console.warn('[manuscript-site] tour failed:', err);
           }
-        }
-
-        const installed = await manuscript.isInstalled();
-        btn.hidden = false;
-        if (installed) {
-          btn.addEventListener('click', startTour);
-        } else {
-          setLabels('Install Manuscript', 'Manuscript 설치');
-          btn.classList.add('is-install');
-          btn.addEventListener('click', () => manuscript.openStore());
-        }
-
-        manuscript.onExit(() => {
-          btn.disabled = false;
-          btn.hidden = false;
         });
-      })();
+        player.onExit(() => { btn.disabled = false; btn.hidden = false; });
+      }
     </script>
   </body>
 </html>

@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "bridge-tour",
+  "name": "런타임 브리지 가이드",
+  "url": "https://zendy00.github.io/manuscript-pages/bridge.html",
+  "steps": [
+    {
+      "id": "step-1",
+      "name": "내 페이지에 투어 버튼 달기",
+      "description": "브리지는 내 페이지가 설치된 Manuscript 확장에 저장된 투어 재생을 부탁하는 작은 리모컨입니다. 방문자에게 확장이 필요하지만 순간적인 데모 재생이 가능합니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/bridge.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#bridge"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-1",
+          "text": "브리지는 내 페이지가 설치된 Manuscript 확장에 저장된 투어 재생을 부탁하는 작은 리모컨입니다. 방문자에게 확장이 필요하지만 순간적인 데모 재생이 가능합니다.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2",
+      "name": "방법 A — 내 버튼 직접 만들기",
+      "description": "버튼을 직접 만들고 원하는 대로 꾸밀 수 있습니다. 확장이 없으면 openStore()와 openHomepage() API로 웹 스토어나 내 홈페이지로 안내하세요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/bridge.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#bridge-option-a"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-2",
+          "text": "버튼을 직접 만들고 원하는 대로 꾸밀 수 있습니다. 확장이 없으면 openStore()와 openHomepage() API로 웹 스토어나 내 홈페이지로 안내하세요.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3",
+      "name": "방법 B — 브리지가 런처를 띄우기",
+      "description": "DOM을 건드리지 않는 방식입니다. 브리지가 Shadow DOM 격리된 pill을 우하단에 띄우고, 확장이 설치돼 있으면 '투어 시작', 미설치면 '설치' 안내를 보여줍니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/bridge.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#bridge-option-b"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-3",
+          "text": "DOM을 건드리지 않는 방식입니다. 브리지가 Shadow DOM 격리된 pill을 우하단에 띄우고, 확장이 설치돼 있으면 '투어 시작', 미설치면 '설치' 안내를 보여줍니다.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4",
+      "name": "공개 API — 완전한 제어",
+      "description": "manuscript.* API로 모든 걸 제어할 수 있습니다. isInstalled(), load(), play(), pause(), next(), prev(), jump(), exit(), 그리고 확장 설치 안내용 openStore(), openHomepage().",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/bridge.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#bridge-api"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-4",
+          "text": "manuscript.* API로 모든 걸 제어할 수 있습니다. isInstalled(), load(), play(), pause(), next(), prev(), jump(), exit(), 그리고 확장 설치 안내용 openStore(), openHomepage().",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-5",
+      "name": "다운로드 및 시작하기",
+      "description": "브리지 라이브러리(14 KB, 의존성 없음)와 투어 JSON 예제를 내려받으세요. 라이브러리를 페이지에 넣고 Manuscript 확장으로 투어를 작성한 뒤 JSON으로 내보내기하면 됩니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/bridge.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#bridge-downloads"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-5",
+          "text": "브리지 라이브러리(14 KB, 의존성 없음)와 투어 JSON 예제를 내려받으세요. 라이브러리를 페이지에 넣고 Manuscript 확장으로 투어를 작성한 뒤 JSON으로 내보내기하면 됩니다.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

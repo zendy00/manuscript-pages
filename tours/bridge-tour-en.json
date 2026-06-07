@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "bridge-tour",
+  "name": "Runtime Bridge guide",
+  "url": "https://zendy00.github.io/manuscript-pages/bridge.html",
+  "steps": [
+    {
+      "id": "step-1",
+      "name": "Put a tour button on your page",
+      "description": "The bridge is a small remote control script that lets your page ask an installed Manuscript extension to replay a saved tour. Your visitors need the extension, but they get instant playback of your demo.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/bridge.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#bridge"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-1",
+          "text": "The bridge is a small remote control script that lets your page ask an installed Manuscript extension to replay a saved tour. Your visitors need the extension, but they get instant playback of your demo.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2",
+      "name": "Option A — your own button",
+      "description": "Author the button yourself with your own styling. When the extension is missing, send visitors to the Web Store or your own homepage via openStore() and openHomepage() API calls.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/bridge.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#bridge-option-a"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-2",
+          "text": "Author the button yourself with your own styling. When the extension is missing, send visitors to the Web Store or your own homepage via openStore() and openHomepage() API calls.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3",
+      "name": "Option B — let the bridge mount",
+      "description": "Zero-DOM-touch approach. The bridge mounts a Shadow-DOM-isolated launcher pill to your page's bottom-right. It shows \"Take the tour\" when the extension is installed, or \"Install Manuscript\" when it's missing.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/bridge.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#bridge-option-b"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-3",
+          "text": "Zero-DOM-touch approach. The bridge mounts a Shadow-DOM-isolated launcher pill to your page's bottom-right. It shows \"Take the tour\" when the extension is installed, or \"Install Manuscript\" when it's missing.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4",
+      "name": "Public API — full control",
+      "description": "The manuscript.* API gives you full control: isInstalled(), load(), play(), pause(), next(), prev(), jump(), exit(), plus openStore() and openHomepage() for extension prompts.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/bridge.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#bridge-api"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-4",
+          "text": "The manuscript.* API gives you full control: isInstalled(), load(), play(), pause(), next(), prev(), jump(), exit(), plus openStore() and openHomepage() for extension prompts.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-5",
+      "name": "Downloads and getting started",
+      "description": "Download the bridge library (14 KB, dependency-free) and example tour JSON. The library plugs into your page, and you author tours with the Manuscript extension then export them as JSON.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/bridge.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#bridge-downloads"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-5",
+          "text": "Download the bridge library (14 KB, dependency-free) and example tour JSON. The library plugs into your page, and you author tours with the Manuscript extension then export them as JSON.",
+          "position": {
+            "x": 50,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

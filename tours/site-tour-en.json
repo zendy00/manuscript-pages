@@ -1,0 +1,305 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "site-tour",
+  "name": "A guided tour of Manuscript",
+  "url": "https://zendy00.github.io/manuscript-pages/",
+  "steps": [
+    {
+      "id": "step-1",
+      "name": "Welcome to Manuscript. It is a browser e",
+      "description": "Welcome to Manuscript. It is a browser extension that turns any web page into a living, narrated, step-by-step manual.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".hero"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-1",
+          "text": "Welcome to Manuscript. It is a browser extension that turns any web page into a living, narrated, step-by-step manual.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2",
+      "name": "It is full of small touches — selectors ",
+      "description": "It is full of small touches — selectors that survive page changes, voice narration, a presenter window, video export, and shared remote libraries.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#features"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-2",
+          "text": "It is full of small touches — selectors that survive page changes, voice narration, a presenter window, video export, and shared remote libraries.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3",
+      "name": "Authoring takes five easy steps: open Ma",
+      "description": "Authoring takes five easy steps: open Manuscript, tap the spot to show, add a note, build out the rest, and press play.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#how"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-3",
+          "text": "Authoring takes five easy steps: open Manuscript, tap the spot to show, add a note, build out the rest, and press play.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4",
+      "name": "You can even hand SKILL.md and a URL to ",
+      "description": "You can even hand SKILL.md and a URL to an AI agent, and it writes the tour for you to load right back in.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#agent"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-4",
+          "text": "You can even hand SKILL.md and a URL to an AI agent, and it writes the tour for you to load right back in.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-5",
+      "name": "And here is the part this tour is using ",
+      "description": "And here is the part this tour is using right now — you can replay a tour without the extension, with just one small script.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-5",
+          "text": "And here is the part this tour is using right now — you can replay a tour without the extension, with just one small script.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-6",
+      "name": "Want the details? This is the full user ",
+      "description": "Want the details? This is the full user guide, with every tool explained step by step.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/manual.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".guide-toc"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-6",
+          "text": "Want the details? This is the full user guide, with every tool explained step by step.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-7",
+      "name": "This page walks through the standalone p",
+      "description": "This page walks through the standalone player in depth, from quick start to the full API.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".changelog-hero"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-7",
+          "text": "This page walks through the standalone player in depth, from quick start to the full API.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-8",
+      "name": "The changelog gathers what shipped in ea",
+      "description": "The changelog gathers what shipped in each release, so you can see what is new at a glance.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/changelog.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#v0-8-0"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-8",
+          "text": "The changelog gathers what shipped in each release, so you can see what is new at a glance.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-9",
+      "name": "And that wraps up the tour — back where ",
+      "description": "And that wraps up the tour — back where we started. When you are ready, install Manuscript and put together your first walkthrough in a minute.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": ".hero"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-9",
+          "text": "And that wraps up the tour — back where we started. When you are ready, install Manuscript and put together your first walkthrough in a minute.",
+          "position": {
+            "x": 52,
+            "y": 16
+          },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}

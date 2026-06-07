@@ -173,6 +173,20 @@ p.lead {
   text-decoration: none;
 }
 .nav a:hover { color: var(--c-text); }
+/* "NEW" badge on a nav item (Player·Bridge). */
+.nav a .nav-new {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 2px 5px;
+  border-radius: var(--r-pill);
+  background: var(--c-primary);
+  color: var(--c-primary-fg);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  vertical-align: middle;
+}
 .lang-select {
   appearance: none;
   -webkit-appearance: none;
@@ -195,7 +209,7 @@ p.lead {
 
 /* ───── Hero ───── */
 .hero {
-  padding: 120px 0 96px;
+  padding: 88px 0 96px;
   border-bottom: none;
   background:
     radial-gradient(ellipse 800px 420px at 50% -10%,
@@ -417,7 +431,8 @@ p.lead {
 }
 
 /* ───── Record spotlight (headline feature) ───── */
-.record-spotlight {
+.record-spotlight,
+.player-spotlight {
   background:
     radial-gradient(ellipse 700px 400px at 100% 0%,
       color-mix(in oklch, var(--c-primary) 18%, transparent) 0%,
@@ -426,7 +441,8 @@ p.lead {
   padding: var(--section-pad) 0;
   border-bottom: 1px solid var(--c-border);
 }
-.record-spotlight .section-title {
+.record-spotlight .section-title,
+.player-spotlight .section-title {
   font-family: var(--ff-serif);
   font-size: 44px;
   line-height: 1.15;
@@ -434,14 +450,17 @@ p.lead {
   letter-spacing: -0.01em;
   margin: 0 0 16px;
 }
-.record-spotlight .section-title em {
+.record-spotlight .section-title em,
+.player-spotlight .section-title em {
   font-style: italic;
   color: var(--c-primary);
 }
-.record-spotlight .eyebrow {
+.record-spotlight .eyebrow,
+.player-spotlight .eyebrow {
   color: var(--c-primary);
 }
-.record-spotlight p.lead {
+.record-spotlight p.lead,
+.player-spotlight p.lead {
   margin-bottom: 24px;
 }
 .record-grid {
@@ -614,6 +633,8 @@ p.lead {
 
 /* ───── How it works (sequence) ───── */
 .how .container { max-width: 980px; }
+.how-guide-cta { margin-top: 40px; text-align: center; }
+.how-guide-cta p { margin: 0 0 16px; color: var(--c-text-mute); }
 .sequence {
   display: grid;
   grid-template-columns: 1fr;
@@ -797,6 +818,9 @@ p.lead {
 }
 
 /* ───── Guide ───── */
+/* manual.html's top section — match the 88px header-to-hero gap of the
+   other pages' .hero / .changelog-hero (otherwise it inherits section's 96px). */
+.guide { padding-top: 88px; }
 .guide-grid {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
@@ -1094,7 +1118,8 @@ body[lang="ko"] [data-ko] { display: revert; }
    dark surface. Using var(--c-text) as a background broke this in
    dark mode (where --c-text flips near-white and the amber strings
    landed on a white bg). */
-.bridge pre.code {
+.bridge pre.code,
+.player-spotlight pre.code {
   background: oklch(0.20 0.020 240);
   color: oklch(0.97 0.003 240);
   padding: 18px 20px;
@@ -1105,9 +1130,78 @@ body[lang="ko"] [data-ko] { display: revert; }
   line-height: 1.55;
   margin: 16px 0;
 }
-.bridge pre.code .tok-key { color: #82b3ff; }
-.bridge pre.code .tok-str { color: #ffd47a; }
-.bridge pre.code .tok-cmt { color: rgba(255, 255, 255, 0.55); }
+.bridge pre.code .tok-key,
+.player-spotlight pre.code .tok-key { color: #82b3ff; }
+.bridge pre.code .tok-str,
+.player-spotlight pre.code .tok-str { color: #ffd47a; }
+.bridge pre.code .tok-cmt,
+.player-spotlight pre.code .tok-cmt { color: rgba(255, 255, 255, 0.55); }
+
+/* ───── Hero player badge + player-spotlight actions ───── */
+/* Hero "no-extension player" promo — an eye-catching NEW callout under the CTAs.
+   display is set per-lang below (the i18n `[data-en]{display:none}` rule comes
+   later in source, so a base `display` here would show both languages). */
+.hero-player-promo {
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  max-width: 540px;
+  padding: 12px 16px;
+  border-radius: var(--r-lg);
+  background:
+    linear-gradient(100deg,
+      color-mix(in oklch, var(--c-primary) 17%, var(--c-surface)),
+      color-mix(in oklch, var(--c-primary) 7%, var(--c-surface)));
+  border: 1px solid color-mix(in oklch, var(--c-primary) 42%, transparent);
+  box-shadow: 0 2px 10px color-mix(in oklch, var(--c-primary) 14%, transparent);
+  color: var(--c-text);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.hero-player-promo:hover {
+  transform: translateY(-2px);
+  border-color: var(--c-primary);
+  box-shadow: 0 8px 22px color-mix(in oklch, var(--c-primary) 24%, transparent);
+  text-decoration: none;
+}
+.hero-player-promo .hpp-new {
+  flex: none;
+  font: 800 11px var(--ff-sans);
+  letter-spacing: 0.07em;
+  color: var(--c-primary-fg);
+  background: var(--c-primary);
+  padding: 4px 9px;
+  border-radius: var(--r-pill);
+}
+.hero-player-promo .hpp-text {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.hero-player-promo .hpp-file {
+  font-family: var(--ff-mono);
+  font-weight: 700;
+  font-size: 12.5px;
+  color: var(--c-primary);
+}
+.hero-player-promo .hpp-em { color: var(--c-primary); font-weight: 700; }
+.hero-player-promo .hpp-arrow {
+  flex: none;
+  margin-left: auto;
+  color: var(--c-primary);
+  font-weight: 700;
+  font-size: 18px;
+}
+/* [data-en]/[data-ko] revert to display when shown; re-assert flex per lang
+   to win specificity (same fix as .btn-sponsor). */
+body[lang="en"] .hero-player-promo[data-en],
+body[lang="ko"] .hero-player-promo[data-ko] { display: flex; }
+.player-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
 
 /* Floating tour pill — appears in the bottom-right when the extension is
    detected. Mirrors the extension's controls pill design tone. */
@@ -1577,7 +1671,7 @@ body[data-palette="studio-dark"] .callout-warn {
 
 /* ───── Changelog page ───── */
 .changelog-hero {
-  padding: 72px 0 32px;
+  padding: 88px 0 32px;
   border-bottom: 1px solid var(--c-border);
 }
 .changelog-hero .lead {
@@ -1671,3 +1765,45 @@ body[lang="ko"] .changelog-tag[data-ko] { display: inline-block; }
   color: var(--c-text);
   font-weight: 500;
 }
+
+/* ───── Diagram primitives — shared by the embed / player / bridge infographics ─────
+   Moved out of embed.html's inline <style> so player.html + bridge.html reuse the
+   same token-driven visual language (and adapt to dark mode for free). */
+.embed-diagram {
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: 10px;
+  margin-bottom: 16px;
+}
+.embed-diagram svg { display: block; width: 100%; height: auto; }
+.embed-diagram .win { fill: var(--c-surface); stroke: var(--c-border-strong); stroke-width: 1.5; }
+.embed-diagram .winbar { stroke: var(--c-border-strong); stroke-width: 1.2; }
+.embed-diagram .dot { fill: var(--c-text-mute); }
+.embed-diagram .label { fill: var(--c-text-mute); font: 600 11px var(--ff-sans); }
+.embed-diagram .label-strong { fill: var(--c-text); font: 700 12px var(--ff-sans); }
+.embed-diagram .chip { fill: color-mix(in srgb, var(--c-primary) 14%, var(--c-surface)); stroke: var(--c-primary); stroke-width: 1.3; }
+.embed-diagram .chiptext { fill: var(--c-primary); font: 700 11px var(--ff-mono); }
+.embed-diagram .chipname { fill: var(--c-primary); font: 700 9.5px var(--ff-mono); }
+.embed-diagram .wire { stroke: var(--c-primary); stroke-width: 2; fill: none; }
+.embed-diagram .wire-dash { stroke-dasharray: 5 4; }
+.embed-diagram .ext { fill: var(--c-primary); }
+.embed-diagram .exttext { fill: var(--c-on-primary, #fff); font: 700 11px var(--ff-sans); }
+.embed-diagram .arrow { fill: var(--c-primary); }
+.embed-diagram .puzzle { fill: var(--c-on-primary, #fff); }
+.embed-diagram .addr { fill: var(--c-bg); stroke: var(--c-border); stroke-width: 1; }
+.embed-diagram .addrtext { fill: var(--c-text-mute); font: 500 9px var(--ff-mono); }
+/* extras introduced for the player / bridge hero infographics */
+.embed-diagram .doc { fill: var(--c-surface); stroke: var(--c-border-strong); stroke-width: 1.5; }
+.embed-diagram .docfold { fill: var(--c-surface-2); stroke: var(--c-border-strong); stroke-width: 1.5; }
+.embed-diagram .docline { stroke: var(--c-border-strong); stroke-width: 2; stroke-linecap: round; }
+.embed-diagram .spot { fill: none; stroke: var(--c-primary); stroke-width: 2.2; }
+.embed-diagram .pill { fill: var(--c-surface); stroke: var(--c-border-strong); stroke-width: 1.2; }
+.embed-diagram .pilltext { fill: var(--c-text); font: 700 10px var(--ff-sans); }
+.embed-diagram .doctext { fill: var(--c-text); font: 700 11px var(--ff-mono); }
+.embed-diagram .el { fill: var(--c-surface-2); stroke: var(--c-border-strong); stroke-width: 1.2; }
+.embed-diagram .elline { stroke: var(--c-text-mute); stroke-width: 2.4; stroke-linecap: round; opacity: 0.5; }
+
+/* Hero infographic: centered, capped width, with breathing room under the
+   page title's lead text. */
+.hero-diagram { max-width: 660px; margin: 28px auto 0; }

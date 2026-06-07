@@ -1,0 +1,338 @@
+{
+  "schemaVersion": "0.1.2",
+  "id": "player-tour",
+  "name": "스탠드얼론 플레이어 가이드 둘러보기",
+  "url": "https://zendy00.github.io/manuscript-pages/player.html",
+  "steps": [
+    {
+      "id": "step-0",
+      "name": "스탠드얼론 플레이어란",
+      "description": "스탠드얼론 플레이어는 chrome-free 번들입니다 — 확장이 필요 없고, 페이지에 스크립트를 하나 끼워 넣으면 투어가 자동으로 재생됩니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-what"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-0",
+          "text": "스탠드얼론 플레이어는 chrome-free 번들입니다 — 확장이 필요 없고, 페이지에 스크립트를 하나 끼워 넣으면 투어가 자동으로 재생됩니다.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-1",
+      "name": "먼저 필요한 것",
+      "description": "두 가지가 필요합니다: 시나리오 JSON(확장에서 내보낸 투어 그 자체)과 HTTP로 제공할 정적 서버 — file://은 안 됩니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-prereq"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-1",
+          "text": "두 가지가 필요합니다: 시나리오 JSON(확장에서 내보낸 투어 그 자체)과 HTTP로 제공할 정적 서버 — file://은 안 됩니다.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-2",
+      "name": "빠른 시작 — 첫 재생",
+      "description": "번들을 import 하고 투어 파일을 fetch 한 뒤 load와 play를 호출하면 됩니다. 정말 이게 전부예요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-quickstart"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-2",
+          "text": "번들을 import 하고 투어 파일을 fetch 한 뒤 load와 play를 호출하면 됩니다. 정말 이게 전부예요.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-3",
+      "name": "번들은 어디서 오나",
+      "description": "이 사이트에서 바로 번들을 받을 수 있습니다 — 단일 UMD 파일이나 ESM 파일 묶음 중에서, 페이지의 모듈 로딩 방식에 맞게 고르면 됩니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-bundle"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-3",
+          "text": "이 사이트에서 바로 번들을 받을 수 있습니다 — 단일 UMD 파일이나 ESM 파일 묶음 중에서, 페이지의 모듈 로딩 방식에 맞게 고르면 됩니다.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-4",
+      "name": "선택 설정",
+      "description": "번들이 로드되기 전에 window.__MANUSCRIPT_PLAYER__를 설정해서 음성 안내를 켜거나 음성을 고르거나 다른 출처 투어를 지원할 수 있습니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-config"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-4",
+          "text": "번들이 로드되기 전에 window.__MANUSCRIPT_PLAYER__를 설정해서 음성 안내를 켜거나 음성을 고르거나 다른 출처 투어를 지원할 수 있습니다.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-5",
+      "name": "한 사이트의 여러 페이지를 잇는 투어",
+      "description": "하나의 투어로 같은 사이트의 여러 페이지를 가로지를 수 있습니다 — 플레이어가 이동을 처리하고, sessionStorage가 진행을 이어가며, 다음 페이지에서 자동으로 계속됩니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-multipage"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-5",
+          "text": "하나의 투어로 같은 사이트의 여러 페이지를 가로지를 수 있습니다 — 플레이어가 이동을 처리하고, sessionStorage가 진행을 이어가며, 다음 페이지에서 자동으로 계속됩니다.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-6",
+      "name": "다른 출처로 건너가기 (심화)",
+      "description": "다른 출처 투어는 sessionStorage 대신 쿼리 파라미터로 presence를 주고받습니다 — 양쪽 모두 번들을 불러오고 allowedParentOrigins에 출처를 등록해야 합니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-crossorigin"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-6",
+          "text": "다른 출처 투어는 sessionStorage 대신 쿼리 파라미터로 presence를 주고받습니다 — 양쪽 모두 번들을 불러오고 allowedParentOrigins에 출처를 등록해야 합니다.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-7",
+      "name": "API 레퍼런스",
+      "description": "플레이어는 load, play, pause, next, prev, jump, exit, onExit, resumeIfActive, bootResume을 내보냅니다 — 모두 언제든 안전하게 호출할 수 있습니다.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-api"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-7",
+          "text": "플레이어는 load, play, pause, next, prev, jump, exit, onExit, resumeIfActive, bootResume을 내보냅니다 — 모두 언제든 안전하게 호출할 수 있습니다.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-8",
+      "name": "재생 중 키보드",
+      "description": "화살표 키로 단계를 넘기고, Space 키로 일시정지·재개하며, Esc 로 투어를 종료합니다 — 발표자가 마우스를 잡을 필요가 없어요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-keys"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-8",
+          "text": "화살표 키로 단계를 넘기고, Space 키로 일시정지·재개하며, Esc 로 투어를 종료합니다 — 발표자가 마우스를 잡을 필요가 없어요.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-9",
+      "name": "잘 재생되지 않을 때",
+      "description": "HTTP 로 제공하는지 file:// 가 아닌지, ESM 파일 세 개가 함께 있는지, 페이지가 제작 이후 바뀌지 않았는지, 멀티 페이지 투어의 모든 페이지에 번들이 있는지 확인하세요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-troubleshoot"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-9",
+          "text": "HTTP 로 제공하는지 file:// 가 아닌지, ESM 파일 세 개가 함께 있는지, 페이지가 제작 이후 바뀌지 않았는지, 멀티 페이지 투어의 모든 페이지에 번들이 있는지 확인하세요.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    },
+    {
+      "id": "step-10",
+      "name": "바로 이 페이지에서 해보기",
+      "description": "이 가이드는 플레이어를 임베드해 자기 자신을 둘러봅니다 — 재생을 누르면 강조 표시가 핵심 영역을 차례로 비춥니다, 확장도 페이지 이동도 없이요.",
+      "pickedAtUrl": "https://zendy00.github.io/manuscript-pages/player.html",
+      "thumbnailDataUrl": null,
+      "selectors": {
+        "layer1": {
+          "kind": "stable-attr",
+          "cssSelector": "#player-try"
+        }
+      },
+      "annotations": [
+        {
+          "kind": "text",
+          "id": "note-10",
+          "text": "이 가이드는 플레이어를 임베드해 자기 자신을 둘러봅니다 — 재생을 누르면 강조 표시가 핵심 영역을 차례로 비춥니다, 확장도 페이지 이동도 없이요.",
+          "position": { "x": 50, "y": 16 },
+          "style": {
+            "fontSize": 15,
+            "bold": true,
+            "color": "#1a2438",
+            "backgroundColor": "#fff8df",
+            "backgroundOpacity": 1
+          }
+        }
+      ],
+      "autoAdvanceMs": 8000,
+      "waitForNavigation": false
+    }
+  ]
+}
